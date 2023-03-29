@@ -20,3 +20,18 @@ body {
 .navbar, footer {
     background-color: #00263D;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+.column {
+    float: left;
+    width: 200px;
+    padding: 5px;
+}
+
+.row {
+    display: inline-flex;
+    margin: auto;
+}

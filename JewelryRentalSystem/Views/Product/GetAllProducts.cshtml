@@ -14,13 +14,13 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="img/jewel1.jpg" class="d-block w-100" alt="" height="300">
+            <img src="~/img/jewel1.jpg" class="d-block w-100" alt="" height="300">
         </div>
         <div class="carousel-item">
-            <img src="img/jewel2.jpg" class="d-block w-100" alt="" height="300">
+            <img src="~/img/jewel2.jpg" class="d-block w-100" alt="" height="300">
         </div>
         <div class="carousel-item">
-            <img src="img/jewel3.jpg" class="d-block w-100" alt="" height="300">
+            <img src="~/img/jewel3.jpg" class="d-block w-100" alt="" height="300">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -33,20 +33,31 @@
     </button>
 </div>
 
+<br />
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+</div>
 @foreach(var item in Model)
 {
     <div class="row">
         <div class="column">
-            <img src="img/JewelSampleImg.PNG" alt="Snow" style="width:100%">
+            <img class="prodImg" src="~/img/JewelSampleImg.PNG" alt="Snow" style="width:100%">
             <h5>@item.ProductName</h5>
             <h4>@item.ProductPrice</h4>
             @if(item.ProductStock == 0)
             {
                 <h6>Out of stock</h6>
             }
+            else if (item.ProductStock == 1)
+            {
+                <h6>@item.ProductStock item left</h6>
+            }
             else
             {
-                <h6>@item.ProductStock items left</h6>
+                <p>@item.ProductStock items left</p>
             }
         </div>
     </div>

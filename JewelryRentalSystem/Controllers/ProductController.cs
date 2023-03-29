@@ -11,7 +11,7 @@ namespace JewelryRentalSystem.Controllers
             this._repo = repo;
         }
 
-        public IActionResult GetAllRProducts()
+        public IActionResult GetAllProducts()
         {
             var productList = _repo.GetAllProducts();
             return View(productList);
