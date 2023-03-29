@@ -5,7 +5,7 @@
 
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-
+        public List<User> Users { get; set; }
         public Role() { }
         public Role(int roleId, string roleName)
         {

@@ -5,6 +5,7 @@ namespace JewelryRentalSystem.Models
 {
     public class User
     {
+
         public int UserId { get; set; }
         [Required]
         [DisplayName("First Name")]
@@ -25,5 +26,23 @@ namespace JewelryRentalSystem.Models
         public string Address { get; set; }
         [Required]
         public string Username { get; set; }
+
+        public int RoleId { get; set; }
+        public Role? Role { get; set; }
+
+
+        public User() { }
+        public User(int userId, string firstName, string lastName, DateTime birthDate, string contactNo, string email, string address, string username, int roleId)
+        {
+            UserId = userId;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDate;
+            ContactNo = contactNo;
+            Email = email;
+            Address = address;
+            Username = username;
+            RoleId = roleId;
+        }
     }
 }

@@ -1,7 +1,14 @@
+using JewelryRentalSystem.Data;
+using JewelryRentalSystem.Repository;
+using JewelryRentalSystem.Repository.MsSQL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<JRSDBContext>();
+builder.Services.AddScoped<JRSDBContext, JRSDBContext>();
+builder.Services.AddScoped<IRoleDBRepository, RoleDBRepository>();
 
 var app = builder.Build();
 
