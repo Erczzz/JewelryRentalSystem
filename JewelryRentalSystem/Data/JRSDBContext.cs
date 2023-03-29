@@ -5,6 +5,7 @@ namespace JewelryRentalSystem.Data
 {
     public class JRSDBContext : DbContext
     {
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string con = "Server = (localdb)\\MSSQLLocalDB; " +
@@ -28,7 +29,7 @@ namespace JewelryRentalSystem.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<AppointmentType> AppointmentTypes { get; set;}
+        public DbSet<AppointmentType> AppointmentTypes { get; set; }
         public DbSet<Payment> Payments { get; set; }
     }
 }

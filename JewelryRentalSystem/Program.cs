@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<JRSDBContext>();
 builder.Services.AddScoped<JRSDBContext, JRSDBContext>();
 builder.Services.AddScoped<IRoleDBRepository, RoleDBRepository>();
+builder.Services.AddScoped<IProductDBRepository, ProductDBRepository>();
 
 var app = builder.Build();
 
@@ -17,6 +18,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
 app.UseStaticFiles();
 
 app.UseRouting();
