@@ -25,21 +25,17 @@ body {
     box-sizing: border-box;
 }
 
-.column {
-    float: left;
-    width: 200px;
-    padding: 5px;
-}
 
 .row {
     display: inline-flex;
     margin-left: auto;
     margin-right: auto;
+    justify-items: center;
 }
 
 .col {
-    float: left;
-    width: 300px;
+
+    width: 200px;
     padding: 5px;
 }
 
@@ -64,6 +60,9 @@ div.carousel-item img {
 }
 
 div.input-group {
+
+}
+.container-product {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
@@ -71,4 +70,8 @@ div.input-group {
 
 div.row {
    
+}
+#containerProd{
+    justify-items:center;
+
 }

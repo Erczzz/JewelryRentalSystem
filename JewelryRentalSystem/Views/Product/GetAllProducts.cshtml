@@ -35,44 +35,24 @@
 </div>
 
 <br />
-<div class="input-group mb-3" >
-    <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">Search</button>
-    </div>
-</div>
-@foreach(var item in Model)
-{
-@*    <div class="row">
-        <div class="column">
-            <img class="prodImg" src="~/img/JewelSampleImg.PNG" alt="Snow" style="width:100%">
-            <h5>@item.ProductName</h5>
-            <h4>@item.ProductPrice</h4>
-            @if(item.ProductStock == 0)
-            {
-                <p>Out of stock</p>
-            }
-            else if (item.ProductStock == 1)
-            {
-                <p>@item.ProductStock item left</p>
-            }
-            else
-            {
-                <p>@item.ProductStock items left</p>
-            }
+<div class="container-product">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
         </div>
     </div>
-*@
-
-    <div id="containerProd" class="row row-cols-1 row-cols-md-3 g-4" >
-        <div class="col">
-            <div class="card h-100">
-                <img src="~/img/JewelSampleImg.PNG" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">@item.ProductName</h4>
-                    <h5>Php @item.ProductPrice</h5>
-                </div>
-                <div class="card-footer d-flex flex-row justify-content-between">
+    @foreach (var item in Model)
+    {
+        <div id="containerProd" class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/img/JewelSampleImg.PNG" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">@item.ProductName</h4>
+                        <h5>Php @item.ProductPrice</h5>
+                    </div>
+                    <div class="card-footer d-flex flex-row justify-content-between">
                         <div>
                             @if (item.ProductStock == 0)
                             {
@@ -90,10 +70,11 @@
                         <div>
                             <a class="btn btn-secondary btn-sm">Rent</a>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
 
+</div>
 
