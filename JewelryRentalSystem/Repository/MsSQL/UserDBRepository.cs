@@ -6,19 +6,27 @@ namespace JewelryRentalSystem.Repository.MsSQL
 {
     public class UserDBRepository : IUserDBRepository
     {
-        private readonly JRSDBContext _JRSDBContext;
+        JRSDBContext _JRSDBContext;
         public UserDBRepository(JRSDBContext jRSDBContext)
         {
             _JRSDBContext = jRSDBContext;
         }
         public User AddUser(User newUser)
         {
-            throw new NotImplementedException();
+            _JRSDBContext.Add(newUser);
+            _JRSDBContext.SaveChanges();
+            return newUser;
         }
 
         public User DeleteUser(int UserId)
         {
-            throw new NotImplementedException();
+            var user = GetUserById(UserId);
+            if (user != null)
+            {
+                _JRSDBContext.Users.Remove(user);
+                _JRSDBContext.SaveChanges();
+            }
+            return user;
         }
 
         public List<User> GetAllUsers()
@@ -28,12 +36,14 @@ namespace JewelryRentalSystem.Repository.MsSQL
 
         public User GetUserById(int UserId)
         {
-            throw new NotImplementedException();
+            return _JRSDBContext.Users.AsNoTracking().ToList().FirstOrDefault(x => x.UserId == UserId);
         }
 
         public User UpdateUser(int UserId, User newUser)
         {
-            throw new NotImplementedException();
+            _JRSDBContext.Users.Update(newUser);
+            _JRSDBContext.SaveChanges();
+            return newUser;
         }
     }
 }

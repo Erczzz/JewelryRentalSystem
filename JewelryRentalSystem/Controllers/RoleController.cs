@@ -26,7 +26,7 @@ namespace JewelryRentalSystem.Controllers
         [HttpPost]
         public IActionResult Create(Role newRole)
         {
-            if (ModelState.IsValid)
+            // if (ModelState.IsValid)
             {
                 var role = _repo.AddRole(newRole);
                 return RedirectToAction("GetAllRoles");

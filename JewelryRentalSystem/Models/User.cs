@@ -27,7 +27,7 @@ namespace JewelryRentalSystem.Models
         [Required]
         public string Username { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
         public Role? Role { get; set; }
 
 
@@ -42,7 +42,7 @@ namespace JewelryRentalSystem.Models
             Email = email;
             Address = address;
             Username = username;
-            RoleId = roleId;
+
         }
     }
 }
