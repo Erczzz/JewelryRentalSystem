@@ -72,18 +72,21 @@
                     <h4>@item.ProductPrice</h4>
                 </div>
                 <div class="card-footer">
-                    @if (item.ProductStock == 0)
-                    {
-                        <small class="text-muted">Out of stock</small>
-                    }
-                    else if (item.ProductStock == 1)
-                    {
-                        <small class="text-muted">@item.ProductStock item left</small>
-                    }
-                    else
-                    {
-                        <small class="text-muted">@item.ProductStock items left</small>
-                    }
+
+                        @if (item.ProductStock == 0)
+                        {
+                            <small class="text-muted">Out of stock</small>
+                        }
+                        else if (item.ProductStock == 1)
+                        {
+                            <small class="text-muted">@item.ProductStock item left</small>
+                        }
+                        else
+                        {
+                            <small class="text-muted">@item.ProductStock items left</small>
+                        }
+                        <a class="btn btn-info btn-sm float-right ">Rent</a>
+
                 </div>
             </div>
         </div>
