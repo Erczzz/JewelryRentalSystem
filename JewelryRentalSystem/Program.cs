@@ -10,6 +10,7 @@ builder.Services.AddDbContext<JRSDBContext>();
 builder.Services.AddScoped<JRSDBContext, JRSDBContext>();
 builder.Services.AddScoped<IRoleDBRepository, RoleDBRepository>();
 builder.Services.AddScoped<IProductDBRepository, ProductDBRepository>();
+builder.Services.AddScoped<IUserDBRepository, UserDBRepository>();
 
 var app = builder.Build();
 

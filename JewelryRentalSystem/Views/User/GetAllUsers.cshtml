@@ -1,0 +1,37 @@
+﻿@model List<User>
+
+
+
+<H1>Get All User</H1>
+
+<a asp-action="Create" asp-controller="User" class="btn btn-dark">Add User</a>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Contact No.</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <th scope="row">@user.RoleId</th>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.ContactNo</td>
+                <td>@user.Email</td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-controller="User" asp-action="Details" asp-route-roleId="@user.RoleId">View</a>
+                    <a class="btn btn-primary btn-sm" asp-controller="User" asp-action="Update" asp-route-roleId="@user.RoleId">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="Delete" asp-route-roleId="@user.RoleId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
