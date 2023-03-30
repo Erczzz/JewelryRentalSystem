@@ -33,11 +33,42 @@ body {
 
 .row {
     display: inline-flex;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .col {
     float: left;
-    width: 200px;
+    width: 300px;
     padding: 5px;
+}
+
+div#carouselExampleIndicators {
+    position: relative;
+    height: 350px;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(black 50%, transparent);
+    mask-image: linear-gradient(black 50%, transparent);
+    mask-mode: luminance;
+}
+
+div.carousel-inner {
+    position: absolute;
+    height: 350px;
+    width: 100%;
+}
+
+div.carousel-item img {
+    position: inherit;
+    object-fit: cover;
+}
+
+div.input-group {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.row {
+   
 }
