@@ -34,7 +34,7 @@
 </div>
 
 <br />
-<div class="input-group mb-3">
+<div class="input-group mb-3" >
     <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
     <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button">Search</button>
@@ -42,18 +42,18 @@
 </div>
 @foreach(var item in Model)
 {
-    <div class="row">
+@*    <div class="row">
         <div class="column">
             <img class="prodImg" src="~/img/JewelSampleImg.PNG" alt="Snow" style="width:100%">
             <h5>@item.ProductName</h5>
             <h4>@item.ProductPrice</h4>
             @if(item.ProductStock == 0)
             {
-                <h6>Out of stock</h6>
+                <p>Out of stock</p>
             }
             else if (item.ProductStock == 1)
             {
-                <h6>@item.ProductStock item left</h6>
+                <p>@item.ProductStock item left</p>
             }
             else
             {
@@ -61,4 +61,33 @@
             }
         </div>
     </div>
+*@
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/JewelSampleImg.PNG" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">@item.ProductName</h5>
+                    <h4>@item.ProductPrice</h4>
+                </div>
+                <div class="card-footer">
+                    @if (item.ProductStock == 0)
+                    {
+                        <small class="text-muted">Out of stock</small>
+                    }
+                    else if (item.ProductStock == 1)
+                    {
+                        <small class="text-muted">@item.ProductStock item left</small>
+                    }
+                    else
+                    {
+                        <small class="text-muted">@item.ProductStock items left</small>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 }
+
+
