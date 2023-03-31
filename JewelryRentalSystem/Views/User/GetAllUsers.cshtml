@@ -21,15 +21,15 @@
         @foreach (var user in Model)
         {
             <tr>
-                <th scope="row">@user.RoleId</th>
+                <th scope="row">@user.UserId</th>
                 <td>@user.FirstName</td>
                 <td>@user.LastName</td>
                 <td>@user.ContactNo</td>
                 <td>@user.Email</td>
                 <td>
-                    <a class="btn btn-sucess btn-sm" asp-controller="User" asp-action="Details" asp-route-roleId="@user.RoleId">View</a>
-                    <a class="btn btn-primary btn-sm" asp-controller="User" asp-action="Update" asp-route-roleId="@user.RoleId">Edit</a>
-                    <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="Delete" asp-route-roleId="@user.RoleId">Delete</a>
+                    <a class="btn btn-sucess btn-sm" asp-controller="User" asp-action="Details" asp-route-userID="@user.UserId">View</a>
+                    <a class="btn btn-primary btn-sm" asp-controller="User" asp-action="Update" asp-route-userID="@user.UserId">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="Delete" asp-route-userID="@user.UserId">Delete</a>
                 </td>
             </tr>
         }

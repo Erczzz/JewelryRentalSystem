@@ -18,9 +18,9 @@ namespace JewelryRentalSystem.Repository.MsSQL
             return newUser;
         }
 
-        public User DeleteUser(int UserId)
+        public User DeleteUser(int userID)
         {
-            var user = GetUserById(UserId);
+            var user = GetUserById(userID);
             if (user != null)
             {
                 _JRSDBContext.Users.Remove(user);
@@ -39,7 +39,7 @@ namespace JewelryRentalSystem.Repository.MsSQL
             return _JRSDBContext.Users.AsNoTracking().ToList().FirstOrDefault(x => x.UserId == UserId);
         }
 
-        public User UpdateUser(int UserId, User newUser)
+        public User UpdateUser(int userID, User newUser)
         {
             _JRSDBContext.Users.Update(newUser);
             _JRSDBContext.SaveChanges();

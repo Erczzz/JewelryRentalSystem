@@ -5,6 +5,10 @@ namespace JewelryRentalSystem.Data
 {
     public class JRSDBContext : DbContext
     {
+        public JRSDBContext()
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,10 +22,33 @@ namespace JewelryRentalSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasOne<Role>(x => x.Role)
-                .WithMany(x => x.Users).HasForeignKey(x => x.RoleId)
+            modelBuilder.Entity<User>()
+                .HasOne<Role>(x => x.Roles)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(modelBuilder);
+
+            var adminRole = new Role { RoleId = 1, RoleName = "Administrator" };
+            var employeeRole = new Role { RoleId = 2, RoleName = "Employee" };
+            var customerRole = new Role { RoleId = 3, RoleName = "Customer" };
+
+            modelBuilder.Entity<Role>()
+                .HasData(adminRole, employeeRole, customerRole);
+
+            modelBuilder.Entity<User>()
+                .HasData(new User
+                {
+                    UserId = 1,
+                    FirstName = "Admin",
+                    LastName = "Admin",
+                    BirthDate = new DateTime(1999, 2, 12),
+                    ContactNo = "09920098321",
+                    Email = "admin@email.com",
+                    Address = "SampleAddress",
+                    Username = "admin",
+                    RoleId = adminRole.RoleId
+                });
         }
 
         public DbSet<User> Users { get; set; }

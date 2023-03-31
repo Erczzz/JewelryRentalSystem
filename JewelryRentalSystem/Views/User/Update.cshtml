@@ -14,7 +14,7 @@
     <div class="container">
 
         <div>
-            <label asp-for="UserId"></label>
+            <label asp-for="UserId" ></label>
             <input asp-for="UserId" readonly />
         </div>
         <div>
@@ -58,6 +58,11 @@
             <input asp-for="Username" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
+        <div>
+            <label asp-for="RoleId" class="control-label"></label>
+            <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleName"></select>
+        </div>
+     
     </div>
 
 @*        <label asp-for="Username"></label>
@@ -72,7 +77,6 @@
         <input asp-for="ConfirmPassword" />
         <span asp-validation-for="ConfirmPassword"></span>
 *@
-    </div>
 
 
     <button class="btn btn-primary" type="submit">Update</button>

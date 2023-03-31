@@ -7,7 +7,7 @@ namespace JewelryRentalSystem.Repository
         List<User> GetAllUsers();
         User GetUserById(int UserId);
         User AddUser(User newUser);
-        User UpdateUser(int UserId, User newUser);
-        User DeleteUser(int UserId);
+        User UpdateUser(int userID, User newUser);
+        User DeleteUser(int userID);
     }
 }

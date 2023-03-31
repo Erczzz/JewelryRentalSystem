@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JewelryRentalSystem.Migrations
 {
-    public partial class addentities : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,7 +75,8 @@ namespace JewelryRentalSystem.Migrations
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<double>(type: "float", nullable: false)
+                    ProductPrice = table.Column<double>(type: "float", nullable: false),
+                    ProductStock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,6 +121,26 @@ namespace JewelryRentalSystem.Migrations
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "RoleId", "RoleName" },
+                values: new object[] { 1, "Administrator" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "RoleId", "RoleName" },
+                values: new object[] { 2, "Employee" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "RoleId", "RoleName" },
+                values: new object[] { 3, "Customer" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Address", "BirthDate", "ContactNo", "Email", "FirstName", "LastName", "RoleId", "Username" },
+                values: new object[] { 1, "SampleAddress", new DateTime(1999, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "09920098321", "admin@email.com", "Admin", "Admin", 1, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    [Migration("20230329143433_deletelastmigration")]
-    partial class deletelastmigration
+    [Migration("20230331170516_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,6 +127,9 @@ namespace JewelryRentalSystem.Migrations
                     b.Property<double>("ProductPrice")
                         .HasColumnType("float");
 
+                    b.Property<int>("ProductStock")
+                        .HasColumnType("int");
+
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
@@ -147,6 +150,23 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            RoleName = "Administrator"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            RoleName = "Employee"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            RoleName = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.User", b =>
@@ -192,17 +212,31 @@ namespace JewelryRentalSystem.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Address = "SampleAddress",
+                            BirthDate = new DateTime(1999, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContactNo = "09920098321",
+                            Email = "admin@email.com",
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            RoleId = 1,
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.User", b =>
                 {
-                    b.HasOne("JewelryRentalSystem.Models.Role", "Role")
+                    b.HasOne("JewelryRentalSystem.Models.Role", "Roles")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Role", b =>

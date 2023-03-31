@@ -18,6 +18,16 @@ namespace JewelryRentalSystem.Controllers
             return View(userList);
         }
 
+        //READ EMPLOYEE
+
+        public IActionResult Details(int UserId)
+        {
+            var user = _repo.GetUserById(UserId);
+            return View(user);
+        }
+
+        //CREATE EMPLOYEE
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -26,7 +36,7 @@ namespace JewelryRentalSystem.Controllers
         [HttpPost]
         public IActionResult Create(User newUser)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = _repo.AddUser(newUser);
                 return RedirectToAction("GetAllUsers");
@@ -35,16 +45,20 @@ namespace JewelryRentalSystem.Controllers
             return View();
         }
 
-        public IActionResult Delete(int userId)
+        //DELETE EMPLOYEE
+
+        public IActionResult Delete(int userID)
         {
-            var userList = _repo.DeleteUser(userId);
+            var userList = _repo.DeleteUser(userID);
             return RedirectToAction(controllerName: "User", actionName: "GetAllUsers");
         }
 
+        //UPDATE EMPLOYEE
+
         [HttpGet]
-        public IActionResult Update(int userId)
+        public IActionResult Update(int userID)
         {
-            var oldUser = _repo.GetUserById(userId);
+            var oldUser = _repo.GetUserById(userID);
             return View(oldUser);
         }
         [HttpPost]
