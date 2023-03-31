@@ -1,16 +1,21 @@
-﻿using JewelryRentalSystem.Models;
+﻿using JewelryRentalSystem.Data;
+using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystem.Controllers
 {
     public class UserController : Controller
     {
+        private readonly JRSDBContext _context;
         IUserDBRepository _repo;
-        public UserController(IUserDBRepository repo)
+        public UserController(IUserDBRepository repo, JRSDBContext JRSDBContext)
         {
             this._repo = repo;
+            this._context = JRSDBContext;
         }
         public IActionResult GetAllUsers()
         {
@@ -31,13 +36,15 @@ namespace JewelryRentalSystem.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName");
             return View();
         }
         [HttpPost]
         public IActionResult Create(User newUser)
-        {
+        {           
             if (ModelState.IsValid)
             {
+                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", newUser.RoleId);
                 var user = _repo.AddUser(newUser);
                 return RedirectToAction("GetAllUsers");
             }
