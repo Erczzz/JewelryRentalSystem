@@ -10,60 +10,68 @@
 <h1>Create User</h1>
 
 <form method="post" asp-action="Create" asp-controller="User">
-@*   <div asp-validation-summary="All" class="text-danger" ></div>*@
-    <div class="container">
-        <div>
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
+    @*   <div asp-validation-summary="All" class="text-danger" ></div>*@
+    <div class="container col-md-4">
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="LastName"></label>
-            <input asp-for="LastName" />
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="BirthDate"></label>
-            <input asp-for="BirthDate" />
+        <div class="form-group">
+            <label asp-for="BirthDate" class="control-label"></label>
+            <input asp-for="BirthDate" class="form-control" />
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="ContactNo"></label>
-            <input asp-for="ContactNo" />
+        <div class="form-group">
+            <label asp-for="ContactNo" class="control-label"></label>
+            <input asp-for="ContactNo" class="form-control" />
             <span asp-validation-for="ContactNo" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="Email"></label>
-            <input asp-for="Email" />
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="Address"></label>
-            <input asp-for="Address" />
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="Username"></label>
-            <input asp-for="Username" />
+        <div class="form-group">
+            <label asp-for="Username" class="control-label"></label>
+            <input asp-for="Username" class="form-control" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
-        <div>
+        <<<<<<< HEAD
+        <div class="form-group">
+            =======
+            <div>
 
-            <label asp-for="RoleId" class="control-label"></label>
-            <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+                >>>>>> 49079e6497a936657f4c53ce768695fc420c6c26
+
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+            </div>
+            <div class="form-group">
+                <br />
+                <button class="btn btn-primary w-100" type="submit">Submit</button>
+            </div>
+
+
         </div>
 
-
-        
-    </div>
-
-@*        <label asp-for="Username"></label>
+        @*        <label asp-for="Username"></label>
         <input asp-for="Username" />
         <span asp-validation-for="Username" class="text-danger"></span>
 
@@ -74,8 +82,7 @@
         <label asp-for="ConfirmPassword"></label>
         <input asp-for="ConfirmPassword" />
         <span asp-validation-for="ConfirmPassword"></span>
-*@
+        *@
 
 
-    <button class="btn btn-primary" type="submit">Submit</button>
 </form>
