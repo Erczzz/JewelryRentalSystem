@@ -1,0 +1,33 @@
+﻿@model JewelryRentalSystem.Models.Product
+
+
+<!-- Display daetails of the User-->
+
+<h1>Product Details</h1>
+
+
+<div class="container d-inline-flex justify-content-between w-75 p-3">
+    <div>
+        <img src="@Model.ProductImage"/>
+    </div>
+    <div>
+        <h3>@Model.ProductName</h3>
+        <h4 class="text-muted">@Model.ProductDescription</h4>
+        <h4>₱@Model.ProductPrice</h4>
+        <div>
+            @if (Model.ProductStock == 0)
+            {
+                <small class="text-muted">Out of stock</small>
+            }
+            else if (Model.ProductStock == 1)
+            {
+                <small class="text-muted">@Model.ProductStock item left</small>
+            }
+            else
+            {
+                <small class="text-muted">Model.ProductStock items left</small>
+            }
+        </div>
+
+    </div>
+</div>

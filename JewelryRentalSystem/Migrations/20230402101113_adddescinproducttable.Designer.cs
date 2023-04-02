@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230402101113_adddescinproducttable")]
+    partial class adddescinproducttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,9 +121,6 @@ namespace JewelryRentalSystem.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
                     b.Property<string>("ProductDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")

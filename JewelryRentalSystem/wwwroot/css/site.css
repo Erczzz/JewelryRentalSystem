@@ -89,3 +89,8 @@ div.row {
     justify-items:center;
 
 }
+
+#productView {
+    text-decoration: none;
+    color: inherit;
+}

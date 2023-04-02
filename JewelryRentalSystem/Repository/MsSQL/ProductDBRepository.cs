@@ -1,5 +1,6 @@
 ﻿using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using JewelryRentalSystem.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystem.Repository.MsSQL
@@ -14,12 +15,20 @@ namespace JewelryRentalSystem.Repository.MsSQL
 
         public Product AddProduct(Product newProduct)
         {
-            throw new NotImplementedException();
+            _JRSDBContext.Add(newProduct);
+            _JRSDBContext.SaveChanges();
+            return newProduct;
         }
 
         public Product DeleteProduct(int ProductId)
         {
-            throw new NotImplementedException();
+            var product = GetProductById(ProductId);
+            if (product != null)
+            {
+                _JRSDBContext.Products.Remove(product);
+                _JRSDBContext.SaveChanges();
+            }
+            return product;
         }
 
         public List<Product> GetAllProducts()
@@ -29,12 +38,14 @@ namespace JewelryRentalSystem.Repository.MsSQL
 
         public Product GetProductById(int ProductId)
         {
-            throw new NotImplementedException();
+            return _JRSDBContext.Products.AsNoTracking().ToList().FirstOrDefault(x => x.ProductId == ProductId);
         }
 
         public Product UpdateProduct(int ProductId, Product newProduct)
         {
-            throw new NotImplementedException();
+            _JRSDBContext.Products.Update(newProduct);
+            _JRSDBContext.SaveChanges();
+            return newProduct;
         }
     }
 }

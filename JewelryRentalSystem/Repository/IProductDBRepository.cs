@@ -1,4 +1,5 @@
 ﻿using JewelryRentalSystem.Models;
+using JewelryRentalSystem.ViewModels;
 
 namespace JewelryRentalSystem.Repository
 {
