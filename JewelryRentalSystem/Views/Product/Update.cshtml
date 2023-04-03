@@ -1,0 +1,55 @@
+﻿@*Hindi ko mapagana yung RegisterUserViewModel dito umaaaay*@
+@model JewelryRentalSystem.ViewModels.ProductViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Update Product</h1>
+
+<form method="post" asp-action="Update" asp-controller="Product">
+@*   <div asp-validation-summary="All" class="text-danger" ></div>*@
+    <div class="container">
+
+        <div>
+            <label asp-for="ProductId" ></label>
+            <input asp-for="ProductId" readonly />
+        </div>
+        <div>
+            <label asp-for="ProductName"></label>
+            <input asp-for="ProductName" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ProductPrice"></label>
+            <input asp-for="ProductPrice" />
+            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ProductStock"></label>
+            <input asp-for="ProductStock" />
+            <span asp-validation-for="ProductStock" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ProductDescription"></label>
+            <input asp-for="ProductDescription" />
+            <span asp-validation-for="ProductDescription" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ProductImage" class="control-label"></label>
+            <div class="custome-file">
+                <input asp-for="ProductImage" class="custom-file-input" id="customFile" />
+                <label class="custom-file-label" for="customeFile">Upload Image</label>
+            </div>
+        </div>
+     
+    </div>
+
+    <button class="btn btn-primary" type="submit">Update</button>
+</form>

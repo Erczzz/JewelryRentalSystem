@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\products\productImgs\" />
     <Folder Include="wwwroot\uploadedimgs\" />
   </ItemGroup>
 

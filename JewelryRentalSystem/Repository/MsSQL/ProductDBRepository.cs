@@ -1,5 +1,6 @@
 ﻿using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using JewelryRentalSystem.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystem.Repository.MsSQL
@@ -12,29 +13,40 @@ namespace JewelryRentalSystem.Repository.MsSQL
             _JRSDBContext = jRSDBContext;
         }
 
-        public Product AddProduct(Product newProduct)
+        public async Task<Product> AddProduct(Product newProduct)
         {
-            throw new NotImplementedException();
+            _JRSDBContext.AddAsync(newProduct);
+            await _JRSDBContext.SaveChangesAsync();
+            return newProduct;
         }
 
-        public Product DeleteProduct(int ProductId)
+        public async Task<Product> DeleteProduct(int ProductId)
         {
-            throw new NotImplementedException();
+            var product = await GetProductById(ProductId);
+            if (product != null)
+            {
+                _JRSDBContext.Products.Remove(product);
+                await _JRSDBContext.SaveChangesAsync();
+                return product;
+            }
+            return null;
         }
 
-        public List<Product> GetAllProducts()
+        public async Task<List<Product>> GetAllProducts()
         {
-            return _JRSDBContext.Products.AsNoTracking().ToList();
+            return await _JRSDBContext.Products.AsNoTracking().ToListAsync();
         }
 
-        public Product GetProductById(int ProductId)
+        public async Task<Product> GetProductById(int ProductId)
         {
-            throw new NotImplementedException();
+            return await _JRSDBContext.Products.AsNoTracking().SingleOrDefaultAsync(x => x.ProductId == ProductId);
         }
 
-        public Product UpdateProduct(int ProductId, Product newProduct)
+        public async Task<Product> UpdateProduct(int ProductId, Product newProduct)
         {
-            throw new NotImplementedException();
+             _JRSDBContext.Products.Update(newProduct);
+            await _JRSDBContext.SaveChangesAsync();
+            return newProduct;
         }
     }
 }
