@@ -1,4 +1,5 @@
-﻿using JewelryRentalSystem.Models;
+﻿using JewelryRentalSystem.Data;
+using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Repository;
 using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,19 +12,28 @@ namespace JewelryRentalSystem.Controllers
     public class ProductController : Controller
     {
         IProductDBRepository _repo;
+        
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly JRSDBContext _JRSDBContext;
 
         public ProductController(IProductDBRepository repo, 
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment, JRSDBContext JRSDBContext)
         {
             _repo = repo;
             _webHostEnvironment = webHostEnvironment;
+            _JRSDBContext = JRSDBContext;
         }
 
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts(string SearchString)
         {
-            var productList = await _repo.GetAllProducts();
-            return View(productList);
+            ViewData["CurrentFilter"] = SearchString;
+            var products = from p in _JRSDBContext.Products select p;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                products = products.Where(p => p.ProductName.Contains(SearchString));
+            }
+            // var productList = await _repo.GetAllProducts();
+            return View(products);
         }
 
         public async Task<IActionResult> ProductManagement()
