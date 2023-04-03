@@ -20,7 +20,7 @@ namespace JewelryRentalSystem.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> GetAllProducts(string SearchString)
+        public async Task<IActionResult> GetAllProducts()
         {
             var productList = await _repo.GetAllProducts();
             return View(productList);
