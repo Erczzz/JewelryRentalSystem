@@ -1,22 +1,23 @@
 ﻿using MessagePack;
-using System.Diagnostics.CodeAnalysis;
+using System.ComponentModel.DataAnnotations;
 
 namespace JewelryRentalSystem.Models
 {
     public class Role
     {
+        [Key]
         public int RoleId { get; set; }
         public string RoleName { get; set; }
 
-        [AllowNull]
         public List<User> Users { get; set; }
-        public Role() 
-        { 
-        }
-        public Role(int roleId, string roleName)
-        {
-            RoleId = roleId;
-            RoleName = roleName;
-        }
+
+        //public Role() 
+        //{ 
+        //}
+        //public Role(int roleId, string roleName)
+        //{
+        //    RoleId = roleId;
+        //    RoleName = roleName;
+        //}
     }
 }

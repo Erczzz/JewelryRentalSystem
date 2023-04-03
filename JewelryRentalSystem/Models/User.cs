@@ -6,7 +6,7 @@ namespace JewelryRentalSystem.Models
 {
     public class User
     {
-        
+        [Key]
         public int UserId { get; set; }
         
         [Required]
@@ -43,25 +43,25 @@ namespace JewelryRentalSystem.Models
         [ForeignKey("RoleId")]
         public int RoleId { get; set; }
 
-        public Role? Roles { get; set; }
+        public Role Roles { get; set; }
 
 
-        public User() 
-        { 
-        }
+        //public User() 
+        //{ 
+        //}
 
-        public User(int userId, string firstName, string lastName, DateTime birthDate, string contactNo, string email, string address, string username, int roleId)
-        {
-            UserId = userId;
-            FirstName = firstName;
-            LastName = lastName;
-            BirthDate = birthDate;
-            ContactNo = contactNo;
-            Email = email;
-            Address = address;
-            Username = username;
-            RoleId = roleId;
+        //public User(int userId, string firstName, string lastName, DateTime birthDate, string contactNo, string email, string address, string username, int roleId)
+        //{
+        //    UserId = userId;
+        //    FirstName = firstName;
+        //    LastName = lastName;
+        //    BirthDate = birthDate;
+        //    ContactNo = contactNo;
+        //    Email = email;
+        //    Address = address;
+        //    Username = username;
+        //    RoleId = roleId;
 
-        }
+        //}
     }
 }

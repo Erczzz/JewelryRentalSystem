@@ -82,10 +82,13 @@ div.input-group {
     margin-right: auto;
 }
 
-div.row {
-   
-}
 #containerProd{
     justify-items:center;
 
+}
+
+.container-md {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }

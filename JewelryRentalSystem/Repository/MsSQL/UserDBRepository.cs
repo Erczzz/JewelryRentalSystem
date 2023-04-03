@@ -6,44 +6,54 @@ namespace JewelryRentalSystem.Repository.MsSQL
 {
     public class UserDBRepository : IUserDBRepository
     {
-        JRSDBContext _JRSDBContext;
-        public UserDBRepository(JRSDBContext jRSDBContext)
+        private readonly JRSDBContext _JRSDbContext;
+        public UserDBRepository(JRSDBContext JRSDBContext)
         {
-            _JRSDBContext = jRSDBContext;
+            _JRSDbContext = JRSDBContext;
         }
-        public User AddUser(User newUser)
+        public async Task<User?> AddUser(User User)
         {
-            _JRSDBContext.Add(newUser);
-            _JRSDBContext.SaveChanges();
-            return newUser;
+            await _JRSDbContext.AddAsync(User);
+            await _JRSDbContext.SaveChangesAsync();
+           
+            return User;
         }
 
-        public User DeleteUser(int userID)
+        public async Task<User?> DeleteUser(int UserId)
         {
-            var user = GetUserById(userID);
+            var user = await GetUserById(UserId);
             if (user != null)
             {
-                _JRSDBContext.Users.Remove(user);
-                _JRSDBContext.SaveChanges();
+                _JRSDbContext.Users.Remove(user);
+                await _JRSDbContext.SaveChangesAsync();
+                return user;
             }
-            return user;
+            return null;
         }
 
-        public List<User> GetAllUsers()
+        public async Task<List<Role>> FetchRoleList()
         {
-            return _JRSDBContext.Users.AsNoTracking().ToList();
+            return await _JRSDbContext.Roles.ToListAsync();
         }
 
-        public User GetUserById(int UserId)
+        public async Task<List<User>> GetAllUsers()
         {
-            return _JRSDBContext.Users.AsNoTracking().ToList().FirstOrDefault(x => x.UserId == UserId);
+            return await _JRSDbContext.Users.Include(x => x.Roles).ToListAsync();
         }
 
-        public User UpdateUser(int userID, User newUser)
+        public async Task<User?> GetUserById(int? UserId)
         {
-            _JRSDBContext.Users.Update(newUser);
-            _JRSDBContext.SaveChanges();
-            return newUser;
+            return await _JRSDbContext.Users
+            .AsNoTracking()
+            .Include(e => e.Roles)
+            .SingleOrDefaultAsync(x => x.UserId == UserId);
+        }
+
+        public async Task<User?> UpdateUser(int UserId, User User)
+        {
+            _JRSDbContext.Users.Update(User);
+            await _JRSDbContext.SaveChangesAsync();
+            return User;
         }
     }
 }

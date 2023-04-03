@@ -4,10 +4,11 @@ namespace JewelryRentalSystem.Repository
 {
     public interface IUserDBRepository
     {
-        List<User> GetAllUsers();
-        User GetUserById(int UserId);
-        User AddUser(User newUser);
-        User UpdateUser(int userID, User newUser);
-        User DeleteUser(int userID);
+        Task<List<User>> GetAllUsers();
+        Task<User?> GetUserById(int? UserId);
+        Task<User?> AddUser(User User);
+        Task<User?> UpdateUser(int UserId, User User);
+        Task<User?> DeleteUser(int UserId);
+        Task<List<Role>> FetchRoleList();
     }
 }

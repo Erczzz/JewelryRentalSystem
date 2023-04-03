@@ -6,37 +6,47 @@ namespace JewelryRentalSystem.Repository.MsSQL
 {
     public class RoleDBRepository : IRoleDBRepository
     {
-        private readonly JRSDBContext _JRSDBContext;
-        public RoleDBRepository(JRSDBContext jRSDBContext)
+        private readonly JRSDBContext _JRSDbContext;
+
+        public RoleDBRepository(JRSDBContext JRSDbContext)
         {
-            _JRSDBContext = jRSDBContext;
+            _JRSDbContext = JRSDbContext;
         }
 
-        public Role AddRole(Role newRole)
+        public async Task<Role?> AddRole(Role Role)
         {
-            _JRSDBContext.Add(newRole);
-            _JRSDBContext.SaveChanges();
-            return newRole;
+            await _JRSDbContext.Roles.AddAsync(Role);
+            await _JRSDbContext.SaveChangesAsync();
+            return Role;
         }
 
-        public Role DeleteRole(int RoleId)
+        public async Task<Role?> DeleteRole(int RoleId)
         {
-            throw new NotImplementedException();
+            var oldRole = await GetRoleById(RoleId);
+            if (oldRole != null)
+            {
+                _JRSDbContext.Roles.Remove(oldRole);
+                _JRSDbContext.SaveChanges();
+                return oldRole;
+            }
+            return null;
         }
 
-        public List<Role> GetAllRoles()
+        public async Task<List<Role>> GetAllRoles()
         {
-            return _JRSDBContext.Roles.AsNoTracking().ToList();
+            return await _JRSDbContext.Roles.ToListAsync();
         }
 
-        public Role GetRoleById(int RoleId)
+        public async Task<Role?> GetRoleById(int? RoleId)
         {
-            throw new NotImplementedException();
+            return await _JRSDbContext.Roles.AsNoTracking().FirstOrDefaultAsync(x => x.RoleId == RoleId);
         }
 
-        public Role UpdateRole(int RoleId, Role role)
+        public async Task<Role?> UpdateRole(int RoleId, Role Role)
         {
-            throw new NotImplementedException();
+            _JRSDbContext.Roles.Update(Role);
+            await _JRSDbContext.SaveChangesAsync();
+            return Role;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Repository;
+using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,68 +11,131 @@ namespace JewelryRentalSystem.Controllers
 {
     public class UserController : Controller
     {
-        private readonly JRSDBContext _context;
-        IUserDBRepository _repo;
-        public UserController(IUserDBRepository repo, JRSDBContext JRSDBContext)
+
+        IUserDBRepository _userRepository;
+        IRoleDBRepository _roleRepository;
+
+        public UserController(IUserDBRepository userRepository, IRoleDBRepository roleRepository)
         {
-            this._repo = repo;
-            this._context = JRSDBContext;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
-        public IActionResult GetAllUsers()
+
+        public async Task<IActionResult> GetAllUsers()
         {
-            var userList = _repo.GetAllUsers();
-            return View(userList);
+            return View(await _userRepository.GetAllUsers());
         }
 
         //READ EMPLOYEE
 
-        public IActionResult Details(int UserId)
+        public async Task<IActionResult> Details(int? UserId)
         {
-            var user = _repo.GetUserById(UserId);
-            return View(user);
+            if (UserId == null)
+            {
+                return NotFound();
+            }
+
+            var employee = await _userRepository.GetUserById(UserId);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return View(employee);
         }
 
         //CREATE EMPLOYEE
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName");
-            return View();
+            CreateUserViewModel createUserViewModel = new CreateUserViewModel
+            {
+                Roles = await _roleRepository.GetAllRoles()
+            };
+
+            return View(createUserViewModel);
         }
+
         [HttpPost]
-        public IActionResult Create(User newUser)
-        {           
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateUserViewModel createUserViewModel)
+        {
+            createUserViewModel.Roles = await _roleRepository.GetAllRoles();
+
             if (ModelState.IsValid)
             {
-                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", newUser.RoleId);
-                var user = _repo.AddUser(newUser);
-                return RedirectToAction("GetAllUsers");
+                User newUser = new User
+                {
+                    FirstName = createUserViewModel.NewUser.FirstName,
+                    LastName = createUserViewModel.NewUser.LastName,
+                    BirthDate = createUserViewModel.NewUser.Birthdate,
+                    ContactNo = createUserViewModel.NewUser.ContactNo,
+                    Email = createUserViewModel.NewUser.Email,
+                    Address = createUserViewModel.NewUser.Address,
+                    Username = createUserViewModel.NewUser.Username,
+                    RoleId = createUserViewModel.NewUser.RoleId
+                };
+
+                await _userRepository.AddUser(newUser);
+                return RedirectToAction(nameof(GetAllUsers));
             }
-            ViewData["Message"] = "Data is not valid to create the Todo";
-            return View();
+            return View(createUserViewModel);
         }
 
         //DELETE EMPLOYEE
 
-        public IActionResult Delete(int userID)
+        public async Task<IActionResult> Delete(int? UserId)
         {
-            var userList = _repo.DeleteUser(userID);
-            return RedirectToAction(controllerName: "User", actionName: "GetAllUsers");
+            if (UserId == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userRepository.GetUserById(UserId);
+            
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int UserId)
+        {
+            if (_userRepository.GetAllUsers() == null)
+            {
+                return Problem("Entity set 'SampleDBContext.Users'  is null.");
+            }
+
+            var user = await _userRepository.GetUserById(UserId);
+
+            if (_userRepository is null)
+            {
+                return NotFound();
+            }
+
+            await _userRepository.DeleteUser(user.UserId);
+            return RedirectToAction(nameof(GetAllUsers));
         }
 
         //UPDATE EMPLOYEE
 
         [HttpGet]
-        public IActionResult Update(int userID)
+        public IActionResult Update(int UserId)
         {
-            var oldUser = _repo.GetUserById(userID);
+            var oldUser = _userRepository.GetUserById(UserId);
             return View(oldUser);
         }
+
         [HttpPost]
         public IActionResult Update(User newUser)
         {
-            var user = _repo.UpdateUser(newUser.UserId, newUser);
+            var user = _userRepository.UpdateUser(newUser.UserId, newUser);
             return RedirectToAction("GetAllUsers");
         }
 
