@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<JewelryRentalSystem.Models.Product>
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -70,8 +71,16 @@
                                     <small class="text-muted">@item.ProductStock items left</small>
                                 }
                             </div>
-                            <div>
-                                <a class="btn btn-outline-secondary btn-sm">Rent</a>
+                            <div>  
+                            @if (_signInManager.IsSignedIn(User))
+                            {
+                                @*Sample lang tong controller and action*@
+                                <a asp-controller="Product" asp-action="Create" class="btn btn-outline-secondary btn-sm">Rent</a>
+                            }
+                            else{
+                                <a class="btn btn-outline-secondary" asp-action="Login" asp-controller="Account">Rent</a>
+                                }
+
                             </div>
                         </div>
                     </div>

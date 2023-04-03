@@ -1,7 +1,9 @@
 ﻿using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Repository;
+using JewelryRentalSystem.Services;
 using JewelryRentalSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +17,23 @@ namespace JewelryRentalSystem.Controllers
         
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly JRSDBContext _JRSDBContext;
+        private readonly IUserService _userService;
 
         public ProductController(IProductDBRepository repo, 
-            IWebHostEnvironment webHostEnvironment, JRSDBContext JRSDBContext)
+            IWebHostEnvironment webHostEnvironment, JRSDBContext JRSDBContext,
+            IUserService userService)
         {
             _repo = repo;
             _webHostEnvironment = webHostEnvironment;
             _JRSDBContext = JRSDBContext;
+            _userService = userService;
         }
 
         public async Task<IActionResult> GetAllProducts(string SearchString)
         {
+            var userId = _userService.GetUserId();
+            var isLoggedIn = _userService.IsAuthenticated();
+
             ViewData["CurrentFilter"] = SearchString;
             var products = from p in _JRSDBContext.Products select p;
             if (!String.IsNullOrEmpty(SearchString))
@@ -36,17 +44,20 @@ namespace JewelryRentalSystem.Controllers
             return View(products);
         }
 
+        [Authorize]
         public async Task<IActionResult> ProductManagement()
         {
             var productList = await _repo.GetAllProducts();
             return View(productList);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel newProduct)
         {

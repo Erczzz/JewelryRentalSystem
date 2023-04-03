@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,9 +41,31 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav my-2 my-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Logout</a>
-                        </li>
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+@*                            Mas okay sana kung dropdown list tong mga anchor tag*@
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-action="ChangePassword" asp-controller="Account">
+                                    Change Password
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-action="Logout" asp-controller="Account">
+                                   @* Logout @User.FindFirst("UserFirstName").Value*@
+                                    Logout @User.Identity.Name
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="SignUp">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

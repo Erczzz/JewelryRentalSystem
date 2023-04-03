@@ -1,9 +1,12 @@
 ﻿using JewelryRentalSystem.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystem.Data
 {
-    public class JRSDBContext : DbContext
+/* We have to input the <ApplicationUser> in our IdentityDbContext
+ * for us to be able to work in our custom columns or property in AspNetUsers*/
+    public class JRSDBContext : IdentityDbContext<ApplicationUser>
     {
         public JRSDBContext()
         {
