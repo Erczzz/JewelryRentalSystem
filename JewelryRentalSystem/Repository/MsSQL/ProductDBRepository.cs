@@ -13,38 +13,39 @@ namespace JewelryRentalSystem.Repository.MsSQL
             _JRSDBContext = jRSDBContext;
         }
 
-        public Product AddProduct(Product newProduct)
+        public async Task<Product> AddProduct(Product newProduct)
         {
-            _JRSDBContext.Add(newProduct);
-            _JRSDBContext.SaveChanges();
+            _JRSDBContext.AddAsync(newProduct);
+            await _JRSDBContext.SaveChangesAsync();
             return newProduct;
         }
 
-        public Product DeleteProduct(int ProductId)
+        public async Task<Product> DeleteProduct(int ProductId)
         {
-            var product = GetProductById(ProductId);
+            var product = await GetProductById(ProductId);
             if (product != null)
             {
                 _JRSDBContext.Products.Remove(product);
-                _JRSDBContext.SaveChanges();
+                await _JRSDBContext.SaveChangesAsync();
+                return product;
             }
-            return product;
+            return null;
         }
 
-        public List<Product> GetAllProducts()
+        public async Task<List<Product>> GetAllProducts()
         {
-            return _JRSDBContext.Products.AsNoTracking().ToList();
+            return await _JRSDBContext.Products.AsNoTracking().ToListAsync();
         }
 
-        public Product GetProductById(int ProductId)
+        public async Task<Product> GetProductById(int ProductId)
         {
-            return _JRSDBContext.Products.AsNoTracking().ToList().FirstOrDefault(x => x.ProductId == ProductId);
+            return await _JRSDBContext.Products.AsNoTracking().SingleOrDefaultAsync(x => x.ProductId == ProductId);
         }
 
-        public Product UpdateProduct(int ProductId, Product newProduct)
+        public async Task<Product> UpdateProduct(int ProductId, Product newProduct)
         {
-            _JRSDBContext.Products.Update(newProduct);
-            _JRSDBContext.SaveChanges();
+             _JRSDBContext.Products.Update(newProduct);
+            await _JRSDBContext.SaveChangesAsync();
             return newProduct;
         }
     }

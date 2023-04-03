@@ -20,27 +20,27 @@ namespace JewelryRentalSystem.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult GetAllProducts(string SearchString)
+        public async Task<IActionResult> GetAllProducts(string SearchString)
         {
-            var productList = _repo.GetAllProducts();
+            var productList = await _repo.GetAllProducts();
             return View(productList);
         }
 
-        public IActionResult ProductManagement()
+        public async Task<IActionResult> ProductManagement()
         {
-            var productList = _repo.GetAllProducts();
+            var productList = await _repo.GetAllProducts();
             return View(productList);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
         [HttpPost]
-        public  IActionResult Create(ProductViewModel newProduct)
+        public async Task<IActionResult> Create(ProductViewModel newProduct)
         {
-            if (ModelState.IsValid)
+            // if (ModelState.IsValid)
             {
                 if (newProduct.ProductImage != null)
                 {
@@ -56,7 +56,7 @@ namespace JewelryRentalSystem.Controllers
                         ProductDescription = newProduct.ProductDescription,
                         ProductImage = "/" + folder
                     };
-                    _repo.AddProduct(product);
+                     await _repo.AddProduct(product);
                 }
 
                 
@@ -66,26 +66,26 @@ namespace JewelryRentalSystem.Controllers
             return View();
         }
 
-        public IActionResult Details(int ProductId)
+        public async Task<IActionResult> Details(int ProductId)
         {
-            var product = _repo.GetProductById(ProductId);
+            var product = await _repo.GetProductById(ProductId);
             return View(product);
         }
 
-        public IActionResult Delete(int ProductId)
+        public async Task<IActionResult> Delete(int ProductId)
         {
-            var productList = _repo.DeleteProduct(ProductId);
+            var productList = await _repo.DeleteProduct(ProductId);
             return RedirectToAction(controllerName: "Product", actionName: "ProductManagement");
         }
 
         [HttpGet]
-        public IActionResult Update(int ProductId)
+        public async Task<IActionResult> Update(int ProductId)
         {
             if (ProductId == null)
             {
                 return NotFound();
             }
-            var prod = _repo.GetProductById(ProductId);
+            var prod = await _repo.GetProductById(ProductId);
             if (prod == null)
             {
                 return NotFound();
@@ -107,7 +107,7 @@ namespace JewelryRentalSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(ProductViewModel newProduct)
+        public async Task<IActionResult> Update(ProductViewModel newProduct)
         {
             if (newProduct.ProductImage != null)
             {
@@ -123,7 +123,7 @@ namespace JewelryRentalSystem.Controllers
                     ProductDescription = newProduct.ProductDescription,
                     ProductImage = "/" + folder
                 };
-                var updatedProduct = _repo.UpdateProduct(newProduct.ProductId, product);
+                var updatedProduct = await _repo.UpdateProduct(newProduct.ProductId, product);
             }
             return RedirectToAction("ProductManagement");
         }

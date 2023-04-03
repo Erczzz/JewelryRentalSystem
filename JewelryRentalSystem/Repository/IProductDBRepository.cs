@@ -5,10 +5,10 @@ namespace JewelryRentalSystem.Repository
 {
     public interface IProductDBRepository
     {
-        List<Product> GetAllProducts();
-        Product GetProductById(int ProductId);
-        Product AddProduct(Product newProduct);
-        Product UpdateProduct(int ProductId, Product newProduct);
-        Product DeleteProduct(int ProductId);
+        Task<List<Product>> GetAllProducts();
+        Task<Product> GetProductById(int ProductId);
+        Task<Product> AddProduct(Product newProduct);
+        Task<Product> UpdateProduct(int ProductId, Product newProduct);
+        Task<Product> DeleteProduct(int ProductId);
     }
 }
