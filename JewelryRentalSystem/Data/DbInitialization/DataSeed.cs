@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace JewelryRentalSystem.Data.DbInitialization
 {
-    public class DataSeed
+    public static class DataSeed
     {
         public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
         {

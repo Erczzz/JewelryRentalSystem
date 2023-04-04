@@ -10,17 +10,14 @@ namespace JewelryRentalSystem.Data.DbInitialization
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<DbInitializer> _logger;
-        private readonly JRSDBContext _dbContext;
         public DbInitializer(
             RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager,
-            ILogger<DbInitializer> logger,
-            JRSDBContext dbContext)
+            ILogger<DbInitializer> logger)
         {
             _roleManager = roleManager;
             _logger = logger;
             _userManager = userManager;
-            _dbContext = dbContext;
         }
         public async Task Initialize()
         {
