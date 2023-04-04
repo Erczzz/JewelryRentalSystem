@@ -1,21 +1,15 @@
-﻿using JewelryRentalSystem.Models;
-using JewelryRentalSystem.Repository;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using JewelryRentalSystem.ViewModels;
 
 namespace JewelryRentalSystem.Controllers
 {
     public class RoleController : Controller
     {
-        IRoleDBRepository _repo;
-        public RoleController(IRoleDBRepository repo)
+        public RoleManager<IdentityRole> _roleManager { get; }
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
-            this._repo = repo;
-        }
-
-        public IActionResult GetAllRoles()
-        {
-            var roleList = _repo.GetAllRoles();
-            return View(roleList);
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -23,16 +17,72 @@ namespace JewelryRentalSystem.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Create(Role newRole)
+        public async Task<IActionResult> Create(RoleViewModel roleViewModel)
         {
-            // if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var role = _repo.AddRole(newRole);
+                var role = new IdentityRole
+                {
+                    Name = roleViewModel.Name
+                };
+                var result = await _roleManager.CreateAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("GetAllRoles");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(roleViewModel);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAllRoles()
+        {
+            return View(_roleManager.Roles.ToList());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(string roleId)
+        {
+            var oldTodo = await _roleManager.FindByIdAsync(roleId);
+            return View(oldTodo);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(RoleViewModel role)
+        {
+            var oldRole = await _roleManager.FindByIdAsync(role.Id.ToString());
+            oldRole.Name = role.Name;
+            var result = await _roleManager.UpdateAsync(oldRole);
+            if (result.Succeeded)
+            {
                 return RedirectToAction("GetAllRoles");
             }
-            ViewData["Message"] = "Data is not valid to create the Todo";
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
             return View();
         }
+
+        public IActionResult Details(string roleId)
+        {
+            var role = _roleManager.FindByIdAsync(roleId);
+            return View(role.Result);
+        }
+
+        public async Task<IActionResult> Delete(string roleId)
+        {
+            var oldRole = await _roleManager.FindByIdAsync(roleId);
+
+            var todolist = _roleManager.DeleteAsync(oldRole);
+            return RedirectToAction(controllerName: "Role", actionName: "GetAllRoles"); // reload the getall page it self
+        }
+
     }
 }

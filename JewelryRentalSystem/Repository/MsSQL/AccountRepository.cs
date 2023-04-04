@@ -1,6 +1,7 @@
 ﻿using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Services;
 using JewelryRentalSystem.ViewModels;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 
 namespace JewelryRentalSystem.Repository.MsSQL
@@ -9,15 +10,24 @@ namespace JewelryRentalSystem.Repository.MsSQL
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserService _userService;
 
         public AccountRepository(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, IUserService userService)
+            SignInManager<ApplicationUser> signInManager, IUserService userService,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userService = userService;
+            _roleManager = roleManager;
         }
+
+/*        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            _userManager.CreateAsync
+        }
+*/
         public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
         {
             var user = new ApplicationUser()

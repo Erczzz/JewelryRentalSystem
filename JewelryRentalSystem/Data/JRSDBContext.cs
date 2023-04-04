@@ -1,4 +1,5 @@
 ﻿using JewelryRentalSystem.Models;
+using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,27 +32,24 @@ namespace JewelryRentalSystem.Data
                 .HasForeignKey(x => x.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(modelBuilder);
+/*
+            var adminRole = new RoleViewModel { Name = "Administrator" };
+            var employeeRole = new RoleViewModel { Name = "Employee" };
+            var customerRole = new RoleViewModel { Name = "Customer" };
 
-            var adminRole = new Role { RoleId = 1, RoleName = "Administrator" };
-            var employeeRole = new Role { RoleId = 2, RoleName = "Employee" };
-            var customerRole = new Role { RoleId = 3, RoleName = "Customer" };
-
-            modelBuilder.Entity<Role>()
+            modelBuilder.Entity<RoleViewModel>()
                 .HasData(adminRole, employeeRole, customerRole);
 
-            modelBuilder.Entity<User>()
-                .HasData(new User
+            modelBuilder.Entity<ApplicationUser>()
+                .HasData(new ApplicationUser
                 {
-                    UserId = 1,
                     FirstName = "Admin",
                     LastName = "Admin",
-                    BirthDate = new DateTime(1999, 2, 12),
+                    Birthdate = new DateTime(1999, 2, 12),
                     ContactNo = "09920098321",
                     Email = "admin@email.com",
                     Address = "SampleAddress",
-                    Username = "admin",
-                    RoleId = adminRole.RoleId
-                });
+                });*/
         }
 
         public DbSet<User> Users { get; set; }
