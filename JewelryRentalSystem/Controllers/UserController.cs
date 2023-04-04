@@ -11,133 +11,80 @@ namespace JewelryRentalSystem.Controllers
 {
     public class UserController : Controller
     {
-
-        IUserDBRepository _userRepository;
-        IRoleDBRepository _roleRepository;
-
-        public UserController(IUserDBRepository userRepository, IRoleDBRepository roleRepository)
+        private UserManager<ApplicationUser> _userManager { get; }
+        public UserController(UserManager<ApplicationUser> userManager)
         {
-            _userRepository = userRepository;
-            _roleRepository = roleRepository;
+            _userManager = userManager;
         }
 
-        public async Task<IActionResult> GetAllUsers()
+        public IActionResult GetAllUsers()
         {
-            return View(await _userRepository.GetAllUsers());
+            var userlist = _userManager.Users.ToList();
+            return View(userlist);
         }
-
-        //READ EMPLOYEE
-
-        public async Task<IActionResult> Details(int? UserId)
+        public IActionResult Details(string userId)
         {
-            if (UserId == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _userRepository.GetUserById(UserId);
-
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
-        }
-
-        //CREATE EMPLOYEE
-
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            CreateUserViewModel createUserViewModel = new CreateUserViewModel
-            {
-                Roles = await _roleRepository.GetAllRoles()
-            };
-
-            return View(createUserViewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateUserViewModel createUserViewModel)
-        {
-            createUserViewModel.Roles = await _roleRepository.GetAllRoles();
-
-            if (ModelState.IsValid)
-            {
-                User newUser = new User
-                {
-                    FirstName = createUserViewModel.NewUser.FirstName,
-                    LastName = createUserViewModel.NewUser.LastName,
-                    BirthDate = createUserViewModel.NewUser.Birthdate,
-                    ContactNo = createUserViewModel.NewUser.ContactNo,
-                    Email = createUserViewModel.NewUser.Email,
-                    Address = createUserViewModel.NewUser.Address,
-                    Username = createUserViewModel.NewUser.Username,
-                    RoleId = createUserViewModel.NewUser.RoleId
-                };
-
-                await _userRepository.AddUser(newUser);
-                return RedirectToAction(nameof(GetAllUsers));
-            }
-            return View(createUserViewModel);
-        }
-
-        //DELETE EMPLOYEE
-
-        public async Task<IActionResult> Delete(int? UserId)
-        {
-            if (UserId == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _userRepository.GetUserById(UserId);
-            
-            if (user == null)
-            {
-                return NotFound();
-            }
-
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
             return View(user);
         }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int UserId)
+        public async Task<IActionResult> Delete(string userId)
         {
-            if (_userRepository.GetAllUsers() == null)
-            {
-                return Problem("Entity set 'SampleDBContext.Users'  is null.");
-            }
-
-            var user = await _userRepository.GetUserById(UserId);
-
-            if (_userRepository is null)
-            {
-                return NotFound();
-            }
-
-            await _userRepository.DeleteUser(user.UserId);
-            return RedirectToAction(nameof(GetAllUsers));
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            var userlist = await _userManager.DeleteAsync(user);
+            return RedirectToAction(controllerName: "User", actionName: "GetAllUsers"); // reload the getall page it self
         }
-
-        //UPDATE EMPLOYEE
 
         [HttpGet]
-        public IActionResult Update(int UserId)
+        public IActionResult Create()
         {
-            var oldUser = _userRepository.GetUserById(UserId);
-            return View(oldUser);
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(RegisterUserViewModel userViewModel) // model binded this where the views data is accepted 
+        {
+            if (ModelState.IsValid)
+            {
+                var userModel = new ApplicationUser
+                {
+                    UserName = userViewModel.Email,
+                    Email = userViewModel.Email,
+                    FirstName = userViewModel.FirstName,
+                    LastName = userViewModel.LastName
+                };
+                var result = await _userManager.CreateAsync(userModel, userViewModel.Password);
+                if (result.Succeeded)
+                {
+                    // notify user created
+
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(userViewModel);
         }
 
-        [HttpPost]
-        public IActionResult Update(User newUser)
+        [HttpGet]
+        public async Task<IActionResult> Update(string userId)
         {
-            var user = _userRepository.UpdateUser(newUser.UserId, newUser);
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            var roles = await _userManager.GetRolesAsync(user);
+            EditUserViewModel userViewModel = new EditUserViewModel()
+            {
+                FirstName = user.FirstName,
+                Email = user.Email,
+                LastName = user.LastName,
+                Roles = roles
+            };
+            return View(userViewModel);
+        }
+        [HttpPost]
+        public IActionResult Update(EditUserViewModel user)
+        {
+            //var user = _userManager.Users.FirstOrDefault(u => u.Id == newUser);
+
             return RedirectToAction("GetAllUsers");
         }
-
     }
 }

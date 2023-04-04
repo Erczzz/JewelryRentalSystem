@@ -1,19 +1,8 @@
 ﻿@model JewelryRentalSystem.ViewModels.SignUpUserModel
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>SignUp</title>
-</head>
-<body>
-
-<div class="container">
+<div id="registerUserForm" class="container">
     <h4>Sign Up</h4>
     <hr />
     <div class="row">
@@ -77,8 +66,4 @@
     </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-</body>
-</html>
+

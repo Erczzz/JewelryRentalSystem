@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+@model IEnumerable<JewelryRentalSystem.Models.Product>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,52 +10,50 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JewelryRentalSystem.styles.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm text-light border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Jewelry Rental System</a>
+        <nav id="navbarDiv" class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div id="navbar2ndDiv" class="container-fluid">
+                <a id="navbarTitle" class="navbar-brand text-dark" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Our Jewelry</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon" id="navbarToggler"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div id="navbarButtons" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
+                    </ul>
+                    <ul id="navbarRight" class="nav navbar-nav my-2 my-lg-0">
+       
+
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Product</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Product</a>
                         </li>
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Index">User</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="ProductManagement">ProductManagement</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductManagement">ProductManagement</a>
                             </li>
                         }
 
-                    </ul>
-                    <ul class="nav navbar-nav my-2 my-lg-0">
                         @if (_signInManager.IsSignedIn(User))
                         {
 @*                            Mas okay sana kung dropdown list tong mga anchor tag*@
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-action="ChangePassword" asp-controller="Account">
+                                <a class="nav-link text-dark" asp-action="ChangePassword" asp-controller="Account">
                                     Change Password
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-action="Logout" asp-controller="Account">
+                                <a class="nav-link text-dark" asp-action="Logout" asp-controller="Account">
                                    @* Logout @User.FindFirst("UserFirstName").Value*@
                                     Logout @User.Identity.Name
                                 </a>
@@ -63,10 +62,10 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="SignUp">Register</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a id="navbarLoginButton" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
 
@@ -81,7 +80,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted text-center">
+    <footer id="footer" class="border-top footer text-muted text-center">
         <div class="container">
             &copy; 2023 - JewelryRentalSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
