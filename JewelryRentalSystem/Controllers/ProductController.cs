@@ -148,5 +148,9 @@ namespace JewelryRentalSystem.Controllers
             }
             return RedirectToAction("ProductManagement");
         }
+        public IActionResult AppointmentSchedule()
+        {
+            return View("AppointmentSchedule");
+        }
     }
 }

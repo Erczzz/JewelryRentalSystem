@@ -1,4 +1,5 @@
 ﻿@model JewelryRentalSystem.Models.Product
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
 
 
 @*<h2>Product Details</h2>*@
@@ -12,8 +13,15 @@
             <div class="d-inline-flex justify-content-between w-100">
                 <h4>@Model.ProductName</h4>
                 <div>
-                    <a class="btn btn-outline-success btn-sm">Add to Cart</a>
-                    <a class="btn btn-outline-primary btn-sm">Rent</a>
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                    {
+
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-success btn-sm">Add to Cart</a>
+                        <a class="btn btn-outline-primary btn-sm">Rent</a>
+                    }
                 </div>
             </div>
 
@@ -35,7 +43,7 @@
             <h6 class="text-muted">@Model.ProductDescription</h6>
         </div>
         <div id="backToHomePage">
-            <a asp-controller="Product" asp-action="GetAllProducts" id="backToHomePage" class="btn btn-outline-secondary btn-sm">Back to Homepage</a>
+            <a asp-controller="Product" asp-action="GetAllProducts" data-rel="back" id="backToHomePage" class="btn btn-outline-secondary btn-sm">Back to Homepage</a>
         </div>
     </div>
 </div>

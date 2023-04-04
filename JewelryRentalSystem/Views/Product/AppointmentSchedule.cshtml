@@ -1,0 +1,120 @@
+﻿<div id="calendarDiv" class="container w-75">
+    <div class="container d-inline-flex justify-content-between">
+        <div id="backToHomePage">
+            <a asp-controller="Product" asp-action="GetAllProducts" id="backToHomePage" class="btn btn-outline-dark btn-sm">Back to Homepage</a>
+        </div>
+        <div id="backToHomePage">
+            <a class="btn btn-outline-dark btn-sm">Create Appointment</a>
+        </div>
+    </div>
+    <p id="pTagCalendar">_ _ _ _ _ _ _ _ _</p>
+    <div class="month">
+        <ul>
+            <li class="prev">&#10094;</li>
+            <li class="next">&#10095;</li>
+            <li>August<br><span style="font-size:18px">2021</span></li>
+        </ul>
+    </div>
+
+    <ul class="weekdays">
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
+    </ul>
+
+    <ul class="days">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li><span class="active">10</span></li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>31</li>
+    </ul>
+    <p id="pTagCalendar">_ _ _ _ _ _ _ _ _</p>
+    <div id="appointmentForm" class="container d-inline-flex">
+            <div class="container w-50">
+                <div>
+                    <label class="control-label">Transaction ID</label>
+                <input disabled class="form-control">
+                </div>
+            <div>
+                <label class="control-label">Available Slots</label>
+                <input disabled class="form-control">
+            </div>
+                <div>
+                    <label class="control-label">Type of Schedule</label>
+                    <select class="form-control">
+                        <option>--- Select ---</option>
+                        <option>Pick-Up</option>
+                        <option>Return</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container w-50">
+            <div>
+                <label class="control-label">Time</label>
+                <select class="form-control">
+                    <option>--- Select ---</option>
+                    <option>8:00am - 9:00am</option>
+                    <option>9:00am - 10:00am</option>
+                    <option>10:00am - 11:00am</option>
+                    <option>11:00am - 12:00nn</option>
+                    <option>01:00pm - 02:00pm</option>
+                    <option>02:00pm - 03:00pm</option>
+                    <option>03:00pm - 04:00pm</option>
+                    <option>04:00pm - 05:00pm</option>
+                </select>
+                <label class="control-label">Duration</label>
+                <select class="form-control">
+                    <option>--- Select ---</option>
+                    <option>1 day</option>
+                    <option>1 week</option>
+                    <option>1 month</option>
+                    <option>Others</option>
+                </select>
+            </div>
+                <div>
+                    <label class="control-label">Location</label>
+                    <select class="form-control">
+                        <option>--- Select ---</option>
+                        <option>Quezon City</option>
+                        <option>Marikina City</option>
+                        <option>Antipolo City</option>
+                        <option>Makati City</option>
+                    </select>
+                </div>
+            </div>
+    </div>    
+
+
+
+</div>
