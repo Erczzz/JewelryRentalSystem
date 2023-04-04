@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230404043217_updateapplicationuser")]
+    partial class updateapplicationuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,27 +106,6 @@ namespace JewelryRentalSystem.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
-                            AccessFailedCount = 0,
-                            Address = "Sample Address",
-                            ConcurrencyStamp = "0ba27a79-1746-41ff-9ad3-8ad4104c43ec",
-                            ContactNo = "09876543211",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "admin",
-                            LastName = "admin",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK22XxPi1l0gS4nxUjMHDQVgsK7jhI7nIe58dHwyDY594gjV2kbsSpD2rL4e8kz97g==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "240ab6e9-4e2d-4b00-bce2-0ee5fd302cab",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Appointment", b =>
@@ -258,7 +239,7 @@ namespace JewelryRentalSystem.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.User", b =>
@@ -331,29 +312,6 @@ namespace JewelryRentalSystem.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "9ea94376-bae3-4592-b2ef-16e2222ec6f4",
-                            ConcurrencyStamp = "9ea94376-bae3-4592-b2ef-16e2222ec6f4",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "7f749ed5-ec6f-410a-9c89-d37c3e498c0c",
-                            ConcurrencyStamp = "7f749ed5-ec6f-410a-9c89-d37c3e498c0c",
-                            Name = "Employee",
-                            NormalizedName = "EMPLOYEE"
-                        },
-                        new
-                        {
-                            Id = "f913644d-d5a1-4c4a-a73b-dacc6a8c7898",
-                            ConcurrencyStamp = "f913644d-d5a1-4c4a-a73b-dacc6a8c7898",
-                            Name = "Customer",
-                            NormalizedName = "CUSTOMER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -441,13 +399,6 @@ namespace JewelryRentalSystem.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
-                            RoleId = "9ea94376-bae3-4592-b2ef-16e2222ec6f4"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

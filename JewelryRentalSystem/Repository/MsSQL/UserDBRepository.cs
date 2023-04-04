@@ -1,4 +1,4 @@
-﻿using JewelryRentalSystem.Data;
+﻿/*using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,10 +31,6 @@ namespace JewelryRentalSystem.Repository.MsSQL
             return null;
         }
 
-        public async Task<List<Role>> FetchRoleList()
-        {
-            return await _JRSDbContext.Roles.ToListAsync();
-        }
 
         public async Task<List<User>> GetAllUsers()
         {
@@ -57,3 +53,4 @@ namespace JewelryRentalSystem.Repository.MsSQL
         }
     }
 }
+*/
