@@ -213,6 +213,18 @@ img.img-responsive {
     display: flex;
 }
 
-.form-group {
+/*.form-group {
     width: 400px;
+}*/
+
+
+/*Sign Up Design*/
+#signUpContainer {
+    width: 45%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#signUpfield {
+    width: 100%;
 }
