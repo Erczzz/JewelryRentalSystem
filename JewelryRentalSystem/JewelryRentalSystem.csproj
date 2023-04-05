@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Documents\ERD\" />
+    <Folder Include="Documents\BRD\" />
+    <Folder Include="Documents\Wireframes\" />
+    <Folder Include="Documents\PPT\" />
     <Folder Include="Views\Product\Appointment\" />
     <Folder Include="wwwroot\products\productImgs\" />
     <Folder Include="wwwroot\uploadedimgs\" />
