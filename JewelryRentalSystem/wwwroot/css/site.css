@@ -168,12 +168,24 @@ div.input-group {
 
 
 /* NAVBAR */
+#navbarImg {
+    height: 45px;
+}
+
+#navbarImgDiv {
+    height: 40px;
+    width: 40px;
+}
+
 #navbarToggler {
     color: green;
 }
-#navbarDiv{
-    color:white;
+#navbarDiv {
+    height: 70px;
 }
+    #navbarDiv li {
+        color: #E9DE82;
+    }
 
 #navbar2ndDiv {
     margin-left: 5%;
@@ -278,8 +290,17 @@ img.img-responsive {
 #changePassNav:hover,
 #logoutNav:hover {
     background-color: red;
+    color: #E9DE82;
 }
 
+#privacyNav,
+#productNav,
+#roleNav,
+#prodMngmntNav,
+#changePassNav,
+#logoutNav{
+    color: #E9DE82;
+}
 
 
 /* CALENDAR DESIGN */
