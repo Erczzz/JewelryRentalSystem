@@ -1,28 +1,19 @@
 ﻿@model JewelryRentalSystem.ViewModels.SignUpUserModel
 
 
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>SignUp</title>
-@*    <link href=".../wwwroot/css/site.css" />*@
-</head>
-<body>
-
 <div id="signUpContainer" class="container">
-    <h4>Sign Up</h4>
+    <h3 id="signUpTitle">Sign Up</h3>
     <hr />
-    <div class="row">
-        <div id="signUpform" class="col-md-4">
+    <div class="row" id="signUpContainer2ndDiv">
+        <div id="signUpform">
             <form asp-action="SignUp">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div id="signUpfield" class="form-group w-100">
+                    <div id="signUpfield" class="form-group">
                         <label asp-for="FirstName" class="control-label"></label>
                         <input asp-for="FirstName" class="form-control" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
-                    <div id="signUpfield" class="form-group w-100">
+                    <div id="signUpfield" class="form-group">
                         <label asp-for="LastName" class="control-label"></label>
                         <input asp-for="LastName" class="form-control" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
@@ -56,24 +47,22 @@
                         <label asp-for="ConfirmPassword" class="control-label"></label>
                         <input asp-for="ConfirmPassword" class="form-control" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div><br />
+                <div class="d-flex" id="signUpBtnDiv">
+                    <div>
+                        <a id="changePassBackBtn" class="btn btn-secondary" asp-action="GetAllProducts" asp-controller="Product">Back to Home</a>
                     </div>
-                    <br />
-                    <div id="signUpfield" class="form-group w-100">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                    <div id="signUpfield" class="form-group">
+                        <input type="submit" value="Create" class="btn btn-warning" />
                     </div>
+                </div><br />
+                <div>
+                    <p id="signUpParag">Already have an Account? Click <a asp-action="Login" asp-controller="Account">here</a> to Login.</p>
+                </div>
             </form>
         </div>
-        
-@*        Dito pwede maglagay ng image for sign up*@
-        <div class="col-md-8">
-            
-        </div>
-    </div>
 
-    <div>
-            <p>Click <a asp-action="Login" asp-controller="Account">here</a> to Login.</p>
     </div>
 </div>
-</body>
-</html>
+
 

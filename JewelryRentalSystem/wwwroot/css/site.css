@@ -15,7 +15,6 @@ html {
 
 body {
     margin-bottom: 60px;
-
 }
 
 
@@ -23,19 +22,26 @@ body {
     box-sizing: border-box;
 }
 
+/* PRODUCT DESIGN */
+
+#productColumn {
+    width: 220px;
+    height: 350px;
+}
+
 
 #containerProd {
     display: inline-flex;
-    margin-left: auto;
-    margin-right: auto;
-    justify-items: center;
+    padding: 10px;
+    justify-content: space-between;
 }
 
+#getAllProductsContainer {
+    flex-direction: column;
+    justify-content: center;
 
-#productColumn {
-    width: 200px;
-    padding: 5px;
 }
+
 
 .card {
     border-radius: 4px;
@@ -72,9 +78,6 @@ div.carousel-item img {
     object-fit: cover;
 }
 
-div.input-group {
-}
-
 .container-product {
     width: 70%;
     margin-left: auto;
@@ -96,11 +99,6 @@ html {
     position: relative;
     min-height: 100%;
 }
-
-body {
-    margin-bottom: 60px;
-}
-
 
 
 * {
@@ -142,8 +140,6 @@ div.carousel-item img {
     object-fit: cover;
 }
 
-div.input-group {
-}
 
 .container-product {
     width: 70%;
@@ -154,12 +150,6 @@ div.input-group {
 
 
 /*ERCZZZ*/
-
-
-
-#containerProd {
-    justify-items: center;
-}
 
 #productView {
     text-decoration: none;
@@ -225,22 +215,29 @@ img.img-responsive {
     display: flex;
 }
 
-/*.form-group {
-    width: 400px;
-}*/
-
 
 /*Sign Up Design*/
 #signUpContainer {
     margin-right: auto;
     margin-left: auto;
     margin: auto;
+
+}
+#signUpTitle, #signUpParag {
+    text-align: center;
+}
+#signUpBtnDiv{
+
 }
 
-#signUpfield {
-    width: 100%;
+#signUpContainer2ndDiv {
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    border-style: ridge;
+    width: 600px;
+    padding: 10px
 }
-
 /*FOOTER AND NAVBAR*/
 .navbar, footer {
     background-color: #00263D;
@@ -254,18 +251,25 @@ img.img-responsive {
     margin-right: auto;
     margin: auto;
 }
-
+#login2ndDiv{
+    margin-left: auto;
+    margin-left: auto;
+    margin: auto;
+    width: 500px;
+    border-style: ridge;
+    padding: 10px;
+}
+#loginH4, #loginParag {
+    text-align: center;
+}
 /* Cart Notification*/
-
 .notification {
-
     color: white;
     text-decoration: none;
     padding: 5px 10px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
-
 }
 
     .notification:hover {
@@ -282,15 +286,17 @@ img.img-responsive {
         color: white;
     }
 
+/* NAVBAR BUTTONS*/
 
 #privacyNav:hover,
 #productNav:hover,
 #roleNav:hover,
 #prodMngmntNav:hover,
 #changePassNav:hover,
-#logoutNav:hover {
+#logoutNav:hover,
+#navbarLoginButton:hover,
+navbarRegisterButton:hover{
     background-color: red;
-    color: #E9DE82;
 }
 
 #privacyNav,
@@ -298,10 +304,11 @@ img.img-responsive {
 #roleNav,
 #prodMngmntNav,
 #changePassNav,
-#logoutNav{
+#logoutNav,
+#navbarLoginButton,
+#navbarRegisterButton {
     color: #E9DE82;
 }
-
 
 /* CALENDAR DESIGN */
 ul {
@@ -404,4 +411,25 @@ ul {
     color: #DDDDDD;
     font-size:0.5px;
     font-weight: bold;
+}
+
+/* CHANGE PASSWORD */
+
+#changePass2ndDiv {
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    padding: 20px;
+    border-style: ridge;
+}
+
+
+#changePassBackBtn {
+    margin-right: 10px;
+}
+#changePassBtnDiv{
+    justify-content:flex-end;
+}
+#changPassTitle{
+    text-align:center;
 }

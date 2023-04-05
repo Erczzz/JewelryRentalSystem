@@ -43,19 +43,19 @@
 
 
                         <li class="nav-item">
-                            <a id="productNav" class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Home</a>
+                            <a id="productNav" class="nav-link" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a id="privacyNav" class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a id="privacyNav" class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a id="roleNav" class="nav-link text-light" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
+                                <a id="roleNav" class="nav-link" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
                             </li>
                             <li class="nav-item">
-                                <a id="prodMngmntNav" class="nav-link text-light" asp-area="" asp-controller="Product" asp-action="ProductManagement">ProductManagement</a>
+                                <a id="prodMngmntNav" class="nav-link" asp-area="" asp-controller="Product" asp-action="ProductManagement">ProductManagement</a>
                             </li>
                         }
 
@@ -64,12 +64,12 @@
 @*                            Mas okay sana kung dropdown list tong mga anchor tag*@
 
                             <li class="nav-item">
-                                <a id="changePassNav" class="nav-link text-light" asp-action="ChangePassword" asp-controller="Account">
+                                <a id="changePassNav" class="nav-link" asp-action="ChangePassword" asp-controller="Account">
                                     Change Password
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a id="logoutNav" class="nav-link text-light" asp-action="Logout" asp-controller="Account">
+                                <a id="logoutNav" class="nav-link" asp-action="Logout" asp-controller="Account">
                                    @* Logout @User.FindFirst("UserFirstName").Value*@
                                     Logout @User.Identity.Name
                                 </a>
@@ -78,10 +78,10 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="SignUp">Register</a>
+                                <a id="navbarRegisterButton" class="nav-link" asp-area="" asp-controller="Account" asp-action="SignUp">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a id="navbarLoginButton" class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a id="navbarLoginButton" class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
 

@@ -34,6 +34,10 @@ namespace JewelryRentalSystem.Controllers
                     }
                     return View(userModel);
                 }
+                else
+                {
+                    return View("Login");
+                }
             }
             return View();
         }

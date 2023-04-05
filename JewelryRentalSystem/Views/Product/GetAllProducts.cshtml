@@ -36,88 +36,93 @@
 </div>
 
 <br />
-<div class="container-product">
+<div class="container-product d-flex w-90" id="getAllProductsContainer">
     <form asp-action="GetAllProducts" method="get">
         <div class="input-group mb-3">
             <input name="SearchString" type="text" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <input value="Search" class="btn btn-outline-secondary" type="submit" />
             </div>
-
-    </form>
-    </div>
-    @foreach (var item in Model)
-    {
-        <div id="containerProd" class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col" id="productColumn">
-                <a id="productView" asp-action="Details" asp-controller="Product" asp-route-productId="@item.ProductId">
-                    <div class="card h-80">
-                        <img src="@item.ProductImage" class="card-img-top" height="200">
-                        <div class="card-body">
-                            <p class="card-title">@item.ProductName</p>
-                            <h5>Php @item.ProductPrice</h5>
-                        </div>
-                        <div class="card-footer d-flex flex-row justify-content-between">
-                            <div>
-                                @if (item.ProductStock == 0)
-                                {
-                                    <small class="text-muted">Out of stock</small>
-                                }
-                                else if (item.ProductStock == 1)
-                                {
-                                    <small class="text-muted">@item.ProductStock item left</small>
-                                }
-                                else
-                                {
-                                    <small class="text-muted">@item.ProductStock items left</small>
-                                }
-                            </div>
-                            <div>
-                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
-                            {
-
-                            }
-                            else{
-                                @if (_signInManager.IsSignedIn(User))
-                                {
-                                    <a class="btn btn-secondary btn-sm" asp-action="AppointmentSchedule" asp-controller="Product">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                                        </svg>
-                                    </a>
-                                    <a asp-controller="" asp-action="" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                        </svg>
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-secondary btn-sm" asp-action="Login" asp-controller="Account">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                                        </svg>
-                                    </a>
-                                    <a asp-controller="Account" asp-action="Login" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                        </svg>
-                                    </a>
-                                }
-
-                        }
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
         </div>
-    }
+    </form>
+    <div id="prod2ndDiv">
+        @foreach (var item in Model)
+        {
+@*            <div class="container" id="cardContainer">*@
+                <div id="containerProd" class="row">
+                    <div class="col" id="productColumn">
+                        <a id="productView" asp-action="Details" asp-controller="Product" asp-route-productId="@item.ProductId">
+                            <div class="card" id="productCard">
+                                <img src="@item.ProductImage" class="card-img-top" height="200">
+                                <div class="card-body">
+                                    <p class="card-title">@item.ProductName</p>
+                                    <h5>Php @item.ProductPrice</h5>
+                                </div>
+                                <div class="card-footer d-flex flex-row justify-content-between">
+                                    <div>
+                                        @if (item.ProductStock == 0)
+                                        {
+                                            <small class="text-muted">Out of stock</small>
+                                        }
+                                        else if (item.ProductStock == 1)
+                                        {
+                                            <small class="text-muted">@item.ProductStock item left</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted">@item.ProductStock items left</small>
+                                        }
+                                    </div>
+                                    <div>
+                                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @if (_signInManager.IsSignedIn(User))
+                                            {
+                                                <a class="btn btn-secondary btn-sm" asp-action="AppointmentSchedule" asp-controller="Product">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                                                        <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                                    </svg>
+                                                </a>
+                                                <a asp-controller="" asp-action="" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                    </svg>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-secondary btn-sm" asp-action="Login" asp-controller="Account">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                                                        <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                                    </svg>
+                                                </a>
+                                                <a asp-controller="Account" asp-action="Login" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                    </svg>
+                                                </a>
+                                            }
+
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+@*            </div>*@
+        }
+    </div>
+</div>
 
 <script>
     $('#myModal').on('shown.bs.modal', function () {
