@@ -55,6 +55,7 @@ namespace JewelryRentalSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
             return View();
         }
 
@@ -65,6 +66,7 @@ namespace JewelryRentalSystem.Controllers
             {
                 if (newProduct.ProductImage != null)
                 {
+                    ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
                     string folder = "products/productImgs/";
                     folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
                     string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
@@ -72,6 +74,7 @@ namespace JewelryRentalSystem.Controllers
                     Product product = new Product()
                     {
                         ProductName = newProduct.ProductName,
+                        CategoryId = newProduct.CategoryId,
                         ProductPrice = newProduct.ProductPrice,
                         ProductStock = newProduct.ProductStock,
                         ProductDescription = newProduct.ProductDescription,
@@ -151,6 +154,12 @@ namespace JewelryRentalSystem.Controllers
         public IActionResult AppointmentSchedule()
         {
             return View("AppointmentSchedule");
+        }
+
+        public async Task<IActionResult> AddToCart(int ProductId)
+        {
+            var product = await _repo.GetProductById(ProductId);
+            return View(product);
         }
     }
 }

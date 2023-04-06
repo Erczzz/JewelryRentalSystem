@@ -12,5 +12,8 @@ namespace JewelryRentalSystem.ViewModels
         public int ProductStock { get; set; }
         public IFormFile ProductImage { get; set; }
         public Product Product { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }

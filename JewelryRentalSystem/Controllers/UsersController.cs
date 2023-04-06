@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,11 +59,11 @@ namespace JewelryRentalSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,FirstName,LastName,BirthDate,ContactNo,Email,Address,Username,RoleId")] User user)
         {
-         
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-           
+
+            _context.Add(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             return View(user);
         }
@@ -99,23 +99,23 @@ namespace JewelryRentalSystem.Controllers
 
             //if (ModelState.IsValid)
             //{
-                try
+            try
+            {
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(user.UserId))
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!UserExists(user.UserId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
             //}
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             return View(user);
@@ -154,15 +154,14 @@ namespace JewelryRentalSystem.Controllers
             {
                 _context.Users.Remove(user);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
     }
 }
-*/

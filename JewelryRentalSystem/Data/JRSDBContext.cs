@@ -29,20 +29,15 @@ namespace JewelryRentalSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            // SeedRoles(modelBuilder);
+            modelBuilder.Entity<Product>()
+    .HasOne<Category>(x => x.Category)
+    .WithMany(x => x.Products)
+    .HasForeignKey(x => x.CategoryId)
+    .OnDelete(DeleteBehavior.Cascade);
 
+            base.OnModelCreating(modelBuilder);
             SeedAdminUser(modelBuilder);
         }
-
-/*        private static void SeedRoles(ModelBuilder builder)
-        {
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole() { Name = "Administrator", ConcurrencyStamp = "1", NormalizedName = "Administrator" },
-                new IdentityRole() { Name = "Customer", ConcurrencyStamp = "2", NormalizedName = "Customer" },
-                new IdentityRole() { Name = "Employee", ConcurrencyStamp = "3", NormalizedName = "Employee" }
-                );
-        }*/
 
         private static void SeedAdminUser(ModelBuilder builder)
         {
@@ -98,22 +93,6 @@ namespace JewelryRentalSystem.Data
                 RoleId = admin_RoleId,
                 UserId = user_AdminId
             });
-
-
-            /*            builder.Entity<IdentityUser>().HasData(
-                            new IdentityUser()
-                            {
-                                UserName = "admin@gmail.com",
-                                ConcurrencyStamp = "1",
-                                NormalizedUserName = "admin@gmail.com"
-                            }
-
-                            );
-                        builder.Entity<IdentityUser>().HasData(
-                            new IdentityUser() { UserName = "admin@gmail.com", ConcurrencyStamp = "1", 
-                                NormalizedUserName = "admin@gmail.com" }
-
-                            );*/
         }
 
 
@@ -125,5 +104,6 @@ namespace JewelryRentalSystem.Data
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentType> AppointmentTypes { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
