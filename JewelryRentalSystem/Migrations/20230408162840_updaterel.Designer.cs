@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230408162840_updaterel")]
+    partial class updaterel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "945c2b33-84c6-41d2-8ad0-ff70ac9180e7",
+                            ConcurrencyStamp = "53621132-7198-4b33-b92d-288892de9d34",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -119,9 +121,9 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPQ5R6I3uadeUtencVtTxfm3DjB50FplkWn6F56Xtscdx/bOIuJb2AIappuB2mjAfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI3G+qkEal0BL0YLJM7BPXF4RVAdc3QVTR6aiMruSPjx54sOUZHy5S5Ey+l/JlH9vw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2459879f-b3f1-401a-b1d9-becf4d83face",
+                            SecurityStamp = "a04c5eff-fa58-4907-befb-293943748bcf",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -138,8 +140,9 @@ namespace JewelryRentalSystem.Migrations
                     b.Property<DateTime>("DateOfAppointment")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TimeId")
                         .HasColumnType("int");
@@ -152,8 +155,6 @@ namespace JewelryRentalSystem.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("AppointmentId");
-
-                    b.HasIndex("LocationId");
 
                     b.HasIndex("TimeId");
 
@@ -620,15 +621,9 @@ namespace JewelryRentalSystem.Migrations
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Appointment", b =>
                 {
-                    b.HasOne("JewelryRentalSystem.Models.Location", "Location")
-                        .WithMany("Appointments")
-                        .HasForeignKey("LocationId");
-
                     b.HasOne("JewelryRentalSystem.Models.ScheduleTime", "ScheduleTime")
                         .WithMany("Appointments")
                         .HasForeignKey("TimeId");
-
-                    b.Navigation("Location");
 
                     b.Navigation("ScheduleTime");
                 });
@@ -723,11 +718,6 @@ namespace JewelryRentalSystem.Migrations
             modelBuilder.Entity("JewelryRentalSystem.Models.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
-                {
-                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Role", b =>

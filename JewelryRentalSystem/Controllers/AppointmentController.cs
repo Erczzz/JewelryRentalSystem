@@ -48,6 +48,8 @@ namespace JewelryRentalSystem.Controllers
         // GET: Appointment/Create
         public IActionResult Create()
         {
+            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
             return View();
         }
 
@@ -57,6 +59,8 @@ namespace JewelryRentalSystem.Controllers
         {
             //if (ModelState.IsValid)
             {
+                ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
+                ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

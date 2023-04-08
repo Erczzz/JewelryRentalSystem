@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230408155128_seeddatatime")]
+    partial class seeddatatime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "945c2b33-84c6-41d2-8ad0-ff70ac9180e7",
+                            ConcurrencyStamp = "1d90476b-3d99-44c4-8718-9afc15db69f2",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -119,9 +121,9 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPQ5R6I3uadeUtencVtTxfm3DjB50FplkWn6F56Xtscdx/bOIuJb2AIappuB2mjAfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEocE7tApnZMBCXjXWzMe3sCiDI+HtQBx8qOpEWHHQ+Gxlaz6JUDXVSILgKcoQPh4Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2459879f-b3f1-401a-b1d9-becf4d83face",
+                            SecurityStamp = "1d479834-f6a8-48a3-bf6d-1d8043febd62",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -138,11 +140,9 @@ namespace JewelryRentalSystem.Migrations
                     b.Property<DateTime>("DateOfAppointment")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TimeId")
-                        .HasColumnType("int");
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TimeOfAppointment")
                         .IsRequired()
@@ -152,10 +152,6 @@ namespace JewelryRentalSystem.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("AppointmentId");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("TimeId");
 
                     b.ToTable("Appointments");
                 });
@@ -232,23 +228,6 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
-                {
-                    b.Property<int>("LocationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocationId"), 1L, 1);
-
-                    b.Property<string>("LocationName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LocationId");
-
-                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Order", b =>
@@ -618,21 +597,6 @@ namespace JewelryRentalSystem.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Appointment", b =>
-                {
-                    b.HasOne("JewelryRentalSystem.Models.Location", "Location")
-                        .WithMany("Appointments")
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("JewelryRentalSystem.Models.ScheduleTime", "ScheduleTime")
-                        .WithMany("Appointments")
-                        .HasForeignKey("TimeId");
-
-                    b.Navigation("Location");
-
-                    b.Navigation("ScheduleTime");
-                });
-
             modelBuilder.Entity("JewelryRentalSystem.Models.Product", b =>
                 {
                     b.HasOne("JewelryRentalSystem.Models.Cart", null)
@@ -725,19 +689,9 @@ namespace JewelryRentalSystem.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
-                {
-                    b.Navigation("Appointments");
-                });
-
             modelBuilder.Entity("JewelryRentalSystem.Models.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.ScheduleTime", b =>
-                {
-                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }
