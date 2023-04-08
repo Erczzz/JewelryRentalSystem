@@ -1,0 +1,73 @@
+﻿@model IEnumerable<JewelryRentalSystem.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container d-inline-flex justify-content-between">
+    <h3>Your Cart</h3>
+
+    <p>
+        <a asp-action="Create" asp-controller="Appointment" class="btn btn-outline-secondary">Schedule Appointment</a>
+    </p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

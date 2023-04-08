@@ -10,5 +10,6 @@ namespace JewelryRentalSystem.Repository
         Task<Product> AddProduct(Product newProduct);
         Task<Product> UpdateProduct(int ProductId, Product newProduct);
         Task<Product> DeleteProduct(int ProductId);
+        Task<Product> AddToCart(int ProductId);
     }
 }

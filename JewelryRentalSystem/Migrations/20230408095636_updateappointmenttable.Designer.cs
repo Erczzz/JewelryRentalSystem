@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230408095636_updateappointmenttable")]
+    partial class updateappointmenttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "46f981b1-35d1-4fbf-a153-e2e2e75b7921",
+                            ConcurrencyStamp = "ac0587e8-af54-4cf2-bb09-0589df2fd0c4",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -119,9 +121,9 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENBvTCL4zFA/+YksqfDkoATC3Tg3ZEn2YXPL/5B+yy22fW0aZOFE24PITtZjJbDcEA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPlOCkR0qsMFqp/COj9+Qx9C/tjZ0oH1O8LCxzN3TjQgra7+A9LXNBI7wdYfpw0gFQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6b3c437a-02b9-4991-8295-fc6f59ddbe24",
+                            SecurityStamp = "a571ef01-26c2-48f3-86d7-d7fbf5c96d33",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -134,9 +136,6 @@ namespace JewelryRentalSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"), 1L, 1);
-
-                    b.Property<DateTime>("DateOfAppointment")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
                         .IsRequired()

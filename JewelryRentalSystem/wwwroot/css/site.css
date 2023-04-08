@@ -162,6 +162,9 @@ div.carousel-item img {
     height: 45px;
 }
 
+#prodImg {
+    background-color: #909090;
+}
 #navbarImgDiv {
     height: 40px;
     width: 40px;
@@ -272,10 +275,6 @@ img.img-responsive {
     border-radius: 2px;
 }
 
-    .notification:hover {
-        background: red;
-    }
-
     .notification .badge {
         position: absolute;
         top: -7px;
@@ -288,6 +287,7 @@ img.img-responsive {
 
 /* NAVBAR BUTTONS*/
 
+.notification:hover,
 #privacyNav:hover,
 #productNav:hover,
 #roleNav:hover,
@@ -295,8 +295,9 @@ img.img-responsive {
 #changePassNav:hover,
 #logoutNav:hover,
 #navbarLoginButton:hover,
-navbarRegisterButton:hover{
-    background-color: red;
+#navbarRegisterButton:hover,
+#catMngmntNav:hover {
+    color: #E9DE82;
 }
 
 #privacyNav,
@@ -306,15 +307,20 @@ navbarRegisterButton:hover{
 #changePassNav,
 #logoutNav,
 #navbarLoginButton,
-#navbarRegisterButton {
-    color: #E9DE82;
+#navbarRegisterButton,
+#catMngmntNav {
+    color: white;
 }
+/*li:active{
+    background-color: white;
+}
+
+#navbar2ndDiv li a:focus {
+    background-color: #EAB126
+}*/
+
 
 /* CALENDAR DESIGN */
-ul {
-    list-style-type: none;
-}
-
 /* Month header */
 .month {
     padding: 30px 25px;
@@ -432,4 +438,12 @@ ul {
 }
 #changPassTitle{
     text-align:center;
+}
+
+/*APPOINTMENT DESIGN*/
+#createAppointmentDiv{
+    width: 40%;
+}
+#createAppointmentH3 {
+    text-align: center;
 }

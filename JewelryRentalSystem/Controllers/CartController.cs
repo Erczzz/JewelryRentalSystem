@@ -10,81 +10,87 @@ using JewelryRentalSystem.Models;
 
 namespace JewelryRentalSystem.Controllers
 {
-    public class CategoryController : Controller
+    public class CartController : Controller
     {
         private readonly JRSDBContext _context;
 
-        public CategoryController(JRSDBContext context)
+        public CartController(JRSDBContext context)
         {
             _context = context;
         }
 
-        // GET: Category
+        // GET: Cart
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'JRSDBContext.Categories'  is null.");
+              return _context.Carts != null ? 
+                          View(await _context.Carts.ToListAsync()) :
+                          Problem("Entity set 'JRSDBContext.Carts'  is null.");
         }
 
-        // GET: Category/Details/5
+        // GET: Cart/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Carts == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var cart = await _context.Carts
+                .FirstOrDefaultAsync(m => m.CartId == id);
+            if (cart == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(cart);
         }
 
-
+        // GET: Cart/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        // POST: Cart/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Create([Bind("CartId,CustomerName,ProductName,ProductQty,RentDuration,ProductPrice,Total,ProductId")] Cart cart)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(cart);
                 await _context.SaveChangesAsync();
-                // TempData["save"] = "Product Category has been saved successfully";
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(cart);
         }
 
+        // GET: Cart/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Carts == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var cart = await _context.Carts.FindAsync(id);
+            if (cart == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(cart);
         }
 
+        // POST: Cart/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CartId,CustomerName,ProductName,ProductQty,RentDuration,ProductPrice,Total,ProductId")] Cart cart)
         {
-            if (id != category.CategoryId)
+            if (id != cart.CartId)
             {
                 return NotFound();
             }
@@ -93,12 +99,12 @@ namespace JewelryRentalSystem.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(cart);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!CartExists(cart.CartId))
                     {
                         return NotFound();
                     }
@@ -109,47 +115,49 @@ namespace JewelryRentalSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(cart);
         }
 
+        // GET: Cart/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Carts == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var cart = await _context.Carts
+                .FirstOrDefaultAsync(m => m.CartId == id);
+            if (cart == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(cart);
         }
 
+        // POST: Cart/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_context.Carts == null)
             {
-                return Problem("Entity set 'JRSDBContext.Categories'  is null.");
+                return Problem("Entity set 'JRSDBContext.Carts'  is null.");
             }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var cart = await _context.Carts.FindAsync(id);
+            if (cart != null)
             {
-                _context.Categories.Remove(category);
+                _context.Carts.Remove(cart);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool CartExists(int id)
         {
-          return (_context.Categories?.Any(e => e.CategoryId == id)).GetValueOrDefault();
+          return (_context.Carts?.Any(e => e.CartId == id)).GetValueOrDefault();
         }
     }
 }

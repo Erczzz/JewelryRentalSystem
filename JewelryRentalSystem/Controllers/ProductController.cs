@@ -6,6 +6,7 @@ using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using static NuGet.Packaging.PackagingConstants;
 
@@ -81,6 +82,7 @@ namespace JewelryRentalSystem.Controllers
                         ProductImage = "/" + folder
                     };
                      await _repo.AddProduct(product);
+                    
                 }
 
                 
@@ -156,10 +158,12 @@ namespace JewelryRentalSystem.Controllers
             return View("AppointmentSchedule");
         }
 
-        public async Task<IActionResult> AddToCart(int ProductId)
+        public async Task<IActionResult> AddToCart(int Id)
         {
-            var product = await _repo.GetProductById(ProductId);
-            return View(product);
+            var prodId = await _repo.GetProductById(Id);
+            TempData["ProductId"] = prodId;
+            RedirectToAction("AddToCart");
+            return View(prodId);
         }
     }
 }

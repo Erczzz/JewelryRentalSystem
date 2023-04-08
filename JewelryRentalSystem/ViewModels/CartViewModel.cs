@@ -1,11 +1,11 @@
-﻿using System.ComponentModel;
+﻿using JewelryRentalSystem.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace JewelryRentalSystem.Models
+namespace JewelryRentalSystem.ViewModels
 {
-    public class Cart
+    public class CartProperty
     {
-        [Key]
         public int CartId { get; set; }
         [Required]
         [DisplayName("Customer Name")]
@@ -25,4 +25,5 @@ namespace JewelryRentalSystem.Models
         public int ProductId { get; set; }
         public List<Product> Products { get; set; }
     }
+
 }

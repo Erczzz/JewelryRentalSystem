@@ -48,5 +48,10 @@ namespace JewelryRentalSystem.Repository.MsSQL
             await _JRSDBContext.SaveChangesAsync();
             return newProduct;
         }
+        public async Task<Product> AddToCart(int ProductId)
+        {
+            return await _JRSDBContext.Products.AsNoTracking().SingleOrDefaultAsync(x => x.ProductId == ProductId);
+        }
     }
+    
 }

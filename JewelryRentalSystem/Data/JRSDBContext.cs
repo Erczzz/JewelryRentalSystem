@@ -30,10 +30,10 @@ namespace JewelryRentalSystem.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>()
-    .HasOne<Category>(x => x.Category)
-    .WithMany(x => x.Products)
-    .HasForeignKey(x => x.CategoryId)
-    .OnDelete(DeleteBehavior.Cascade);
+            .HasOne<Category>(x => x.Category)
+            .WithMany(x => x.Products)
+            .HasForeignKey(x => x.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
             SeedAdminUser(modelBuilder);
@@ -105,5 +105,6 @@ namespace JewelryRentalSystem.Data
         public DbSet<AppointmentType> AppointmentTypes { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Cart> Carts { get; set; }
     }
 }

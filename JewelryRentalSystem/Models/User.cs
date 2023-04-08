@@ -43,7 +43,10 @@ namespace JewelryRentalSystem.Models
         [ForeignKey("RoleId")]
         public int RoleId { get; set; }
 
-        public Role Roles { get; set; }
+        public Role? Roles { get; set; }
+
+        public int? CartId { get; set; }
+        public Cart? Cart { get; set; }
 
 
         //public User() 
