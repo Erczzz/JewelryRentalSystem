@@ -9,35 +9,23 @@ namespace JewelryRentalSystemAPI.Models
     {
         [Key]
         public int ProductId { get; set; }
-        [Required]
+
         [DisplayName("Product Name")]
         public string ProductName { get; set; }
-        [Required]
-        [DisplayName("Product Description")]
+        
+        [DisplayName("Description")]
         public string? ProductDescription { get; set; }
-        [Required]
-        [DisplayName("Product Price")]
-        public double ProductPrice { get; set; }
-        // public string ProductImage { get; set; }
-        [Required]
-        [DisplayName("Product Stock")]
-        public int ProductStock { get; set; }
-        [Required]
-        public string? ProductImage { get; set; }
        
-        public int? CategoryId { get; set; }
-        public Category? Category { get; set; }
-        public Product() { }
+        [DisplayName("Price")]
+        public double ProductPrice { get; set; }
+        
+        [DisplayName("Stock")]
+        public int ProductStock { get; set; }
+        
+        public string? ProductImage { get; set; }
 
-        public Product(int productId, string productName, string? productDescription, double productPrice, int productStock, string? productImage, int categoryId)
-        {
-            ProductId = productId;
-            ProductName = productName;
-            ProductDescription = productDescription;
-            ProductPrice = productPrice;
-            ProductStock = productStock;
-            ProductImage = productImage;
-            CategoryId = categoryId;
-        }
+        public List<ProductCategory> ProductCategories { get; set; }
+        
+
     }
 }

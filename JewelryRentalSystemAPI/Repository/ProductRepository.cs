@@ -12,9 +12,9 @@ namespace JewelryRentalSystemAPI.Repository
             _context = context;
         }
 
-        public Product GetProductById(int id)
+        public Product GetProductById(int prodId)
         {
-            return _context.Products.Where(p => p.ProductId == id).FirstOrDefault();
+            return _context.Products.Where(p => p.ProductId == prodId).FirstOrDefault();
         }
 
         public Product GetProductByName(string name)
