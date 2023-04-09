@@ -22,6 +22,14 @@ namespace JewelryRentalSystemAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Product>))]
+        public IActionResult AssignNewCategory(int productId, int catergoryId)
+        {
+            _productRepository.AssignNewCategory(productId, catergoryId);
+            return Ok();
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<Product>))]
         public IActionResult GetProducts()
         {
             var products = _mapper.Map<List<ProductDto>>(_productRepository.GetProducts());

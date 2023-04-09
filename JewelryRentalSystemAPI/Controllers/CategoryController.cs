@@ -33,7 +33,7 @@ namespace JewelryRentalSystemAPI.Controllers
         }
 
         [HttpGet("{categoryId}")]
-        [ProducesResponseType(200, Type = typeof(Product))]
+        [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
         public IActionResult GetProductById(int categoryId)
         {
@@ -45,5 +45,18 @@ namespace JewelryRentalSystemAPI.Controllers
             return Ok(category);
         }
 
+        [HttpGet("product/{categoryId}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Product>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetProductByCategoryId(int categoryId)
+        {
+           var prooducts = _mapper.Map<List<ProductDto>>(
+               _categoryRepository.GetProductByCategory(categoryId));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(prooducts);
+        }
     }
 }
