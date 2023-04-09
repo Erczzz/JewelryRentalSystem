@@ -419,8 +419,10 @@ img.img-responsive {
     font-weight: bold;
 }
 
+#appointmentBtns{
+    padding:0;
+}
 /* CHANGE PASSWORD */
-
 #changePass2ndDiv {
     margin-left: auto;
     margin-right: auto;
@@ -434,7 +436,7 @@ img.img-responsive {
     margin-right: 10px;
 }
 #changePassBtnDiv{
-    justify-content:flex-end;
+    justify-content:flex-start;
 }
 #changPassTitle{
     text-align:center;
@@ -469,4 +471,20 @@ img.img-responsive {
 #cartBodyTR {
     background-color: #F2F2F2;
     border:ridge;
+}
+
+/* ADD TO CART DESIGN */
+#addToCartDiv{
+    width: 800px;
+    padding: 10px;
+    border:ridge;
+}
+
+#addToCartH4andBack{
+    display:inline-flex;
+    justify-content: space-between;
+    padding: 0;
+}
+#addToCartBtn{
+    text-align: right;
 }

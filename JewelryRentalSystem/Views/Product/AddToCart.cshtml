@@ -6,12 +6,16 @@
 
 }
 
-<h1>AddToCart</h1>
 
-<h4>Cart</h4>
 <hr />
 <div class="row">
     <div class="container" id="addToCartDiv">
+        <div class="container" id="addToCartH4andBack">
+            <h4>ADD TO CART</h4>
+            <div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
         <form asp-action="Create" asp-controller="Cart">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -20,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
+                <input asp-for="ProductName" readonly class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="ProductQty" class="control-label"></label>
@@ -46,15 +50,13 @@
                 <label asp-for="ProductId" class="control-label"></label>
                 <input asp-for="ProductId" class="form-control" />
                 <span asp-validation-for="ProductId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            </div><br />
+            <div class="form-group" id="addToCartBtn">
+                <input type="submit" value="Add To Cart" class="btn btn-warning" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</div>
+
 
