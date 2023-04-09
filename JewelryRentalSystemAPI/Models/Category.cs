@@ -1,19 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JewelryRentalSystemAPI.DTO;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace JewelryRentalSystemAPI.Models
 {
     public class Category
     {
+        [Key]
         public int CategoryId { get; set; }
-        [Required(ErrorMessage = "Category name is required.")]
         public string CategoryName { get; set; }
-        public List<Product>? Products { get; set; }
-        public Category() { }
-
-        public Category(int categoryId, string categoryName)
-        {
-            CategoryId = categoryId;
-            CategoryName = categoryName;
-        }
+        public List<ProductCategory> ProductCategories { get; set; }
+        
     }
 }

@@ -6,7 +6,7 @@ namespace JewelryRentalSystemAPI.Interface
     {
         List<Product> GetProducts();
 
-        Product GetProductById(int id);
+        Product GetProductById(int prodId);
         Product GetProductByName(string name);
 
     }
