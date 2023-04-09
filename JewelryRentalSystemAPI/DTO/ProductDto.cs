@@ -11,7 +11,6 @@ namespace JewelryRentalSystemAPI.DTO
         public double ProductPrice { get; set; }
         public int ProductStock { get; set; }
         public string? ProductImage { get; set; }
-        
 
     }
 }

@@ -5,11 +5,12 @@ using System.Runtime;
 
 namespace JewelryRentalSystemAPI.Helper
 {
-    public class MappingProduct : Profile
+    public class MappingProfiles : Profile
     {
-        public MappingProduct() 
+        public MappingProfiles() 
         { 
             CreateMap<Product, ProductDto>();
+            CreateMap<Category, CategoryDto>();
         }
 
     }
