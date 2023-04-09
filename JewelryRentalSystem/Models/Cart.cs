@@ -14,12 +14,13 @@ namespace JewelryRentalSystem.Models
         [DisplayName("Product Name")]
         public string ProductName { get; set; }
         [Required]
+        [DisplayName("Qty")]
         public double ProductQty { get; set; }
         [Required]
         [DisplayName("Rent Duration")]
         public int RentDuration { get; set; }
         [Required]
-        [DisplayName("Product Price")]
+        [DisplayName("Price")]
         public double ProductPrice { get; set; }
         public double Total { get; set; }
         public int ProductId { get; set; }

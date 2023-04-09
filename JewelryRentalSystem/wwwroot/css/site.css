@@ -447,3 +447,26 @@ img.img-responsive {
 #createAppointmentH3 {
     text-align: center;
 }
+
+
+/* CART DESIGN */
+#cartDiv{
+    width: 1200px;
+
+    padding: 10px;
+
+
+}
+#totalH4 {
+    color: #BB2D3B;
+}
+#cartTR {
+    background-color: #373737;
+    color: white;
+    border: ridge;
+}
+
+#cartBodyTR {
+    background-color: #F2F2F2;
+    border:ridge;
+}

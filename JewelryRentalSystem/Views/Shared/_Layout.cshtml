@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav id="navbarDiv" class="navbar navbar-expand-sm bg-dark text-light navbar-toggleable-sm border-bottom box-shadow mb-3">
+        <nav id="navbarDiv" class="navbar navbar-expand-sm bg-secondary text-light navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div id="navbar2ndDiv" class="container-fluid">
                 <a id="navbarTitle" class="navbar-brand text-light" asp-area="" asp-controller="Product" asp-action="GetAllProducts">
                         <img id="navbarImg" src="~/img/OurJewelries.png" />    
@@ -87,14 +87,31 @@
                                     Hello @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
+                                    <ul><a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a></ul>
                                 </div>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <ul>
+                                        <a id="changePassNav" class="nav-link" asp-action="ChangePassword" asp-controller="Account">
+                                            Change Password
+                                        </a>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+
+@*                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hello @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
                                     <a id="changePassNav" class="nav-link" asp-action="ChangePassword" asp-controller="Account">
                                         Change Password
                                     </a>
                                 </div>
-                            </li>
+                            </div>*@
                         }
                         else
                         {
@@ -117,7 +134,7 @@
         </main>
     </div>
 
-    <footer id="footer" class="border-top footer bg-dark text-muted text-center">
+    <footer id="footer" class="border-top footer bg-secondary text-dark text-center">
         <div class="container">
             &copy; 2023 - JewelryRentalSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

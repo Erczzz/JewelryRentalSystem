@@ -22,7 +22,14 @@ namespace JewelryRentalSystem.Controllers
         // GET: Cart
         public async Task<IActionResult> Index()
         {
-              return _context.Carts != null ? 
+            var count = 0;
+            var data = _context.Carts.ToList();
+            foreach(var item in data)
+            {
+                count++;
+            }
+            ViewData["count"] = count;
+            return _context.Carts != null ? 
                           View(await _context.Carts.ToListAsync()) :
                           Problem("Entity set 'JRSDBContext.Carts'  is null.");
         }
@@ -58,7 +65,7 @@ namespace JewelryRentalSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CartId,CustomerName,ProductName,ProductQty,RentDuration,ProductPrice,Total,ProductId")] Cart cart)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
@@ -159,5 +166,7 @@ namespace JewelryRentalSystem.Controllers
         {
           return (_context.Carts?.Any(e => e.CartId == id)).GetValueOrDefault();
         }
+
+
     }
 }

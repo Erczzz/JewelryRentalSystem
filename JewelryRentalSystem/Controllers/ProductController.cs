@@ -160,10 +160,20 @@ namespace JewelryRentalSystem.Controllers
 
         public async Task<IActionResult> AddToCart(int Id)
         {
-            var prodId = await _repo.GetProductById(Id);
-            TempData["ProductId"] = prodId;
-            RedirectToAction("AddToCart");
-            return View(prodId);
+            var product = await _repo.GetProductById(Id);
+            var cart = new Cart
+            {
+                
+                CustomerName = "John",
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                ProductPrice = product.ProductPrice,
+                ProductQty = 1,
+                RentDuration = 1,
+                Total = product.ProductPrice
+
+            };
+            return View(cart);
         }
     }
 }

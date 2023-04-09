@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<JewelryRentalSystem.Models.Cart>
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
 
 @{
     ViewData["Title"] = "Index";
 }
+<div class="container" id="cartDiv">
 
 <div class="container d-inline-flex justify-content-between">
     <h3>Your Cart</h3>
@@ -11,63 +13,57 @@
         <a asp-action="Create" asp-controller="Appointment" class="btn btn-outline-secondary">Schedule Appointment</a>
     </p>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductQty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RentDuration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentDuration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <table class="table">
+        <thead>
+            <tr id="cartTR">
+                <th >
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RentDuration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+                <tr id="cartBodyTR">
+                    @if(item.CustomerName == (User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentDuration)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.CartId" class="btn btn-secondary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.CartId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4 id="totalH4">TOTAL: ₱ 0.00</h4>
+</div>
