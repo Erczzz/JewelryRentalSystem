@@ -8,12 +8,16 @@
 
 
 <hr />
-<div class="row">
+
+<div id="addToCartMainDiv" class="container" >
+@*    <div id="addToCartImg">
+        <img src="" />
+    </div>*@
     <div class="container" id="addToCartDiv">
         <div class="container" id="addToCartH4andBack">
             <h4>ADD TO CART</h4>
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="GetAllProducts" asp-controller="Product" class="btn btn-secondary">Back to List</a>
             </div>
         </div>
         <form asp-action="Create" asp-controller="Cart">
@@ -47,9 +51,7 @@
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <input asp-for="ProductId" class="form-control" />
-                <span asp-validation-for="ProductId" class="text-danger"></span>
+                <input hidden asp-for="ProductId" class="form-control" />
             </div><br />
             <div class="form-group" id="addToCartBtn">
                 <input type="submit" value="Add To Cart" class="btn btn-warning" />

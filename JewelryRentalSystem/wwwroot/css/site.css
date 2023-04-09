@@ -285,32 +285,30 @@ img.img-responsive {
         color: white;
     }
 
-/* NAVBAR BUTTONS*/
+/* NAVBAR BUTTONS */
 
-.notification:hover,
-#privacyNav:hover,
-#productNav:hover,
-#roleNav:hover,
-#prodMngmntNav:hover,
-#changePassNav:hover,
-#logoutNav:hover,
-#navbarLoginButton:hover,
-#navbarRegisterButton:hover,
-#catMngmntNav:hover {
+
+#navbarDiv a:hover {
     color: #E9DE82;
 }
 
+
+#navbarRegisterButton,
+#navbarLoginButton,
 #privacyNav,
 #productNav,
-#roleNav,
-#prodMngmntNav,
-#changePassNav,
-#logoutNav,
-#navbarLoginButton,
-#navbarRegisterButton,
-#catMngmntNav {
+#adminMngmnt,
+#navbarUser {
     color: white;
 }
+
+    #roleNav,
+    #prodMngmntNav,
+    #changePassNav,
+    #logoutNav,
+    #catMngmntNav {
+        color: black;
+    }
 /*li:active{
     background-color: white;
 }
@@ -445,19 +443,32 @@ img.img-responsive {
 /*APPOINTMENT DESIGN*/
 #createAppointmentDiv{
     width: 40%;
+    border-style: ridge;
+    padding: 20px;
 }
 #createAppointmentH3 {
     text-align: center;
 }
 
+#appointmentContainer{
+    width: 80%;
 
+}
+#appointmentTR {
+    background-color: #212529;
+    color: white;
+    border: ridge;
+    text-align:center;
+}
+#appointmentBodyTR {
+    background-color: #F2F2F2;
+    border: ridge;
+    text-align: center;
+}
 /* CART DESIGN */
-#cartDiv{
-    width: 1200px;
-
+#cartDiv {
+    width: 80%;
     padding: 10px;
-
-
 }
 #totalH4 {
     color: #BB2D3B;
@@ -474,10 +485,10 @@ img.img-responsive {
 }
 
 /* ADD TO CART DESIGN */
-#addToCartDiv{
-    width: 800px;
-    padding: 10px;
-    border:ridge;
+#addToCartDiv {
+    width: 40%;
+    padding: 20px;
+    border: ridge;
 }
 
 #addToCartH4andBack{
@@ -487,4 +498,13 @@ img.img-responsive {
 }
 #addToCartBtn{
     text-align: right;
+}
+#addToCartImg {
+    width: 40%;
+    padding: 20px;
+    border: ridge;
+}
+#addToCartMainDiv{
+    display: flex;
+    justify-items:center;
 }

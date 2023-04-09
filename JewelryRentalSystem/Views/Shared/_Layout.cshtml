@@ -53,65 +53,48 @@
 
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                         {
-                            <li class="nav-item">
-                                <a id="roleNav" class="nav-link" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
+
+                            <li id="adminMngmnt" class="nav-item dropdown">
+                                <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                    Admin Management
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a id="roleNav" class="dropdown-item" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
+                                        </li>
+                                    <li class="nav-item">
+                                        <a id="prodMngmntNav" class="dropdown-item" asp-area="" asp-controller="Product" asp-action="ProductManagement">ProductManagement</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="catMngmntNav" class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index">Product Category</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="catMngmntNav" class="dropdown-item" asp-area="" asp-controller="Location" asp-action="Index">Branch Location</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="nav-item">
-                                <a id="prodMngmntNav" class="nav-link" asp-area="" asp-controller="Product" asp-action="ProductManagement">ProductManagement</a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="catMngmntNav" class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Product Category</a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="catMngmntNav" class="nav-link" asp-area="" asp-controller="Location" asp-action="Index">Branch Location</a>
-                            </li>
+
                         }
 
                         @if (_signInManager.IsSignedIn(User))
                         {
-@*                            Mas okay sana kung dropdown list tong mga anchor tag*@
 
-                            <li class="nav-item">
-                                <a id="changePassNav" class="nav-link" asp-action="ChangePassword" asp-controller="Account">
-                                    Change Password
+                            <li class="nav-item dropdown" id="navbarUserDropdown">
+                                <a id="navbarUser" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                    @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="logoutNav" class="nav-link" asp-action="Logout" asp-controller="Account">
-                                   @* Logout @User.FindFirst("UserFirstName").Value*@
-                                    Logout @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-labelledby="navbarDropdown">
-                                    Hello @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <ul><a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a></ul>
-                                </div>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <ul>
-                                        <a id="changePassNav" class="nav-link" asp-action="ChangePassword" asp-controller="Account">
-                                            Change Password
-                                        </a>
-                                    </ul>
-                                </div>
+                                <ul class="dropdown-menu">                                   
+                                    <li><a class="dropdown-item" asp-controller="" asp-action="">Your Profile</a></li>
+                                    <li><a  class="dropdown-item" asp-controller="Appointment" asp-action="Index">Appointments</a></li>
+                                    <li><a id="navbarChangePass" class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
+                                    <li>
+                                        <form  asp-controller="Account" asp-action="Logout">
+                                            <button id="navbarLogout" type="submit" class="dropdown-item">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
 
-
-
-@*                            <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Hello @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
-                                    <a id="changePassNav" class="nav-link" asp-action="ChangePassword" asp-controller="Account">
-                                        Change Password
-                                    </a>
-                                </div>
-                            </div>*@
                         }
                         else
                         {

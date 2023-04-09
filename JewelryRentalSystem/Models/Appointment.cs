@@ -12,11 +12,11 @@ namespace JewelryRentalSystem.Models
         public string CustomerName { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        [DisplayName("Date of Appointment")]
+        [DisplayName("Date")]
         public DateTime DateOfAppointment { get; set; }
-        [DisplayName("Time Of Appointment")]
+        [DisplayName("Time")]
         public string TimeOfAppointment { get; set; }
-        [DisplayName("Total Amount To Be Paid")]
+        [DisplayName("Total Amount")]
         public double TotalAmountToBePaid { get; set; }
         public int? TimeId { get; set; }      
         public int? LocationId { get; set; }
