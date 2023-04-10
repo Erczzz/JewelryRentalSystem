@@ -54,7 +54,7 @@
                 <input hidden asp-for="ProductId" class="form-control" />
             </div><br />
             <div class="form-group" id="addToCartBtn">
-                <input type="submit" value="Add To Cart" class="btn btn-warning" />
+                <input asp-action="GetAllProducts" asp-controller="Product" type="submit" value="Add To Cart" class="btn btn-warning" />
             </div>
         </form>
     </div>

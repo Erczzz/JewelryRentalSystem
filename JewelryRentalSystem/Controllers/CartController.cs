@@ -7,28 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace JewelryRentalSystem.Controllers
 {
     public class CartController : Controller
     {
         private readonly JRSDBContext _context;
+        private UserManager<ApplicationUser> _userManager { get; }
 
-        public CartController(JRSDBContext context)
+        public CartController(JRSDBContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Cart
         public async Task<IActionResult> Index()
         {
-            var count = 0;
-            var data = _context.Carts.ToList();
-            foreach(var item in data)
-            {
-                count++;
-            }
-            ViewData["count"] = count;
+            // var dataCount = _context.Carts.CountAsync();
+            // TempData["count"] = dataCount;
+            
             return _context.Carts != null ? 
                           View(await _context.Carts.ToListAsync()) :
                           Problem("Entity set 'JRSDBContext.Carts'  is null.");
