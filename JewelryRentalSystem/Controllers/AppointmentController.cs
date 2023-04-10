@@ -59,10 +59,11 @@ namespace JewelryRentalSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TotalAmountToBePaid,TimeId,LocationId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TimeId,LocationId")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
+                
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -95,7 +96,7 @@ namespace JewelryRentalSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TotalAmountToBePaid,TimeId,LocationId")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TimeId,LocationId")] Appointment appointment)
         {
             if (id != appointment.AppointmentId)
             {
