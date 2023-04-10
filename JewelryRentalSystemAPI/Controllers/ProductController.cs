@@ -3,6 +3,8 @@ using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Interface;
 using JewelryRentalSystemAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 
 namespace JewelryRentalSystemAPI.Controllers
@@ -18,14 +20,6 @@ namespace JewelryRentalSystemAPI.Controllers
         {
             _productRepository = productRepository;
             _mapper = mapper;
-        }
-
-        [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<Product>))]
-        public IActionResult AssignNewCategory(int productId, int catergoryId)
-        {
-            _productRepository.AssignNewCategory(productId, catergoryId);
-            return Ok();
         }
 
         [HttpGet]
