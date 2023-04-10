@@ -7,51 +7,55 @@
 @{
 }
 
-<h1>Add Product</h1>
+<div class="container" id="addProductContainer">
+    <h3 style="text-align:center">Add Product</h3>
 
-<form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Product">
-@*   <div asp-validation-summary="All" class="text-danger" ></div>*@
-    <div class="container col-md-4">
-        <div class ="form-group">
-            <label asp-for="ProductName" class="control-label"></label>
-            <input asp-for="ProductName" class="form-control" />
-            <span asp-validation-for="ProductName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="CategoryId" class="control-label"></label>
-            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="ProductPrice" class="control-label"></label>
-            <input asp-for="ProductPrice" class="form-control" />
-            <span asp-validation-for="ProductPrice" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="ProductStock" class="control-label"></label>
-            <input asp-for="ProductStock" class="form-control" />
-            <span asp-validation-for="ProductStock" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="ProductDescription" class="control-label"></label>
-            <input asp-for="ProductDescription" class="form-control" />
-            <span asp-validation-for="ProductDescription" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductImage" class="control-label"></label>
-            <div class="custome-file">
-                <input asp-for="ProductImage" class="custom-file-input" id="customFile"/>
-                <label class="custom-file-label" for="customeFile">Upload Image</label>
+    <form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Product">
+        @*   <div asp-validation-summary="All" class="text-danger" ></div>*@
+        <div class="container">
+            <div class="form-group">
+                <label class="control-label">Product Name</label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
-            <span asp-validation-for="ProductImage" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <br />
-            <button class="btn btn-primary w-100" type="submit">Create</button>
+            <div class="form-group">
+                <label class="control-label">Category</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Product Price</label>
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Product Stock</label>
+                <input asp-for="ProductStock" class="form-control" />
+                <span asp-validation-for="ProductStock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Product Description</label>
+                <input asp-for="ProductDescription" class="form-control" />
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductImage" class="control-label"></label>
+                <div class="custome-file">
+                    <input asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
+                    <label class="custom-file-label" for="customeFile"></label>
+                </div>
+                <span asp-validation-for="ProductImage" class="text-danger"></span>
+            </div>
+            <div class="d-inline-flex justify-content-start">
+                <br />
+                <button class="btn btn-warning" type="submit">Save</button> &nbsp
+                <a class="btn btn-secondary" asp-action="ProductManagement">Cancel</a>
+            </div>
+
         </div>
 
-    </div>
-        
-</form>
+    </form>
+
+</div>

@@ -527,3 +527,108 @@ img.img-responsive {
 
 /* PROFILE DESIGN */
 
+
+/* ROLES DESIGN */
+#createRoleContainer{
+    width:50%;
+    border:ridge;
+    padding:20px;
+}
+#updateRoleContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#rolesContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#roleTR {
+    text-align: center;
+    background-color: #212529;
+    color:white;
+}
+#roleTRBody {
+    text-align: center;
+    background-color: #F3F3F3;
+}
+
+
+/* PRODUCT LIST DESIGN */
+#addProductContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#updateProductContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#productListContainer {
+    width: 70%;
+    border: ridge;
+    padding: 20px;
+}
+#productTitleTR {
+    background-color: #212529;
+    color:white;
+    text-align:center;
+}
+#productTRBody {
+    text-align: center;
+    background-color: #F3F3F3;
+}
+
+/* CATEGORY DESIGN */
+#editLocationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#addLocationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#editCategoryContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#createCategoryContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#categoryContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#categoryTR {
+    text-align: center;
+    background-color: #212529;
+    color:white;
+}
+#categoryTRBody {
+    text-align: center;
+    background-color: #F3F3F3;
+}
+
+/* LOCATION DESIGN */
+#locationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#locationTR {
+    text-align: center;
+    background-color: #212529;
+    color: white;
+}
+#locationTRBody {
+    text-align: center;
+    background-color: #F3F3F3;
+}
