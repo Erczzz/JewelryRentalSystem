@@ -16,8 +16,8 @@ namespace JewelryRentalSystem.Models
         public DateTime DateOfAppointment { get; set; }
         [DisplayName("Time")]
         public string TimeOfAppointment { get; set; }
-        [DisplayName("Total Amount")]
-        public double TotalAmountToBePaid { get; set; }
+        //[DisplayName("Total Amount")]
+        //public double TotalAmountToBePaid { get; set; }
         public int? TimeId { get; set; }      
         public int? LocationId { get; set; }
         public ScheduleTime? ScheduleTime { get; set; }
@@ -25,14 +25,13 @@ namespace JewelryRentalSystem.Models
         public Appointment() { }
 
         public Appointment(int appointmentId, string customerName, 
-            DateTime dateOfAppointment, string timeOfAppointment, 
-            double totalAmountToBePaid, int? timeId, int? locationId)
+            DateTime dateOfAppointment, string timeOfAppointment, int? timeId, int? locationId)
         {
             AppointmentId = appointmentId;
             CustomerName = customerName;
             DateOfAppointment = dateOfAppointment;
             TimeOfAppointment = timeOfAppointment;
-            TotalAmountToBePaid = totalAmountToBePaid;
+            //TotalAmountToBePaid = totalAmountToBePaid;
             TimeId = timeId;
             LocationId = locationId;
         }
