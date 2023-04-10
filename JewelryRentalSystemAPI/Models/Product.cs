@@ -24,7 +24,7 @@ namespace JewelryRentalSystemAPI.Models
         
         public string? ProductImage { get; set; }
 
-        public List<ProductCategory> ProductCategories { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; }
         
 
     }
