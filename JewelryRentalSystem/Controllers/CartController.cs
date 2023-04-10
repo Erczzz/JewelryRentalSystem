@@ -66,6 +66,7 @@ namespace JewelryRentalSystem.Controllers
         {
             //if (ModelState.IsValid)
             {
+                cart.Total = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
