@@ -16,15 +16,11 @@
     <div class="container" id="addToCartDiv">
         <div class="container" id="addToCartH4andBack">
             <h4>ADD TO CART</h4>
-            <div>
-                <a asp-action="GetAllProducts" asp-controller="Product" class="btn btn-secondary">Back to List</a>
-            </div>
         </div>
         <form asp-action="Create" asp-controller="Cart">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" readonly value="@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)" class="form-control" />
+                <input asp-for="CustomerName" hidden value="@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="ProductName" class="control-label"></label>
@@ -47,14 +43,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
+                <input readonly asp-for="Total" class="form-control" />
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input hidden asp-for="ProductId" class="form-control" />
             </div><br />
-            <div class="form-group" id="addToCartBtn">
-                <input asp-action="GetAllProducts" asp-controller="Product" type="submit" value="Add To Cart" class="btn btn-warning" />
+            <div class="d-inline-flex">
+                <div>
+                    <a asp-action="GetAllProducts" asp-controller="Product" class="btn btn-secondary">Back to List</a>&nbsp
+                </div>
+                <div class="form-group" id="addToCartBtn">
+                    <input asp-action="GetAllProducts" asp-controller="Product" type="submit" value="Add To Cart" class="btn btn-warning" />
+                </div>
             </div>
         </form>
     </div>

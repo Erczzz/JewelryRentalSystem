@@ -24,6 +24,23 @@ body {
 
 /* PRODUCT DESIGN */
 
+/*#productMainDiv{
+    display:inline-flex;
+    padding:0;
+    margin:0;
+}*/
+#productContainer{  
+/*    border:ridge;*/
+}
+#productLeftContainer {
+    border: ridge;
+    width: 15%;
+}
+#productRightContainer {
+    border: ridge;
+    width: 15%;
+}
+
 #productColumn {
     width: 220px;
     height: 350px;
@@ -38,7 +55,6 @@ body {
 
 #getAllProductsContainer {
     flex-direction: column;
-    justify-content: center;
 
 }
 
@@ -297,7 +313,7 @@ img.img-responsive {
 #navbarLoginButton,
 #privacyNav,
 #productNav,
-#adminMngmnt,
+#adminMngmentBtn,
 #navbarUser {
     color: white;
 }
@@ -508,3 +524,6 @@ img.img-responsive {
     display: flex;
     justify-items:center;
 }
+
+/* PROFILE DESIGN */
+

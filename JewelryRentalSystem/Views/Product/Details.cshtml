@@ -12,35 +12,23 @@
         <div>
             <div class="d-inline-flex justify-content-between w-100">
                 <h4>@Model.ProductName</h4>
-                <div>
-                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
-                    {
-
-                    }
-                    else
-                    {
-                        <a class="btn btn-outline-success btn-sm">Add to Cart</a>
-                        <a class="btn btn-outline-primary btn-sm">Rent</a>
-                    }
-                </div>
-            </div>
-
-            <h5>₱@Model.ProductPrice</h5>
+                <h4>₱@Model.ProductPrice</h4>
+            </div>           
             <div>
                 @if (Model.ProductStock == 0)
                 {
-                    <small class="text-muted">Out of stock</small>
+                    <h6 class="text-muted">Out of stock</h6>
                 }
                 else if (Model.ProductStock == 1)
                 {
-                    <small class="text-muted">@Model.ProductStock item left</small>
+                    <h6 class="text-muted">@Model.ProductStock item left</h6>
                 }
                 else
                 {
-                    <small class="text-muted">@Model.ProductStock items left</small>
+                    <h6 class="text-muted">@Model.ProductStock items left</h6>
                 }
             </div>
-            <h6 class="text-muted">@Model.ProductDescription</h6>
+            <small class="text-muted">@Model.ProductDescription</small>
         </div>
         <div id="backToHomePage">
             <a asp-controller="Product" asp-action="GetAllProducts" data-rel="back" id="backToHomePage" class="btn btn-outline-secondary btn-sm">Back to Homepage</a>

@@ -1,0 +1,54 @@
+﻿@model JewelryRentalSystem.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h3 id="profileH3">Your Profile</h3>
+<hr />
+<div class="container" id="profileDiv">
+    <div class="container" id="profileDetails">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Birthdate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Birthdate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ContactNo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ContactNo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+        </dl>
+    </div>
+    <div id="profileBtns">
+        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.CustomerId">Edit your Profile</a>
+        <a class="btn btn-secondary" asp-action="GetAllProducts" asp-controller="Product">Back to Homepage</a>
+    </div>
+</div>

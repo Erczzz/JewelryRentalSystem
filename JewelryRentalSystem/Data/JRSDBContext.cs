@@ -51,5 +51,6 @@ namespace JewelryRentalSystem.Data
         public DbSet<Cart> Carts { get; set; }
         public DbSet<ScheduleTime> ScheduleTimes { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<JewelryRentalSystem.ViewModels.ProfileViewModel>? ProfileViewModel { get; set; }
     }
 }

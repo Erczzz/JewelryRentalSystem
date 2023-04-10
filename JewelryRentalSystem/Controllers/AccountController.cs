@@ -1,6 +1,7 @@
 ﻿using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Repository;
 using JewelryRentalSystem.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryRentalSystem.Controllers
@@ -8,10 +9,13 @@ namespace JewelryRentalSystem.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountController(IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository,
+            UserManager<ApplicationUser> userManager)
         {
             _accountRepository = accountRepository;
+            _userManager = userManager;
         }
         [Route("signup")]
         public IActionResult SignUp()
@@ -95,6 +99,26 @@ namespace JewelryRentalSystem.Controllers
                 }
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction(controllerName: "Account", actionName: "Login");
+            }
+            var viewModel = new ProfileViewModel
+            {
+                CustomerId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Birthdate = user.Birthdate,
+                ContactNo = user.ContactNo,
+                Address = user.Address
+            };
+            return View(viewModel);
         }
     }
 }

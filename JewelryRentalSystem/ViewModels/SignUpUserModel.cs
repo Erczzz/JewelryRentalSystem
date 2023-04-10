@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace JewelryRentalSystem.ViewModels
 {
@@ -13,7 +14,10 @@ namespace JewelryRentalSystem.ViewModels
         [DataType(DataType.Date)]
         public DateTime? Birthdate { get; set; }
 
-        [Required(ErrorMessage = "Please enter your Contact Number")]
+        [Required]
+        [DisplayName("Contact Number")]
+        [MinLength(11)]
+        [RegularExpression("(09)[0-9]{9}", ErrorMessage = "This is not a valid phone number")]
         public string ContactNo { get; set; }
 
         [Required(ErrorMessage = "Please enter your Address")]

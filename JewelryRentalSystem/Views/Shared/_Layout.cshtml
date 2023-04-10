@@ -55,7 +55,7 @@
                         {
 
                             <li id="adminMngmnt" class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                <a id="adminMngmentBtn" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     Admin Management
                                 </a>
                                 <ul class="dropdown-menu">
@@ -84,8 +84,13 @@
                                     @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
                                 </a>
                                 <ul class="dropdown-menu">                                   
-                                    <li><a class="dropdown-item" asp-controller="" asp-action="">Your Profile</a></li>
-                                    <li><a  class="dropdown-item" asp-controller="Appointment" asp-action="Index">Appointments</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile">Your Profile</a></li>
+                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+                                    {
+                                        <li><a  class="dropdown-item" asp-controller="Appointment" asp-action="Index">Your Appointments</a></li>
+                                    }else{
+
+                                    }
                                     <li><a id="navbarChangePass" class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
                                     <li>
                                         <form  asp-controller="Account" asp-action="Logout">

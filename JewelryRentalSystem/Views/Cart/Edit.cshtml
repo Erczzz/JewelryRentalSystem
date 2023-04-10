@@ -4,9 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Cart</h4>
+<h4>Modify Item</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,13 +13,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CartId" />
             <div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                <input hidden asp-for="CustomerName" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
+                <input readonly asp-for="ProductName" class="form-control" />
                 <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,18 +41,19 @@
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <input asp-for="ProductId" class="form-control" />
-                <span asp-validation-for="ProductId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input hidden asp-for="ProductId" class="form-control" />
+            </div><br />
+            <div class="d-inline-flex">
+                <div>
+                    <a class="btn btn-secondary" asp-action="Index">Back to List</a>&nbsp
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-warning" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
