@@ -5,36 +5,38 @@
 @{
 }
 
-<H1>Product List</H1>
-
-<a asp-action="Create" asp-controller="Product" class="btn btn-dark">Add Product</a>
-
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Stock</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <th scope="row">@item.ProductId</th>
-                <td>@item.ProductName</td>
-                <td>@item.ProductPrice</td>
-                <td>@item.ProductStock</td>
-                <td>
-                    <a class="btn btn-success btn-sm" asp-controller="Product" asp-action="Details" asp-route-productId="@item.ProductId">View</a>
-                    <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Update" asp-route-productId="@item.ProductId">Edit</a>
-                    <a class="btn btn-danger btn-sm" asp-controller="Product" asp-action="Delete" asp-route-productId="@item.ProductId">Delete</a>
-                    
-                </td>
+<div class="container" id="productListContainer">
+    <div class="container d-inline-flex justify-content-between">
+        <h3>Product List</h3>
+        <a asp-action="Create" asp-controller="Product" class="btn btn-outline-secondary">Add Product</a>      
+    </div><br />
+    <table class="table">
+        <br />
+        <thead class="thead-dark">
+            <tr id="productTitleTR">
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="productTRBody">
+                    <th scope="row">@item.ProductId</th>
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductPrice</td>
+                    <td>@item.ProductStock</td>
+                    <td>
+                        <a class="btn btn-secondary btn-sm" asp-controller="Product" asp-action="Update" asp-route-productId="@item.ProductId">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Product" asp-action="Delete" asp-route-productId="@item.ProductId">Delete</a>
 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
