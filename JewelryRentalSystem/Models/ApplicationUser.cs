@@ -7,7 +7,7 @@ namespace JewelryRentalSystem.Models
     public class ApplicationUser : IdentityUser
     {
         [DisplayName("First Name")]
-        public string  FirstName { get; set; }
+        public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
         [DisplayName("Birth of Date")]
@@ -18,5 +18,8 @@ namespace JewelryRentalSystem.Models
         [RegularExpression("(09)[0-9]{9}", ErrorMessage = "This is not a valid phone number")]
         public string ContactNo { get; set; }
         public string Address { get; set; }
+
+        public ICollection<Cart> Carts {get; set; } = new List<Cart>();
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     }
 }

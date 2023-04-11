@@ -54,26 +54,21 @@ namespace JewelryRentalSystem.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedAdminUser();
-            modelBuilder.SeedDefaultTime();
+/*            modelBuilder.SeedDefaultTime();*/
 
-            modelBuilder.ProductCategoryRelation();
-            modelBuilder.AppointmentTimeRelation();
-            modelBuilder.LocationAppointmentrelation();
+            modelBuilder.AppointmentRelation();
             base.OnModelCreating(modelBuilder);
             
         }
 
-        public DbSet<User> Users { get; set; }
-/*        public DbSet<Role> Roles { get; set; }*/
         public DbSet<Product> Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentType> AppointmentTypes { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<ScheduleTime> ScheduleTimes { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ScheduleTime> ScheduleTimes { get; set; }
         public DbSet<JewelryRentalSystem.ViewModels.ProfileViewModel>? ProfileViewModel { get; set; }
     }
 }

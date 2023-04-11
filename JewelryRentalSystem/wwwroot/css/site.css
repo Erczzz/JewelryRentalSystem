@@ -46,9 +46,11 @@ body {
 
 #productColumn {
     width: 220px;
-    height: 350px;
+    height: 380px;
 }
-
+#productCard {
+    height: 355px;
+}
 
 #containerProd {
     display: inline-flex;
@@ -60,7 +62,9 @@ body {
     flex-direction: column;
 
 }
-
+#cardBodyDiv{
+    height:310px;
+}
 
 .card {
     border-radius: 4px;
@@ -222,6 +226,7 @@ img.img-responsive {
 #prodDetailsContainer {
     display: flex;
     justify-content: space-between;
+    padding:50px;
 }
 
 #prodDetailLastChild {
@@ -231,11 +236,17 @@ img.img-responsive {
     display: flex;
     flex-direction: column;
 }
+    #prodDetailLastChild h6 {
+        color: #CDC781;
+    }
+    #prodDetailLastChild h5 {
+        color: #909090;
+    }
 
-#backToHomePage {
-    justify-content: flex-end;
-    display: flex;
-}
+    #backToHomePage {
+        justify-content: flex-end;
+        display: flex;
+    }
 
 
 /*Sign Up Design*/

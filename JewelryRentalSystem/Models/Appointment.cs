@@ -8,32 +8,20 @@ namespace JewelryRentalSystem.Models
         [Key]
         public int AppointmentId { get; set; }
         [Required]
-        [DisplayName("Customer Name")]
-        public string CustomerName { get; set; }
+        public string CustomerId { get; set; }
+        public ApplicationUser Customer { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DisplayName("Date")]
         public DateTime DateOfAppointment { get; set; }
         [DisplayName("Time")]
-        public string TimeOfAppointment { get; set; }
-        //[DisplayName("Total Amount")]
-        //public double TotalAmountToBePaid { get; set; }
-        public int? TimeId { get; set; }      
-        public int? LocationId { get; set; }
-        public ScheduleTime? ScheduleTime { get; set; }
-        public Location? Location { get; set; }
+        public int ScheduleTimeId { get; set; }    
+        public ScheduleTime ScheduleTime { get; set; } = null!;
+        public int LocationId { get; set; }
+        public Location Location { get; set; } = null!;
+        public int AppointmentTypeId { get; set; }
+        public AppointmentType AppointmentType { get; set; } = null!;
         public Appointment() { }
 
-        public Appointment(int appointmentId, string customerName, 
-            DateTime dateOfAppointment, string timeOfAppointment, int? timeId, int? locationId)
-        {
-            AppointmentId = appointmentId;
-            CustomerName = customerName;
-            DateOfAppointment = dateOfAppointment;
-            TimeOfAppointment = timeOfAppointment;
-            //TotalAmountToBePaid = totalAmountToBePaid;
-            TimeId = timeId;
-            LocationId = locationId;
-        }
     }
 }

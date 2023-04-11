@@ -14,7 +14,7 @@ namespace JewelryRentalSystem.Models
         public string ProductName { get; set; }
         [Required]
         [DisplayName("Product Description")]
-        public string? ProductDescription { get; set; }
+        public string ProductDescription { get; set; } = default!;
         [Required]
         [DisplayName("Product Price")]
         public double ProductPrice { get; set; }
@@ -22,9 +22,9 @@ namespace JewelryRentalSystem.Models
         [DisplayName("Product Stock")]
         public int ProductStock { get; set; }
         [Required]
-        public string? ProductImage { get; set; }
-        public int? CategoryId { get; set; }
-        public Category? Category { get; set; }
+        public string ProductImage { get; set; } = default!;
+        public int CategoryId { get; set; }
+        public Category Category { get; set; } = null!;
         public Product() { }
 
         public Product(int productId, string productName, string? productDescription, double productPrice, int productStock, string? productImage, int categoryId)

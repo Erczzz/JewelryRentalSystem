@@ -54,7 +54,7 @@ namespace JewelryRentalSystem.Data
             });
         }
 
-        public static void SeedDefaultTime(this ModelBuilder modelBuilder)
+/*        public static void SeedDefaultTime(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ScheduleTime>().HasData(
                 new ScheduleTime(1, "8:00:00 - 9:00:00"),
@@ -67,7 +67,7 @@ namespace JewelryRentalSystem.Data
                 new ScheduleTime(8, "16:00:00 - 17:00:00")
                 );
 
-        }
+        }*/
 
 
     }

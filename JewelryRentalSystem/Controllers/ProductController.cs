@@ -4,6 +4,7 @@ using JewelryRentalSystem.Repository;
 using JewelryRentalSystem.Services;
 using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
@@ -19,19 +20,23 @@ namespace JewelryRentalSystem.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly JRSDBContext _JRSDBContext;
         private readonly IUserService _userService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public ProductController(IProductDBRepository repo, 
             IWebHostEnvironment webHostEnvironment, JRSDBContext JRSDBContext,
-            IUserService userService)
+            IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _repo = repo;
             _webHostEnvironment = webHostEnvironment;
             _JRSDBContext = JRSDBContext;
             _userService = userService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> GetAllProducts(string SearchString)
         {
+            var countCart = _JRSDBContext.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = countCart;
             var userId = _userService.GetUserId();
             var isLoggedIn = _userService.IsAuthenticated();
 
@@ -161,10 +166,10 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> AddToCart(int Id)
         {
             var product = await _repo.GetProductById(Id);
-            var cart = new Cart
+            var cart = new CartViewModel()
             {
-                
-                CustomerName = "John",
+
+                CustomerId = _userManager.GetUserId(HttpContext.User),
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
                 ProductPrice = product.ProductPrice,

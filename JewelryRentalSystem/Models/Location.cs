@@ -10,7 +10,6 @@ namespace JewelryRentalSystem.Models
         [Required]
         [DisplayName("Location")]
         public string LocationName { get; set; }
-        public List<Appointment>? Appointments { get; set; }
         public Location()
         {
             
@@ -21,5 +20,7 @@ namespace JewelryRentalSystem.Models
             LocationId = locationId;
             LocationName = locationName;
         }
+
+
     }
 }

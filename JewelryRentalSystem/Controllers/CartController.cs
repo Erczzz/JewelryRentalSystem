@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace JewelryRentalSystem.Controllers
@@ -14,7 +15,7 @@ namespace JewelryRentalSystem.Controllers
     public class CartController : Controller
     {
         private readonly JRSDBContext _context;
-        private UserManager<ApplicationUser> _userManager { get; }
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public CartController(JRSDBContext context, UserManager<ApplicationUser> userManager)
         {
@@ -22,15 +23,18 @@ namespace JewelryRentalSystem.Controllers
             _userManager = userManager;
         }
 
+        public async Task<IActionResult> CountCart()
+        {
+            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = countCart;
+            return View(countCart);
+        }
+
         // GET: Cart
         public async Task<IActionResult> Index()
         {
-            // var dataCount = _context.Carts.CountAsync();
-            // TempData["count"] = dataCount;
-            
-            return _context.Carts != null ? 
-                          View(await _context.Carts.ToListAsync()) :
-                          Problem("Entity set 'JRSDBContext.Carts'  is null.");
+            var jRSDBContext = _context.Carts.Include(c => c.Customer).Include(c => c.Product);
+            return View(await jRSDBContext.ToListAsync());
         }
 
         // GET: Cart/Details/5
@@ -42,6 +46,8 @@ namespace JewelryRentalSystem.Controllers
             }
 
             var cart = await _context.Carts
+                .Include(c => c.Customer)
+                .Include(c => c.Product)
                 .FirstOrDefaultAsync(m => m.CartId == id);
             if (cart == null)
             {
@@ -54,6 +60,9 @@ namespace JewelryRentalSystem.Controllers
         // GET: Cart/Create
         public IActionResult Create()
         {
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
+            ViewData["TransactionId"] = new SelectList(_context.Transactions, "TransactionId", "TransactionId");
             return View();
         }
 
@@ -62,16 +71,25 @@ namespace JewelryRentalSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CartId,CustomerName,ProductName,ProductQty,RentDuration,ProductPrice,Total,ProductId")] Cart cart)
+        public async Task<IActionResult> Create([Bind("CartId,CustomerId,ProductQty,RentDuration,Total,ConfirmRent,ProductId")] CartViewModel cart)
         {
+
             //if (ModelState.IsValid)
             {
-                cart.Total = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
-                _context.Add(cart);
+                ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
+                var newCart = new Cart
+                {
+                    CustomerId = cart.CustomerId,
+                    ProductQty = cart.ProductQty,
+                    RentDuration = cart.RentDuration,
+                    Total = cart.Total,
+                    ProductId = cart.ProductId
+                };
+                _context.Add(newCart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(cart);
+            }            
         }
 
         // GET: Cart/Edit/5
@@ -87,6 +105,8 @@ namespace JewelryRentalSystem.Controllers
             {
                 return NotFound();
             }
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductDescription", cart.ProductId);
             return View(cart);
         }
 
@@ -95,7 +115,7 @@ namespace JewelryRentalSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartId,CustomerName,ProductName,ProductQty,RentDuration,ProductPrice,Total,ProductId")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("CartId,CustomerId,ProductQty,RentDuration,Total,ConfirmRent,ProductId,TransactionId")] Cart cart)
         {
             if (id != cart.CartId)
             {
@@ -122,6 +142,8 @@ namespace JewelryRentalSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductDescription", cart.ProductId);
             return View(cart);
         }
 
@@ -133,7 +155,7 @@ namespace JewelryRentalSystem.Controllers
                 return NotFound();
             }
 
-            var cart = await _context.Carts
+            var cart = await _context.Carts.Include(c => c.Customer).Include(c => c.Product)
                 .FirstOrDefaultAsync(m => m.CartId == id);
             if (cart == null)
             {
@@ -166,7 +188,5 @@ namespace JewelryRentalSystem.Controllers
         {
           return (_context.Carts?.Any(e => e.CartId == id)).GetValueOrDefault();
         }
-
-
     }
 }
