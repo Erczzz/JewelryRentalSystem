@@ -1,11 +1,8 @@
-﻿using JewelryRentalSystem.Data;
-using JewelryRentalSystem.Models;
-using JewelryRentalSystem.Repository;
+﻿using JewelryRentalSystem.Models;
 using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace JewelryRentalSystem.Controllers
 {

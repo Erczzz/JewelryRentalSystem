@@ -8,13 +8,11 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<JRSDBContext>();
 
 builder.Services.AddDbContext<JRSDBContext>();
 builder.Services.AddTransient<JRSDBContext>();
-// configure identity framework 
 
 builder.Services.AddScoped<JRSDBContext, JRSDBContext>();
 
@@ -53,6 +51,8 @@ var app = builder.Build();
 }
 
 app.UseStaticFiles();
+
+app.AutoMigrate();
 
 app.UseRouting();
 

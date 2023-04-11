@@ -9,20 +9,43 @@ using JewelryRentalSystem.Data.EntityRelationship;
 
 namespace JewelryRentalSystem.Data
 {
-/* We have to input the <ApplicationUser> in our IdentityDbContext
- * for us to be able to work in our custom columns or property in AspNetUsers*/
-    public class JRSDBContext : IdentityDbContext<ApplicationUser>
+   public class JRSDBContext : IdentityDbContext<ApplicationUser>
     {
-        public JRSDBContext(DbContextOptions<JRSDBContext> options) : base(options)
+        public IConfiguration _appConfig { get; }
+        public ILogger _logger { get; }
+        private readonly IWebHostEnvironment _env;
+        public JRSDBContext(IConfiguration appConfig, ILogger<JRSDBContext> logger,
+            IWebHostEnvironment env)
         {
-
+            _appConfig = appConfig;
+            _logger = logger;
+            _env = env;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string con = "Server = (localdb)\\MSSQLLocalDB; " +
-                "Database = JRSDB; Integrated Security = true;";
-            optionsBuilder.UseSqlServer(con)
+            /*string con = "Server = (localdb)\\MSSQLLocalDB; " +
+                "Database = JRSDB; Integrated Security = true;";*/
+            var server = _appConfig.GetConnectionString("Server");
+            var db = _appConfig.GetConnectionString("DB");
+            string connectionString;
+            if (_env.IsDevelopment())
+            {
+                connectionString = $"Server={server};Database={db};MultipleActiveResultSets=true";
+            }
+            else
+            {
+                var username = _appConfig.GetConnectionString("Username");
+                var password = _appConfig.GetConnectionString("Password");
+                connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true";
+            }
+            
+
+            // log over here 
+            // _logger.LogInformation("Db Connection string: " + connectionString);
+
+
+            optionsBuilder.UseSqlServer(connectionString)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior
                 .NoTracking);
             base.OnConfiguring(optionsBuilder);
