@@ -12,18 +12,10 @@ namespace JewelryRentalSystemAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductCategory>()
-            .HasKey(pc => new { pc.ProductId, pc.CategoryId });
-
-            modelBuilder.Entity<ProductCategory>()
-            .HasOne(p => p.Product)
-            .WithMany(pc => pc.ProductCategories)
-            .HasForeignKey(p => p.ProductId);
-
-            modelBuilder.Entity<ProductCategory>()
-            .HasOne(c => c.Category)
-            .WithMany(pc => pc.ProductCategories)
-            .HasForeignKey(c => c.CategoryId);
+            modelBuilder.Entity<Product>()
+            .HasOne<Category>(e => e.Category)
+            .WithMany(d => d.Products)
+            .HasForeignKey(e => e.CategoryId);
 
             base.OnModelCreating(modelBuilder);
 
@@ -50,6 +42,7 @@ namespace JewelryRentalSystemAPI.Data
                 ProductPrice = 20000,
                 ProductStock = 2,
                 ProductImage = "Test",
+                CategoryId = 1
             };
 
             var product2 = new Product
@@ -60,6 +53,7 @@ namespace JewelryRentalSystemAPI.Data
                 ProductPrice = 15000,
                 ProductStock = 1,
                 ProductImage = "Test",
+                CategoryId = 2
             };
             modelBuilder.Entity<Product>()
                 .HasData(product1, product2);
@@ -67,7 +61,7 @@ namespace JewelryRentalSystemAPI.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+
     }
 
 }

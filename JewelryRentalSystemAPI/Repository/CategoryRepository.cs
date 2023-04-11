@@ -12,7 +12,7 @@ namespace JewelryRentalSystemAPI.Repository
         {
             _context = context;
         }
-        public List<Category> GetCategories()
+        public ICollection<Category> GetCategories()
         {
             return _context.Categories.ToList();
         }
@@ -22,9 +22,9 @@ namespace JewelryRentalSystemAPI.Repository
             return _context.Categories.Where(e => e.CategoryId == categoryId).FirstOrDefault();
         }
 
-        public List<Product> GetProductByCategory(int categoryId)
+        public ICollection<Product> GetProductByCategory(int categoryId)
         {
-            return _context.ProductCategories.Where(e => e.CategoryId == categoryId).Select(c => c.Product).ToList();
+            return _context.Products.Where(e => e.CategoryId == categoryId).ToList();
         }
     }
 }

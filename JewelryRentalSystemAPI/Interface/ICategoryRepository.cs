@@ -4,8 +4,8 @@ namespace JewelryRentalSystemAPI.Interface
 {
     public interface ICategoryRepository
     {
-        List<Category> GetCategories();
+        ICollection<Category> GetCategories();
         Category GetCategoryById(int categoryId);
-        List<Product> GetProductByCategory(int categoryId);
+        ICollection<Product> GetProductByCategory(int categoryId);
     }
 }

@@ -43,10 +43,17 @@ namespace JewelryRentalSystemAPI.Controllers
 
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
-
+            
             return Ok(product);
         }
+/*
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
 
-            
+        public IActionResult CreateProduct([FromQuery] int categoryId, [FromBody] ProductDto productCreate)
+        {
+            if () ;
+        }*/
     }
 }
