@@ -12,7 +12,6 @@ namespace JewelryRentalSystem.Models
         public string LastName { get; set; }
         [DisplayName("Birth of Date")]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
         public DateTime? Birthdate { get; set; }
         [DisplayName("Contact Number")]
         [MinLength(11)]

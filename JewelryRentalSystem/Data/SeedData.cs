@@ -42,7 +42,7 @@ namespace JewelryRentalSystem.Data
             };
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
-            user.PasswordHash = ph.HashPassword(user, "myPassword1!");
+            user.PasswordHash = ph.HashPassword(user, "password1!");
 
             //seed user
             modelBuilder.Entity<ApplicationUser>().HasData(user);
