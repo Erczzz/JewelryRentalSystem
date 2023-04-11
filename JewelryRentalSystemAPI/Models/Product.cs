@@ -21,10 +21,13 @@ namespace JewelryRentalSystemAPI.Models
         
         [DisplayName("Stock")]
         public int ProductStock { get; set; }
-        
-        public string? ProductImage { get; set; }
 
-        public ICollection<ProductCategory> ProductCategories { get; set; }
+        [DisplayName("Image")]
+        public string? ProductImage { get; set; }
+        
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
         
 
     }
