@@ -2,6 +2,7 @@
 using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Interface;
 using JewelryRentalSystemAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -12,6 +13,7 @@ namespace JewelryRentalSystemAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
