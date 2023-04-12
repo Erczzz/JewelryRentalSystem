@@ -9,8 +9,14 @@ namespace JewelryRentalSystemAPI.Helper
     {
         public MappingProfiles() 
         { 
-            CreateMap<Product, ProductDto>();
-            CreateMap<Category, CategoryDto>();
+            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+
+            CreateMap<ApplicationUser, SignUpDto>().ReverseMap()
+                .ForMember(f => f.UserName, t2 => t2.MapFrom(src => src.Email));
+
+            CreateMap<ApplicationUser, LogInDto>().ReverseMap()
+                .ForMember(f => f.UserName, t2 => t2.MapFrom(src => src.Email));
         }
 
     }
