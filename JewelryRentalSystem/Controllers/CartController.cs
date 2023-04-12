@@ -26,20 +26,10 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> CountCart()
         {
             /*            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();*/
-            var count = 0;
-            var cart = _context.Carts.ToList();
-            foreach(var item in cart)
-            {
-                if(item.CustomerId == _userManager.GetUserId(HttpContext.User))
-                {
-                    if (item.ConfirmRent == false)
-                    {
-                        count++;
-                    }
-                }
-            }
+
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             ViewBag.Count = count;
-            return View(count);
+            return View();
         }
 
         // GET: Cart
@@ -109,7 +99,7 @@ namespace JewelryRentalSystem.Controllers
                 };
                 _context.Add(newCart);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("GetAllProducts", "Product");
             }            
         }
 

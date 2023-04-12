@@ -7,31 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using Microsoft.AspNetCore.Identity;
+using JewelryRentalSystem.ViewModels;
 
 namespace JewelryRentalSystem.Controllers
 {
     public class TransactionController : Controller
     {
         private readonly JRSDBContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TransactionController(JRSDBContext context)
+        public TransactionController(JRSDBContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Transaction
         public async Task<IActionResult> Index()
         {
+            
             var jRSDBContext = _context.Transactions.Include(t => t.Appointment);
             return View(await jRSDBContext.ToListAsync());
         }
 
-        public async Task<IActionResult> OrderList()
+/*        public async Task<IActionResult> OrderList()
         {
             var jRSDBContext = _context.Transactions.Include(t => t.Appointment)
                 .Include(c => c.Carts);
             return View(await jRSDBContext.ToListAsync());
-        }
+        }*/
 
         // GET: Transaction/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -64,7 +69,19 @@ namespace JewelryRentalSystem.Controllers
         {
             //if (ModelState.IsValid)
             {
-              
+
+                var userAppointment = _context.Appointments
+                    .Where(a => a.ConfirmAppointment == false && 
+                    a.CustomerId == _userManager.GetUserId(HttpContext.User)).ToList();
+                ViewBag.userAppointment = userAppointment;
+
+/*                var carts = _context.Carts
+                    .Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)
+                    && c.ConfirmRent == false).ToList();
+
+                transaction.Carts = carts;*/
+
+
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
                 var cart = _context.Carts.Where(x => x.ConfirmRent == false).ToList();
@@ -84,6 +101,7 @@ namespace JewelryRentalSystem.Controllers
                     _context.Update(item);
                     await _context.SaveChangesAsync();
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AppointmentId"] = new SelectList(_context.Appointments.Where(b => b.ConfirmAppointment == false), "AppointmentId", "CustomerId", transaction.AppointmentId);
@@ -184,6 +202,17 @@ namespace JewelryRentalSystem.Controllers
         private bool TransactionExists(int id)
         {
           return (_context.Transactions?.Any(e => e.TransactionId == id)).GetValueOrDefault();
+        }
+
+        public async Task<IActionResult> OrderItems(int id)
+        {
+            var transaction = await _context.Transactions
+            .Include(t => t.Appointment)
+            .FirstOrDefaultAsync(m => m.TransactionId == id);
+
+            var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false)
+                .Include(c => c.Customer).Include(c => c.Product);
+            return View(await jRSDBContext.ToListAsync());
         }
     }
 }

@@ -471,7 +471,17 @@ img.img-responsive {
 }
 
 /*APPOINTMENT DESIGN*/
-#createAppointmentDiv{
+#createTransactionH4 {
+    color: #6C757D;
+}
+#createAppointmentH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#createAppointmentContainer {
+    width: 40%;
+}
+#createAppointmentDiv {
     width: 40%;
     border-style: ridge;
     padding: 20px;
@@ -496,12 +506,43 @@ img.img-responsive {
     text-align: center;
 }
 /* CART DESIGN */
-#cartDiv {
-    width: 80%;
-    padding: 10px;
+#cartListContainer table {
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
 }
-#totalH4 {
-    color: #BB2D3B;
+#cartListTR {
+    background-color: #6C757D;
+    color: white;
+    text-align: center;
+}
+#cartListTRBody {
+
+    text-align:center;
+}
+#cartProductImg {
+    height: 90px;
+
+}
+#noItemsBtn {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+#noItemsImg {
+    width: 40%;
+}
+    #noItemsImg img{
+        opacity: 40%;
+        height:400px;
+    }
+    #cartDiv {
+        width: 80%;
+        padding: 10px;
+    }
+#totalH5 {
+    color: #6C757D;
+    text-align: end;
 }
 #cartTR {
     background-color: #373737;
@@ -515,6 +556,33 @@ img.img-responsive {
 }
 
 /* ADD TO CART DESIGN */
+#addToCartBtns{
+    display:flex;
+    justify-content:end;
+    padding:0;
+}
+#addToCartH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#addToCartContainer img {
+
+    padding: 20px;
+}
+#addToCartForm {
+    padding: 20px;
+    width: 50%;
+
+}
+#addToCartContainer {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+
 #addToCartDiv {
     width: 40%;
     padding: 20px;
@@ -528,11 +596,6 @@ img.img-responsive {
 }
 #addToCartBtn{
     text-align: right;
-}
-#addToCartImg {
-    width: 40%;
-    padding: 20px;
-    border: ridge;
 }
 #addToCartMainDiv{
     display: flex;
@@ -654,4 +717,25 @@ img.img-responsive {
 #locationTRBody {
     text-align: center;
     background-color: #F3F3F3;
+}
+
+/* TRANSACTION DESIGN */
+#containerTransaction {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+#transactionListH4 {
+    text-align: center;
+    color: #6C757D;
+    padding:10px;
+}
+#transactionCardBody {
+    background-color: #FAFAFA;
+}
+#transactionBtns{
+    padding:0px;
+}
+#transactionBtns a{
+    padding: 10px;
 }

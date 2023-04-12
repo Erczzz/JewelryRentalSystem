@@ -21,8 +21,15 @@
                 <tr id="roleTRBody">
                     <td>@role.Name</td>
                     <td>
-                        <a class="btn btn-secondary btn-sm" asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id">Edit</a>
-                        <a class="btn btn-danger btn-sm" asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id">Delete</a>
+                        @if(role.Name == "Administrator" || role.Name == "Customer")
+                        {
+
+                        }
+                        else
+                        {
+                            <a class="btn btn-secondary btn-sm" asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id">Delete</a>
+                        }
                     </td>
                 </tr>
             }

@@ -22,6 +22,7 @@ namespace JewelryRentalSystem.ViewModels
         public double ProductPrice { get; set; }
         public double Total { get; set; }
         public int ProductId { get; set; }
+        public string ProductImage { get; set; } = default!;
     }
 
 }

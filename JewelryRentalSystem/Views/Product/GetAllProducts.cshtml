@@ -62,17 +62,25 @@
                                     </div>
                                     <div class="card-footer d-flex flex-row justify-content-between">
                                         <div>
-                                            @if (item.ProductStock == 0)
-                                            {
-                                                <small class="text-muted">Out of stock</small>
-                                            }
-                                            else if (item.ProductStock == 1)
-                                            {
-                                                <small class="text-muted">@item.ProductStock item left</small>
+                                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                            {                                           
+                                                <small class="text-muted">@item.ProductStock Item(s) in Stock</small>
+
                                             }
                                             else
                                             {
-                                                <small class="text-muted">@item.ProductStock items left</small>
+                                                @if (item.ProductStock == 0)
+                                                {
+                                                    <small class="text-muted">Out of stock</small>
+                                                }
+                                                else if (item.ProductStock == 1)
+                                                {
+                                                    <small class="text-muted">@item.ProductStock item left</small>
+                                                }
+                                                else
+                                                {
+                                                    <small class="text-muted">In Stock!</small>
+                                                }
                                             }
                                         </div>
                                         <div>

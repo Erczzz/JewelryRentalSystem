@@ -4,26 +4,48 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Transaction</h4>
+<h4 id="createTransactionH4">Confirm Order?</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="">
+@*        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Rent Duration</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    @foreach (var item in Model.Carts)
+                    {
+                        <td>@item.Customer.FirstName</td>
+                        <td>@item.Product.ProductName</td>
+                        <td>@item.ProductQty</td>
+                        <td>@item.RentDuration</td>
+                        <td>@item.Total</td>
+                    }
+                </tr>
+            </thead>
+        </table>*@
+
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="AppointmentId" class="control-label"></label>
-                <select asp-for="AppointmentId" class ="form-control" asp-items="ViewBag.AppointmentId"></select>
+                <select hidden asp-for="AppointmentId" class ="form-control" asp-items="ViewBag.AppointmentId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-inline-flex justify-content-between">
+                <div class="form-group">
+                    <input type="submit" value="Confirm" class="btn btn-warning" />&nbsp
+                </div>
+                <div>
+                    <a class="btn btn-secondary" asp-action="Index" asp-controller="Cart">Cancel</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

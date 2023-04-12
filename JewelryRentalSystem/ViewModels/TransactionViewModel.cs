@@ -1,11 +1,11 @@
-﻿using System.ComponentModel;
+﻿using JewelryRentalSystem.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace JewelryRentalSystem.ViewModels
 {
     public class TransactionViewModel
     {
-        [Key]
         public int TransactionId { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -15,6 +15,9 @@ namespace JewelryRentalSystem.ViewModels
         public string AppointmentTime { get; set; }
         [DisplayName("Branch Location")]
         public string Location { get; set; }
+        public List<Cart> Carts { get; set; } = new();
+        public List<Appointment> Appointments { get; set; }
+        public int AppointmentId { get; set; }
 
     }
 }

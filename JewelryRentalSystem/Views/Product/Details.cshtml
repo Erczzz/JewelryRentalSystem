@@ -15,20 +15,28 @@
                 <h5>₱@Model.ProductPrice</h5>
             </div>           
             <div>
-                @if (Model.ProductStock == 0)
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                 {
-                    <h6 >Out of stock</h6>
-                }
-                else if (Model.ProductStock == 1)
-                {
-                    <h6 >@Model.ProductStock item left</h6>
+                    <h6 >@Model.ProductStock Item(s) in Stock</h6>
+
                 }
                 else
                 {
-                    <h6 >@Model.ProductStock items left</h6>
+                    @if (Model.ProductStock == 0)
+                    {
+                        <h6>Out of stock</h6>
+                    }
+                    else if (Model.ProductStock == 1)
+                    {
+                        <h6>@Model.ProductStock item left</h6>
+                    }
+                    else
+                    {
+                        <h6>In Stock!</h6>
+                    }
                 }
             </div>
-            <small class="text-muted">@Model.ProductDescription</small>
+            <br /><small class="text-muted">@Model.ProductDescription</small>
         </div>
         <div id="backToHomePage">
             <a asp-controller="Product" asp-action="GetAllProducts" data-rel="back" id="backToHomePage" class="btn btn-outline-secondary btn-sm">Back to Homepage</a>

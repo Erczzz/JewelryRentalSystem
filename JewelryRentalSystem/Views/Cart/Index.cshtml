@@ -3,88 +3,99 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
-<div >
-    <h3>Your Cart</h3>
+<div class="container" id="cartListContainer">
+    
     @if (ViewBag.Count == 0)
     {
-        <br><h2 style="text-align:center">There's no items in your cart.</h2>
+        <br><br><h3 style="text-align:center; color:#6C757D">There's no Items in your cart.</h3>
+        <br>
+        <div class="container" id="noItemsBtn">
+            <a asp-action="GetAllProducts" asp-controller="Product" class="btn btn-outline-danger">Add Items</a>
+        </div>
+        <div class="container" id="noItemsImg">
+            <img src="~/img/Cart-PNG-Image.png">
+        </div>
+        
     }
     else if(ViewBag.CountAppointment == 0)
     {
-        <p>
-            <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Appointment">Create Appointment</a>
-        </p>
-
-        <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductQty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RentDuration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConfirmRent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Customer.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductQty)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RentDuration)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Total)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ConfirmRent)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.ProductId)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
-                    </td>
-                </tr>
-        }
-            </tbody>
-        </table>
-        <h4 id="totalH4">TOTAL: ₱@Model.Sum(p => p.Total)</h4>
-    }
-    else
-    {
-
-        <p>
-            <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Transaction">Checkout</a>
-        </p>
+        <div class="container d-inline-flex justify-content-between" >
+            <h4 style="color:#6C757D">YOUR CART</h4>
+            <p>
+                <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Appointment">Create Appointment</a>
+            </p>
+        </div>
 
         <table class="table">
             <thead>
-                <tr>
+                <tr id="cartListTR">
                     <th>
-                        @Html.DisplayNameFor(model => model.Customer)
+                        @Html.DisplayNameFor(model => model.Product.ProductImage)
+                    </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Product.ProductName)
+                            </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductQty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RentDuration)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Total)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr id="cartListTRBody">
+                <td>
+                    <img id="cartProductImg" src="@Html.DisplayFor(modelItem => item.Product.ProductImage)" />
+                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.CartId"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.CartId"><i class="bi bi-book"></i></a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CartId"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+        }
+            </tbody>
+        </table>
+        <h5 id="totalH5">Total Amount: ₱@Model.Sum(p => p.Total)</h5>
+    }
+    else
+    {
+        <div class="container d-inline-flex justify-content-between">
+            <h4 style="color:#6C757D">YOUR CART</h4>
+            <p>
+                <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Transaction">Checkout</a>
+            </p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr id="cartListTR">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.ProductImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.ProductName)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.ProductQty)
@@ -95,21 +106,18 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Total)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ConfirmRent)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Product)
-                    </th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr id="cartListTRBody">
                         <td>
-                            @Html.DisplayFor(modelItem => item.Customer.Id)
+                            <img id="cartProductImg" src="@Html.DisplayFor(modelItem => item.Product.ProductImage)" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.ProductName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ProductQty)
@@ -121,21 +129,15 @@
                             @Html.DisplayFor(modelItem => item.Total)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ConfirmRent)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Product.ProductId)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.CartId"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.CartId"><i class="bi bi-book"></i></a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CartId"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        <h4 id="totalH4">TOTAL: ₱@Model.Sum(p => p.Total)</h4>
+        <h5 id="totalH5">Total Amount: ₱@Model.Sum(p => p.Total)</h5>
     }
 
 </div>

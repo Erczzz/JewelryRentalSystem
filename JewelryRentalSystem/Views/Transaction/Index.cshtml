@@ -4,60 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h3>Transactions</h3>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Appointment ID
-            </th>
-            <th>
-                Transaction ID
-            </th>
-            <th>
-                Appointment Date
-            </th>
-            <th>
-                Appointment Time
-            </th>
-            <th>
-                Appointment Type
-            </th>
-            <th>
-                Appointment Location
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<h4 id="transactionListH4">TRANSACTION HISTORY</h4>
+<hr />
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransactionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment.DateOfAppointment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment.ScheduleTimeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment.LocationId)
-            </td>
-
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
-                <a asp-action="OrderList" asp-route-id="@item.TransactionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
-            </td>
-        </tr>
+    <div id="containerTransaction">
+        <div class="card" style="width: 18rem;" id="transactioCard">
+            <div class="card-body" id="transactionCardBody">
+                <h5 class="card-title">Transaction</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Appointment ID: @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Transaction ID: @Html.DisplayFor(modelItem => item.TransactionId)</h6>&#160
+                <div class="container" id="transactionBtns">
+                    <a class="btn btn-outline-secondary form-control" asp-route-id="@item.AppointmentId" asp-action="Details" asp-controller="Appointment">Appointment Details</a>
+                    <a class="btn btn-outline-secondary form-control" asp-route-id="@item.TransactionId">View Items</a>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-    </tbody>
-</table>

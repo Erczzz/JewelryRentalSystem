@@ -52,35 +52,33 @@ namespace JewelryRentalSystem.Controllers
             return View(appointment);
         }
 
-        // GET: Appointment/Create
+
         public IActionResult Create()
         {
-            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId");
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "APTName");
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
             ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
             return View();
         }
 
-        // POST: Appointment/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment)
         {
             //if (ModelState.IsValid)
             {
+
                 appointment.CustomerId = _userManager.GetUserId(HttpContext.User);
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Transaction");
             }
-            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+/*            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
             ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
-            return View(appointment);
+            return View(appointment);*/
         }
 
         // GET: Appointment/Edit/5

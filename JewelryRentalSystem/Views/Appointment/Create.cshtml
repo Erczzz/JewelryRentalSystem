@@ -4,18 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Appointment</h4>
+<h4 id="createAppointmentH4">CREATE APPOINTMENT</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="container" id="createAppointmentContainer">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
-            </div>*@
             <div class="form-group">
                 <label asp-for="DateOfAppointment" class="control-label"></label>
                 <input asp-for="DateOfAppointment" class="form-control" />
@@ -26,21 +20,24 @@
                 <select asp-for="ScheduleTimeId" class ="form-control" asp-items="ViewBag.ScheduleTimeId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="LocationId" class="control-label"></label>
+                <label class="control-label">Branch Location</label>
                 <select asp-for="LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="AppointmentTypeId" class="control-label"></label>
+                <label class="control-label">Appointment Type</label>
                 <select asp-for="AppointmentTypeId" class ="form-control" asp-items="ViewBag.AppointmentTypeId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <br /><div class="d-inline-flex justify-content-between">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-warning" />&nbsp
+                </div>
+                <div>
+                    <a class="btn btn-secondary" asp-action="Index" asp-controller="Cart">Cancel</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

@@ -35,8 +35,9 @@ namespace JewelryRentalSystem.Controllers
 
         public async Task<IActionResult> GetAllProducts(string SearchString)
         {
-            var countCart = _JRSDBContext.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
-            ViewBag.Count = countCart;
+            var count = _JRSDBContext.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
             var userId = _userService.GetUserId();
             var isLoggedIn = _userService.IsAuthenticated();
 
@@ -175,7 +176,8 @@ namespace JewelryRentalSystem.Controllers
                 ProductPrice = product.ProductPrice,
                 ProductQty = 1,
                 RentDuration = 1,
-                Total = product.ProductPrice
+                Total = product.ProductPrice,
+                ProductImage = product.ProductImage
 
             };
             
