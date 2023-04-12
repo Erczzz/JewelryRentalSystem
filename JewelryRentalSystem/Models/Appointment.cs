@@ -21,6 +21,7 @@ namespace JewelryRentalSystem.Models
         public Location Location { get; set; } = null!;
         public int AppointmentTypeId { get; set; }
         public AppointmentType AppointmentType { get; set; } = null!;
+        public bool ConfirmAppointment { get; set; } = false;
         public Appointment() { }
 
     }

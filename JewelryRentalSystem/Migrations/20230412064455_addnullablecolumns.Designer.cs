@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230412064455_addnullablecolumns")]
+    partial class addnullablecolumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "628c13e2-3e69-4780-97ad-33770ec0c678",
+                            ConcurrencyStamp = "b8fed842-ca39-495d-b51a-f0897e756c20",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -119,9 +121,9 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMmZhuSWz0TDY0zSxserjSz0HSncXHxSBunZ7P4yZ4f1eg03r6meciUBKplG2BquTQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECtghaRjq4i0gK8kiypNudrb1+m4SppmUTYdyiXJ6mfb0n0ks+tOghojDzRa77oecg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9e772644-4c3d-4e8c-8954-64083f9b100e",
+                            SecurityStamp = "0abde33e-edf8-4aeb-8cdb-528dd567747a",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -244,28 +246,6 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "Ring"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryName = "Necklace"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            CategoryName = "Bracelet"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            CategoryName = "Earrings"
-                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
@@ -319,18 +299,6 @@ namespace JewelryRentalSystem.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 4,
-                            ProductDescription = "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
-                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
-                            ProductName = "Enchanted Disney Fine Jewelry",
-                            ProductPrice = 4000.0,
-                            ProductStock = 4
-                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.ScheduleTime", b =>

@@ -69,6 +69,25 @@ namespace JewelryRentalSystem.Data
 
         }
 
+        public static void SeedDefaultProductCategory(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(
+                new Category(1, "Ring"),
+                new Category(2, "Necklace"),
+                new Category(3, "Bracelet"),
+                new Category(4, "Earrings")
+            );
+        }
+
+        public static void SeedDefaultProduct(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().HasData(
+                new Product(1, "Enchanted Disney Fine Jewelry",
+                "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
+                4000, 4, "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", 4)
+                );
+        }
+
 
     }
 }

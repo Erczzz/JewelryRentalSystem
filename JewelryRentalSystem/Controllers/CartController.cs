@@ -45,6 +45,12 @@ namespace JewelryRentalSystem.Controllers
         // GET: Cart
         public async Task<IActionResult> Index()
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
+            var countAppointment = _context.Appointments.Where(c => c.ConfirmAppointment == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.CountAppointment = countAppointment;
+
             var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false)
                 .Include(c => c.Customer).Include(c => c.Product);
             return View(await jRSDBContext.ToListAsync());

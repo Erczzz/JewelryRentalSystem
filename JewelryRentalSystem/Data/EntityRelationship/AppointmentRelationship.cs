@@ -13,9 +13,12 @@ namespace JewelryRentalSystem.Data.EntityRelationship
                 .HasForeignKey(a => a.CustomerId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-/*            modelBuilder.Entity<Cart>()
-            .HasOne<Transaction>(x => x.Transaction)
-            .WithMany(x => x.Carts);*/
+/*            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Transaction)
+                .WithOne(a => a.Appointment)
+                .HasForeignKey<Transaction>(a => a.TransactionId)
+                .OnDelete(DeleteBehavior.NoAction);*/
+
         }
 
     }

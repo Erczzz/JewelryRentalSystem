@@ -1,17 +1,23 @@
 ﻿@model IEnumerable<JewelryRentalSystem.Models.Cart>
+@using JewelryRentalSystem.Data
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<div class="container d-inline-flex justify-content-between">
+<div >
     <h3>Your Cart</h3>
-    <p>
-        <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Transaction">Checkout</a>
-        <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Appointment">Create Appointment</a>
-    </p>
-</div>
-<table class="table">
+    @if (ViewBag.Count == 0)
+    {
+        <br><h2 style="text-align:center">There's no items in your cart.</h2>
+    }
+    else if(ViewBag.CountAppointment == 0)
+    {
+        <p>
+            <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Appointment">Create Appointment</a>
+        </p>
+
+        <table class="table">
     <thead>
         <tr>
             <th>
@@ -36,33 +42,101 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentDuration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConfirmRent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-<h4 id="totalH4">TOTAL: ₱@Model.Sum(p => p.Total)</></h4>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RentDuration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConfirmRent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+        <h4 id="totalH4">TOTAL: ₱@Model.Sum(p => p.Total)</h4>
+    }
+    else
+    {
+
+        <p>
+            <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Transaction">Checkout</a>
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductQty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RentDuration)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Total)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ConfirmRent)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentDuration)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ConfirmRent)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.ProductId)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h4 id="totalH4">TOTAL: ₱@Model.Sum(p => p.Total)</h4>
+    }
+
+</div>
+

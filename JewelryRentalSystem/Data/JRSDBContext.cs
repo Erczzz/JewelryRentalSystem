@@ -53,6 +53,8 @@ namespace JewelryRentalSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.SeedDefaultProduct();
+            modelBuilder.SeedDefaultProductCategory();
             modelBuilder.SeedAdminUser();
             modelBuilder.SeedDefaultTime();
 

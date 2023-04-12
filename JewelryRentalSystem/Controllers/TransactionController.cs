@@ -54,7 +54,7 @@ namespace JewelryRentalSystem.Controllers
 
         public IActionResult Create()
         {
-            ViewData["AppointmentId"] = new SelectList(_context.Appointments, "AppointmentId", "CustomerId");
+            ViewData["AppointmentId"] = new SelectList(_context.Appointments.Where(b => b.ConfirmAppointment == false), "AppointmentId", "CustomerId");
             return View();
         }
 
@@ -76,9 +76,17 @@ namespace JewelryRentalSystem.Controllers
                     _context.Update(item);
                     await _context.SaveChangesAsync();
                 }
+
+                var appointment = _context.Appointments.Where(x => x.ConfirmAppointment == false).ToList();
+                foreach (var item in appointment)
+                {
+                    item.ConfirmAppointment = true;
+                    _context.Update(item);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppointmentId"] = new SelectList(_context.Appointments, "AppointmentId", "CustomerId", transaction.AppointmentId);
+            ViewData["AppointmentId"] = new SelectList(_context.Appointments.Where(b => b.ConfirmAppointment == false), "AppointmentId", "CustomerId", transaction.AppointmentId);
             return View(transaction);
         }
 
