@@ -3,10 +3,12 @@ using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Interface;
 using JewelryRentalSystemAPI.Models;
 using JewelryRentalSystemAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class CategoryController : Controller
