@@ -9,7 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ProductController : Controller
     {
@@ -22,6 +22,7 @@ namespace JewelryRentalSystemAPI.Controllers
             _mapper = mapper;
         }
 
+        //Listing of Products
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Product>))]
         public IActionResult GetProducts()
@@ -34,26 +35,34 @@ namespace JewelryRentalSystemAPI.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{prodId}")]
+        //Listing of Products by Id
+        [HttpGet("{productId}")]
         [ProducesResponseType(200, Type = typeof(Product))]
         [ProducesResponseType(400)]
-        public IActionResult GetProductById(int prodId) 
+        public IActionResult GetProductById(int productId) 
         {
-            var product = _mapper.Map<ProductDto>(_productRepository.GetProductById(prodId));
+            var product = _mapper.Map<ProductDto>(_productRepository.GetProductById(productId));
 
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
             
             return Ok(product);
         }
-/*
-        [HttpPost]
+
+        //Delete Products
+        [HttpDelete("{productId}")]
+        [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-
-        public IActionResult CreateProduct([FromQuery] int categoryId, [FromBody] ProductDto productCreate)
+        public IActionResult Delete([FromRoute] int productId)
         {
-            if () ;
-        }*/
+            if (productId == 0)
+                return BadRequest();
+            var product = _productRepository.GetProductById(productId);
+            if (product == null)
+                return NotFound("No Resource Found.");
+            return Accepted(_productRepository.DeleteProduct(productId));
+        }
+
     }
 }

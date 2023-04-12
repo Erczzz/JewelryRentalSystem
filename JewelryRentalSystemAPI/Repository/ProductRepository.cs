@@ -12,17 +12,6 @@ namespace JewelryRentalSystemAPI.Repository
             _context = context;
         }
 
-        //public bool CreateProduct(int categoryId, Product newProduct)
-        //{
-        //    var category = _context.Categories.Where(a => a.CategoryId == categoryId).FirstOrDefault();
-        //    var newProd = new Product
-        //    {
-        //        CategoryId = categoryId,
-        //    };
-        //    _context.Products.Add(newProduct);
-        //    return Save();
-        //}
-
         public Product GetProductById(int prodId)
         {
             return _context.Products.Where(p => p.ProductId == prodId).FirstOrDefault();
@@ -36,6 +25,17 @@ namespace JewelryRentalSystemAPI.Repository
         public ICollection<Product> GetProducts()
         {
             return _context.Products.OrderBy(p => p.ProductId).ToList();
+        }
+
+        public Product DeleteProduct(int productId)
+        {
+            var product =  GetProductById(productId);
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+            }
+            return product;
         }
 
         public bool Save()
