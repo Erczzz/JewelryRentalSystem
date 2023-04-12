@@ -38,10 +38,31 @@ namespace JewelryRentalSystemAPI.Repository
             return product;
         }
 
-        public bool Save()
+        public Product AddProduct(Product newProduct)
         {
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
+            _context.Add(newProduct);
+            _context.SaveChanges();
+            return newProduct;  
+        }
+
+        public Product UpdateProduct(int productId, Product newProduct)
+        {
+            var products = _context.Products.Find(productId);
+            if (products is null)
+            {
+                throw new Exception("Trying to update product that doesn't exists.");
+            }
+
+            products.ProductName = newProduct.ProductName;
+            products.ProductDescription = newProduct.ProductDescription;
+            products.ProductPrice = newProduct.ProductPrice;
+            products.ProductStock = newProduct.ProductStock;
+            products.ProductImage = newProduct.ProductImage;
+            products.CategoryId = newProduct.CategoryId;
+
+            _context.Products.Update(products);
+            _context.SaveChanges();
+            return products;
         }
     }
 }

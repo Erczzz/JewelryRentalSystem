@@ -1,9 +1,10 @@
 ﻿using JewelryRentalSystemAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystemAPI.Data
 {
-    public class JRSDBContext : DbContext
+    public class JRSDBContext : IdentityDbContext<ApplicationUser>
     {
         public JRSDBContext(DbContextOptions<JRSDBContext> options) : base(options) 
         { 

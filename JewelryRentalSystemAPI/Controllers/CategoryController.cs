@@ -58,5 +58,52 @@ namespace JewelryRentalSystemAPI.Controllers
 
             return Ok(products);
         }
+
+        [HttpDelete("{categoryId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteCategory([FromRoute] int categoryId)
+        {
+            if (categoryId == 0)
+                return BadRequest();
+            var category = _categoryRepository.GetCategoryById(categoryId);
+            if (category == null)
+                return NotFound("No Resource Found.");
+            return Accepted(_categoryRepository.DeleteCategory(categoryId));
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult AddCategory([FromBody] CategoryDto categoryDto)
+        {
+            if (categoryDto == null)
+                return BadRequest("No data has been provided.");
+            if (ModelState.IsValid)
+            {
+                var category = _mapper.Map<Category>(categoryDto);
+
+                var newCategory = _categoryRepository.AddCategory(category);
+                return CreatedAtAction("GetCategoryById", new { categoryId = newCategory.CategoryId }, newCategory);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPut("{categoryId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateCategory(int categoryId, [FromBody] CategoryDto categoryDto)
+        {
+            if (categoryDto == null)
+                return BadRequest("No data provided");
+
+            var category = _categoryRepository.GetCategoryById(categoryId);
+            var updatedCategory = _mapper.Map<Category>(categoryDto);
+
+            _categoryRepository.UpdateCategory(category.CategoryId, updatedCategory);
+            return Ok();
+        }
     }
 }

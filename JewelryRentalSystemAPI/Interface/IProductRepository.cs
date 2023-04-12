@@ -8,6 +8,7 @@ namespace JewelryRentalSystemAPI.Interface
         Product GetProductById(int productId);
         Product GetProductByName(string name);
         Product DeleteProduct(int productId);
-        bool Save();
+        Product AddProduct(Product newProduct);
+        Product UpdateProduct(int productId, Product newProduct);
     }
 }

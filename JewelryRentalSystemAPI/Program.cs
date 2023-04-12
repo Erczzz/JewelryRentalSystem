@@ -1,5 +1,6 @@
 using JewelryRentalSystemAPI;
 using JewelryRentalSystemAPI.Data;
+using JewelryRentalSystemAPI.Helper;
 using JewelryRentalSystemAPI.Interface;
 using JewelryRentalSystemAPI.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
