@@ -91,7 +91,6 @@
                                     <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile">Your Profile</a></li>
                                     @if (_signInManager.IsSignedIn(User) && User.IsInRole("Customer"))
                                     {
-                                        <li><a  class="dropdown-item" asp-controller="Appointment" asp-action="Index">Your Appointments</a></li>
                                         <li><a  class="dropdown-item" asp-controller="Transaction" asp-action="Index">Your Transactions</a></li>
                                     }else{
 
