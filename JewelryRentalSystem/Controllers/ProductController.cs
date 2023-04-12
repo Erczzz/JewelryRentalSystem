@@ -178,6 +178,7 @@ namespace JewelryRentalSystem.Controllers
                 Total = product.ProductPrice
 
             };
+            
             return View(cart);
         }
     }

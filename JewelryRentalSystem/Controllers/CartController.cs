@@ -25,15 +25,28 @@ namespace JewelryRentalSystem.Controllers
 
         public async Task<IActionResult> CountCart()
         {
-            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
-            ViewBag.Count = countCart;
-            return View(countCart);
+            /*            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();*/
+            var count = 0;
+            var cart = _context.Carts.ToList();
+            foreach(var item in cart)
+            {
+                if(item.CustomerId == _userManager.GetUserId(HttpContext.User))
+                {
+                    if (item.ConfirmRent == false)
+                    {
+                        count++;
+                    }
+                }
+            }
+            ViewBag.Count = count;
+            return View(count);
         }
 
         // GET: Cart
         public async Task<IActionResult> Index()
         {
-            var jRSDBContext = _context.Carts.Include(c => c.Customer).Include(c => c.Product);
+            var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false)
+                .Include(c => c.Customer).Include(c => c.Product);
             return View(await jRSDBContext.ToListAsync());
         }
 
@@ -63,6 +76,7 @@ namespace JewelryRentalSystem.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             ViewData["TransactionId"] = new SelectList(_context.Transactions, "TransactionId", "TransactionId");
+            
             return View();
         }
 
@@ -76,6 +90,7 @@ namespace JewelryRentalSystem.Controllers
 
             //if (ModelState.IsValid)
             {
+                var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
                 ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
                 var newCart = new Cart
@@ -83,7 +98,7 @@ namespace JewelryRentalSystem.Controllers
                     CustomerId = cart.CustomerId,
                     ProductQty = cart.ProductQty,
                     RentDuration = cart.RentDuration,
-                    Total = cart.Total,
+                    Total = cart.Total * cart.ProductQty * cart.RentDuration,
                     ProductId = cart.ProductId
                 };
                 _context.Add(newCart);

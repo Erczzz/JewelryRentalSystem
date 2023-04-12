@@ -54,7 +54,7 @@ namespace JewelryRentalSystem.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedAdminUser();
-/*            modelBuilder.SeedDefaultTime();*/
+            modelBuilder.SeedDefaultTime();
 
             modelBuilder.AppointmentRelation();
             base.OnModelCreating(modelBuilder);

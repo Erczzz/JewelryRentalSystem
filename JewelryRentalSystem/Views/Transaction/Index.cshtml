@@ -1,0 +1,63 @@
+﻿@model IEnumerable<JewelryRentalSystem.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Transactions</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Appointment ID
+            </th>
+            <th>
+                Transaction ID
+            </th>
+            <th>
+                Appointment Date
+            </th>
+            <th>
+                Appointment Time
+            </th>
+            <th>
+                Appointment Type
+            </th>
+            <th>
+                Appointment Location
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment.DateOfAppointment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment.ScheduleTimeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment.LocationId)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
+                <a asp-action="OrderList" asp-route-id="@item.TransactionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

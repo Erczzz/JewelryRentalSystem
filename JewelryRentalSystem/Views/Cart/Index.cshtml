@@ -4,11 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="container d-inline-flex justify-content-between">
+    <h3>Your Cart</h3>
+    <p>
+        <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Transaction">Checkout</a>
+        <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Appointment">Create Appointment</a>
+    </p>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -63,3 +65,4 @@
 }
     </tbody>
 </table>
+<h4 id="totalH4">TOTAL: ₱@Model.Sum(p => p.Total)</></h4>

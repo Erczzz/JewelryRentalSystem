@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,22 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace JewelryRentalSystem.Controllers
 {
     public class AppointmentController : Controller
     {
         private readonly JRSDBContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AppointmentController(JRSDBContext context)
+        public AppointmentController(JRSDBContext context, 
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Appointment
         public async Task<IActionResult> Index()
         {
-            var jRSDBContext = _context.Appointments.Include(a => a.Location).Include(a => a.ScheduleTime);
+            var jRSDBContext = _context.Appointments.Include(a => a.AppointmentType).Include(a => a.Customer).Include(a => a.Location).Include(a => a.ScheduleTime);
             return View(await jRSDBContext.ToListAsync());
         }
 
@@ -35,6 +39,8 @@ namespace JewelryRentalSystem.Controllers
             }
 
             var appointment = await _context.Appointments
+                .Include(a => a.AppointmentType)
+                .Include(a => a.Customer)
                 .Include(a => a.Location)
                 .Include(a => a.ScheduleTime)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
@@ -49,8 +55,10 @@ namespace JewelryRentalSystem.Controllers
         // GET: Appointment/Create
         public IActionResult Create()
         {
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId");
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
             return View();
         }
 
@@ -59,17 +67,19 @@ namespace JewelryRentalSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TimeId,LocationId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
-                
+                appointment.CustomerId = _userManager.GetUserId(HttpContext.User);
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.TimeId);
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
             return View(appointment);
         }
 
@@ -86,8 +96,10 @@ namespace JewelryRentalSystem.Controllers
             {
                 return NotFound();
             }
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.TimeId);
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
             return View(appointment);
         }
 
@@ -96,7 +108,7 @@ namespace JewelryRentalSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TimeId,LocationId")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment)
         {
             if (id != appointment.AppointmentId)
             {
@@ -123,8 +135,10 @@ namespace JewelryRentalSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.TimeId);
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
             return View(appointment);
         }
 
@@ -137,6 +151,8 @@ namespace JewelryRentalSystem.Controllers
             }
 
             var appointment = await _context.Appointments
+                .Include(a => a.AppointmentType)
+                .Include(a => a.Customer)
                 .Include(a => a.Location)
                 .Include(a => a.ScheduleTime)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
@@ -173,4 +189,3 @@ namespace JewelryRentalSystem.Controllers
         }
     }
 }
-*/
