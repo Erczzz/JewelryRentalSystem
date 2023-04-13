@@ -63,7 +63,7 @@
                                                 <div>
                                                     @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                                                     {
-                                                        <small id="stock">@item.ProductStock Item(s) in Stock</small>
+                                                        <small id="stock">@item.ProductStock Item(s)</small>
 
                                                     }
                                                     else
@@ -85,14 +85,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex flex-column">
-                                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
-                                            {
+                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                    {
 
-                                            }
-                                            else
-                                            {
+                                    }
+                                    else
+                                    {
+                                        <div class="card-footer" id="prodFooter">
+                                            <div class="d-flex flex-column">
                                                 @if (_signInManager.IsSignedIn(User))
                                                 {
                                                     <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
@@ -106,10 +106,10 @@
                                                     </a>
                                                 }
 
-                                            }
-
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
+
                                 </div>
                             </a>
                         </div>

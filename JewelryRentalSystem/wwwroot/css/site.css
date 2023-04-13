@@ -53,6 +53,9 @@ body {
 #productCard {
     height: 360px;
 }
+#prodFooter{
+    height:30px;
+}
 
 #containerProd {
     display: inline-flex;
@@ -641,8 +644,57 @@ img.img-responsive {
 }
 
 /* PROFILE DESIGN */
+#deactivate {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#profileMainDiv {
+    border: ridge;
+    width: 60%;
+    display: flex;
+    padding: 0px;
+}
+#userProfileImg {
+    height: 250px;
+    width: 250px;
+    opacity: 25%;
+    margin: auto;
+}
+#profile2ndDiv {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #FAFAFA;
+}
+#profileBtns {
+    display: flex;
+    justify-content: space-between;
+    padding-block-start:10px;
+    padding-block-end:20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#profileBtn{
+    width:49%;
+}
+#profileDetails {
+    padding: 30px;
 
-
+}
+#profileDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: #6C757D;
+    color:white;
+    /*    background-color: #FAFAFA;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);*/
+}
+#profileH3 {
+    color: #6C757D;
+    text-align: center;
+}
 /* ROLES DESIGN */
 #roleListH3 {
     color: #6C757D;
