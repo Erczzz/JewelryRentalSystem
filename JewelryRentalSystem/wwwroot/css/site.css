@@ -844,3 +844,31 @@ img.img-responsive {
 #transactionBtns a{
     padding: 10px;
 }
+
+/* APPOINTMENT TYPE DESIGN */
+#APTTypeContainer{
+    width:50%;
+    border:ridge;
+    padding:20px;
+}
+#APTTypeH3 {
+    color: #6C757D;
+}
+#APTTR {
+    background-color: #6C757D;
+    color:white;
+    text-align:center;
+}
+#APTTRBody {
+    background-color: #F3F3F3;
+    text-align: center;
+}
+#APTTpeContainer{
+    width:40%;
+    border:ridge;
+    padding:20px;
+}
+#APTTypeH4 {
+    text-align: center;
+    color: #6C757D;
+}
