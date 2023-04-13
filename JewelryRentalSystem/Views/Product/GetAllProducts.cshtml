@@ -70,11 +70,11 @@
                                                     {
                                                         @if (item.ProductStock == 0)
                                                         {
-                                                            <small id="stock">Out of stock</small>
+                                                            <small id="stock" style="font-size:10px">Out of stock</small>
                                                         }
                                                         else if (item.ProductStock == 1)
                                                         {
-                                                            <small id="stock">@item.ProductStock item left</small>
+                                                            <small id="stock" style="font-size:12px">@item.ProductStock item left</small>
                                                         }
                                                         else
                                                         {
@@ -91,17 +91,25 @@
                                     }
                                     else
                                     {
-                                        <div class="card-footer" id="prodFooter">
+                                        <div class="card-footer" >
                                             <div class="d-flex flex-column">
                                                 @if (_signInManager.IsSignedIn(User))
                                                 {
-                                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
-                                                        ADD TO BAG
-                                                    </a>
+                                                    if(item.ProductStock == 0)
+                                                    {
+                                                        <a asp-controller="" asp-action="" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
+                                                            ADD TO BAG
+                                                        </a>
+                                                    }else{
+                                                        <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
+                                                            ADD TO BAG
+                                                        </a>
+                                                    }
+                                                    
                                                 }
                                                 else
                                                 {
-                                                    <a asp-controller="Account" asp-action="Login" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                                         ADD TO BAG
                                                     </a>
                                                 }
