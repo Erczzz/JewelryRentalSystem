@@ -24,11 +24,13 @@ body {
 
 /* PRODUCT DESIGN */
 
-/*#productMainDiv{
-    display:inline-flex;
-    padding:0;
-    margin:0;
-}*/
+#stock {
+    color: #E9DE82;
+}
+#priceStock {
+    display: inline-flex;
+    width: 100%;
+}
 #productListH3 {
     color: #6C757D;
 }
@@ -49,7 +51,7 @@ body {
     height: 380px;
 }
 #productCard {
-    height: 355px;
+    height: 360px;
 }
 
 #containerProd {
@@ -299,7 +301,7 @@ img.img-responsive {
 .notification {
     color: white;
     text-decoration: none;
-    padding: 5px 10px;
+    padding: 7px 10px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
@@ -756,6 +758,21 @@ img.img-responsive {
 }
 
 /* TRANSACTION DESIGN */
+#cartItemsTable {
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+#cartItemsTR {
+    background-color: #6C757D;
+    color:white;
+}
+#cartItemsTRBody {
+    
+}
+#cartItemsH4 {
+    color: #6C757D;
+}
 #containerTransaction {
     padding: 10px;
     display: inline-flex;

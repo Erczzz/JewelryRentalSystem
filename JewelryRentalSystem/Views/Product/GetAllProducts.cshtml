@@ -57,33 +57,36 @@
                                         <img src="@item.ProductImage" class="card-img-top" height="200">
                                         <div class="card-body">
                                             <p style="text-align:center; color:#6C757D; font-size:13px" class="card-title">@item.ProductName</p>
-                                            <p style="text-align:center; color:#6C757D">Php @item.ProductPrice</p>
+                                            
+                                            <div class="container" id="priceStock">
+                                                <p style="text-align:center; color:#6C757D">₱@item.ProductPrice | </p>&nbsp
+                                                <div>
+                                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                                    {
+                                                        <small id="stock">@item.ProductStock Item(s) in Stock</small>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        @if (item.ProductStock == 0)
+                                                        {
+                                                            <small id="stock">Out of stock</small>
+                                                        }
+                                                        else if (item.ProductStock == 1)
+                                                        {
+                                                            <small id="stock">@item.ProductStock item left</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small id="stock">In Stock!</small>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer d-flex flex-row justify-content-between">
-                                        <div>
-                                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
-                                            {                                           
-                                                <small class="text-muted">@item.ProductStock Item(s) in Stock</small>
-
-                                            }
-                                            else
-                                            {
-                                                @if (item.ProductStock == 0)
-                                                {
-                                                    <small class="text-muted">Out of stock</small>
-                                                }
-                                                else if (item.ProductStock == 1)
-                                                {
-                                                    <small class="text-muted">@item.ProductStock item left</small>
-                                                }
-                                                else
-                                                {
-                                                    <small class="text-muted">In Stock!</small>
-                                                }
-                                            }
-                                        </div>
-                                        <div>
+                                    <div class="card-footer">
+                                        <div class="d-flex flex-column">
                                             @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                                             {
 
@@ -92,14 +95,14 @@
                                             {
                                                 @if (_signInManager.IsSignedIn(User))
                                                 {
-                                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-secondary btn-sm">
-                                                        <i class="bi bi-bag-plus-fill"></i>
+                                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
+                                                        ADD TO BAG
                                                     </a>
                                                 }
                                                 else
                                                 {
                                                     <a asp-controller="Account" asp-action="Login" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                        <i class="bi bi-bag-plus-fill"></i>
+                                                        ADD TO BAG
                                                     </a>
                                                 }
 

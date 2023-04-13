@@ -32,7 +32,6 @@ namespace JewelryRentalSystem.Controllers
             return View();
         }
 
-        // GET: Cart
         public async Task<IActionResult> Index()
         {
             var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
@@ -46,7 +45,7 @@ namespace JewelryRentalSystem.Controllers
             return View(await jRSDBContext.ToListAsync());
         }
 
-        // GET: Cart/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Carts == null)
@@ -66,7 +65,6 @@ namespace JewelryRentalSystem.Controllers
             return View(cart);
         }
 
-        // GET: Cart/Create
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
@@ -76,9 +74,6 @@ namespace JewelryRentalSystem.Controllers
             return View();
         }
 
-        // POST: Cart/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CartId,CustomerId,ProductQty,RentDuration,Total,ConfirmRent,ProductId")] CartViewModel cart)
@@ -103,7 +98,6 @@ namespace JewelryRentalSystem.Controllers
             }            
         }
 
-        // GET: Cart/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Carts == null)
@@ -121,9 +115,6 @@ namespace JewelryRentalSystem.Controllers
             return View(cart);
         }
 
-        // POST: Cart/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CartId,CustomerId,ProductQty,RentDuration,Total,ConfirmRent,ProductId,TransactionId")] Cart cart)
@@ -158,7 +149,6 @@ namespace JewelryRentalSystem.Controllers
             return View(cart);
         }
 
-        // GET: Cart/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Carts == null)
@@ -176,7 +166,6 @@ namespace JewelryRentalSystem.Controllers
             return View(cart);
         }
 
-        // POST: Cart/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -198,6 +187,13 @@ namespace JewelryRentalSystem.Controllers
         private bool CartExists(int id)
         {
           return (_context.Carts?.Any(e => e.CartId == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> CartItems(int id)
+        {
+
+            var cart = _context.Carts.Where(b => b.ConfirmRent == true && b.TransactionId == id)
+                .Include(c => c.Customer).Include(c => c.Product);
+            return View(await cart.ToListAsync());
         }
     }
 }

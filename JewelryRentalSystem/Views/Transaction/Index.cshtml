@@ -15,7 +15,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">Transaction ID: @Html.DisplayFor(modelItem => item.TransactionId)</h6>&#160
                 <div class="container" id="transactionBtns">
                     <a class="btn btn-outline-secondary form-control" asp-route-id="@item.AppointmentId" asp-action="Details" asp-controller="Appointment">Appointment Details</a>
-                    <a class="btn btn-outline-secondary form-control" asp-route-id="@item.TransactionId">View Items</a>
+                    <a class="btn btn-outline-secondary form-control" asp-route-id="@item.TransactionId" asp-action="CartItems" asp-controller="Cart">View Items</a>
                 </div>
             </div>
         </div>
