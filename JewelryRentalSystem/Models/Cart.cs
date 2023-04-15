@@ -18,6 +18,7 @@ namespace JewelryRentalSystem.Models
         public int ProductQty { get; set; }
         [DisplayName("Rent Duration")]
         public int RentDuration { get; set; }
+/*        public double Price { get; set; }*/
         public double Total { get; set; }
         public bool ConfirmRent { get; set; } = false;
         public int ProductId { get; set; }

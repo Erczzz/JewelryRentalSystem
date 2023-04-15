@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "_Layout";
+}
+@if(TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @TempData["AlertMessage"]
+    </div>
 }
 
 
@@ -24,11 +31,11 @@
                 <input asp-for="RentDuration" class="form-control" />
                 <span asp-validation-for="RentDuration" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Total" class="control-label"></label>
                 <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
-            </div>
+                <span asp-validation-for="Total" class="text-danger"></span>  </div>
             <div class="form-group">
                 <input hidden asp-for="ProductId" class="form-control" />
             </div>

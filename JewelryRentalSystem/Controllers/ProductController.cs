@@ -122,20 +122,7 @@ namespace JewelryRentalSystem.Controllers
             {
                 return NotFound();
             }
-
-            ProductViewModel updatedProductViewModel = new ProductViewModel
-            {
-                Product = new Product()
-                {
-                    ProductId = prod.ProductId,
-                    ProductName = prod.ProductName,
-                    ProductPrice = prod.ProductPrice,
-                    ProductStock = prod.ProductStock,
-                    ProductDescription = prod.ProductDescription,
-                    ProductImage = prod.ProductImage
-                }
-            };
-            return View(updatedProductViewModel);
+            return View(prod);
         }
 
         [HttpPost]

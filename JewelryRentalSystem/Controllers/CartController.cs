@@ -27,7 +27,7 @@ namespace JewelryRentalSystem.Controllers
         {
             /*            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();*/
 
-            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            var count =  _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             ViewBag.Count = count;
             return View();
         }
@@ -82,10 +82,10 @@ namespace JewelryRentalSystem.Controllers
 
             //if (ModelState.IsValid)
             {
-                var productId = 0;
+/*                var productId = 0;
                 var product = _context.Carts.Where(p => p.ProductId == productId).ToList();
 
-
+*/
                 var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
                 ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
@@ -99,6 +99,7 @@ namespace JewelryRentalSystem.Controllers
                 };
                 _context.Add(newCart);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Item added tou your bag successfully!";
                 return RedirectToAction("GetAllProducts", "Product");
             }            
         }
@@ -117,6 +118,8 @@ namespace JewelryRentalSystem.Controllers
             }
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductPrice", cart.ProductId);
+
+
             return View(cart);
         }
 

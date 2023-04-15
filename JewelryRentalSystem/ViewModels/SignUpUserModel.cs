@@ -12,6 +12,7 @@ namespace JewelryRentalSystem.ViewModels
         public string LastName { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? Birthdate { get; set; }
 
         [Required]

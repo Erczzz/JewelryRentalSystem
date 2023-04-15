@@ -11,6 +11,7 @@ namespace JewelryRentalSystem.Models
         [DisplayName("Last Name")]
         public string LastName { get; set; }
         [DisplayName("Birth of Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? Birthdate { get; set; }
         [DisplayName("Contact Number")]
