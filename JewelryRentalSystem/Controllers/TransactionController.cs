@@ -26,8 +26,7 @@ namespace JewelryRentalSystem.Controllers
         // GET: Transaction
         public async Task<IActionResult> Index()
         {
-            
-            var jRSDBContext = _context.Transactions.Include(t => t.Appointment);
+            var jRSDBContext = _context.Transactions.Include(t => t.Appointment).Where(u => u.Appointment.CustomerId == _userManager.GetUserId(HttpContext.User));
             return View(await jRSDBContext.ToListAsync());
         }
 
@@ -210,7 +209,7 @@ namespace JewelryRentalSystem.Controllers
             .Include(t => t.Appointment)
             .FirstOrDefaultAsync(m => m.TransactionId == id);
 
-            var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false)
+            var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false && b.CustomerId == _userManager.GetUserId(HttpContext.User))
                 .Include(c => c.Customer).Include(c => c.Product);
             return View(await jRSDBContext.ToListAsync());
         }

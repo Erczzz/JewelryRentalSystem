@@ -10,10 +10,11 @@ namespace JewelryRentalSystem.Models
         [Required]
         public string CustomerId { get; set; }
         public ApplicationUser Customer { get; set; }
+        [Required(ErrorMessage = "Date field is required.")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DisplayName("Date")]
-        public DateTime DateOfAppointment { get; set; }
+        public DateTime DateOfAppointment { get; set; } = DateTime.Now;
         [DisplayName("Time")]
         public int ScheduleTimeId { get; set; }    
         public ScheduleTime ScheduleTime { get; set; } = null!;

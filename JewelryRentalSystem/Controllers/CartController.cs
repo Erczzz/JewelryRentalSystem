@@ -40,7 +40,8 @@ namespace JewelryRentalSystem.Controllers
             var countAppointment = _context.Appointments.Where(c => c.ConfirmAppointment == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             ViewBag.CountAppointment = countAppointment;
 
-            var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false)
+
+            var jRSDBContext = _context.Carts.Where(b => b.ConfirmRent == false && b.CustomerId == _userManager.GetUserId(HttpContext.User))
                 .Include(c => c.Customer).Include(c => c.Product);
             return View(await jRSDBContext.ToListAsync());
         }
@@ -81,6 +82,10 @@ namespace JewelryRentalSystem.Controllers
 
             //if (ModelState.IsValid)
             {
+                var productId = 0;
+                var product = _context.Carts.Where(p => p.ProductId == productId).ToList();
+
+
                 var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
                 ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
