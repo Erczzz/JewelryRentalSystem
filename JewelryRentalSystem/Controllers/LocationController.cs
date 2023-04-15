@@ -19,7 +19,6 @@ namespace JewelryRentalSystem.Controllers
             _context = context;
         }
 
-        // GET: Location
         public async Task<IActionResult> Index()
         {
               return _context.Locations != null ? 
@@ -27,7 +26,6 @@ namespace JewelryRentalSystem.Controllers
                           Problem("Entity set 'JRSDBContext.Locations'  is null.");
         }
 
-        // GET: Location/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Locations == null)
@@ -45,15 +43,11 @@ namespace JewelryRentalSystem.Controllers
             return View(location);
         }
 
-        // GET: Location/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Location/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LocationId,LocationName")] Location location)
@@ -67,7 +61,6 @@ namespace JewelryRentalSystem.Controllers
             return View(location);
         }
 
-        // GET: Location/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Locations == null)
@@ -83,9 +76,6 @@ namespace JewelryRentalSystem.Controllers
             return View(location);
         }
 
-        // POST: Location/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LocationId,LocationName")] Location location)
@@ -118,7 +108,6 @@ namespace JewelryRentalSystem.Controllers
             return View(location);
         }
 
-        // GET: Location/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Locations == null)
@@ -136,7 +125,6 @@ namespace JewelryRentalSystem.Controllers
             return View(location);
         }
 
-        // POST: Location/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

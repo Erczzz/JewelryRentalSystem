@@ -15,7 +15,7 @@ namespace JewelryRentalSystem.Models
         public ApplicationUser Customer { get; set; } = null!;
 
         [DisplayName("Quantity")]
-        public double ProductQty { get; set; }
+        public int ProductQty { get; set; }
         [DisplayName("Rent Duration")]
         public int RentDuration { get; set; }
         public double Total { get; set; }

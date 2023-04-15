@@ -8,7 +8,7 @@ namespace JewelryRentalSystem.Models
         [Required, EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password field is required.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Display(Name = "Remember me")]

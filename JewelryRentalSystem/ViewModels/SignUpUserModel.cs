@@ -31,11 +31,13 @@ namespace JewelryRentalSystem.ViewModels
         [Required(ErrorMessage = "Please enter a strong password")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
+        [MinLength(5, ErrorMessage = "Password must be minimum lenth of 5")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Please confirm your password")]
         [Compare("Password", ErrorMessage = "Password does not match")]
         [DataType(DataType.Password)]
+        [MinLength(5, ErrorMessage = "Password must be minimum lenth of 5")]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -111,7 +111,7 @@ namespace JewelryRentalSystem.Controllers
                 return NotFound();
             }
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductDescription", cart.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductPrice", cart.ProductId);
             return View(cart);
         }
 
@@ -124,10 +124,11 @@ namespace JewelryRentalSystem.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            // if (ModelState.IsValid)
             {
                 try
                 {
+                    cart.Total = cart.Total * cart.ProductQty * cart.RentDuration;
                     _context.Update(cart);
                     await _context.SaveChangesAsync();
                 }

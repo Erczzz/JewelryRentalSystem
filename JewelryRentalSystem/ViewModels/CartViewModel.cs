@@ -13,7 +13,7 @@ namespace JewelryRentalSystem.ViewModels
         [DisplayName("Product Name")]
         public string ProductName { get; set; }
         [Required]
-        public double ProductQty { get; set; }
+        public int ProductQty { get; set; }
         [Required]
         [DisplayName("Rent Duration")]
         public int RentDuration { get; set; }
