@@ -9,50 +9,50 @@
             <form asp-action="SignUp">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div id="signUpfield" class="form-group">
-                        <label asp-for="FirstName" class="control-label"></label>
-                        <input asp-for="FirstName" class="form-control" />
+                        <label asp-for="FirstName" class="control-label">Firstname</label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter your firstname here..." required/>
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group">
-                        <label asp-for="LastName" class="control-label"></label>
-                        <input asp-for="LastName" class="form-control" />
+                        <label asp-for="LastName" class="control-label">Lastname</label>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter your lastname here..." required />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div id="signUpfield"  class="form-group w-100">
-                        <label asp-for="Birthdate" class="control-label"></label>
-                        <input asp-for="Birthdate" class="form-control" />
+                        <label asp-for="Birthdate" class="control-label">Date of Birth</label>
+                        <input asp-for="Birthdate" class="form-control" required />
                         <span asp-validation-for="Birthdate" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group w-100">
-                        <label asp-for="ContactNo" class="control-label"></label>
-                        <input asp-for="ContactNo" class="form-control" />
+                        <label asp-for="ContactNo" class="control-label">Contact Number</label>
+                        <input asp-for="ContactNo" class="form-control" placeholder="09** **** ***" required />
                         <span asp-validation-for="ContactNo" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group w-100">
                         <label asp-for="Address" class="control-label"></label>
-                        <input asp-for="Address" class="form-control" />
+                        <input asp-for="Address" class="form-control" placeholder="Enter your address here..." required />
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group w-100">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
+                        <label asp-for="Email" class="control-label">Email Address</label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter your email here..." required />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group w-100">
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
+                        <input asp-for="Password" class="form-control" placeholder="Enter your password here..." required />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group w-100">
-                        <label asp-for="ConfirmPassword" class="control-label"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <label asp-for="ConfirmPassword" class="control-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password..." required />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div><br />
                 <div class="d-flex" id="signUpBtnDiv">
                     <div>
                         <a id="changePassBackBtn" class="btn btn-secondary" asp-action="GetAllProducts" asp-controller="Product">Cancel</a>
                     </div>
-                    <div id="signUpfield" class="form-group">
+                    <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-warning" />
                     </div>
                 </div><br />

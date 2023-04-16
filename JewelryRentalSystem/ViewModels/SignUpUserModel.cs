@@ -17,7 +17,7 @@ namespace JewelryRentalSystem.ViewModels
 
         [Required]
         [DisplayName("Contact Number")]
-        [MinLength(11)]
+        [MinLength(11, ErrorMessage = "The minimum length should be 11 digits")]
         [RegularExpression("(09)[0-9]{9}", ErrorMessage = "This is not a valid phone number")]
         public string ContactNo { get; set; }
 
