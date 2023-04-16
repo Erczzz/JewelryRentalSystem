@@ -4,12 +4,10 @@
     ViewData["Title"] = "ModifyAccount";
 }
 
-<h1>ModifyAccount</h1>
-
-<h4>ModifyAccountViewModel</h4>
+<h4 id="modifyAccH4">MODIFY ACCOUNT</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="container" id="modifyAccContainer">
         <form asp-action="ModifyAccount">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -42,15 +40,18 @@
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            </div><br />
+            <div class="d-inline-flex justify-content-between">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-warning" />&nbsp
+                </div>
+                <div>
+                    <a class="btn btn-secondary" asp-action="Profile">Back to List</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

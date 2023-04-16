@@ -67,13 +67,15 @@ namespace JewelryRentalSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel newProduct)
         {
+            ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
             // if (ModelState.IsValid)
             {
                 if (newProduct.ProductImage != null)
                 {
-                    ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
+                    
                     string folder = "products/productImgs/";
                     folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
                     string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
@@ -94,7 +96,7 @@ namespace JewelryRentalSystem.Controllers
                 
                 return RedirectToAction("ProductManagement");
             }
-            ViewData["Message"] = "Data is not valid to create the Todo";
+            ViewData["Message"] = "Data is not valid to create the Product";
             return View();
         }
 
@@ -126,6 +128,7 @@ namespace JewelryRentalSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(ProductViewModel newProduct)
         {
             if (newProduct.ProductImage != null)

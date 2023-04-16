@@ -911,3 +911,14 @@ img.img-responsive {
     text-align: center;
     color: #6C757D;
 }
+
+/* MODIFY ACCOUNT */
+#modifyAccH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#modifyAccContainer {
+    width: 40%;
+    border: ridge;
+    padding: 20px;
+}

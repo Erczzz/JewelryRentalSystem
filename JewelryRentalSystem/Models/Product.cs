@@ -9,20 +9,21 @@ namespace JewelryRentalSystem.Models
     {
         [Key]
         public int ProductId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         [DisplayName("Product Name")]
         public string ProductName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         [DisplayName("Product Description")]
         public string ProductDescription { get; set; } = default!;
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         [DisplayName("Product Price")]
         public double ProductPrice { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         [DisplayName("Product Stock")]
         public int ProductStock { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string ProductImage { get; set; } = default!;
+        [Required(ErrorMessage = "This field is required.")]
         public int CategoryId { get; set; }
         public Category Category { get; set; } = null!;
         public Product() { }

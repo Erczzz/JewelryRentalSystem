@@ -23,7 +23,6 @@ namespace JewelryRentalSystem.Controllers
             _userManager = userManager;
         }
 
-        // GET: Appointment
         public async Task<IActionResult> Index()
         {
             var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
@@ -33,7 +32,6 @@ namespace JewelryRentalSystem.Controllers
             return View(await jRSDBContext.ToListAsync());
         }
 
-        // GET: Appointment/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
