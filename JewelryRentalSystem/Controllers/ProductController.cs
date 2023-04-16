@@ -70,7 +70,7 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> Create(ProductViewModel newProduct)
         {
             // if (ModelState.IsValid)
-            {
+            //{
                 if (newProduct.ProductImage != null)
                 {
                     ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
@@ -93,7 +93,7 @@ namespace JewelryRentalSystem.Controllers
 
                 
                 return RedirectToAction("ProductManagement");
-            }
+            //}
             ViewData["Message"] = "Data is not valid to create the Todo";
             return View();
         }
