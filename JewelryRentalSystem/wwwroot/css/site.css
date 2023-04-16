@@ -791,6 +791,24 @@ img.img-responsive {
 }
 
 /* LOCATION DESIGN */
+#modifyLocationH4 {
+    color: #6C757D;
+    text-align: center;
+}
+#modifyLocationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#addLocationH4 {
+    color: #6C757D;
+    text-align: center;
+}
+#createLocationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
 #locationListH3 {
     color: #6C757D;
 }

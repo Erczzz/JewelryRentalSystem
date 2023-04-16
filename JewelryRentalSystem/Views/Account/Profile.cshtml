@@ -7,56 +7,59 @@
 <h3 id="profileH3">YOUR PROFILE</h3>
 <hr />
 <div id="profileMainDiv" class="container">
-<div class="container" id="profile2ndDiv">
-    <img id="userProfileImg" src="~/img/user1.png" />
-</div>
-<div class="container" id="profileDiv">
-    <div class="container" id="profileDetails">
-        <dl class="row">
-            <dt class="col-sm-6">
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt >
-            <dd class="col-sm-6"">
-                @Html.DisplayFor(model => model.FirstName)
-            </dd class="col-sm-6">
-                <dt class="col-sm-6">
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-                <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-                <dt class="col-sm-6">
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-                <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-                <dt class="col-sm-6">
-                @Html.DisplayNameFor(model => model.Birthdate)
-            </dt>
-                <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Birthdate)
-            </dd>
-                <dt class="col-sm-6">
-                @Html.DisplayNameFor(model => model.ContactNo)
-            </dt>
-                <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.ContactNo)
-            </dd>
-                <dt class="col-sm-6">
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-                <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-        </dl>
+    <div class="container" id="profile2ndDiv">
+        <img id="userProfileImg" src="~/img/user1.png" />      
     </div>
-    <div class="container" id="deactivate">
-        <a style="display:block" class="btn btn-danger">DEACTIVATE ACCOUNT</a>
-    </div>
-    <div id="profileBtns">
-        <a id="profileBtn" class="btn btn-outline-warning" asp-action="" asp-route-id="@Model?.CustomerId">MODIFY</a>&nbsp
-        <a id="profileBtn" class="btn btn-outline-warning" asp-action="GetAllProducts" asp-controller="Product">HOMEPAGE</a>
-    </div>
+    <div class="container" id="profileDiv">
+        <div class="container" id="profileDetails">
+            <dl class="row">
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt >
+                <dd class="col-sm-6"">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd class="col-sm-6">
+                    <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                    <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                    <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Birthdate)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Birthdate)
+                </dd>
+                    <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.ContactNo)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.ContactNo)
+                </dd>
+                    <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+            </dl>
+        </div>
+        <div hidden class="container" id="profile2ndDiv">
+            <img id="userProfileImg" src="~/img/user1.png" />           
+        </div>
+        <div class="container" id="deactivate">
+            <a style="display:block" asp-action="DeactivateConfirmed" asp-controller="Account" class="btn btn-danger">DEACTIVATE ACCOUNT</a>
+        </div>
+        <div id="profileBtns">
+            <a id="profileBtn" class="btn btn-outline-warning" asp-action="" asp-route-id="@Model?.CustomerId">MODIFY</a>&nbsp
+            <a id="profileBtn" class="btn btn-outline-warning" asp-action="GetAllProducts" asp-controller="Product">HOMEPAGE</a>
+        </div>
     </div>
 </div>

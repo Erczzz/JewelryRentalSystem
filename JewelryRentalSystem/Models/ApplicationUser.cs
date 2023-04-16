@@ -22,5 +22,6 @@ namespace JewelryRentalSystem.Models
 
         public ICollection<Cart> Carts {get; set; } = new List<Cart>();
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public bool isActive { get; set; } = true;
     }
 }

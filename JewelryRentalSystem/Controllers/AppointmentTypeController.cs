@@ -58,7 +58,7 @@ namespace JewelryRentalSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentTypeId,APTName,APTDescription")] AppointmentType appointmentType)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 _context.Add(appointmentType);
                 await _context.SaveChangesAsync();

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    [Migration("20230412043602_updateentities")]
-    partial class updateentities
+    [Migration("20230416064531_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,6 +95,9 @@ namespace JewelryRentalSystem.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -113,7 +116,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "6564fa55-edb6-48f7-bc11-9e023afb354f",
+                            ConcurrencyStamp = "fde57615-a51b-4be2-a46a-4bd3e9edda3c",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -121,11 +124,12 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED+aDY2KD96U1+VZ25wKcNo43suwk9ldnq6DioFPLEUlWRnuJLZVpaF5gQqtZpXIrQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOHGnwGyWvW8fY1PmBjEyhGjUBalKASUehQHavlqKII/0sf8CQCclBtE/zBizia9Xw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "599ac8cd-7e3d-47d3-81a0-42ec42ce44f8",
+                            SecurityStamp = "e0a9dbe4-247f-492a-b592-c8c3641a9b5e",
                             TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
+                            UserName = "admin@gmail.com",
+                            isActive = true
                         });
                 });
 
@@ -139,6 +143,9 @@ namespace JewelryRentalSystem.Migrations
 
                     b.Property<int>("AppointmentTypeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ConfirmAppointment")
+                        .HasColumnType("bit");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
@@ -205,8 +212,8 @@ namespace JewelryRentalSystem.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<double>("ProductQty")
-                        .HasColumnType("float");
+                    b.Property<int>("ProductQty")
+                        .HasColumnType("int");
 
                     b.Property<int>("RentDuration")
                         .HasColumnType("int");
@@ -243,6 +250,28 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Ring"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Necklace"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Bracelet"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Earrings"
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
@@ -296,6 +325,18 @@ namespace JewelryRentalSystem.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 4,
+                            ProductDescription = "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
+                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
+                            ProductName = "Enchanted Disney Fine Jewelry",
+                            ProductPrice = 4000.0,
+                            ProductStock = 4
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.ScheduleTime", b =>

@@ -47,6 +47,7 @@ namespace JewelryRentalSystem.Migrations
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -263,7 +264,8 @@ namespace JewelryRentalSystem.Migrations
                     DateOfAppointment = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ScheduleTimeId = table.Column<int>(type: "int", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false),
-                    AppointmentTypeId = table.Column<int>(type: "int", nullable: false)
+                    AppointmentTypeId = table.Column<int>(type: "int", nullable: false),
+                    ConfirmAppointment = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -299,7 +301,7 @@ namespace JewelryRentalSystem.Migrations
                 {
                     TransactionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AppointmentId = table.Column<int>(type: "int", nullable: false)
+                    AppointmentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -308,8 +310,7 @@ namespace JewelryRentalSystem.Migrations
                         name: "FK_Transactions_Appointments_AppointmentId",
                         column: x => x.AppointmentId,
                         principalTable: "Appointments",
-                        principalColumn: "AppointmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AppointmentId");
                 });
 
             migrationBuilder.CreateTable(
@@ -319,12 +320,12 @@ namespace JewelryRentalSystem.Migrations
                     CartId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductQty = table.Column<double>(type: "float", nullable: false),
+                    ProductQty = table.Column<int>(type: "int", nullable: false),
                     RentDuration = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<double>(type: "float", nullable: false),
                     ConfirmRent = table.Column<bool>(type: "bit", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    TransactionId = table.Column<int>(type: "int", nullable: false)
+                    TransactionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -345,29 +346,58 @@ namespace JewelryRentalSystem.Migrations
                         name: "FK_Carts_Transactions_TransactionId",
                         column: x => x.TransactionId,
                         principalTable: "Transactions",
-                        principalColumn: "TransactionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TransactionId");
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9ea94376-bae3-4592-b2ef-16e2222ec6f4", "9ea94376-bae3-4592-b2ef-16e2222ec6f4", "Administrator", "ADMINISTRATOR" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f913644d-d5a1-4c4a-a73b-dacc6a8c7898", "f913644d-d5a1-4c4a-a73b-dacc6a8c7898", "Customer", "CUSTOMER" });
+                values: new object[,]
+                {
+                    { "9ea94376-bae3-4592-b2ef-16e2222ec6f4", "9ea94376-bae3-4592-b2ef-16e2222ec6f4", "Administrator", "ADMINISTRATOR" },
+                    { "f913644d-d5a1-4c4a-a73b-dacc6a8c7898", "f913644d-d5a1-4c4a-a73b-dacc6a8c7898", "Customer", "CUSTOMER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "Birthdate", "ConcurrencyStamp", "ContactNo", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "Sample Address", null, "2a860d12-d7b2-4c4e-a0cc-820dab3ef021", "09876543211", "admin@gmail.com", false, "admin", "admin", false, null, null, "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEDI5gXXg39eCxshC/eUCguMJpYKhYBwAllo0xNEl+f3hxJRnKj3OoXurS6V9lko5GQ==", null, false, "39c09e68-6e48-4835-972f-2d6342048e76", false, "admin@gmail.com" });
+                columns: new[] { "Id", "AccessFailedCount", "Address", "Birthdate", "ConcurrencyStamp", "ContactNo", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "isActive" },
+                values: new object[] { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "Sample Address", null, "fde57615-a51b-4be2-a46a-4bd3e9edda3c", "09876543211", "admin@gmail.com", false, "admin", "admin", false, null, null, "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEOHGnwGyWvW8fY1PmBjEyhGjUBalKASUehQHavlqKII/0sf8CQCclBtE/zBizia9Xw==", null, false, "e0a9dbe4-247f-492a-b592-c8c3641a9b5e", false, "admin@gmail.com", true });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "Ring" },
+                    { 2, "Necklace" },
+                    { 3, "Bracelet" },
+                    { 4, "Earrings" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ScheduleTimes",
+                columns: new[] { "TimeId", "SchedTime" },
+                values: new object[,]
+                {
+                    { 1, "8:00:00 - 9:00:00" },
+                    { 2, "9:00:00 - 10:00:00" },
+                    { 3, "10:00:00 - 11:00:00" },
+                    { 4, "11:00:00 - 12:00:00" },
+                    { 5, "13:00:00 - 14:00:00" },
+                    { 6, "14:00:00 - 15:00:00" },
+                    { 7, "15:00:00 - 16:00:00" },
+                    { 8, "16:00:00 - 17:00:00" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { "9ea94376-bae3-4592-b2ef-16e2222ec6f4", "02174cf0–9412–4cfe-afbf-59f706d72cf6" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "CategoryId", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "ProductStock" },
+                values: new object[] { 1, 4, "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.", "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", "Enchanted Disney Fine Jewelry", 4000.0, 4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_AppointmentTypeId",

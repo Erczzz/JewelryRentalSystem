@@ -93,6 +93,9 @@ namespace JewelryRentalSystem.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -111,7 +114,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "d3061c17-4706-48a4-94d7-c6d5b6888fc2",
+                            ConcurrencyStamp = "9c250a6c-94c7-46c1-af20-9732c537cd43",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -119,11 +122,12 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKZK3Vt7ZwENbhUjP7+UYXShRpwELgASB9Jdy2YCGfdC651SQE0d0KILwkGfK+RoKA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAw4maqVn1JcL0OShLlP8acQ1IHFr9XVmGPwxNLOx8WzA3eeXkrrK16UWwVQaORktA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "903b2aae-27ae-471a-b71d-2a9fb999b2aa",
+                            SecurityStamp = "b45c24f7-3be1-4f50-aaf6-7c4ebd02174b",
                             TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
+                            UserName = "admin@gmail.com",
+                            isActive = true
                         });
                 });
 
@@ -174,10 +178,6 @@ namespace JewelryRentalSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentTypeId"), 1L, 1);
-
-                    b.Property<string>("APTDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("APTName")
                         .IsRequired()

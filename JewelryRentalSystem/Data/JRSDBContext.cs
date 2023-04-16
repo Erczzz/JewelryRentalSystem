@@ -72,5 +72,6 @@ namespace JewelryRentalSystem.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<ScheduleTime> ScheduleTimes { get; set; }
         public DbSet<JewelryRentalSystem.ViewModels.ProfileViewModel>? ProfileViewModel { get; set; }
+        public DbSet<JewelryRentalSystem.ViewModels.ActivateAccountViewModel>? ActivateAccountViewModel { get; set; }
     }
 }

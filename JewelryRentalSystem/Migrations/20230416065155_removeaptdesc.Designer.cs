@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    [Migration("20230412074134_seedcatandprod")]
-    partial class seedcatandprod
+    [Migration("20230416065155_removeaptdesc")]
+    partial class removeaptdesc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,6 +95,9 @@ namespace JewelryRentalSystem.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -113,7 +116,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "628c13e2-3e69-4780-97ad-33770ec0c678",
+                            ConcurrencyStamp = "9c250a6c-94c7-46c1-af20-9732c537cd43",
                             ContactNo = "09876543211",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -121,11 +124,12 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMmZhuSWz0TDY0zSxserjSz0HSncXHxSBunZ7P4yZ4f1eg03r6meciUBKplG2BquTQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAw4maqVn1JcL0OShLlP8acQ1IHFr9XVmGPwxNLOx8WzA3eeXkrrK16UWwVQaORktA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9e772644-4c3d-4e8c-8954-64083f9b100e",
+                            SecurityStamp = "b45c24f7-3be1-4f50-aaf6-7c4ebd02174b",
                             TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
+                            UserName = "admin@gmail.com",
+                            isActive = true
                         });
                 });
 
@@ -177,10 +181,6 @@ namespace JewelryRentalSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentTypeId"), 1L, 1);
 
-                    b.Property<string>("APTDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("APTName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -208,8 +208,8 @@ namespace JewelryRentalSystem.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<double>("ProductQty")
-                        .HasColumnType("float");
+                    b.Property<int>("ProductQty")
+                        .HasColumnType("int");
 
                     b.Property<int>("RentDuration")
                         .HasColumnType("int");

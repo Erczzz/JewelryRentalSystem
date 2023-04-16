@@ -4,15 +4,13 @@
     {
         public int AppointmentTypeId { get; set; }
         public string APTName { get; set;}
-        public string APTDescription { get; set;}
 
         public AppointmentType() { }
 
-        public AppointmentType(int appointmentTypeId, string aPTName, string aPTDescription)
+        public AppointmentType(int appointmentTypeId, string aPTName)
         {
             AppointmentTypeId = appointmentTypeId;
             APTName = aPTName;
-            APTDescription = aPTDescription;
         }
     }
 }

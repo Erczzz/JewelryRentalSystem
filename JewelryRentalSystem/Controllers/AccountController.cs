@@ -1,8 +1,11 @@
-﻿using JewelryRentalSystem.Models;
+﻿using JewelryRentalSystem.Data;
+using JewelryRentalSystem.Models;
 using JewelryRentalSystem.Repository;
 using JewelryRentalSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace JewelryRentalSystem.Controllers
 {
@@ -10,12 +13,14 @@ namespace JewelryRentalSystem.Controllers
     {
         private readonly IAccountRepository _accountRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly JRSDBContext _context;
 
         public AccountController(IAccountRepository accountRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager , JRSDBContext context)
         {
             _accountRepository = accountRepository;
             _userManager = userManager;
+            _context = context;
         }
         [Route("signup")]
         public IActionResult SignUp()
@@ -59,12 +64,35 @@ namespace JewelryRentalSystem.Controllers
             if(ModelState.IsValid)
             {
                 var result = await _accountRepository.PasswordSignInAsync(signInModel);
+                var user = await _userManager.FindByEmailAsync(signInModel.Email);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("GetAllProducts", "Product");
+                    if (user.isActive == false)
+                    {
+                        user.isActive = true;
+                        var updatedUser = await _userManager.UpdateAsync(user);
+                        return RedirectToAction("DeactivatedAccountWelcomePage");
+                    }
+
+
+                    else
+                    {
+                        return RedirectToAction("GetAllProducts", "Product");
+                    }
                 }
-                ModelState.AddModelError("", "Invalid Credentials");
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Credentials");
+                }
+                
+
             }
+            
+            return View();
+        }
+
+        public async Task<IActionResult> DeactivatedAccountWelcomePage()
+        {
             return View();
         }
 
@@ -120,5 +148,41 @@ namespace JewelryRentalSystem.Controllers
             };
             return View(viewModel);
         }
+
+        public async Task<IActionResult> DeactivateConfirmed()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Deactivate()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                user.isActive = false;
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await _accountRepository.SignOutAsync();
+                    return RedirectToAction("GetAllProducts", "Product");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error deactivating account.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "User not found.");
+            }
+
+            return View();
+        }
+
     }
 }

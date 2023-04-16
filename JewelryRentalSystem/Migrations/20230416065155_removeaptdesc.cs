@@ -4,37 +4,37 @@
 
 namespace JewelryRentalSystem.Migrations
 {
-    public partial class addnullablecolumns : Migration
+    public partial class removeaptdesc : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "ConfirmAppointment",
-                table: "Appointments",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.DropColumn(
+                name: "APTDescription",
+                table: "AppointmentTypes");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "b8fed842-ca39-495d-b51a-f0897e756c20", "AQAAAAEAACcQAAAAECtghaRjq4i0gK8kiypNudrb1+m4SppmUTYdyiXJ6mfb0n0ks+tOghojDzRa77oecg==", "0abde33e-edf8-4aeb-8cdb-528dd567747a" });
+                values: new object[] { "9c250a6c-94c7-46c1-af20-9732c537cd43", "AQAAAAEAACcQAAAAEAw4maqVn1JcL0OShLlP8acQ1IHFr9XVmGPwxNLOx8WzA3eeXkrrK16UWwVQaORktA==", "b45c24f7-3be1-4f50-aaf6-7c4ebd02174b" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ConfirmAppointment",
-                table: "Appointments");
+            migrationBuilder.AddColumn<string>(
+                name: "APTDescription",
+                table: "AppointmentTypes",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "6564fa55-edb6-48f7-bc11-9e023afb354f", "AQAAAAEAACcQAAAAED+aDY2KD96U1+VZ25wKcNo43suwk9ldnq6DioFPLEUlWRnuJLZVpaF5gQqtZpXIrQ==", "599ac8cd-7e3d-47d3-81a0-42ec42ce44f8" });
+                values: new object[] { "fde57615-a51b-4be2-a46a-4bd3e9edda3c", "AQAAAAEAACcQAAAAEOHGnwGyWvW8fY1PmBjEyhGjUBalKASUehQHavlqKII/0sf8CQCclBtE/zBizia9Xw==", "e0a9dbe4-247f-492a-b592-c8c3641a9b5e" });
         }
     }
 }

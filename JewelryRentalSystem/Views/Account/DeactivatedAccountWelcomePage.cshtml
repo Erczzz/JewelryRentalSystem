@@ -1,0 +1,7 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+<div>
+    <h2>Welcome back, @(User.FindFirst("UserFirstName").Value)! We missed seeing you around!</h2>
+    <p>You have successfully activated your account.</p>
+    <p>To continue shopping, click <a asp-action="GetAllProducts" asp-controller="Product">here</a></p>
+</div>
