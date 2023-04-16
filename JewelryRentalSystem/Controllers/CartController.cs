@@ -23,14 +23,32 @@ namespace JewelryRentalSystem.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> CountCart()
-        {
-            /*            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();*/
+        /*        public async Task<IActionResult> CountCart()
+                {
+                    *//*            var countCart = _context.Carts.Where(c => c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();*//*
 
-            var count =  _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
-            ViewBag.Count = count;
-            return View();
-        }
+                    var count =  _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+                    ViewBag.Count = count;
+                    return View();
+                }*/
+
+        /*        public IActionResult GetCartCount()
+                {
+                    int cartCount = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+                    return PartialView("_CartCount", cartCount);
+                }*/
+/*        public int GetCartItemCount()
+        {
+            int cartCount = 0;
+            cartCount = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            if (cartCount == 0)
+            {
+                return 0;
+            }
+            ViewBag.Count = cartCount;
+            return cartCount;
+        }*/
+
 
         public async Task<IActionResult> Index()
         {
@@ -68,6 +86,9 @@ namespace JewelryRentalSystem.Controllers
 
         public IActionResult Create()
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             ViewData["TransactionId"] = new SelectList(_context.Transactions, "TransactionId", "TransactionId");
@@ -82,10 +103,6 @@ namespace JewelryRentalSystem.Controllers
 
             //if (ModelState.IsValid)
             {
-/*                var productId = 0;
-                var product = _context.Carts.Where(p => p.ProductId == productId).ToList();
-
-*/
                 var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
                 ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
@@ -112,10 +129,12 @@ namespace JewelryRentalSystem.Controllers
             }
 
             var cart = await _context.Carts.FindAsync(id);
+            
             if (cart == null)
             {
                 return NotFound();
             }
+
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductPrice", cart.ProductId);
 

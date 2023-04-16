@@ -26,6 +26,9 @@ namespace JewelryRentalSystem.Controllers
         // GET: Appointment
         public async Task<IActionResult> Index()
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
             var jRSDBContext = _context.Appointments.Include(a => a.AppointmentType).Include(a => a.Customer).Include(a => a.Location).Include(a => a.ScheduleTime);
             return View(await jRSDBContext.ToListAsync());
         }
@@ -33,6 +36,9 @@ namespace JewelryRentalSystem.Controllers
         // GET: Appointment/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
             if (id == null || _context.Appointments == null)
             {
                 return NotFound();
@@ -59,6 +65,8 @@ namespace JewelryRentalSystem.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
             ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
             return View();
         }
 
@@ -81,9 +89,10 @@ namespace JewelryRentalSystem.Controllers
             return View(appointment);*/
         }
 
-        // GET: Appointment/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
             if (id == null || _context.Appointments == null)
             {
                 return NotFound();
@@ -101,9 +110,6 @@ namespace JewelryRentalSystem.Controllers
             return View(appointment);
         }
 
-        // POST: Appointment/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment)
@@ -140,9 +146,10 @@ namespace JewelryRentalSystem.Controllers
             return View(appointment);
         }
 
-        // GET: Appointment/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
             if (id == null || _context.Appointments == null)
             {
                 return NotFound();
@@ -162,7 +169,6 @@ namespace JewelryRentalSystem.Controllers
             return View(appointment);
         }
 
-        // POST: Appointment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

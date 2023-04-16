@@ -45,6 +45,9 @@
                         @Html.DisplayNameFor(model => model.RentDuration) day(s)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Product.ProductPrice)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Total)
                     </th>
                     <th>Action</th>
@@ -65,6 +68,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.RentDuration)
                 </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.ProductPrice)
+                        </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Total)
                 </td>
@@ -129,8 +135,7 @@
                             @Html.DisplayFor(modelItem => item.Total)
                         </td>
                         <td>
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.CartId"><i class="bi bi-pencil-square"></i></a>
-@*                            <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.CartId"><i class="bi bi-book"></i></a>*@
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id1="@item.CartId" asp-route-id="@item.CartId"><i class="bi bi-pencil-square"></i></a>
                             <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CartId"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>

@@ -5,6 +5,8 @@ using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace JewelryRentalSystem.Controllers
@@ -67,18 +69,23 @@ namespace JewelryRentalSystem.Controllers
                 var user = await _userManager.FindByEmailAsync(signInModel.Email);
                 if (result.Succeeded)
                 {
-                    if (user.isActive == false)
+                    if (user != null)
                     {
-                        user.isActive = true;
-                        var updatedUser = await _userManager.UpdateAsync(user);
-                        return RedirectToAction("DeactivatedAccountWelcomePage");
-                    }
+                        if (user.isActive == false)
+                        {
+                            user.isActive = true;
+                            var updatedUser = await _userManager.UpdateAsync(user);
+                            return RedirectToAction("DeactivatedAccountWelcomePage");
+                        }
 
 
-                    else
-                    {
-                        return RedirectToAction("GetAllProducts", "Product");
+                        else
+                        {
+                            return RedirectToAction("GetAllProducts", "Product");
+                        }
                     }
+                    return RedirectToAction("GetAllProducts", "Product");
+
                 }
                 else
                 {
@@ -106,12 +113,15 @@ namespace JewelryRentalSystem.Controllers
         [Route("change-password")]
         public IActionResult ChangePassword()
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
             return View();
         }
 
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
         {
+
             if (ModelState.IsValid)
             {
                 var result = await _accountRepository.ChangePasswordAsync(model);
@@ -131,6 +141,9 @@ namespace JewelryRentalSystem.Controllers
 
         public async Task<IActionResult> Profile()
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -182,6 +195,70 @@ namespace JewelryRentalSystem.Controllers
             }
 
             return View();
+        }
+
+        public async Task<IActionResult> ModifyAccount(string Id)
+        {
+                var user = await _context.Users.FindAsync(Id);
+                if(user == null) 
+                {
+                    return NotFound();
+                }
+
+            var viewModel = new ModifyAccountViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Birthdate = user.Birthdate,
+                ContactNo = user.ContactNo,
+                Address = user.Address,
+                Email = user.Email
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ModifyAccount(ModifyAccountViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _context.Users.FindAsync(viewModel.Id);
+                if(user == null)
+                {
+                    return NotFound();
+                }
+                /*viewModel.FirstName = user.FirstName;
+                viewModel.LastName = user.LastName;
+                viewModel.Birthdate = user.Birthdate;
+                viewModel.ContactNo = user.ContactNo;
+                viewModel.Address = user.Address;
+                viewModel.Email = user.Email;*/
+
+                user.FirstName = viewModel.FirstName;
+                user.LastName = viewModel.LastName;
+                user.Birthdate = viewModel.Birthdate;
+                user.ContactNo = viewModel.ContactNo;
+                user.Address = viewModel.Address;
+                user.Email = viewModel.Email;
+                user.UserName = viewModel.Email;
+                user.NormalizedUserName = viewModel.Email.ToUpper();
+                user.NormalizedEmail = viewModel.Email.ToUpper();
+                _context.Update(user);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException) 
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists, " +
+                    "see your system administrator.");
+                }
+                return RedirectToAction("Profile");
+
+            }
+            return View(viewModel);
         }
 
     }
