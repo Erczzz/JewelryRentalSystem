@@ -276,6 +276,10 @@ img.img-responsive {
     width: 600px;
     padding: 10px
 }
+#signUpfield {
+    padding-top: 12px;
+}
+
 /*FOOTER AND NAVBAR*/
 .navbar, footer {
     background-color: #00263D;
