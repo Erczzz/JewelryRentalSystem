@@ -832,6 +832,23 @@ img.img-responsive {
 }
 
 /* TRANSACTION DESIGN */
+#noTransaction2ndDiv{
+    display:flex;
+    justify-content:space-between;
+    padding:0;
+}
+#noTransactionH2 {
+    color: #6C757D;
+}
+#noTransactionImg{
+    opacity: 30%;
+    height:500px;
+}
+#noTransactionContainer {
+    display: flex;
+    justify-content: end;
+    width: 90%;
+}
 #cartItemsTable {
     box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
     -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);

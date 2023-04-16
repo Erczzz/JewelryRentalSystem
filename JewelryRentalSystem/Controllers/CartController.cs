@@ -125,8 +125,9 @@ namespace JewelryRentalSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartId,CustomerId,ProductQty,RentDuration,Total,ConfirmRent,ProductId,TransactionId")] Cart cart)
+        public async Task<IActionResult> Edit(int id, int newQty, [Bind("CartId,CustomerId,ProductQty,RentDuration,Total,ConfirmRent,ProductId,TransactionId")] Cart cart)
         {
+            var cartItem = _context.Carts.Find(id);
             if (id != cart.CartId)
             {
                 return NotFound();

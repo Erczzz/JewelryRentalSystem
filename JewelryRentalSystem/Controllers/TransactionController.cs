@@ -26,18 +26,13 @@ namespace JewelryRentalSystem.Controllers
         // GET: Transaction
         public async Task<IActionResult> Index()
         {
+            var countTransaction = _context.Transactions.Where(c => c.Appointment.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.countTransaction = countTransaction;
+
             var jRSDBContext = _context.Transactions.Include(t => t.Appointment).Where(u => u.Appointment.CustomerId == _userManager.GetUserId(HttpContext.User));
             return View(await jRSDBContext.ToListAsync());
         }
 
-/*        public async Task<IActionResult> OrderList()
-        {
-            var jRSDBContext = _context.Transactions.Include(t => t.Appointment)
-                .Include(c => c.Carts);
-            return View(await jRSDBContext.ToListAsync());
-        }*/
-
-        // GET: Transaction/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Transactions == null)
