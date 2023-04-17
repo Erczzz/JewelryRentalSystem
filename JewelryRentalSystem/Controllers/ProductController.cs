@@ -67,10 +67,11 @@ namespace JewelryRentalSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel newProduct)
         {
-            // if (ModelState.IsValid)
-            //{
+            //if (ModelState.IsValid)
+            {
             if (newProduct.ProductImage != null)
             {
                 ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
@@ -93,9 +94,9 @@ namespace JewelryRentalSystem.Controllers
 
 
             return RedirectToAction("ProductManagement");
-            //}
-            ViewData["Message"] = "Data is not valid to create the Todo";
-            return View();
+            }
+/*            ViewData["Message"] = "Data is not valid to create the Todo";
+            return View();*/
         }
 
         public async Task<IActionResult> Details(int ProductId)

@@ -17,6 +17,7 @@
                 <th>
                     Appointment Type
                 </th>
+                <th></th>
 
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.APTName)
                     </td>
+                    <td><a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.AppointmentTypeId">Edit</a></td>
                 </tr>
             }
         </tbody>

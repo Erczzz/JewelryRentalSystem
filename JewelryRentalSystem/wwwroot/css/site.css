@@ -885,10 +885,19 @@ img.img-responsive {
 }
 
 /* APPOINTMENT TYPE DESIGN */
-#APTTypeContainer{
-    width:50%;
-    border:ridge;
-    padding:20px;
+#modifyAptTypeContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#modifyAptTypeH4 {
+    color: #6C757D;
+    text-align: center;
+}
+#APTTypeContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
 }
 #APTTypeH3 {
     color: #6C757D;

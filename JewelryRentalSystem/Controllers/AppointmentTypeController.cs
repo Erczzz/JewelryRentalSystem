@@ -19,7 +19,6 @@ namespace JewelryRentalSystem.Controllers
             _context = context;
         }
 
-        // GET: AppointmentType
         public async Task<IActionResult> Index()
         {
               return _context.AppointmentTypes != null ? 
@@ -27,7 +26,6 @@ namespace JewelryRentalSystem.Controllers
                           Problem("Entity set 'JRSDBContext.AppointmentTypes'  is null.");
         }
 
-        // GET: AppointmentType/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.AppointmentTypes == null)
@@ -45,20 +43,17 @@ namespace JewelryRentalSystem.Controllers
             return View(appointmentType);
         }
 
-        // GET: AppointmentType/Create
+
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: AppointmentType/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentTypeId,APTName,APTDescription")] AppointmentType appointmentType)
+        public async Task<IActionResult> Create(AppointmentType appointmentType)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(appointmentType);
                 await _context.SaveChangesAsync();
@@ -67,7 +62,7 @@ namespace JewelryRentalSystem.Controllers
             return View(appointmentType);
         }
 
-        // GET: AppointmentType/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.AppointmentTypes == null)
@@ -83,9 +78,6 @@ namespace JewelryRentalSystem.Controllers
             return View(appointmentType);
         }
 
-        // POST: AppointmentType/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AppointmentTypeId,APTName,APTDescription")] AppointmentType appointmentType)
@@ -118,7 +110,6 @@ namespace JewelryRentalSystem.Controllers
             return View(appointmentType);
         }
 
-        // GET: AppointmentType/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.AppointmentTypes == null)
@@ -136,7 +127,6 @@ namespace JewelryRentalSystem.Controllers
             return View(appointmentType);
         }
 
-        // POST: AppointmentType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
