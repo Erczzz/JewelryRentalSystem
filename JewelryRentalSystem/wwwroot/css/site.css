@@ -961,22 +961,40 @@ img.img-responsive {
 }
 
 /* WELCOME PAGE DESIGN */
-#deactAccWelcomeContainer{
+#deactAccWelcomeImgDiv{
     display:flex;
-    flex-direction:column;
+    justify-content:end;
+}
+#deactAccWelcomeImg {
+    opacity: 40%;
+    height: 400px;
+    transform: scalex(-1)
+}
+#deactAccWelcomeContainer {
+    display: flex;
+    flex-direction: column;
 }
 #deactAccWelcomeH2 {
     color: #FFD558;
     font-weight: bold;
-    text-align: center;
+
 }
 #deactAccWelcomeContainer p {
-    text-align: center;
     color: #6C757D;
 }
 #deactAccWelcomeBtn{
+    padding:0;
+
+}
+
+/* CONFIRM DEACTIVATION OF ACCOUNT DESIGN */
+#confirmDeactivationH2 {
+    color: #6C757D;
+}
+#confirmDeactivationContainer{
     display:flex;
     flex-direction:column;
-    justify-content:center;
-    width: 300px;
+    width: 50%;
+    border:ridge;
+    padding:20px;
 }
