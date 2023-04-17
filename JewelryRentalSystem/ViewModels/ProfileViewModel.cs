@@ -19,6 +19,7 @@ namespace JewelryRentalSystem.ViewModels
         public string Email { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DisplayName("Birthday")]
         public DateTime? Birthdate { get; set; }
 
