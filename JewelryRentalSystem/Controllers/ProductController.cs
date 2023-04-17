@@ -16,13 +16,13 @@ namespace JewelryRentalSystem.Controllers
     public class ProductController : Controller
     {
         IProductDBRepository _repo;
-        
+
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly JRSDBContext _JRSDBContext;
         private readonly IUserService _userService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProductController(IProductDBRepository repo, 
+        public ProductController(IProductDBRepository repo,
             IWebHostEnvironment webHostEnvironment, JRSDBContext JRSDBContext,
             IUserService userService, UserManager<ApplicationUser> userManager)
         {
@@ -67,36 +67,34 @@ namespace JewelryRentalSystem.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel newProduct)
         {
-            ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
             // if (ModelState.IsValid)
             //{
-                if (newProduct.ProductImage != null)
+            if (newProduct.ProductImage != null)
+            {
+                ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
+                string folder = "products/productImgs/";
+                folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
+                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                newProduct.ProductImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
+                Product product = new Product()
                 {
-                    
-                    string folder = "products/productImgs/";
-                    folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
-                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                    newProduct.ProductImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
-                    Product product = new Product()
-                    {
-                        ProductName = newProduct.ProductName,
-                        CategoryId = newProduct.CategoryId,
-                        ProductPrice = newProduct.ProductPrice,
-                        ProductStock = newProduct.ProductStock,
-                        ProductDescription = newProduct.ProductDescription,
-                        ProductImage = "/" + folder
-                    };
-                     await _repo.AddProduct(product);
-                    
-                }
+                    ProductName = newProduct.ProductName,
+                    CategoryId = newProduct.CategoryId,
+                    ProductPrice = newProduct.ProductPrice,
+                    ProductStock = newProduct.ProductStock,
+                    ProductDescription = newProduct.ProductDescription,
+                    ProductImage = "/" + folder
+                };
+                await _repo.AddProduct(product);
 
-                
-                return RedirectToAction("ProductManagement");
             }
-            ViewData["Message"] = "Data is not valid to create the Product";
+
+
+            return RedirectToAction("ProductManagement");
+            //}
+            ViewData["Message"] = "Data is not valid to create the Todo";
             return View();
         }
 
@@ -128,7 +126,6 @@ namespace JewelryRentalSystem.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(ProductViewModel newProduct)
         {
             if (newProduct.ProductImage != null)
@@ -170,7 +167,7 @@ namespace JewelryRentalSystem.Controllers
                 ProductImage = product.ProductImage
 
             };
-            
+
             return View(cart);
         }
     }
