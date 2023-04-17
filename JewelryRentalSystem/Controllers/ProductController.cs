@@ -72,7 +72,7 @@ namespace JewelryRentalSystem.Controllers
         {
             ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
             // if (ModelState.IsValid)
-            {
+            //{
                 if (newProduct.ProductImage != null)
                 {
                     
