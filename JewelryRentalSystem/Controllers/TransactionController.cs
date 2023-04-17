@@ -40,7 +40,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Transactions == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var transaction = await _context.Transactions
@@ -48,7 +48,7 @@ namespace JewelryRentalSystem.Controllers
                 .FirstOrDefaultAsync(m => m.TransactionId == id);
             if (transaction == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(transaction);
@@ -107,13 +107,13 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Transactions == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var transaction = await _context.Transactions.FindAsync(id);
             if (transaction == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             ViewData["AppointmentId"] = new SelectList(_context.Appointments, "AppointmentId", "CustomerId", transaction.AppointmentId);
             return View(transaction);
@@ -125,7 +125,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id != transaction.TransactionId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             if (ModelState.IsValid)
@@ -139,7 +139,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!TransactionExists(transaction.TransactionId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -157,7 +157,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Transactions == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var transaction = await _context.Transactions
@@ -165,7 +165,7 @@ namespace JewelryRentalSystem.Controllers
                 .FirstOrDefaultAsync(m => m.TransactionId == id);
             if (transaction == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(transaction);

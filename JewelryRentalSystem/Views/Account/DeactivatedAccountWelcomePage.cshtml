@@ -1,7 +1,12 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
 
-<div>
-    <h2>Welcome back, @(User.FindFirst("UserFirstName").Value)! We missed seeing you around!</h2>
-    <p>You have successfully reactivated your account.</p>
-    <p>To continue shopping, click <a asp-action="GetAllProducts" asp-controller="Product">here</a></p>
+<br /><div class="container" id="deactAccWelcomeContainer">
+    <h2 id="deactAccWelcomeH2">Welcome back, @(User.FindFirst("UserFirstName").Value)! We missed seeing you around!</h2>
+    <div>
+        <p>You have successfully reactivated your account.</p>
+        <p>Find out what's new!</p>
+    </div>
+    <div class="container" id="deactAccWelcomeBtn">
+        <a class="btn btn-outline-warning" asp-action="GetAllProducts" asp-controller="Product">Continue Shopping</a>
+    </div>
 </div>

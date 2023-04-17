@@ -32,14 +32,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Categories == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(category);
@@ -69,13 +69,13 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Categories == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             return View(category);
         }
@@ -86,7 +86,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id != category.CategoryId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             if (ModelState.IsValid)
@@ -100,7 +100,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!CategoryExists(category.CategoryId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -116,14 +116,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Categories == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(category);

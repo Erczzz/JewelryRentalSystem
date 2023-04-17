@@ -202,7 +202,7 @@ namespace JewelryRentalSystem.Controllers
                 var user = await _context.Users.FindAsync(Id);
                 if(user == null) 
                 {
-                    return NotFound();
+                    return View("NotFound", "Home");
                 }
 
             var viewModel = new ModifyAccountViewModel
@@ -226,7 +226,7 @@ namespace JewelryRentalSystem.Controllers
                 var user = await _context.Users.FindAsync(viewModel.Id);
                 if(user == null)
                 {
-                    return NotFound();
+                    return View("NotFound", "Home");
                 }
                 /*viewModel.FirstName = user.FirstName;
                 viewModel.LastName = user.LastName;

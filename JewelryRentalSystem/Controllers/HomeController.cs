@@ -43,5 +43,9 @@ namespace JewelryRentalSystem.Controllers
             ViewBag.Count = count;
             return View("AboutUs");
         }
+        public IActionResult NotFound()
+        {
+            return View("NotFound");
+        }
     }
 }

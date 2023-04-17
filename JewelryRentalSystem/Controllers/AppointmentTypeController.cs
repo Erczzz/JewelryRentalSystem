@@ -30,14 +30,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.AppointmentTypes == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointmentType = await _context.AppointmentTypes
                 .FirstOrDefaultAsync(m => m.AppointmentTypeId == id);
             if (appointmentType == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(appointmentType);
@@ -67,13 +67,13 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.AppointmentTypes == null)
             {
-                return NotFound();
-            }
+                return View("NotFound", "Home");
+            }   
 
             var appointmentType = await _context.AppointmentTypes.FindAsync(id);
             if (appointmentType == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             return View(appointmentType);
         }
@@ -84,7 +84,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id != appointmentType.AppointmentTypeId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             if (ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!AppointmentTypeExists(appointmentType.AppointmentTypeId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -114,14 +114,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.AppointmentTypes == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointmentType = await _context.AppointmentTypes
                 .FirstOrDefaultAsync(m => m.AppointmentTypeId == id);
             if (appointmentType == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(appointmentType);

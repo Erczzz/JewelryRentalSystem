@@ -69,7 +69,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Carts == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var cart = await _context.Carts
@@ -78,7 +78,7 @@ namespace JewelryRentalSystem.Controllers
                 .FirstOrDefaultAsync(m => m.CartId == id);
             if (cart == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(cart);
@@ -125,14 +125,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Carts == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var cart = await _context.Carts.FindAsync(id);
             
             if (cart == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
@@ -149,7 +149,7 @@ namespace JewelryRentalSystem.Controllers
             var cartItem = _context.Carts.Find(id);
             if (id != cart.CartId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             // if (ModelState.IsValid)
@@ -164,7 +164,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!CartExists(cart.CartId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -182,14 +182,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Carts == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var cart = await _context.Carts.Include(c => c.Customer).Include(c => c.Product)
                 .FirstOrDefaultAsync(m => m.CartId == id);
             if (cart == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(cart);

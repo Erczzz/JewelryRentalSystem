@@ -39,7 +39,7 @@ namespace JewelryRentalSystem.Controllers
 
             if (id == null || _context.Appointments == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointment = await _context.Appointments
@@ -50,7 +50,7 @@ namespace JewelryRentalSystem.Controllers
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(appointment);
@@ -93,13 +93,13 @@ namespace JewelryRentalSystem.Controllers
             ViewBag.Count = count;
             if (id == null || _context.Appointments == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointment = await _context.Appointments.FindAsync(id);
             if (appointment == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
@@ -114,7 +114,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id != appointment.AppointmentId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             if (ModelState.IsValid)
@@ -128,7 +128,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!AppointmentExists(appointment.AppointmentId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -150,7 +150,7 @@ namespace JewelryRentalSystem.Controllers
             ViewBag.Count = count;
             if (id == null || _context.Appointments == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointment = await _context.Appointments
@@ -161,7 +161,7 @@ namespace JewelryRentalSystem.Controllers
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(appointment);

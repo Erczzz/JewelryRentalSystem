@@ -116,12 +116,12 @@ namespace JewelryRentalSystem.Controllers
         {
             if (ProductId == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             var prod = await _repo.GetProductById(ProductId);
             if (prod == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             return View(prod);
         }

@@ -30,14 +30,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Locations == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var location = await _context.Locations
                 .FirstOrDefaultAsync(m => m.LocationId == id);
             if (location == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(location);
@@ -65,13 +65,13 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Locations == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var location = await _context.Locations.FindAsync(id);
             if (location == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
             return View(location);
         }
@@ -82,7 +82,7 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id != location.LocationId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             if (ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!LocationExists(location.LocationId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -112,14 +112,14 @@ namespace JewelryRentalSystem.Controllers
         {
             if (id == null || _context.Locations == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var location = await _context.Locations
                 .FirstOrDefaultAsync(m => m.LocationId == id);
             if (location == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(location);
