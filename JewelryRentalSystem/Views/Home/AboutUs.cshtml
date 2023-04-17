@@ -1,24 +1,83 @@
 ﻿
 
 <div>
-    <h1>About Us</h1>
-    <p>Welcome to our jewelry rental system. As you can see, our website is quite unusual for a rental system. We are a two-person team, and our client PJLI, who operates a jewelry business and, as we all know, does everything online, inspired us to come up with this idea.</p>
+    <h1 id="aboutUsH1">Our Jewelries</h1>
+    <hr />
     <br />
-    <h4>Our Team</h4>
-    <div id="containerTransaction">
-        <div class="card" style="width: 18rem;" id="transactioCard">
-            <div class="card-body" id="transactionCardBody">
-                <img height="150px" src="~/img/user1.png"/><h5 class="card-title">Erica Barrientos</h5>                
-                <small>ericabarrientoswork@gmail.com</small>
-            </div>
+    <div class="container" id="aboutUsContainer1">
+        <div class="container" id="aboutUsContainer1P">
+            <p>
+                <span>This</span> 2023, when <a asp-action="GetAllProducts" asp-controller="Product">
+                Our Jewelries</a> first opened it's entryways, a custom of magnificient 
+                Service, Value, and Quality was conceived.
+            </p>
+            <p>
+                We strive to create jewelry that inspires and keeps happy memories alive, 
+                whether it's a tiny pendant or a huge diamond ring.
+             </p>
+            <p>
+                Our mission is to praise women and make them stand out by creating
+                affordable luxury jewelry that contributes her personal style.
+             </p>
+        </div>
+        <div class="container" id="aboutUsContainer1Space">
+
+        </div>
+        <div class="container" id="aboutUsContainer1ImgDiv">
+            <img id="aboutUsContainer1Img" height="500px" src="~/img/jewel5.jpg" />
         </div>
     </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container" id="aboutUsContainer2">
+        <div class="container" id="aboutUsContainer2P">
+            <p>
+                <span>This</span> 2023, when <a asp-action="GetAllProducts" asp-controller="Product">
+                    Our Jewelries
+                </a> first opened it's entryways, a custom of magnificient
+                Service, Value, and Quality was conceived.
+            </p>
+            <p>
+                We strive to create jewelry that inspires and keeps happy memories alive,
+                whether it's a tiny pendant or a huge diamond ring.
+            </p>
+            <p>
+                Our mission is to praise women and make them stand out by creating
+                affordable luxury jewelry that contributes her personal style.
+            </p>
+        </div>
+        <div class="container" id="aboutUsContainer2Space">
+        </div>
+        <div class="container" id="aboutUsContainer2ImgDiv">
+            <img id="aboutUsContainer2Img" height="500px" src="~/img/jewel8.jpg" />
+        </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <p>Welcome to our jewelry rental system. As you can see, our website is quite unusual for a rental system. We are a two-person team, and our client PJLI, who operates a jewelry business and, as we all know, does everything online, inspired us to come up with this idea.</p>
+    <br />
 
-    <div id="containerTransaction">
-        <div class="card" style="width: 18rem;" id="transactioCard">
-            <div class="card-body" id="transactionCardBody">
-                <img height="150px" src="~/img/user1.png" /><h5 class="card-title">Abdul Hanief Rizada</h5>
-                <small>abdul.hanief.rizada@gmail.com</small>
+    <h4 id="aboutUsOurTeamH4">OUR TEAM</h4>
+    <div class="container" id="aboutUsOurTeamContainer">
+        <div id="containerOurTeam">
+            <div class="card" style="width: 18rem;" id="ourTeamCard">
+                <div class="card-body" id="ourTeamCardBody">
+                    <img height="150px" src="~/img/femaleUser1.png" /><br />
+                    <br /><h5 class="card-title" id="teamName">Erica Barrientos</h5>
+                    <small id="teamEmail">ericabarrientoswork@gmail.com</small>
+                </div>
+            </div>
+        </div>
+
+        <div id="containerOurTeam">
+            <div class="card" style="width: 18rem;" id="ourTeamCard">
+                <div class="card-body" id="ourTeamCardBody">
+                    <img height="150px" src="~/img/maleUser.png" /><br />
+                    <br /><h5 class="card-title" id="teamName">Abdul Hanief Rizada</h5>
+                    <small id="teamEmail">abdul.hanief.rizada@gmail.com</small>
+                </div>
             </div>
         </div>
     </div>

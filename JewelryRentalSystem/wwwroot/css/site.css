@@ -875,7 +875,7 @@ img.img-responsive {
     padding:10px;
 }
 #transactionCardBody {
-    background-color: #FAFAFA;
+    background-color: #FAFAFA
 }
 #transactionBtns{
     padding:0px;
@@ -997,4 +997,113 @@ img.img-responsive {
     width: 50%;
     border:ridge;
     padding:20px;
+}
+
+/* ABOUT US DESIGN */
+#aboutUsContainer1{
+
+    padding:0;
+    display:flex;
+    flex-direction:row-reverse;
+}
+#aboutUsContainer1P {
+    width: 50%;
+    padding: 0;
+    margin-right: 20%;
+    margin: auto;
+}
+#aboutUsContainer1ImgDiv {
+    width: 50%;
+    padding: 0;
+}
+#aboutUsContainer1P span {
+    font-size: 25px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
+#aboutUsContainer1P a {
+    color: #FFC107;
+    text-decoration:none;
+}
+    #aboutUsContainer1P a:hover {
+        color: #AA8003;
+        text-decoration: none;
+    }
+#aboutUsH1 {
+    color: #6C757D;
+    text-align:center;
+}
+#aboutUsContainer1Space{
+    width:10%;
+}
+
+
+#aboutUsContainer2 {
+    padding: 0;
+    display: flex;
+
+}
+
+#aboutUsContainer2P {
+    width: 50%;
+    padding: 0;
+    margin-right: 20%;
+    margin: auto;
+}
+
+#aboutUsContainer2ImgDiv {
+    width: 50%;
+    padding: 0;
+}
+#aboutUsContainer2 {
+    margin-left: 5%;
+}
+
+#aboutUsContainer2P span {
+    font-size: 25px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
+#aboutUsContainer2P a {
+    color: #FFC107;
+    text-decoration: none;
+}
+
+    #aboutUsContainer2P a:hover {
+        color: #AA8003;
+        text-decoration: none;
+    }
+
+#aboutUsH2 {
+    color: #6C757D;
+}
+
+#aboutUsContainer2Space {
+    width: 15%;
+}
+
+#aboutUsOurTeamH4 {
+    color: #6C757D;
+    text-align:center;
+}
+#aboutUsOurTeamContainer{
+    display:flex;
+    justify-content:center;
+}
+#containerOurTeam {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+#ourTeamCardBody{
+    text-align:center;
+    padding:10%;
+}
+#teamName {
+    color: #6C757D;
+}
+#teamEmail{
+    color:blue;
 }
