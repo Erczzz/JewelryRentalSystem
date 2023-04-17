@@ -964,7 +964,6 @@ img.img-responsive {
 #deactAccWelcomeContainer{
     display:flex;
     flex-direction:column;
-
 }
 #deactAccWelcomeH2 {
     color: #FFD558;
