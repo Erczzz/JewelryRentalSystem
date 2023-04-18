@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 
 @if (ViewBag.countTransaction == 0)
  {

@@ -59,7 +59,7 @@ namespace JewelryRentalSystem.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                // TempData["save"] = "Product Category has been saved successfully";
+                TempData["Message"] = "Category has been added successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -95,6 +95,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     _context.Update(category);
                     await _context.SaveChangesAsync();
+                    TempData["Message"] = "Branch Location has been updated successfully!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

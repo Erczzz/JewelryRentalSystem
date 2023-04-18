@@ -64,7 +64,6 @@ namespace JewelryRentalSystem.Controllers
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
             ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
             var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
-            ViewBag.Count = count;
             return View();
         }
 

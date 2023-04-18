@@ -30,6 +30,7 @@ namespace JewelryRentalSystem.Controllers
                 var result = await _roleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {
+                    TempData["Message"] = "Role has been added successfully!";
                     return RedirectToAction("GetAllRoles");
                 }
                 foreach (var error in result.Errors)

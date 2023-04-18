@@ -1,7 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @model List<IdentityRole>
 
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 <div class="container " id="rolesContainer">
     <div class="container d-inline-flex justify-content-between" id="roleH3AddDiv">
         <h3 id="roleListH3">USER ROLES</h3>

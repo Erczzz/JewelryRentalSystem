@@ -94,6 +94,7 @@ namespace JewelryRentalSystem.Controllers
                     item.ConfirmAppointment = true;
                     _context.Update(item);
                     await _context.SaveChangesAsync();
+                    TempData["Message"] = "Transaction created successfully!";
                 }
                 
                 return RedirectToAction(nameof(Index));

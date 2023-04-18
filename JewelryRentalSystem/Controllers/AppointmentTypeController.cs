@@ -57,6 +57,7 @@ namespace JewelryRentalSystem.Controllers
             {
                 _context.Add(appointmentType);
                 await _context.SaveChangesAsync();
+                TempData["Message"] = "Appointment Type has been added successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(appointmentType);
@@ -93,6 +94,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     _context.Update(appointmentType);
                     await _context.SaveChangesAsync();
+                    TempData["Message"] = "Appointment Type has been updated successfully!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 
 <div class="container" id="APTTypeContainer">
     <div class="container d-inline-flex justify-content-between p-0">

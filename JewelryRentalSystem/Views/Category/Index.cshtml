@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 <div class="container" id="categoryContainer">
     <div class="container d-inline-flex justify-content-between">
         <h3 id="categoryListH3">PRODUCT CATEGORY</h3>

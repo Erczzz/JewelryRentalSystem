@@ -116,7 +116,7 @@ namespace JewelryRentalSystem.Controllers
                 };
                 _context.Add(newCart);
                 await _context.SaveChangesAsync();
-                TempData["AlertMessage"] = "Item added tou your bag successfully!";
+                TempData["Message"] = "Item added to your bag successfully!";
                 return RedirectToAction("GetAllProducts", "Product");
             }            
         }
@@ -207,9 +207,11 @@ namespace JewelryRentalSystem.Controllers
             if (cart != null)
             {
                 _context.Carts.Remove(cart);
+                
             }
             
             await _context.SaveChangesAsync();
+            TempData["Message"] = "Item removed from your bag successfully!";
             return RedirectToAction(nameof(Index));
         }
 

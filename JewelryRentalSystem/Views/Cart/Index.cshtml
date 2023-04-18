@@ -5,7 +5,10 @@
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 <div class="container" id="cartListContainer">
     
     @if (ViewBag.Count == 0)

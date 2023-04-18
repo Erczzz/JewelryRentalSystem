@@ -56,6 +56,7 @@ namespace JewelryRentalSystem.Controllers
             {
                 _context.Add(location);
                 await _context.SaveChangesAsync();
+                TempData["Message"] = "Branch Location has been added successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(location);
@@ -91,6 +92,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     _context.Update(location);
                     await _context.SaveChangesAsync();
+                    TempData["Message"] = "Branch Location has been updated successfully!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

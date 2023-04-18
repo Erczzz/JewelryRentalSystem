@@ -16,7 +16,10 @@
 
     <h3 style="color:#6C757D" id="loginH4">Sign In to your Account</h3>
 <hr />
-
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
 
     <div id="loginContainer" class="container rounded w-20">
         <div id="login2ndDiv" class="row">

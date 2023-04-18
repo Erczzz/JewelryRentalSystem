@@ -75,6 +75,7 @@ namespace JewelryRentalSystem.Controllers
                         {
                             user.isActive = true;
                             var updatedUser = await _userManager.UpdateAsync(user);
+                            TempData["Message"] = "Account has been reactivated successfully!";
                             return RedirectToAction("DeactivatedAccountWelcomePage");
                         }
 
@@ -182,7 +183,8 @@ namespace JewelryRentalSystem.Controllers
                 if (result.Succeeded)
                 {
                     await _accountRepository.SignOutAsync();
-                    return RedirectToAction("GetAllProducts", "Product");
+                    TempData["Message"] = "Account has been deactivated successfully!";
+                    return RedirectToAction("Login");
                 }
                 else
                 {
@@ -228,12 +230,6 @@ namespace JewelryRentalSystem.Controllers
                 {
                     return View("NotFound", "Home");
                 }
-                /*viewModel.FirstName = user.FirstName;
-                viewModel.LastName = user.LastName;
-                viewModel.Birthdate = user.Birthdate;
-                viewModel.ContactNo = user.ContactNo;
-                viewModel.Address = user.Address;
-                viewModel.Email = user.Email;*/
 
                 user.FirstName = viewModel.FirstName;
                 user.LastName = viewModel.LastName;
@@ -248,6 +244,7 @@ namespace JewelryRentalSystem.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
+                    TempData["Message"] = "Account updated successfully!";
                 }
                 catch(DbUpdateException) 
                 {

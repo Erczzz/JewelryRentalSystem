@@ -7,6 +7,10 @@
 
 <h3 id="profileH3">YOUR PROFILE</h3>
 <hr />
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
 <div id="profileMainDiv" class="container">
     <div class="container" id="profile2ndDiv">
         <img id="userProfileImg" src="~/img/user1.png" />      
