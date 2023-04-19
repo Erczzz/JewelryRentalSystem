@@ -38,7 +38,7 @@ namespace JewelryRentalSystem.Data
                 ContactNo = "09876543211",
                 Address = "Sample Address",
                 NormalizedUserName = "ADMIN@GMAIL.COM",
-
+                CustClassId = 5
             };
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
@@ -84,10 +84,20 @@ namespace JewelryRentalSystem.Data
             modelBuilder.Entity<Product>().HasData(
                 new Product(1, "Enchanted Disney Fine Jewelry",
                 "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
-                4000, 4, "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", 4)
+                4000, 4, "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", 4, 2)
                 );
         }
 
+        public static void SeedDefaultCustomerClassification(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomerClassification>().HasData(
+                new CustomerClassification(1, "Low", 5, 1),
+                new CustomerClassification(2, "Med", 10, 5),
+                new CustomerClassification(3, "High", 20, 10),
+                new CustomerClassification(4, "Superior", 0, 0),
+                new CustomerClassification(5, "Admin", 0, 0)
+                );
+        }
 
     }
 }

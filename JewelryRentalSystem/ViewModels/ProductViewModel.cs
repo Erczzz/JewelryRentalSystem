@@ -15,5 +15,7 @@ namespace JewelryRentalSystem.ViewModels
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public List<Category> Categories { get; set; }
+        public CustomerClassification CustomerClassification { get; set; }
+        public int CustomerClassId { get; set; }
     }
 }

@@ -57,6 +57,7 @@ namespace JewelryRentalSystem.Data
             modelBuilder.SeedDefaultProductCategory();
             modelBuilder.SeedAdminUser();
             modelBuilder.SeedDefaultTime();
+            modelBuilder.SeedDefaultCustomerClassification();
 
             modelBuilder.AppointmentRelation();
             base.OnModelCreating(modelBuilder);
@@ -74,5 +75,6 @@ namespace JewelryRentalSystem.Data
         public DbSet<JewelryRentalSystem.ViewModels.ProfileViewModel>? ProfileViewModel { get; set; }
         public DbSet<JewelryRentalSystem.ViewModels.ActivateAccountViewModel>? ActivateAccountViewModel { get; set; }
         public DbSet<JewelryRentalSystem.ViewModels.ModifyAccountViewModel>? ModifyAccountViewModel { get; set; }
+        public DbSet<CustomerClassification> CustomerClassifications { get; set; }
     }
 }

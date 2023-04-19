@@ -9,6 +9,7 @@ using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
 using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using JewelryRentalSystem.Services;
 
 namespace JewelryRentalSystem.Controllers
 {
@@ -16,11 +17,14 @@ namespace JewelryRentalSystem.Controllers
     {
         private readonly JRSDBContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserService _userService;
 
-        public CartController(JRSDBContext context, UserManager<ApplicationUser> userManager)
+        public CartController(JRSDBContext context, UserManager<ApplicationUser> userManager,
+            IUserService userService)
         {
             _context = context;
             _userManager = userManager;
+            _userService = userService;
         }
 
         /*        public async Task<IActionResult> CountCart()
@@ -103,10 +107,102 @@ namespace JewelryRentalSystem.Controllers
 
             //if (ModelState.IsValid)
             {
-                var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
+                var userId = _userService.GetUserId();
+                var user = await _userManager.Users
+                .Include(u => u.CustomerClassification)
+                .SingleOrDefaultAsync(u => u.Id == userId);
+                var userItemLimit = user.CustomerClassification.ItemLimit;
+                var userRentLimit = user.CustomerClassification.RentLimit;
+                var userCart = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Sum(q => q.ProductQty);
+
+                if (userItemLimit == 5)
+                {
+                    if(userCart < 5)
+                    {
+                        var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
+                        ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
+                        ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
+                        if(cart.ProductQty > userItemLimit || cart.ProductQty > (userItemLimit - userCart))
+                        {
+                            TempData["ErrorMessage"] = "You have exceeded your item limit of 5";
+                            return RedirectToAction("GetAllProducts", "Product");
+                        }
+                        var newCart = new Cart
+                        {
+                            CustomerId = cart.CustomerId,
+                            ProductQty = cart.ProductQty,
+                            RentDuration = cart.RentDuration,
+                            Total = cart.Total * cart.ProductQty * cart.RentDuration,
+                            ProductId = cart.ProductId
+                        };
+                        _context.Add(newCart);
+                        await _context.SaveChangesAsync();
+                        TempData["Message"] = "Item added to your bag successfully!";
+                        return RedirectToAction("GetAllProducts", "Product");
+                    }
+                    TempData["ErrorMessage"] = "You have exceeded your item limit of 5";
+                    return RedirectToAction("GetAllProducts", "Product");
+                }
+                else if (userItemLimit == 10)
+                {
+                    if (userCart < 10)
+                    {
+                        var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
+                        ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
+                        ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
+                        if (cart.ProductQty > userItemLimit || cart.ProductQty > (userItemLimit - userCart))
+                        {
+                            TempData["ErrorMessage"] = "You have exceeded your item limit of 10";
+                            return RedirectToAction("GetAllProducts", "Product");
+                        }
+                        var newCart = new Cart
+                        {
+                            CustomerId = cart.CustomerId,
+                            ProductQty = cart.ProductQty,
+                            RentDuration = cart.RentDuration,
+                            Total = cart.Total * cart.ProductQty * cart.RentDuration,
+                            ProductId = cart.ProductId
+                        };
+                        _context.Add(newCart);
+                        await _context.SaveChangesAsync();
+                        TempData["Message"] = "Item added to your bag successfully!";
+                        return RedirectToAction("GetAllProducts", "Product");
+                    }
+                    TempData["ErrorMessage"] = "You have exceeded your item limit of 10";
+                    return RedirectToAction("GetAllProducts", "Product");
+                }
+                else if (userItemLimit == 20)
+                {
+                    if (userCart < 20)
+                    {
+                        var cartTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
+                        ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
+                        ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
+                        if (cart.ProductQty > userItemLimit || cart.ProductQty > (userItemLimit - userCart))
+                        {
+                            TempData["ErrorMessage"] = "You have exceeded your item limit of 20";
+                            return RedirectToAction("GetAllProducts", "Product");
+                        }
+                        var newCart = new Cart
+                        {
+                            CustomerId = cart.CustomerId,
+                            ProductQty = cart.ProductQty,
+                            RentDuration = cart.RentDuration,
+                            Total = cart.Total * cart.ProductQty * cart.RentDuration,
+                            ProductId = cart.ProductId
+                        };
+                        _context.Add(newCart);
+                        await _context.SaveChangesAsync();
+                        TempData["Message"] = "Item added to your bag successfully!";
+                        return RedirectToAction("GetAllProducts", "Product");
+                    }
+                    TempData["ErrorMessage"] = "You have exceeded your item limit of 20";
+                    return RedirectToAction("GetAllProducts", "Product");
+                }
+                var supTotal = (cart.ProductPrice * cart.ProductQty) * cart.RentDuration;
                 ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", cart.CustomerId);
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", cart.ProductId);
-                var newCart = new Cart
+                var supCart = new Cart
                 {
                     CustomerId = cart.CustomerId,
                     ProductQty = cart.ProductQty,
@@ -114,11 +210,14 @@ namespace JewelryRentalSystem.Controllers
                     Total = cart.Total * cart.ProductQty * cart.RentDuration,
                     ProductId = cart.ProductId
                 };
-                _context.Add(newCart);
+                _context.Add(supCart);
                 await _context.SaveChangesAsync();
                 TempData["Message"] = "Item added to your bag successfully!";
                 return RedirectToAction("GetAllProducts", "Product");
-            }            
+
+
+            }
+            return RedirectToAction("GetAllProducts", "Product");
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -156,7 +255,7 @@ namespace JewelryRentalSystem.Controllers
             {
                 try
                 {
-                    cart.Total = cart.Total * cart.ProductQty * cart.RentDuration;
+                    cart.Total = cart.Product.ProductPrice * cart.ProductQty * cart.RentDuration;
                     _context.Update(cart);
                     await _context.SaveChangesAsync();
                 }

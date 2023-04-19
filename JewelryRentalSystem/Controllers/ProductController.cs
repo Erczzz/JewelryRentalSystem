@@ -33,13 +33,60 @@ namespace JewelryRentalSystem.Controllers
             _userManager = userManager;
         }
 
+
+
         public async Task<IActionResult> GetAllProducts(string SearchString)
         {
             var count = _JRSDBContext.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             ViewBag.Count = count;
 
-            var userId = _userService.GetUserId();
+           
             var isLoggedIn = _userService.IsAuthenticated();
+
+            var userId = _userService.GetUserId();
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user != null)
+            {
+                var userClass = user.CustClassId;
+                ViewData["CurrentFilter"] = SearchString;
+                if (userClass == 1)
+                {
+                    var prodClass1 = from p in _JRSDBContext.Products where p.CustClassId == 1 select p;
+                    if (!String.IsNullOrEmpty(SearchString))
+                    {                        
+                        prodClass1 = prodClass1.Where(p => p.ProductName.Contains(SearchString) && p.CustClassId <= 1);
+                    }
+                    // var productList = await _repo.GetAllProducts();
+                    return View(prodClass1);
+                }
+                else if (userClass == 2)
+                {
+                    var prodClass2 = from p in _JRSDBContext.Products where p.CustClassId <= 2 select p;
+                    if (!String.IsNullOrEmpty(SearchString))
+                    {
+                        prodClass2 = prodClass2.Where(p => p.ProductName.Contains(SearchString) && p.CustClassId <= 2);
+                    }
+                    return View(prodClass2);
+                }
+                else if (userClass == 3)
+                {
+                    var prodClass3 = from p in _JRSDBContext.Products where p.CustClassId <= 3 select p;
+                    if (!String.IsNullOrEmpty(SearchString))
+                    {
+                        prodClass3 = prodClass3.Where(p => p.ProductName.Contains(SearchString) && p.CustClassId <= 3);
+                    }
+                    return View(prodClass3);
+                }
+
+/*                var prod = from p in _JRSDBContext.Products where p.CustomerClassId >= userClass select p;
+                if (!String.IsNullOrEmpty(SearchString))
+                {
+                    prod = prod.Where(p => p.ProductName.Contains(SearchString) && p.CustomerClassId == userClass);
+                }
+                // var productList = await _repo.GetAllProducts();
+                return View(prod);*/
+            }
+
 
             ViewData["CurrentFilter"] = SearchString;
             var products = from p in _JRSDBContext.Products select p;
@@ -63,6 +110,7 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> Create()
         {
             ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
             return View();
         }
 
@@ -75,7 +123,8 @@ namespace JewelryRentalSystem.Controllers
             if (newProduct.ProductImage != null)
             {
                 ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
-                string folder = "products/productImgs/";
+                ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
+                    string folder = "products/productImgs/";
                 folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 newProduct.ProductImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
@@ -83,6 +132,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     ProductName = newProduct.ProductName,
                     CategoryId = newProduct.CategoryId,
+                    CustClassId = newProduct.CustomerClassId,
                     ProductPrice = newProduct.ProductPrice,
                     ProductStock = newProduct.ProductStock,
                     ProductDescription = newProduct.ProductDescription,

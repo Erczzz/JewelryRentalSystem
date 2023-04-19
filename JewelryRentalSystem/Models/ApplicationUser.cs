@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JewelryRentalSystem.Models
 {
@@ -23,5 +24,9 @@ namespace JewelryRentalSystem.Models
         public ICollection<Cart> Carts {get; set; } = new List<Cart>();
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
         public bool isActive { get; set; } = true;
+
+        public int? CustClassId { get; set; } = 1;
+        public CustomerClassification? CustomerClassification { get; set; }
+
     }
 }

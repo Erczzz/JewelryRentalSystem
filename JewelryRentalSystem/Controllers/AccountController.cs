@@ -34,7 +34,7 @@ namespace JewelryRentalSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpUserModel userModel)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 var result = await _accountRepository.CreateUserAsync(userModel);
                 if(!result.Succeeded)

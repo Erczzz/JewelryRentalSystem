@@ -38,7 +38,8 @@ namespace JewelryRentalSystem.Repository.MsSQL
                 ContactNo = userModel.ContactNo,
                 Address = userModel.Address,
                 Email = userModel.Email,
-                UserName = userModel.Email
+                UserName = userModel.Email,
+                CustClassId = userModel.CustomerClassId
             };
             var result = await _userManager.CreateAsync(user, userModel.Password);
             await _userManager.AddToRoleAsync(user, "Customer");

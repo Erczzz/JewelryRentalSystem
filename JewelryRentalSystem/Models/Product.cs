@@ -26,9 +26,12 @@ namespace JewelryRentalSystem.Models
         [Required(ErrorMessage = "This field is required.")]
         public int CategoryId { get; set; }
         public Category Category { get; set; } = null!;
+        public int? CustClassId { get; set; }
+        public CustomerClassification? CustomerClassification { get; set; }
         public Product() { }
 
-        public Product(int productId, string productName, string? productDescription, double productPrice, int productStock, string? productImage, int categoryId)
+        public Product(int productId, string productName, string? productDescription, double productPrice, 
+            int productStock, string? productImage, int categoryId, int? custClassId)
         {
             ProductId = productId;
             ProductName = productName;
@@ -37,6 +40,7 @@ namespace JewelryRentalSystem.Models
             ProductStock = productStock;
             ProductImage = productImage;
             CategoryId = categoryId;
+            CustClassId = custClassId; 
         }
     }
 }

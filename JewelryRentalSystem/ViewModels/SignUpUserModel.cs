@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using JewelryRentalSystem.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace JewelryRentalSystem.ViewModels
@@ -40,5 +41,8 @@ namespace JewelryRentalSystem.ViewModels
         [DataType(DataType.Password)]
         [MinLength(5, ErrorMessage = "Password must be minimum length of 5")]
         public string ConfirmPassword { get; set; }
+
+        public int CustomerClassId { get; set; } = 1;
+        public CustomerClassification CustomerClassification { get; set; }
     }
 }
