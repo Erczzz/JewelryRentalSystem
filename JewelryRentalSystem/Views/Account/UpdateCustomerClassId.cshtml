@@ -1,0 +1,16 @@
+﻿@model ApplicationUser
+
+
+<h2>Update User Customer Class</h2>
+<div>
+    <form asp-action="UpdateCustomerClassId" method="post">
+        <div>
+            <label class="control-label" asp-for="CustClassId">Customer Class:</label>
+            <select class="form-control" asp-for="CustClassId" asp-items="ViewBag.CustomerClassId"></select>
+        </div>
+
+        <div>
+            <button class="btn btn-warning" type="submit">Update</button>
+        </div>
+    </form>
+</div>

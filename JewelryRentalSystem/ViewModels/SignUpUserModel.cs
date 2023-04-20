@@ -7,11 +7,14 @@ namespace JewelryRentalSystem.ViewModels
     public class SignUpUserModel
     {
         [Required(ErrorMessage ="Please enter your First Name")]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Please enter your Last Name")]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
+        [DisplayName("Birth of Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? Birthdate { get; set; }

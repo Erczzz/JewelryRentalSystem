@@ -5,6 +5,7 @@ using JewelryRentalSystem.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -34,7 +35,7 @@ namespace JewelryRentalSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpUserModel userModel)
         {
-            //if (ModelState.IsValid)
+            // if (ModelState.IsValid)
             {
                 var result = await _accountRepository.CreateUserAsync(userModel);
                 if(!result.Succeeded)
@@ -256,6 +257,55 @@ namespace JewelryRentalSystem.Controllers
 
             }
             return View(viewModel);
+        }
+
+        [HttpGet]
+        [Route("users")]
+        public IActionResult ListUsers()
+        {
+            var users = _accountRepository.GetUsers();
+            return View(users);
+        }
+        public async Task<IActionResult> UpdateCustomerClassId(string Id)
+        {
+
+            ViewData["CustomerClassId"] = new SelectList(_context.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
+            if (Id == null || _context.Users == null)
+            {
+                return View("NotFound", "Home");
+            }
+
+            var user = await _context.Users.FindAsync(Id);
+            if (user == null)
+            {
+                return View("NotFound", "Home");
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateCustomerClassId(ApplicationUser applicationUser)
+        {
+            var user = await _context.Users.FindAsync(applicationUser.Id);
+            if (user == null)
+            {
+                return View("NotFound", "Home");
+            }
+            user.CustClassId = applicationUser.CustClassId;
+            _context.Update(user);
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["UpdateClassificationMessage"] = "Account classification updated successfully!";
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. " +
+                "Try again, and if the problem persists, " +
+                "see your system administrator.");
+            }
+            return RedirectToAction(nameof(ListUsers));
         }
 
     }
