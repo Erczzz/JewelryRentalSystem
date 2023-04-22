@@ -744,7 +744,6 @@ img.img-responsive {
     background-color: #F3F3F3;
 }
 
-
 /* PRODUCT LIST DESIGN */
 #addProductContainer {
     width: 50%;
@@ -764,10 +763,10 @@ img.img-responsive {
 #productTitleTR {
     background-color: #6C757D;
     color: white;
-    text-align: center;
+
 }
 #productTRBody {
-    text-align: center;
+
     background-color: #F3F3F3;
 }
 
