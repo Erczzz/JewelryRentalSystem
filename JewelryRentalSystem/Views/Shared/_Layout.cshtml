@@ -42,7 +42,10 @@
                                     <span>
                                         <i class="bi bi-bag-fill"></i>
                                     </span>
-                                    <span class="badge">@ViewBag.Count</span>
+                                    @if(@ViewBag.Count != 0)
+                                    {
+                                        <span class="badge">@ViewBag.Count</span>
+                                    }                                    
                                 </a>
                             </li>
                         }
