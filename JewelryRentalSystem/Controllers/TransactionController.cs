@@ -70,15 +70,15 @@ namespace JewelryRentalSystem.Controllers
             {
                 var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
                 ViewBag.Count = count;
-
+                var userId = _userManager.GetUserId(HttpContext.User);
                 var userAppointment = _context.Appointments
                     .Where(a => a.ConfirmAppointment == false && 
-                    a.CustomerId == _userManager.GetUserId(HttpContext.User)).ToList();
+                    a.CustomerId == userId).ToList();
                 ViewBag.userAppointment = userAppointment;
 
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
-                var cart = _context.Carts.Where(x => x.ConfirmRent == false).ToList();
+                var cart = _context.Carts.Where(x => x.ConfirmRent == false && x.CustomerId == userId).ToList();
 
                 foreach (var item in cart)
                 {
