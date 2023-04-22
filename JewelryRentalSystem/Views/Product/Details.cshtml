@@ -11,8 +11,12 @@
     <div id="prodDetailLastChild">
         <div>
             <div class="d-inline-flex justify-content-between w-100">
+                @{
+                    var price = Model.ProductPrice;
+                    var culture = new System.Globalization.CultureInfo("fil-PH");
+                }
                 <h5>@Model.ProductName</h5>
-                <h5>₱@Model.ProductPrice</h5>
+                <h5 value="@Model.ProductPrice">@Model.ProductPrice.ToString("C", culture)</h5>
             </div>           
             <div>
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))

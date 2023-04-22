@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
+    var culture = new System.Globalization.CultureInfo("fil-PH");
 }
 @if (TempData["Message"] != null)
 {
@@ -86,7 +87,7 @@
         }
             </tbody>
         </table>
-        <h5 id="totalH5">Total Amount: ₱@Model.Sum(p => p.Total)</h5>
+        <h5 id="totalH5">Total Amount: @Model.Sum(p => p.Total).ToString("C", culture)</h5>
     }
     else
     {
@@ -145,7 +146,7 @@
                 }
             </tbody>
         </table>
-        <h5 id="totalH5">Total Amount: ₱@Model.Sum(p => p.Total)</h5>
+        <h5 id="totalH5">Total Amount: @Model.Sum(p => p.Total).ToString("C", culture)</h5>
     }
 
 </div>

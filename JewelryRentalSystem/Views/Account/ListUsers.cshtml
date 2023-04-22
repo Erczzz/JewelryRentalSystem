@@ -4,33 +4,36 @@
         Layout = "_Layout";
     }
 
-<h1>List of Users</h1>
 @if (TempData["UpdateClassificationMessage"] != null)
 {
     <div class="alert alert-success">@TempData["UpdateClassificationMessage"]</div>
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Customer Class</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
+                  <div class="container" id="userListDiv">
+                      <h3 id="userListH3">LIST OF USERS</h3>
+
+                      <table class="table">
+                          <thead>
+                              <tr id="userListTR">
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Email</th>
+                                  <th>Phone</th>
+                                  <th>Address</th>
+                                  <th>Customer Class</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach (var user in Model)
         {
-            <tr>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.Email</td>
-                <td>@user.ContactNo</td>
-                <td>@user.Address</td>
-                <td><a asp-action="UpdateCustomerClassId" asp-route-id="@user.Id" style="width:150px" class="btn btn-outline-secondary">@user.CustomerClassification.CustomerClassName</a></td>
-            </tr>
+                              <tr id="userListTRBody">
+                                  <td>@user.FirstName</td>
+                                  <td>@user.LastName</td>
+                                  <td>@user.Email</td>
+                                  <td>@user.ContactNo</td>
+                                  <td>@user.Address</td>
+                                  <td><a asp-action="UpdateCustomerClassId" asp-route-id="@user.Id" style="width:150px" class="btn btn-outline-secondary">@user.CustomerClassification.CustomerClassName</a></td>
+                              </tr>
         }
-    </tbody>
-</table>
+                          </tbody>
+                      </table>
+                  </div>

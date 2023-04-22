@@ -6,7 +6,6 @@
 
 <h4 id="addToCartH4">ADD ITEM</h4>
 <hr />
-
 <div class="row">
     <div class="container" id="addToCartContainer">
         <img height="350px" src="@Model.ProductImage" />
@@ -20,9 +19,12 @@
                     <label class="control-label">Product Name</label>
                     <input readonly asp-for="ProductName" class="form-control" />
                 </div>
+                @{
+                    var culture = new System.Globalization.CultureInfo("fil-PH");
+                }
                 <div class="form-group">
                     <label class="control-label">Product Price</label>
-                    <input readonly asp-for="ProductPrice" class="form-control" />
+                    <input readonly asp-for="ProductPrice" value="@Model.ProductPrice.ToString("C", culture)" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Quantity</label>

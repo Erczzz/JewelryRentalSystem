@@ -13,7 +13,7 @@
         }
 <div id="profileMainDiv" class="container">
     <div class="container" id="profile2ndDiv">
-        <img id="userProfileImg" src="~/img/user1.png" />      
+        <img id="userProfileImg" src="~/img/user1.png" />  
     </div>
     <div class="container" id="profileDiv">
         <div class="container" id="profileDetails">
@@ -53,6 +53,24 @@
                 </dt>
                     <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.CustomerClassName)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.CustomerClassName)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.ItemLimit)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.ItemLimit)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.RentLimit)
+                </dt>
+                    <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.RentLimit)
                 </dd>
             </dl>
         </div>

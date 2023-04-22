@@ -1107,3 +1107,32 @@ img.img-responsive {
 #teamEmail{
     color:blue;
 }
+
+/* USER LIST DESIGN */
+#userListDiv {
+    border: ridge;
+    padding: 20px;
+}
+#userListH3 {
+    color: #6C757D;
+
+}
+#userListTR {
+    text-align: center;
+    background-color: #6C757D;
+    color: white;
+}
+#userListTRBody {
+    text-align: center;
+    background-color: #F3F3F3;
+}
+/* UPDATE USER CLASS DESIGN */
+#updateUserClassDiv{
+    width:40%;
+    border:ridge;
+    padding:20px;
+}
+#updateUserClassH3 {
+    color: #6C757D;
+    text-align:center;
+}

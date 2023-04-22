@@ -146,7 +146,7 @@ namespace JewelryRentalSystem.Controllers
             var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             ViewBag.Count = count;
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.Users.Include(u => u.CustomerClassification).SingleOrDefaultAsync(u => u.Id == _userManager.GetUserId(HttpContext.User));
             if (user == null)
             {
                 return RedirectToAction(controllerName: "Account", actionName: "Login");
@@ -159,7 +159,10 @@ namespace JewelryRentalSystem.Controllers
                 Email = user.Email,
                 Birthdate = user.Birthdate,
                 ContactNo = user.ContactNo,
-                Address = user.Address
+                Address = user.Address,
+                CustomerClassName = user.CustomerClassification.CustomerClassName,
+                ItemLimit = user.CustomerClassification.ItemLimit,
+                RentLimit = user.CustomerClassification.RentLimit
             };
             return View(viewModel);
         }

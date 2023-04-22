@@ -5,7 +5,16 @@
 }
 
 <h4 id="editCartH4">Modify Item</h4>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
 <hr />
+@if (TempData["UpdateCartError"] != null)
+{
+    <div class="alert alert-danger">@TempData["UpdateCartError"]</div>
+}
 <div class="row">
     <div class="container" id="editCartContainer">
         <form asp-action="Edit">
@@ -22,7 +31,7 @@
                 <span asp-validation-for="ProductQty" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Rend Duration (day/s)</label>
+                <label class="control-label">Rent Duration (day/s)</label>
                 <input min="1" asp-for="RentDuration" class="form-control" />
                 <span asp-validation-for="RentDuration" class="text-danger"></span>
             </div>

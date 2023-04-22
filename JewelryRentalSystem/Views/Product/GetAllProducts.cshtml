@@ -3,14 +3,15 @@
 
 @{
     Layout = "_Layout";
+    
 }
 @if (TempData["Message"] != null)
 {
     <div class="alert alert-success">@TempData["Message"]</div>
 }
-@if (TempData["ErrorMessage"] != null)
+@if (TempData["AddToCartError"] != null)
 {
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    <div class="alert alert-danger">@TempData["AddToCartError"]</div>
 }
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -55,6 +56,8 @@
             <div id="prod2ndDiv">
                 @foreach (var item in Model)
                 {
+                    var price = item.ProductPrice;
+                    var culture = new System.Globalization.CultureInfo("fil-PH");
                     @*            <div class="container" id="cardContainer">*@
                     <div id="containerProd" class="row">
                         <div class="col" id="productColumn">
@@ -66,26 +69,26 @@
                                             <p style="text-align:center; color:#6C757D; font-size:13px" class="card-title">@item.ProductName</p>
                                             
                                             <div class="container" id="priceStock">
-                                                <p style="text-align:center; color:#6C757D">₱@item.ProductPrice | </p>&nbsp
+                                                <p value="@item.ProductPrice" id="price" style="text-align:center; color:#6C757D; font-size:13px">@item.ProductPrice.ToString("C", culture) | </p>&nbsp
                                                 <div>
                                                     @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                                                     {
-                                                        <small id="stock">@item.ProductStock Item(s)</small>
+                                                        <small style="font-size:13px" id="stock">@item.ProductStock Item(s)</small>
 
                                                     }
                                                     else
                                                     {
                                                         @if (item.ProductStock == 0)
                                                         {
-                                                            <small id="stock" style="font-size:10px">Out of stock</small>
+                                                            <p id="stock" style="font-size:10px">Out of stock</p>
                                                         }
                                                         else if (item.ProductStock == 1)
                                                         {
-                                                            <small id="stock" style="font-size:12px">@item.ProductStock item left</small>
+                                                            <p id="stock" style="font-size:12px">@item.ProductStock item left</p>
                                                         }
                                                         else
                                                         {
-                                                            <small id="stock">In Stock!</small>
+                                                            <p style="font-size:10px" id="stock">IN STOCK!</p>
                                                         }
                                                     }
                                                 </div>

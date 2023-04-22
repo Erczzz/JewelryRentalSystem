@@ -31,6 +31,13 @@ namespace JewelryRentalSystem.ViewModels
 
         [Required]
         public string Address { get; set; }
+        [DisplayName("Eligibility")]
+        public string CustomerClassName { get; set; }
+        [DisplayName("Item Limit")]
+        public int ItemLimit { get; set; }
+        [DisplayName("Rent Limit")]
+        public int RentLimit { get; set; }
+
 
     }
 }
