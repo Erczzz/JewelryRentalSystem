@@ -19,6 +19,7 @@
                                   <th>Email</th>
                                   <th>Phone</th>
                                   <th>Address</th>
+                                  <th>Status</th>
                                   <th>Customer Class</th>
                               </tr>
                           </thead>
@@ -30,8 +31,22 @@
                                   <td>@user.LastName</td>
                                   <td>@user.Email</td>
                                   <td>@user.ContactNo</td>
-                                  <td>@user.Address</td>
-                                  <td><a asp-action="UpdateCustomerClassId" asp-route-id="@user.Id" style="width:150px" class="btn btn-outline-secondary">@user.CustomerClassification.CustomerClassName</a></td>
+                                    <td>@user.Address</td>
+                                    @if (user.isActive == true)
+                                    {
+                                        <td><span class="badge bg-success">Active</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-danger">Inactive</span></td>
+                                    }
+                                    @if(user.CustClassId == 5)
+                                    {
+                                        <td><a style="width:150px" class="btn btn-outline-secondary">@user.CustomerClassification.CustomerClassName</a></td>
+                                    }else{
+                                        <td><a asp-action="UpdateCustomerClassId" asp-route-id="@user.Id" style="width:150px" class="btn btn-outline-secondary">@user.CustomerClassification.CustomerClassName</a></td>
+                                    }
+                    
                               </tr>
         }
                           </tbody>

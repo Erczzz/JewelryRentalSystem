@@ -475,11 +475,27 @@ img.img-responsive {
 #changePassBtnDiv{
     justify-content:flex-start;
 }
-#changPassTitle{
-    text-align:center;
+#changPassTitle {
+    text-align: center;
+    color: #6C757D;
 }
 
 /*APPOINTMENT DESIGN*/
+#appointmentDetailsDiv span{
+    font-weight:bold;
+}
+#appointmentDetailsDiv {
+    width: 40%;
+    padding: 20px;
+    background-color: #F3F3F3;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+#appointmentDetailsH4 {
+    color: #6C757D;
+    text-align:center;
+}
 #createTransactionH4 {
     color: #6C757D;
 }
@@ -832,10 +848,16 @@ img.img-responsive {
 }
 
 /* TRANSACTION DESIGN */
-#noTransaction2ndDiv{
-    display:flex;
-    justify-content:space-between;
-    padding:0;
+#confirmOrderDiv{
+    width:30%;
+    text-align:center;
+    border:ridge;
+    padding:20px;
+}
+#noTransaction2ndDiv {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
 }
 #noTransactionH2 {
     color: #6C757D;

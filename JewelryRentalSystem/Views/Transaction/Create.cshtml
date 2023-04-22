@@ -4,32 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h4 id="createTransactionH4">Confirm Order?</h4>
-<hr />
-<div class="row">
-    <div class="">
-@*        <table>
-            <thead>
-                <tr>
-                    <th>Customer Name</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Rent Duration</th>
-                    <th>Total</th>
-                </tr>
-                <tr>
-                    @foreach (var item in Model.Carts)
-                    {
-                        <td>@item.Customer.FirstName</td>
-                        <td>@item.Product.ProductName</td>
-                        <td>@item.ProductQty</td>
-                        <td>@item.RentDuration</td>
-                        <td>@item.Total</td>
-                    }
-                </tr>
-            </thead>
-        </table>*@
 
+<div class="container" id="confirmOrderDiv">
+    <h5 id="createTransactionH4">Confirm Order?</h5><br />
+    <div class="">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

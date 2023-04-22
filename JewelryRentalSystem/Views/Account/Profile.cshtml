@@ -54,6 +54,8 @@
                     <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.Address)
                 </dd>
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+                {
                 <dt class="col-sm-6">
                     @Html.DisplayNameFor(model => model.CustomerClassName)
                 </dt>
@@ -64,14 +66,16 @@
                     @Html.DisplayNameFor(model => model.ItemLimit)
                 </dt>
                     <dd class="col-sm-6">
-                    @Html.DisplayFor(model => model.ItemLimit)
+                    @Html.DisplayFor(model => model.ItemLimit) items
                 </dd>
                 <dt class="col-sm-6">
                     @Html.DisplayNameFor(model => model.RentLimit)
                 </dt>
                     <dd class="col-sm-6">
-                    @Html.DisplayFor(model => model.RentLimit)
+                    @Html.DisplayFor(model => model.RentLimit) day/s
                 </dd>
+                }
+
             </dl>
         </div>
         <div hidden class="container" id="profile2ndDiv">
