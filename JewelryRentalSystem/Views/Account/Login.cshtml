@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <h3 style="color:#6C757D" id="loginH4">Sign In to your Account</h3>
+    <h3 style="color:#6C757D" id="loginH4">SIGN IN TO YOUR ACCOUNT</h3>
 <hr />
     @if (TempData["Message"] != null)
     {
@@ -22,7 +22,7 @@
     }
 
     <div id="loginContainer" class="container rounded w-20">
-        <div id="login2ndDiv" class="row">
+        <div id="login2ndDiv" class="container">
                 <form asp-action="Login">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group"><br />
@@ -52,6 +52,9 @@
             <div>
                 <p id="loginParag">No Account yet? Click <a asp-action="SignUp" asp-controller="Account">here</a> to Signup.</p>
             </div>
+        </div>
+        <div class="container" id="loginImgDiv">
+            <img id="loginImg" src="~/img/login3.png" />
         </div>
 </div>
 

@@ -6,7 +6,14 @@
         ADD PRODUCT
     </h4>
     <hr />
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["priceError"] != null)
+{
+    <div class="alert alert-danger">@TempData["priceError"]</div>
+}
 <div class="container" id="addProductContainer">
 
 
@@ -29,7 +36,7 @@
 
             <div class="form-group">
                 <label class="control-label">Product Price</label>
-                <input required step="0.01" min="0.0" asp-for="ProductPrice" class="form-control" />
+                <input required  asp-for="ProductPrice" class="form-control" />
                 <span asp-validation-for="ProductPrice" class="text-danger"></span>
             </div>
 

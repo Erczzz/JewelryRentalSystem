@@ -9,6 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System;
 using static NuGet.Packaging.PackagingConstants;
 
 namespace JewelryRentalSystem.Controllers
@@ -35,7 +40,7 @@ namespace JewelryRentalSystem.Controllers
 
 
 
-        public async Task<IActionResult> GetAllProducts(string SearchString)
+        public async Task<IActionResult> GetAllProducts(string SearchString, int? page)
         {
             var count = _JRSDBContext.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             ViewBag.Count = count;
@@ -95,6 +100,7 @@ namespace JewelryRentalSystem.Controllers
                 products = products.Where(p => p.ProductName.Contains(SearchString));
             }
             // var productList = await _repo.GetAllProducts();
+
             return View(products);
         }
 
@@ -128,17 +134,27 @@ namespace JewelryRentalSystem.Controllers
                 folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 newProduct.ProductImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
-                Product product = new Product()
-                {
-                    ProductName = newProduct.ProductName,
-                    CategoryId = newProduct.CategoryId,
-                    CustClassId = newProduct.CustomerClassId,
-                    ProductPrice = newProduct.ProductPrice,
-                    ProductStock = newProduct.ProductStock,
-                    ProductDescription = newProduct.ProductDescription,
-                    ProductImage = "/" + folder
-                };
-                await _repo.AddProduct(product);
+                    if(newProduct.ProductPrice < 0)
+                    {
+                        TempData["priceError"] = "Product Price must be equal or greater than 0.";
+                        return View();
+                    }
+                    else
+                    {
+                        Product product = new Product()
+                        {
+                            ProductName = newProduct.ProductName,
+                            CategoryId = newProduct.CategoryId,
+                            CustClassId = newProduct.CustomerClassId,
+                            ProductPrice = newProduct.ProductPrice,
+                            ProductStock = newProduct.ProductStock,
+                            ProductDescription = newProduct.ProductDescription,
+                            ProductImage = "/" + folder
+                        };
+                        await _repo.AddProduct(product);
+                        TempData["Message"] = "Product has been added successfully!";
+                    }
+                
 
             }
 
@@ -164,48 +180,132 @@ namespace JewelryRentalSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int ProductId)
         {
+            ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
             if (ProductId == null)
             {
                 return View("NotFound", "Home");
             }
+
             var prod = await _repo.GetProductById(ProductId);
+
             if (prod == null)
             {
                 return View("NotFound", "Home");
             }
-            return View(prod);
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> Update(ProductViewModel newProduct)
-        {
-            if (newProduct.ProductImage != null)
+            var model = new ProductViewModel
             {
-                string folder = "products/productImgs/";
-                folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
-                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                newProduct.ProductImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
-                Product product = new Product()
-                {
-                    ProductName = newProduct.ProductName,
-                    ProductPrice = newProduct.ProductPrice,
-                    ProductStock = newProduct.ProductStock,
-                    ProductDescription = newProduct.ProductDescription,
-                    ProductImage = "/" + folder
-                };
-                var updatedProduct = await _repo.UpdateProduct(newProduct.ProductId, product);
-            }
-            return RedirectToAction("ProductManagement");
+                ProductId = prod.ProductId,
+                ProductName = prod.ProductName,
+                ProductDescription = prod.ProductDescription,
+                ProductPrice = prod.ProductPrice,
+                ProductStock = prod.ProductStock,
+                ProductImage = null, // Set to null because we're not editing the image here
+                CategoryId = prod.CategoryId,
+                CustomerClassification = prod.CustomerClassification
+            };
+
+            return View(model);
         }
-        public IActionResult AppointmentSchedule()
+        [HttpPost]
+
+        public async Task<IActionResult> Update(ProductViewModel model)
         {
-            return View("AppointmentSchedule");
+            ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
+            //if (ModelState.IsValid)
+            {
+                var prod = await _repo.GetProductById(model.ProductId);
+
+                if (prod == null)
+                {
+                    return View("NotFound", "Home");
+                }
+                if (model.ProductPrice < 0)
+                {
+                    TempData["priceError"] = "Product Price must be equal or greater than 0.";
+                    return View();
+                }
+                else
+                {
+                    var updatedProduct = new Product
+                    {
+                        ProductId = model.ProductId,
+                        ProductName = model.ProductName,
+                        ProductDescription = model.ProductDescription,
+                        ProductPrice = model.ProductPrice,
+                        ProductStock = model.ProductStock,
+                        CategoryId = model.CategoryId,
+                        CustClassId = model.CustomerClassId
+                    };
+
+                    var result = await _repo.UpdateProduct(updatedProduct, model.ProductImage);
+                    if (result != null)
+                    {
+                        await _JRSDBContext.SaveChangesAsync();
+                        TempData["UpdateProduct"] = "Product has been updated successfully!";
+                        return RedirectToAction("ProductManagement");
+                    }
+                }
+
+                
+            }
+            return View(model);
         }
 
-        public async Task<IActionResult> AddToCart(int Id)
-        {
-            var product = await _repo.GetProductById(Id);
-            var cart = new CartViewModel()
+
+
+
+
+
+
+
+        /*
+                [HttpGet]
+                public async Task<IActionResult> Update(int ProductId)
+                {
+                    if (ProductId == null)
+                    {
+                        return View("NotFound", "Home");
+                    }
+                    var prod = await _repo.GetProductById(ProductId);
+                    if (prod == null)
+                    {
+                        return View("NotFound", "Home");
+                    }
+                    return View(prod);
+                }
+
+                [HttpPost]
+                public async Task<IActionResult> Update(ProductViewModel newProduct)
+                {
+                    if (newProduct.ProductImage != null)
+                    {
+                        string folder = "products/productImgs/";
+                        folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
+                        string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                        newProduct.ProductImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
+                        Product product = new Product()
+                        {
+                            ProductName = newProduct.ProductName,
+                            ProductPrice = newProduct.ProductPrice,
+                            ProductStock = newProduct.ProductStock,
+                            ProductDescription = newProduct.ProductDescription,
+                            ProductImage = "/" + folder
+                        };
+                        var updatedProduct = await _repo.UpdateProduct(newProduct.ProductId, product);
+                    }
+                    return RedirectToAction("ProductManagement");
+                }*/
+        public IActionResult AppointmentSchedule()
+    {
+        return View("AppointmentSchedule");
+    }
+    public async Task<IActionResult> AddToCart(int Id)
+    {
+        var product = await _repo.GetProductById(Id);
+        var cart = new CartViewModel()
             {
 
                 CustomerId = _userManager.GetUserId(HttpContext.User),

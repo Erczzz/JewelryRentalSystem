@@ -255,11 +255,11 @@ img.img-responsive {
 
 
 /*Sign Up Design*/
+#signUpform {
+    width: 40%;
+    padding: 0;
+}
 #signUpContainer {
-    margin-right: auto;
-    margin-left: auto;
-    margin: auto;
-
 }
 #signUpTitle, #signUpParag {
     text-align: center;
@@ -267,14 +267,24 @@ img.img-responsive {
 #signUpBtnDiv{
 
 }
+#signUpImgDiv {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
 
+    padding: 0;
+}
+#signUpImg {
+    height: 450px;
+    opacity: 50%;
+    margin:auto;
+}
 #signUpContainer2ndDiv {
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
-    border-style: ridge;
-    width: 600px;
-    padding: 10px
+    display: flex;
+    justify-content: center;
+    padding:0;
+
 }
 #signUpfield {
     padding-top: 12px;
@@ -287,19 +297,16 @@ img.img-responsive {
 }
 
 /*Login Design*/
+#loginImg{
+    opacity:50%;
+    height:450px;
+}
 
 #loginContainer {
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
+    display: flex;
 }
 #login2ndDiv{
-    margin-left: auto;
-    margin-left: auto;
-    margin: auto;
-    width: 500px;
-    border-style: ridge;
-    padding: 10px;
+    margin:auto;
 }
 #loginH4, #loginParag {
     text-align: center;
@@ -460,14 +467,19 @@ img.img-responsive {
     padding:0;
 }
 /* CHANGE PASSWORD */
-#changePass2ndDiv {
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
-    padding: 20px;
-    border-style: ridge;
+#changePasswordImgDiv{
+    text-align:right;
 }
+    #changePasswordImg{
+        opacity:50%;
+    }
+    #changePass2ndDiv {
+        display: flex;
+    }
+#changePassDiv{
+    padding:50px;
 
+}
 
 #changePassBackBtn {
     margin-right: 10px;

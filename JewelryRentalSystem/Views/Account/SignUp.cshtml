@@ -2,19 +2,19 @@
 
 
 <div id="signUpContainer" class="container">
-    <h3 style="color:#6C757D" id="signUpTitle">Sign Up</h3>
+    <h3 style="color:#6C757D" id="signUpTitle">CREATE YOUR ACCOUNT</h3>
     <hr />
-    <div class="row" id="signUpContainer2ndDiv">
-        <div id="signUpform">
+    <div class="container" id="signUpContainer2ndDiv">
+        <div class="container" id="signUpform">
             <form asp-action="SignUp">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div id="signUpfield" class="form-group">
-                        <label asp-for="FirstName" class="control-label">Firstname</label>
+                        <label asp-for="FirstName" class="control-label">First Name</label>
                         <input asp-for="FirstName" class="form-control" placeholder="Enter your firstname here..." required/>
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div id="signUpfield" class="form-group">
-                        <label asp-for="LastName" class="control-label">Lastname</label>
+                        <label asp-for="LastName" class="control-label">Last Name</label>
                         <input asp-for="LastName" class="form-control" placeholder="Enter your lastname here..." required />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
@@ -60,6 +60,9 @@
                     <p id="signUpParag">Already have an Account? Click <a asp-action="Login" asp-controller="Account">here</a> to Login.</p>
                 </div>
             </form>
+        </div>
+        <div class="container" id="signUpImgDiv">
+            <img id="signUpImg" src="~/img/signup.png" />
         </div>
 
     </div>

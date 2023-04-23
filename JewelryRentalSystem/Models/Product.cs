@@ -20,6 +20,7 @@ namespace JewelryRentalSystem.Models
         public double ProductPrice { get; set; }
         [Required(ErrorMessage = "This field is required.")]
         [DisplayName("Product Stock")]
+        [Range(0, double.MaxValue, ErrorMessage = "Value must be greater than or equal to 0")]
         public int ProductStock { get; set; }
         [Required(ErrorMessage = "This field is required.")]
         public string ProductImage { get; set; } = default!;
