@@ -11,6 +11,7 @@ namespace JewelryRentalSystemAPI.Helper
         { 
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Location, LocationDto>().ReverseMap();
 
             CreateMap<ApplicationUser, SignUpDto>().ReverseMap()
                 .ForMember(f => f.UserName, t2 => t2.MapFrom(src => src.Email));
