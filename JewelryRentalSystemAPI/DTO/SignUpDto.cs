@@ -38,5 +38,6 @@ namespace JewelryRentalSystemAPI.DTO
         [Compare("Password", ErrorMessage = "Password does not match")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
     }
 }

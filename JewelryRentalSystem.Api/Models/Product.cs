@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JewelryRentalSystemAPI.Models
+namespace JewelryRentalSystem.Api.Models
 {
     public class Product
     {
@@ -29,10 +29,9 @@ namespace JewelryRentalSystemAPI.Models
         public int? CustClassId { get; set; }
         [ForeignKey("CustClassId")]
         public CustomerClassification? CustomerClassification { get; set; }
-
         public Product() { }
 
-        public Product(int productId, string productName, string? productDescription, double productPrice,
+        public Product(int productId, string productName, string? productDescription, double productPrice, 
             int productStock, string? productImage, int categoryId, int? custClassId)
         {
             ProductId = productId;
@@ -42,8 +41,7 @@ namespace JewelryRentalSystemAPI.Models
             ProductStock = productStock;
             ProductImage = productImage;
             CategoryId = categoryId;
-            CustClassId = custClassId;
+            CustClassId = custClassId; 
         }
-
     }
 }

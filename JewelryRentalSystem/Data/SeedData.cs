@@ -91,10 +91,10 @@ namespace JewelryRentalSystem.Data
         public static void SeedDefaultCustomerClassification(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CustomerClassification>().HasData(
-                new CustomerClassification(1, "Low", 5, 1),
-                new CustomerClassification(2, "Med", 10, 5),
-                new CustomerClassification(3, "High", 20, 10),
-                new CustomerClassification(4, "Superior", 0, 0),
+                new CustomerClassification(1, "Classic", 5, 1),
+                new CustomerClassification(2, "Silver", 10, 5),
+                new CustomerClassification(3, "Gold", 20, 10),
+                new CustomerClassification(4, "Platinum", 0, 0),
                 new CustomerClassification(5, "Admin", 0, 0)
                 );
         }
