@@ -30,7 +30,7 @@
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
-                <label class="control-label">Customer Classification</label>
+                <label class="control-label">Product Classification</label>
                 <select asp-for="CustomerClassId" class="form-control" asp-items="ViewBag.CustomerClassId"></select>
             </div>
 
@@ -48,11 +48,11 @@
 
             <div class="form-group">
                 <label class="control-label">Product Description</label>
-                <input required asp-for="ProductDescription" class="form-control" />
+                <textarea required asp-for="ProductDescription" class="form-control"></textarea>
                 <span asp-validation-for="ProductDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductImage" class="control-label"></label>
+                <label asp-for="ProductImage" class="control-label">Product Image</label>
                 <div class="custome-file">
                     <input required asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
                     <label class="custom-file-label" for="customeFile"></label>

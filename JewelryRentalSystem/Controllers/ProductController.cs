@@ -116,7 +116,7 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> Create()
         {
             ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
-            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
             return View();
         }
 
@@ -129,7 +129,7 @@ namespace JewelryRentalSystem.Controllers
             if (newProduct.ProductImage != null)
             {
                 ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
-                ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
+                ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
                     string folder = "products/productImgs/";
                 folder += Guid.NewGuid().ToString() + "_" + newProduct.ProductImage.FileName;
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
@@ -181,7 +181,7 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> Update(int ProductId)
         {
             ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
-            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
             if (ProductId == null)
             {
                 return View("NotFound", "Home");
@@ -213,7 +213,7 @@ namespace JewelryRentalSystem.Controllers
         public async Task<IActionResult> Update(ProductViewModel model)
         {
             ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
-            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications, "CustomerClassId", "CustomerClassName");
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
             //if (ModelState.IsValid)
             {
                 var prod = await _repo.GetProductById(model.ProductId);

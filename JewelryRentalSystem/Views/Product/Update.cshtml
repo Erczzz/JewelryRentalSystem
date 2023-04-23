@@ -17,37 +17,37 @@
             <span asp-validation-for="ProductId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProductName"></label>
+            <label asp-for="ProductName">Product Name</label>
             <input asp-for="ProductName" class="form-control" />
             <span asp-validation-for="ProductName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="CategoryId"></label>
+            <label asp-for="CategoryId">Category</label>
             <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control"></select>
             <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="CustomerClassId"></label>
+            <label asp-for="CustomerClassId">Product Classification</label>
             <select asp-for="CustomerClassId" asp-items="ViewBag.CustomerClassId" class="form-control"></select>
             <span asp-validation-for="CustomerClassId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProductPrice"></label>
+            <label asp-for="ProductPrice">Product Price</label>
             <input asp-for="ProductPrice" class="form-control" />
             <span asp-validation-for="ProductPrice" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProductStock"></label>
+            <label asp-for="ProductStock">Product Stock</label>
             <input asp-for="ProductStock" class="form-control" />
             <span asp-validation-for="ProductStock" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label class="control-label">Product Description</label>
-            <input required asp-for="ProductDescription" class="form-control" />
+            <textarea required asp-for="ProductDescription" class="form-control"></textarea>
             <span asp-validation-for="ProductDescription" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProductImage" class="control-label"></label>
+            <label asp-for="ProductImage" class="control-label">Product Image</label>
             <div class="custome-file">
                 <input required asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
                 <label class="custom-file-label" for="customeFile"></label>
