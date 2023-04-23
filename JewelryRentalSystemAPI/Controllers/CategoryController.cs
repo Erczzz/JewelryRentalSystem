@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    [Authorize]
+    
     [Route("api/v1/[controller]")]
     [ApiController]
     public class CategoryController : Controller

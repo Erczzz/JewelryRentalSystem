@@ -13,3 +13,4 @@ namespace JewelryRentalSystemAPI.DTO
         public bool RememberMe { get; set; }
     }
 }
+

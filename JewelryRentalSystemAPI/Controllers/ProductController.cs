@@ -13,7 +13,6 @@ namespace JewelryRentalSystemAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;

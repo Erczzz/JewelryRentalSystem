@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230423044454_seeddataupdate")]
+    partial class seeddataupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +121,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "78c13626-f448-4a3c-adda-7c77a6fdc7f4",
+                            ConcurrencyStamp = "4fad4857-cfd6-4fa6-91dc-4628aa10108a",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin@gmail.com",
@@ -128,9 +130,9 @@ namespace JewelryRentalSystem.Migrations
                             LastName = "admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKlbQZqCcwftRMXt5WoyRHJBnpOv0glPsLUoIq+tWfFrmo9rLF7O60d8GNLPCkgQhA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEExbrl4Doma+NP+g7jqIiKlEouI3ldyg0HHTG/owdfTapLpCNlJuSv6wWOIalTbSQg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "169b69d4-8b19-41be-80a9-1d5cabfa77a0",
+                            SecurityStamp = "47e82973-1056-4b41-ae87-70bba290e0f3",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             isActive = true
@@ -300,7 +302,7 @@ namespace JewelryRentalSystem.Migrations
                         new
                         {
                             CustomerClassId = 1,
-                            CustomerClassName = "Classic",
+                            CustomerClassName = "CLassic",
                             ItemLimit = 5,
                             RentLimit = 1
                         },
