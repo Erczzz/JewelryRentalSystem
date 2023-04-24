@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystemAPI.Data;
 using JewelryRentalSystemAPI.Models;
 using JewelryRentalSystemAPI.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Customer")]
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentsController : ControllerBase

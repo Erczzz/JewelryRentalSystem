@@ -39,6 +39,7 @@ namespace JewelryRentalSystem.Data
                 ContactNo = "09876543211",
                 Address = "Sample Address",
                 NormalizedUserName = "ADMIN@GMAIL.COM",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
                 CustClassId = 5
             };
 
@@ -53,6 +54,7 @@ namespace JewelryRentalSystem.Data
                 ContactNo = "09876543211",
                 Address = "Sample Address",
                 NormalizedUserName = "ADMIN2@GMAIL.COM",
+                NormalizedEmail = "ADMIN2@GMAIL.COM",
                 CustClassId = 5
             };
 

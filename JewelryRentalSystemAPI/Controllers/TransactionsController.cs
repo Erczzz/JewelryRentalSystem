@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Models;
 using JewelryRentalSystemAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Customer")]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class TransactionsController : ControllerBase
@@ -103,22 +105,6 @@ namespace JewelryRentalSystemAPI.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
-        }
-
-        // DELETE: api/Transactions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTransaction(int id)
-        {
-            var transaction = await _context.Transactions.FindAsync(id);
-            if (transaction == null)
-            {
-                return NotFound();
-            }
-
-            _context.Transactions.Remove(transaction);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
