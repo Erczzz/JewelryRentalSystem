@@ -53,6 +53,9 @@
                         <li class="nav-item">
                             <a id="productNav" class="nav-link" asp-area="" asp-controller="Product" asp-action="GetAllProducts">Home</a>
                         </li>
+                                                    <li class="active nav-item">
+                                <a id="privacyNav" class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                            </li>
 
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                         {
@@ -78,17 +81,12 @@
                                         <a id="catMngmntNav" class="dropdown-item" asp-area="" asp-controller="AppointmentType" asp-action="Index">Appointment Type</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a id="catMngmntNav" class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ListUsers">Users</a>
+                                        <a id="catMngmntNav" class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ListUsers">User Management</a>
                                     </li>
                                 </ul>
                             </li>
                         }
-                        else
-                        {
-                            <li class="active nav-item">
-                                <a id="privacyNav" class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
-                            </li>
-                        }
+                        
 
                         @if (_signInManager.IsSignedIn(User))
                         {
