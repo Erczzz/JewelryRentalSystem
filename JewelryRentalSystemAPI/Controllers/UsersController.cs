@@ -1,106 +1,154 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Models;
-using JewelryRentalSystemAPI.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly JRSDBContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UsersController(JRSDBContext context)
+        public UsersController(UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _userManager = userManager;
         }
 
-        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<UsersDto>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
+            var usersDto = new List<UsersDto>();
+            foreach (var user in users)
+            {
+                usersDto.Add(new UsersDto
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Birthdate = user.Birthdate,
+                    ContactNo = user.ContactNo,
+                    Address = user.Address,
+                    isActive = user.isActive,
+                    CustClassId = user.CustClassId
+                });
+            }
+            return Ok(usersDto);
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
+        /*[HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<UsersDto>> GetUser(string id)
         {
-            var user = await _context.Users.FindAsync(id);
-
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (user == null)
             {
                 return NotFound();
             }
+            var userDto = new UsersDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Birthdate = user.Birthdate,
+                ContactNo = user.ContactNo,
+                Address = user.Address,
+                isActive = user.isActive,
+                CustClassId = user.CustClassId
+            };
+            return Ok(userDto);
+        }*/
 
-            return user;
-        }
-
-        // PUT: api/Users/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, ApplicationUser user)
+        [HttpGet("email/{email}")]
+        [Authorize]
+        public async Task<ActionResult<UsersDto>> GetUserByEmail(string email)
         {
-            if (id != user.Id)
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
+            var userDto = new UsersDto
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Birthdate = user.Birthdate,
+                ContactNo = user.ContactNo,
+                Address = user.Address,
+                isActive = user.isActive,
+                CustClassId = user.CustClassId
+            };
+            return Ok(userDto);
         }
 
-        // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<ApplicationUser>> PostUser(ApplicationUser user)
+        [Authorize]
+        public async Task<ActionResult<UsersDto>> CreateUser(UsersDto usersDto)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            var user = new ApplicationUser
+            {
+                FirstName = usersDto.FirstName,
+                LastName = usersDto.LastName,
+                Birthdate = usersDto.Birthdate,
+                ContactNo = usersDto.ContactNo,
+                Address = usersDto.Address,
+                isActive = usersDto.isActive,
+                CustClassId = usersDto.CustClassId
+            };
+            var result = await _userManager.CreateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return CreatedAtAction(nameof(GetUserByEmail), new { id = user.Id }, usersDto);
         }
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
+        [HttpPut("{email}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateUserByEmail(string email, UsersDto usersDto)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.FirstName = usersDto.FirstName;
+            user.LastName = usersDto.LastName;
+            user.Birthdate = usersDto.Birthdate;
+            user.ContactNo = usersDto.ContactNo;
+            user.Address = usersDto.Address;
+            user.isActive = usersDto.isActive;
+            user.CustClassId = usersDto.CustClassId;
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{email}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteUserByEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
 
             return NoContent();
-        }
-
-        private bool UserExists(string id)
-        {
-            return _context.Users.Any(e => e.Id == id);
         }
     }
 }
