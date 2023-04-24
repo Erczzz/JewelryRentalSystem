@@ -60,7 +60,7 @@ namespace JewelryRentalSystem.Controllers
         public IActionResult Create()
         {
             ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "APTName");
-            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "UserName");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
             ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
             var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
@@ -69,22 +69,28 @@ namespace JewelryRentalSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment, int id)
         {
-            //if (ModelState.IsValid)
-            {
 
-                appointment.CustomerId = _userManager.GetUserId(HttpContext.User);
+            // Get the current user ID
+            string currentUserId = _userManager.GetUserId(HttpContext.User);
+
+            // Set the appointment customer ID to the current user ID
+            appointment.CustomerId = currentUserId;
+
+            if (ModelState.IsValid)
+            {
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Create", "Transaction");
             }
-/*            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
-            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "UserName", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
             ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
-            return View(appointment);*/
+            return View(appointment);
         }
+
 
         public async Task<IActionResult> Edit(int? id)
         {
