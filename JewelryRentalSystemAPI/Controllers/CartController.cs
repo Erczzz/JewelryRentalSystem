@@ -114,7 +114,7 @@ public class CartController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    /*[HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCart(int id)
     {
         var cart = await _context.Carts.FindAsync(id);
@@ -128,6 +128,6 @@ public class CartController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
-    }
+    }*/
 }
 

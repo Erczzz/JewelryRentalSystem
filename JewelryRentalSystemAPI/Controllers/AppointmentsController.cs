@@ -136,7 +136,7 @@ namespace JewelryRentalSystemAPI.Controllers
             }, appointmentDto);
         }
         // DELETE: api/Appointments/5
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppointment(int id)
         {
             var appointment = await _context.Appointments.FindAsync(id);
@@ -155,6 +155,6 @@ namespace JewelryRentalSystemAPI.Controllers
         private bool AppointmentExists(int id)
         {
             return _context.Appointments.Any(e => e.AppointmentId == id);
-        }
+        }*/
     }
 }
