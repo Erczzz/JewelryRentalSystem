@@ -2,12 +2,14 @@
 using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Interface;
 using JewelryRentalSystemAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("api/[controller]")]
     public class ScheduleTimeController : ControllerBase

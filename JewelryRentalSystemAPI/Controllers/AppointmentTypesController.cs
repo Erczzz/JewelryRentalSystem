@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class AppointmentTypesController : ControllerBase
@@ -80,22 +81,6 @@ namespace JewelryRentalSystemAPI.Controllers
             await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetAppointmentType), new { id = appointmentType.AppointmentTypeId }, appointmentType);
-        }
-
-        // DELETE: api/appointmenttypes/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAppointmentType(int id)
-        {
-            var appointmentType = await _dbContext.AppointmentTypes.FindAsync(id);
-            if (appointmentType == null)
-            {
-                return NotFound();
-            }
-
-            _dbContext.AppointmentTypes.Remove(appointmentType);
-            await _dbContext.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool AppointmentTypeExists(int id)

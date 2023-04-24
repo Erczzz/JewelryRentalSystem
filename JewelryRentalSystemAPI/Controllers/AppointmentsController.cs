@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystemAPI.Data;
 using JewelryRentalSystemAPI.Models;
 using JewelryRentalSystemAPI.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Customer")]
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentsController : ControllerBase
@@ -134,7 +136,7 @@ namespace JewelryRentalSystemAPI.Controllers
             }, appointmentDto);
         }
         // DELETE: api/Appointments/5
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppointment(int id)
         {
             var appointment = await _context.Appointments.FindAsync(id);
@@ -148,7 +150,7 @@ namespace JewelryRentalSystemAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool AppointmentExists(int id)
         {

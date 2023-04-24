@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    
+    [Authorize(Roles = "Administrator")]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class CategoryController : Controller
@@ -61,7 +61,7 @@ namespace JewelryRentalSystemAPI.Controllers
             return Ok(products);
         }
 
-        [HttpDelete("{categoryId}")]
+        /*[HttpDelete("{categoryId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -73,7 +73,7 @@ namespace JewelryRentalSystemAPI.Controllers
             if (category == null)
                 return NotFound("No Resource Found.");
             return Accepted(_categoryRepository.DeleteCategory(categoryId));
-        }
+        }*/
 
         [HttpPost]
         [ProducesResponseType(204)]

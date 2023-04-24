@@ -25,6 +25,7 @@ namespace JewelryRentalSystemAPI.Controllers
         }
 
         //Listing of Products
+        [Authorize(Roles = "Administrator, Customer")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Product>))]
         public IActionResult GetProducts()
@@ -38,6 +39,7 @@ namespace JewelryRentalSystemAPI.Controllers
         }
 
         //Listing of Products by Id
+        [Authorize(Roles = "Administrator, Customer")]
         [HttpGet("{productId}")]
         [ProducesResponseType(200, Type = typeof(Product))]
         [ProducesResponseType(400)]
@@ -51,22 +53,8 @@ namespace JewelryRentalSystemAPI.Controllers
             return Ok(product);
         }
 
-        //Delete Product(s)
-        [HttpDelete("{productId}")]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(404)]
-        public IActionResult DeleteProduct([FromRoute] int productId)
-        {
-            if (productId == 0)
-                return BadRequest();
-            var product = _productRepository.GetProductById(productId);
-            if (product == null)
-                return NotFound("No Resource Found.");
-            return Accepted(_productRepository.DeleteProduct(productId));
-        }
-
         //Add Product(s)
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -85,6 +73,7 @@ namespace JewelryRentalSystemAPI.Controllers
         }
 
         //Update Product(s)
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{productId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]

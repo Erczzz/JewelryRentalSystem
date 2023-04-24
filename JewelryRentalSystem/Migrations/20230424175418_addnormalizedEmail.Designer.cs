@@ -4,6 +4,7 @@ using JewelryRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    partial class JRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230424175418_addnormalizedEmail")]
+    partial class addnormalizedEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +121,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "cf498b1b-02a5-456d-ae91-4f13386a5b5d",
+                            ConcurrencyStamp = "d6373d25-0fd7-4cd1-8b82-2c178441f732",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin@gmail.com",
@@ -129,9 +131,9 @@ namespace JewelryRentalSystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOrIT4C1AvpXu820u43yeJhb6gsTZPCqnCG27t+sAJ0FU0fEWXgUPI/sNW5oBC7Rdw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDR2pjXNXQ4W6vGiWefqUPOz44RSBnSuiDSB3XiXjYazn+p4wORxmEx6sz5/gDfyNA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "322f6487-d51b-4054-acb8-12d8e2768c6b",
+                            SecurityStamp = "8b7dfa50-74e7-4e0f-b3aa-530094fb9dcd",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             isActive = true
@@ -141,8 +143,8 @@ namespace JewelryRentalSystem.Migrations
                             Id = "45e23747-27a5-48e9-b7a6-755bfbb86004",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            Birthdate = new DateTime(2003, 4, 25, 2, 27, 9, 826, DateTimeKind.Local).AddTicks(4114),
-                            ConcurrencyStamp = "1d3e74b2-b560-40ea-ba43-f4d23093451e",
+                            Birthdate = new DateTime(2003, 4, 25, 1, 54, 18, 88, DateTimeKind.Local).AddTicks(8358),
+                            ConcurrencyStamp = "4932bbe7-39be-4730-9ca9-4d0e93d350d0",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin2@gmail.com",
@@ -152,9 +154,9 @@ namespace JewelryRentalSystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN2@GMAIL.COM",
                             NormalizedUserName = "ADMIN2@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHzN5gakMp/lVR5yLs5rPL/+uQMNo/g2P9SJmFfn5McOMTWV5NpqqkGIswliKW+XAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENsOhnvdkzpnm9NcMbvLFZOxdx+Fnai02DvjDm3cDO4FagqIrwB7vCNsbhyhCIUZVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "668978ac-82b5-426f-a63e-156bb448e9d2",
+                            SecurityStamp = "6054427b-b2a4-4676-bc09-3cc644895559",
                             TwoFactorEnabled = false,
                             UserName = "admin2@gmail.com",
                             isActive = true
@@ -216,13 +218,6 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("AppointmentTypeId");
 
                     b.ToTable("AppointmentTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            AppointmentTypeId = 1,
-                            APTName = "Pick-Up"
-                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Cart", b =>
@@ -380,33 +375,6 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Locations");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            LocationName = "Makati City"
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            LocationName = "Quezon City"
-                        },
-                        new
-                        {
-                            LocationId = 3,
-                            LocationName = "Valenzuela City"
-                        },
-                        new
-                        {
-                            LocationId = 4,
-                            LocationName = "Antipolo City"
-                        },
-                        new
-                        {
-                            LocationId = 5,
-                            LocationName = "Taguig City"
-                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Product", b =>
@@ -458,19 +426,8 @@ namespace JewelryRentalSystem.Migrations
                             ProductDescription = "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
                             ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
                             ProductName = "Enchanted Disney Fine Jewelry",
-                            ProductPrice = 1250.0,
-                            ProductStock = 4
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 1,
-                            CustClassId = 3,
-                            ProductDescription = "A mysterious bloom carrying many meanings. The black rose, in this Disney Villain ring, actually stands for rebirth and new beginnings. Get this as a token to honor a major change in your life. A creation from the Enchanted Disney Fine Jewelry Collection, this Maleficent Ring features a thorn-inspired sterling silver band plated in black rhodium.",
-                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
-                            ProductName = "Maleficent Rose Ring",
                             ProductPrice = 4000.0,
-                            ProductStock = 5
+                            ProductStock = 4
                         });
                 });
 

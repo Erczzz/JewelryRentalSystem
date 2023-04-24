@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class LocationsController : ControllerBase
@@ -87,22 +88,6 @@ namespace JewelryRentalSystemAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetLocation), new { id = location.LocationId }, location.ToDto());
-        }
-
-        // DELETE: api/Locations/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLocation(int id)
-        {
-            var location = await _context.Locations.FindAsync(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            _context.Locations.Remove(location);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool LocationExists(int id)

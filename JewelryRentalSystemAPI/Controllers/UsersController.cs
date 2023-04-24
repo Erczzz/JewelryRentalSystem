@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using JewelryRentalSystemAPI.DTO;
 using JewelryRentalSystemAPI.Models;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -132,17 +134,34 @@ namespace JewelryRentalSystemAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{email}")]
         [Authorize]
-        public async Task<IActionResult> DeleteUserByEmail(string email)
+        [HttpPut]
+        public async Task<IActionResult> UpdateAccount(UsersDto usersDto)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            // Get the user's information from the HttpContext
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+
             if (user == null)
             {
                 return NotFound();
             }
 
-            var result = await _userManager.DeleteAsync(user);
+            // Only allow the user to update their own account
+            if (user.FirstName != usersDto.FirstName)
+            {
+                return Forbid();
+            }
+
+            // Update the user's information
+            user.FirstName = usersDto.FirstName;
+            user.LastName = usersDto.LastName;
+            user.Birthdate = usersDto.Birthdate;
+            user.ContactNo = usersDto.ContactNo;
+            user.Address = usersDto.Address;
+
+            var result = await _userManager.UpdateAsync(user);
+
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);
