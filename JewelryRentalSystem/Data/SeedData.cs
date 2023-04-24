@@ -106,7 +106,10 @@ namespace JewelryRentalSystem.Data
             modelBuilder.Entity<Product>().HasData(
                 new Product(1, "Enchanted Disney Fine Jewelry",
                 "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
-                4000, 4, "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", 4, 2)
+                1250, 4, "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", 4, 2),
+                                new Product(2, "Maleficent Rose Ring",
+                "A mysterious bloom carrying many meanings. The black rose, in this Disney Villain ring, actually stands for rebirth and new beginnings. Get this as a token to honor a major change in your life. A creation from the Enchanted Disney Fine Jewelry Collection, this Maleficent Ring features a thorn-inspired sterling silver band plated in black rhodium.",
+                4000, 5, "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp", 1, 3)
                 );
         }
 
@@ -118,6 +121,23 @@ namespace JewelryRentalSystem.Data
                 new CustomerClassification(3, "Gold", 20, 10),
                 new CustomerClassification(4, "Platinum", 0, 0),
                 new CustomerClassification(5, "Admin", 0, 0)
+                );
+        }
+        public static void SeedDefaultLocation(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Location>().HasData(
+                new Location(1, "Makati City"),
+                new Location(2, "Quezon City"),
+                new Location(3, "Valenzuela City"),
+                new Location(4, "Antipolo City"),
+                new Location(5, "Taguig City")
+                );
+        }
+
+        public static void SeedDefaultAppointmentType(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppointmentType>().HasData(
+                new AppointmentType(1, "Pick-Up")
                 );
         }
 
