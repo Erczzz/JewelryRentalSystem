@@ -7,9 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using JewelryRentalSystemAPI.Mappers;
 using JewelryRentalSystemAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     [ApiController]
     [Route("[controller]")]
     public class LocationsController : ControllerBase

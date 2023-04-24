@@ -1,5 +1,6 @@
 ﻿using JewelryRentalSystemAPI.Data;
 using JewelryRentalSystemAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     [ApiController]
     [Route("api/[controller]")]
     public class AppointmentTypesController : ControllerBase
