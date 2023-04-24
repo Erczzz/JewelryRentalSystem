@@ -22,7 +22,7 @@
         <div class="container">
             <div class="form-group">
                 <label class="control-label">Product Name</label>
-                <input required asp-for="ProductName" class="form-control" />
+                <input asp-for="ProductName" class="form-control" />
                 <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,25 +36,25 @@
 
             <div class="form-group">
                 <label class="control-label">Product Price</label>
-                <input required  asp-for="ProductPrice" class="form-control" />
+                <input  asp-for="ProductPrice" class="form-control" />
                 <span asp-validation-for="ProductPrice" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label">Product Stock</label>
-                <input required min="1" asp-for="ProductStock" class="form-control" />
+                <input min="1" asp-for="ProductStock" class="form-control" />
                 <span asp-validation-for="ProductStock" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label">Product Description</label>
-                <textarea required asp-for="ProductDescription" class="form-control"></textarea>
+                <textarea asp-for="ProductDescription" class="form-control"></textarea>
                 <span asp-validation-for="ProductDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ProductImage" class="control-label">Product Image</label>
                 <div class="custome-file">
-                    <input required asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
+                    <input asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
                     <label class="custom-file-label" for="customeFile"></label>
                 </div>
                 <span asp-validation-for="ProductImage" class="text-danger"></span>

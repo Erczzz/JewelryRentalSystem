@@ -46,6 +46,6 @@ namespace JewelryRentalSystem.ViewModels
         public string ConfirmPassword { get; set; }
 
         public int CustomerClassId { get; set; } = 1;
-        public CustomerClassification CustomerClassification { get; set; }
+        public CustomerClassification? CustomerClassification { get; set; }
     }
 }

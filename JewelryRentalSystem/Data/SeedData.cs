@@ -11,6 +11,7 @@ namespace JewelryRentalSystem.Data
             var admin_RoleId = "9ea94376-bae3-4592-b2ef-16e2222ec6f4";
             var cust_RoleId = "f913644d-d5a1-4c4a-a73b-dacc6a8c7898";
             string user_AdminId = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
+            string user_AdminId2 = "45e23747-27a5-48e9-b7a6-755bfbb86004";
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
 
@@ -41,16 +42,37 @@ namespace JewelryRentalSystem.Data
                 CustClassId = 5
             };
 
+            var user2 = new ApplicationUser
+            {
+                Id = user_AdminId2,
+                Email = "admin2@gmail.com",
+                FirstName = "admin",
+                LastName = "admin",
+                Birthdate = DateTime.Now.AddYears(-20),
+                UserName = "admin2@gmail.com",
+                ContactNo = "09876543211",
+                Address = "Sample Address",
+                NormalizedUserName = "ADMIN2@GMAIL.COM",
+                CustClassId = 5
+            };
+
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
             user.PasswordHash = ph.HashPassword(user, "password1!");
+            user2.PasswordHash = ph.HashPassword(user2, "Password1!");
 
             //seed user
             modelBuilder.Entity<ApplicationUser>().HasData(user);
+            modelBuilder.Entity<ApplicationUser>().HasData(user2);
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = admin_RoleId,
                 UserId = user_AdminId
+            });
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = admin_RoleId,
+                UserId = user_AdminId2
             });
         }
 

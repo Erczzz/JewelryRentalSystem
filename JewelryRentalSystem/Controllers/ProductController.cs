@@ -124,7 +124,9 @@ namespace JewelryRentalSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel newProduct)
         {
-            //if (ModelState.IsValid)
+            ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName", newProduct);
+            ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
+            if (ModelState.IsValid)
             {
             if (newProduct.ProductImage != null)
             {
@@ -154,15 +156,15 @@ namespace JewelryRentalSystem.Controllers
                         await _repo.AddProduct(product);
                         TempData["Message"] = "Product has been added successfully!";
                     }
-                
+                    
 
-            }
+                }
 
 
             return RedirectToAction("ProductManagement");
             }
-/*            ViewData["Message"] = "Data is not valid to create the Todo";
-            return View();*/
+            ViewData["Message"] = "Data is not valid to create the Product";
+            return View();
         }
 
         public async Task<IActionResult> Details(int ProductId)

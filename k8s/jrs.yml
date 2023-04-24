@@ -5,13 +5,94 @@ metadata:
   name: jrs
 
 # SQL
-  kind: Deployment
-  metadata:
-    name:: jrsdb
-  spec:
-    selector:
-      matchLabels:
-        labels:
-          app: jrsdb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jrsdb
+  namespace: jrs
+spec:
+  selector:
+    matchLabels:
+      app: jrsb
+  template:
+    metadata:
+      labels:
+        app: jrsb
+    spec:
+      containers:
+      - name: jrsb
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          value: Pa$$w0rd!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jrsdb
+  namespace: jrs
+  labels:
+    app: jrsdb
+spec:
+  selector:
+    app: jrsdb
+  ports:
+  - name: tcp
+    port: 1433
+    targetPort: 1433
+  type: NodePort
       
-# 
+# Web App
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jrsweb
+  namespace: jrs
+spec:
+  selector:
+    matchLabels:
+      app: jrsweb
+  template:
+    metadata:
+      labels:
+        app: jrsweb
+    spec:
+      containers:
+      - name: jrsweb
+        image: ercz/jrs_web:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: ConnectionStrings_Server
+          value: jrsdb
+        - name: ConnectionStrings_DB
+          value: JRSDB
+        - name: ConnectionStrings_Username
+          value: sa
+        - name: ConnectionStrings_Password
+          value: Pa$$w0rd!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jrsweb
+  namespace: jrs
+  labels:
+    app: jrsweb
+spec:
+  selector:
+    app: jrsweb
+  ports:
+  - name: tcp
+    port: 5001
+    targetPort: 80
+  type: NodePort
+
+# Web aPI
