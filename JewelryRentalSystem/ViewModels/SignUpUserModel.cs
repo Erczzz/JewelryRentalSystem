@@ -36,13 +36,12 @@ namespace JewelryRentalSystem.ViewModels
         [Required(ErrorMessage = "Please enter a strong password")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [MinLength(5, ErrorMessage = "Password must be minimum length of 5")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$", ErrorMessage = "Password must have a minimum of five characters, at least one letter, one number and one special character")]
         public string Password { get; set; }
-
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$", ErrorMessage = "Password must have a minimum of five characters, at least one letter, one number and one special character")]
         [Required(ErrorMessage = "Please confirm your password")]
         [Compare("Password", ErrorMessage = "Password does not match")]
         [DataType(DataType.Password)]
-        [MinLength(5, ErrorMessage = "Password must be minimum length of 5")]
         public string ConfirmPassword { get; set; }
 
         public int CustomerClassId { get; set; } = 1;
