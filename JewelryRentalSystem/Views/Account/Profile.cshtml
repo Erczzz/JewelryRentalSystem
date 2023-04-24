@@ -57,7 +57,7 @@
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Customer"))
                 {
                 <dt class="col-sm-6">
-                    @Html.DisplayNameFor(model => model.CustomerClassName)
+                    Tier
                 </dt>
                     <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.CustomerClassName)

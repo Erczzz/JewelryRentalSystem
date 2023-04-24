@@ -800,6 +800,11 @@ img.img-responsive {
     width: 50%;
     border: ridge;
     padding: 20px;
+
+}
+#modifyCategoryH3 {
+    color: #6C757D;
+    text-align: center;
 }
 #createCategoryContainer {
     width: 50%;
@@ -997,10 +1002,11 @@ img.img-responsive {
 #deactAccWelcomeImgDiv{
     display:flex;
     justify-content:end;
+    height:300px;
 }
 #deactAccWelcomeImg {
     opacity: 40%;
-    height: 400px;
+    height: 350px;
     transform: scalex(-1)
 }
 #deactAccWelcomeContainer {
