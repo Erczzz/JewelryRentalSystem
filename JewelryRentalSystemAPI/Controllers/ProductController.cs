@@ -11,7 +11,6 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ProductController : Controller

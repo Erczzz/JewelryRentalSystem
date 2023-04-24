@@ -11,9 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class LocationsController : ControllerBase
     {
         private readonly JRSDBContext _context;

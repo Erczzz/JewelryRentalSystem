@@ -1,24 +1,21 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace JewelryRentalSystemAPI.Models
+namespace JewelryRentalSystemAPI.DTO
 {
-    public class ScheduleTime
+    public class ScheduleTimeDto
     {
-        [Key]
-        public int TimeId { get; set; }
-
         [Required]
         [DisplayName("Time")]
         public string SchedTime { get; set; }
 
-        public ScheduleTime()
+        public ScheduleTimeDto()
         {
+
         }
 
-        public ScheduleTime(int timeId, string schedTime)
+        public ScheduleTimeDto(string schedTime)
         {
-            TimeId = timeId;
             SchedTime = schedTime;
         }
     }

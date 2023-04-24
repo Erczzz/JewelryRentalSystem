@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JewelryRentalSystemAPI.DTO
 {
@@ -29,9 +30,13 @@ namespace JewelryRentalSystemAPI.DTO
         [DisplayName("Category")]
         public int CategoryId { get; set; }
 
+        [ForeignKey("CustClassId")]
+        public int? CustClassId { get; set; }
+        
+
         public ProductDto() { }
 
-        public ProductDto(string productName, string productDescription, double productPrice, int productStock, string productImage, int categoryId)
+        public ProductDto(string productName, string productDescription, double productPrice, int productStock, string productImage, int categoryId, int custclassId)
         {
             ProductName = productName;
             ProductDescription = productDescription;
@@ -39,6 +44,7 @@ namespace JewelryRentalSystemAPI.DTO
             ProductStock = productStock;
             ProductImage = productImage;
             CategoryId = categoryId;
+            CustClassId = custclassId;
         }
     }
 }

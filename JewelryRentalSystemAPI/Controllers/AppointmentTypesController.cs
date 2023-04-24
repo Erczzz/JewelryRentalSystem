@@ -1,5 +1,6 @@
 ﻿using JewelryRentalSystemAPI.Data;
 using JewelryRentalSystemAPI.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace JewelryRentalSystemAPI.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AppointmentTypesController : ControllerBase
     {
         private readonly JRSDBContext _dbContext;
