@@ -58,6 +58,8 @@ namespace JewelryRentalSystem.Data
             modelBuilder.SeedAdminUser();
             modelBuilder.SeedDefaultTime();
             modelBuilder.SeedDefaultCustomerClassification();
+            modelBuilder.SeedDefaultLocation();
+            modelBuilder.SeedDefaultAppointmentType();
 
             modelBuilder.AppointmentRelation();
             base.OnModelCreating(modelBuilder);

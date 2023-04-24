@@ -216,7 +216,7 @@ namespace JewelryRentalSystem.Controllers
         {
             ViewData["CategoryId"] = new SelectList(_JRSDBContext.Categories, "CategoryId", "CategoryName");
             ViewData["CustomerClassId"] = new SelectList(_JRSDBContext.CustomerClassifications.Where(x => x.CustomerClassId <= 4), "CustomerClassId", "CustomerClassName");
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var prod = await _repo.GetProductById(model.ProductId);
 
