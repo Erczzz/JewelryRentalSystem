@@ -150,11 +150,11 @@ namespace JewelryRentalSystemAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool AppointmentExists(int id)
         {
             return _context.Appointments.Any(e => e.AppointmentId == id);
-        }*/
+        }
     }
 }
