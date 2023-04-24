@@ -9,12 +9,21 @@ namespace JewelryRentalSystemAPI.Repository
     {
         public UserManager<ApplicationUser> _userManager { get; }
         public SignInManager<ApplicationUser> _signInManager { get; }
+        private readonly IServiceProvider _serviceProvider;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IServiceProvider serviceProvider)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _serviceProvider = serviceProvider;
         }
+
+        public async Task<IList<string>> GetUserRolesAsync(ApplicationUser user)
+        {
+            var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            return await userManager.GetRolesAsync(user);
+        }
+
 
         public async Task<ApplicationUser> SignUpUserAsync(ApplicationUser user, string password)
         {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace JewelryRentalSystemAPI.Controllers
@@ -33,7 +34,7 @@ namespace JewelryRentalSystemAPI.Controllers
             return Ok();
         }
 
-        [HttpPost("SignIn")]
+        /*[HttpPost("SignIn")]
         public async Task<IActionResult> LogIn(LogInDto logInDto)
         {
             var audience = _configuration["JWT:Audience"];
@@ -48,6 +49,7 @@ namespace JewelryRentalSystemAPI.Controllers
                     var user = _accountRepository.FindUserByEmailAsync(logInDto.Email);
                     if (user != null)
                     {
+
                         var keyBytes = Encoding.UTF8.GetBytes(key);
                         var theKey = new SymmetricSecurityKey(keyBytes);
                         var creds = new SigningCredentials(theKey,SecurityAlgorithms.HmacSha256);
@@ -57,6 +59,48 @@ namespace JewelryRentalSystemAPI.Controllers
                 }
             }
             return BadRequest();
+        }*/
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> LogIn(LogInDto logInDto)
+        {
+            var audience = _configuration["JWT:Audience"];
+            var issuer = _configuration["JWT:Issuer"];
+            var key = _configuration["JWT:Key"];
+
+            if (ModelState.IsValid)
+            {
+                var loginResult = await _accountRepository.SignInUserAsync(logInDto);
+                if (loginResult.Succeeded)
+                {
+                    var user = await _accountRepository.FindUserByEmailAsync(logInDto.Email);
+                    if (user != null)
+                    {
+                        // Get user's roles
+                        var roles = await _accountRepository.GetUserRolesAsync(user);
+
+                        var keyBytes = Encoding.UTF8.GetBytes(key);
+                        var theKey = new SymmetricSecurityKey(keyBytes);
+                        var creds = new SigningCredentials(theKey, SecurityAlgorithms.HmacSha256);
+
+                        // Add user's role as claim
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.UserName),
+                            new Claim(ClaimTypes.Email, user.Email),
+                            new Claim(ClaimTypes.NameIdentifier, user.Id),
+                        };
+                        foreach (var role in roles)
+                        {
+                            claims.Add(new Claim(ClaimTypes.Role, role));
+                        }
+
+                        var token = new JwtSecurityToken(issuer, audience, claims, expires: DateTime.Now.AddMinutes(30), signingCredentials: creds);
+                        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    }
+                }
+            }
+            return BadRequest();
         }
+
     }
 }
