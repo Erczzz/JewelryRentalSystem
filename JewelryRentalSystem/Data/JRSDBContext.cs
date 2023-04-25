@@ -31,13 +31,13 @@ namespace JewelryRentalSystem.Data
             string connectionString;
             if (_env.IsDevelopment())
             {
-                connectionString = $"Server={server};Database={db};MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True";
+                connectionString = $"Server={server};Database={db};MultipleActiveResultSets=true;TrustServerCertificate=True;";
             }
             else
             {
                 var username = _appConfig.GetConnectionString("Username");
                 var password = _appConfig.GetConnectionString("Password");
-                connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True";
+                connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true;TrustServerCertificate=True;Integrated Security=false";
             }
             
 

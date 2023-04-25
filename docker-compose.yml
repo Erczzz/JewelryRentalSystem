@@ -1,4 +1,4 @@
-version: "1.0"
+version: "3.4"
 services:
     jrsdb:
         image: mcr.microsoft.com/mssql/server:2022-latest
@@ -7,6 +7,19 @@ services:
         environment:
             - ACCEPT_EULA=Y
             - MSSQL_SA_PASSWORD=Pa$$w0rd!
+    
+    jrsapi:
+      image: jrsapi
+      build:
+          context: .
+          dockerfile: JewelryRentalSystemAPI/Dockerfile
+      ports:
+          - 5001:80
+      environment: 
+          - ConnectionStrings__Server=jrsdb
+          - ConnectionStrings__DB=JRSDB
+          - ConnectionStrings__Username=sa
+          - ConnectionStrings__Password=Pa$$w0rd!
 
     jrsweb:
       image: jrsweb

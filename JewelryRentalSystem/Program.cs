@@ -11,9 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<JRSDBContext>();
 
-builder.Services.AddDbContext<JRSDBContext>();
-builder.Services.AddTransient<JRSDBContext>();
-
 builder.Services.AddScoped<JRSDBContext, JRSDBContext>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -61,14 +58,14 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Hello changes
-app.UseEndpoints(endpoints =>
+/*app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "cartCount",
         pattern: "Cart/GetCartCount",
         defaults: new { controller = "Cart", action = "GetCartCount" });
     // add other routes as needed
-});
+});*/
 
 app.MapControllerRoute(
     name: "default",
