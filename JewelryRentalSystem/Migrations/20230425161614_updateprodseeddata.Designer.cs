@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryRentalSystem.Migrations
 {
     [DbContext(typeof(JRSDBContext))]
-    [Migration("20230425155551_updateprodseeddata")]
+    [Migration("20230425161614_updateprodseeddata")]
     partial class updateprodseeddata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,7 +121,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "dfb28322-5edc-48ed-96b0-330a71091926",
+                            ConcurrencyStamp = "7f8e022b-2f2f-42d6-bf86-145cce520c34",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin@gmail.com",
@@ -131,9 +131,9 @@ namespace JewelryRentalSystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKZ8bAsAAu/zK0Or4CqU4m0ZNMgirVYFjwAv3paC5PAQbSS/wKLc80znQPdqd+U9TQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJpxDe43HJt9Bzr9zOFG3maYsL0k1ca3e1c20Ene7DzE0kTb9w75KVteVjpEgEZmlA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e09fa62f-1bb5-4006-b2f4-1262af53b77f",
+                            SecurityStamp = "f918f039-d870-4040-af2f-75dca898d8fb",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             isActive = true
@@ -143,8 +143,8 @@ namespace JewelryRentalSystem.Migrations
                             Id = "45e23747-27a5-48e9-b7a6-755bfbb86004",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            Birthdate = new DateTime(2003, 4, 25, 23, 55, 50, 767, DateTimeKind.Local).AddTicks(848),
-                            ConcurrencyStamp = "4092c772-9d04-4049-b862-68574cea287e",
+                            Birthdate = new DateTime(2003, 4, 26, 0, 16, 12, 104, DateTimeKind.Local).AddTicks(664),
+                            ConcurrencyStamp = "b2297909-5100-4205-8579-1befe3908ac7",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin2@gmail.com",
@@ -154,9 +154,9 @@ namespace JewelryRentalSystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN2@GMAIL.COM",
                             NormalizedUserName = "ADMIN2@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIm1HCLM8wXZrwubNJB6D0lW8Ajjw1Von16CE285BJJWpY6TIQ9ehS4eBaVBELVhyg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJgYFzTbzdo8o3T3kCEYYRiAw95I4irocjr7HoERbiL0hLsHqgyaOzhfpewzpvttkg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9b80ccd6-5671-48d6-9242-fc6f755915ab",
+                            SecurityStamp = "e78dca85-ba10-4083-af36-1fc058737474",
                             TwoFactorEnabled = false,
                             UserName = "admin2@gmail.com",
                             isActive = true
@@ -470,7 +470,7 @@ namespace JewelryRentalSystem.Migrations
                             CategoryId = 1,
                             CustClassId = 2,
                             ProductDescription = "Dress up like your favorite Disney Princess Snow White by wearing this Enchanted Disney Fine Jewelry Sterling Silver and 10K Rose Gold Ring with Diamond Accent and Red Garnet. Evoking the gentle yet stern personality of Disney's first princess, this ring is all about female empowerment. It's the jewel for the independent lady who still loves fashion pretend play but does it in a chic, stylish, and very sophisticated way.",
-                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
+                            ProductImage = "/products/productImgs/6a33a5ce-c010-419a-99f7-1d6e5ef8d343_06-28-2020_SD_RGO8042_0308_72dpi_600x@2x.webp",
                             ProductName = "Diamond and Red Garnet Snow White Ring",
                             ProductPrice = 2450.0,
                             ProductStock = 5
