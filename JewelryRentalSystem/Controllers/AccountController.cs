@@ -48,6 +48,7 @@ namespace JewelryRentalSystem.Controllers
                 }
                 else
                 {
+                    TempData["Message"] = "Account has been successfully created!";
                     return View("Login");
                 }
             }

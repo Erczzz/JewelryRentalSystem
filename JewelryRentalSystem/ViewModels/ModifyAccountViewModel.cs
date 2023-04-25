@@ -7,9 +7,9 @@ namespace JewelryRentalSystem.ViewModels
     {
         public string Id { get; set; }
         [Required(ErrorMessage ="Please enter your First Name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "This field allows letters only.")]
         public string FirstName { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "This field allows letters only.")]
 
         [Required(ErrorMessage = "Please enter your Last Name")]
         public string LastName { get; set; }

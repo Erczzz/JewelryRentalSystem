@@ -6,12 +6,12 @@ namespace JewelryRentalSystem.ViewModels
 {
     public class SignUpUserModel
     {
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "This field allows letters only.")]
         [Required(ErrorMessage ="Please enter your First Name")]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "This field allows letters only.")]
         [Required(ErrorMessage = "Please enter your Last Name")]
         [DisplayName("Last Name")]
         public string LastName { get; set; }

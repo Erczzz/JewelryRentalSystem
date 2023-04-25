@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
       - name: jrsweb
-        image: ercz/jrsweb:1.0
+        image: ercz/jrsweb:1.2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
