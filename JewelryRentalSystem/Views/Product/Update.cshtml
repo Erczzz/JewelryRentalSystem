@@ -1,60 +1,64 @@
-﻿@*Hindi ko mapagana yung RegisterUserViewModel dito umaaaay*@
-@model JewelryRentalSystem.ViewModels.ProductViewModel
-
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model JewelryRentalSystem.ViewModels.ProductViewModel
 @{
+    ViewData["Title"] = "Update Product";
+}
+@if (TempData["priceError"] != null)
+{
+    <div class="alert alert-danger">@TempData["priceError"]</div>
 }
 
 <div class="container" id="updateProductContainer">
-    <h3 style="text-align:center">Update Product</h3>
+    <H4 style="text-align:center;color: #6C757D;">MODIFY PRODUCT</H4>
 
-    <form method="post" asp-action="Update" asp-controller="Product">
-        @*   <div asp-validation-summary="All" class="text-danger" ></div>*@
-        <div class="container">
-
-            <div>
-                <label>Product ID</label>
-                <input asp-for="ProductId" class="form-control" readonly />
-            </div>
-            <div>
-                <label>Product Name</label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
-            </div>
-
-            <div>
-                <label>Product Price</label>
-                <input asp-for="ProductPrice" class="form-control" />
-                <span asp-validation-for="ProductPrice" class="text-danger"></span>
-            </div>
-
-            <div>
-                <label>Product Stock</label>
-                <input asp-for="ProductStock" class="form-control" />
-                <span asp-validation-for="ProductStock" class="text-danger"></span>
-            </div>
-
-            <div>
-                <label>Product Description</label>
-                <input asp-for="ProductDescription" class="form-control" />
-                <span asp-validation-for="ProductDescription" class="text-danger"></span>
-            </div>
-
-            <div>
-                <label class="control-label">Product Image</label>
-                <div class="custome-file">
-                    <input asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
-                    <label class="custom-file-label" for="customeFile"></label>
-                </div>
-            </div>
-
+    <form asp-action="Update" asp-controller="Product" method="post" enctype="multipart/form-data">
+        <div hidden class="form-group">
+            <label asp-for="ProductId"></label>
+            <input asp-for="ProductId" class="form-control" />
+            <span asp-validation-for="ProductId" class="text-danger"></span>
         </div>
-
-        <div class="d-inline-flex justify-content-start" style="padding:10px;">
-            <button class="btn btn-warning" type="submit">Update</button> &nbsp
+        <div class="form-group">
+            <label asp-for="ProductName">Product Name</label>
+            <input asp-for="ProductName" class="form-control" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CategoryId">Category</label>
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control"></select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CustomerClassId">Product Classification</label>
+            <select asp-for="CustomerClassId" asp-items="ViewBag.CustomerClassId" class="form-control"></select>
+            <span asp-validation-for="CustomerClassId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductPrice">Product Price</label>
+            <input asp-for="ProductPrice" class="form-control" />
+            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductStock">Product Stock</label>
+            <input asp-for="ProductStock" class="form-control" />
+            <span asp-validation-for="ProductStock" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Product Description</label>
+            <textarea  asp-for="ProductDescription" class="form-control"></textarea>
+            <span asp-validation-for="ProductDescription" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductImage" class="control-label">Product Image</label>
+            <div class="custome-file">
+                <input  asp-for="ProductImage" class="custom-file-input form-control" id="customFile" />
+                <label class="custom-file-label" for="customeFile"></label>
+            </div>
+            <span asp-validation-for="ProductImage" class="text-danger"></span>
+        </div>
+        <div class="d-inline-flex justify-content-start">
+            <br />
+            <button class="btn btn-warning" type="submit">Save</button> &nbsp
             <a class="btn btn-secondary" asp-action="ProductManagement">Cancel</a>
         </div>
+
     </form>
 </div>

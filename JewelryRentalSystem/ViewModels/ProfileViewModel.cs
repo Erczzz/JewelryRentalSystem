@@ -19,6 +19,7 @@ namespace JewelryRentalSystem.ViewModels
         public string Email { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DisplayName("Birthday")]
         public DateTime? Birthdate { get; set; }
 
@@ -30,6 +31,13 @@ namespace JewelryRentalSystem.ViewModels
 
         [Required]
         public string Address { get; set; }
+        [DisplayName("Eligibility")]
+        public string CustomerClassName { get; set; }
+        [DisplayName("Item Limit")]
+        public int ItemLimit { get; set; }
+        [DisplayName("Rent Limit")]
+        public int RentLimit { get; set; }
+
 
     }
 }

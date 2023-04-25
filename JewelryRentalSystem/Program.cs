@@ -61,6 +61,14 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Hello changes
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "cartCount",
+        pattern: "Cart/GetCartCount",
+        defaults: new { controller = "Cart", action = "GetCartCount" });
+    // add other routes as needed
+});
 
 app.MapControllerRoute(
     name: "default",

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JewelryRentalSystem.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+@if (ViewBag.countTransaction == 0)
+ {
+    <br/><div>
+        <h2 id="noTransactionH2">You have no transactions created.</h2>
+    </div>
+    <div class="container" id="noTransaction2ndDiv">
+        <div>
+            <p>It seems that you have not done any transactions yet.</p>
+            <p>Create your very first transaction now!</p>
+            <a asp-action="GetAllProducts" asp-controller="Product" class="btn btn-outline-primary">Go To Shopping</a>
+        </div>
+        <div class="container" id="noTransactionContainer">
+            <img id="noTransactionImg" src="~/img/transaction.webp" />
+        </div>
+    </div>
+
+}
+else
+{
+    <h4 id="transactionListH4">TRANSACTION HISTORY</h4>
+    <hr />
+    @foreach (var item in Model) {   
+        <div id="containerTransaction">
+            <div class="card" style="width: 18rem;" id="transactioCard">
+                <div class="card-body" id="transactionCardBody">
+                    <h5 style="color:#6C757D; font-weight:bold" class="card-title">Transaction</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Appointment ID: @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Transaction ID: @Html.DisplayFor(modelItem => item.TransactionId)</h6>&#160
+                    <div class="container" id="transactionBtns">
+                        <a class="btn btn-outline-warning form-control" asp-route-id="@item.AppointmentId" asp-action="Details" asp-controller="Appointment">Appointment Details</a>
+                        <a class="btn btn-outline-warning form-control" asp-route-id="@item.TransactionId" asp-action="CartItems" asp-controller="Cart">View Items</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+}

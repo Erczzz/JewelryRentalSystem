@@ -5,9 +5,10 @@ namespace JewelryRentalSystemAPI.Interface
     public interface IProductRepository
     {
         ICollection<Product> GetProducts();
-        Product GetProductById(int prodId);
+        Product GetProductById(int productId);
         Product GetProductByName(string name);
-        /*bool CreateProduct (int categoryId, Product newProduct);*/
-        bool Save();
+        Product DeleteProduct(int productId);
+        Product AddProduct(Product newProduct);
+        Product UpdateProduct(int productId, Product newProduct);
     }
 }

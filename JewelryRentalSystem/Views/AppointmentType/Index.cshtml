@@ -1,0 +1,40 @@
+﻿@model IEnumerable<JewelryRentalSystem.Models.AppointmentType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<div class="container" id="APTTypeContainer">
+    <div class="container d-inline-flex justify-content-between p-0">
+        <h3 id="APTTypeH3">APPOINTMENT TYPE</h3>
+        <p>
+            <a class="btn btn-outline-secondary" asp-action="Create">ADD APPOINTMENT TYPE</a>
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr id="APTTR">
+                <th>
+                    Appointment Type
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="APTTRBody">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.APTName)
+                    </td>
+                    <td><a class="btn btn-secondary btn-sm" asp-action="Edit" asp-route-id="@item.AppointmentTypeId">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

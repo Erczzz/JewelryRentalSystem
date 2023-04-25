@@ -31,13 +31,13 @@ namespace JewelryRentalSystem.Data
             string connectionString;
             if (_env.IsDevelopment())
             {
-                connectionString = $"Server={server};Database={db};MultipleActiveResultSets=true";
+                connectionString = $"Server={server};Database={db};MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True";
             }
             else
             {
                 var username = _appConfig.GetConnectionString("Username");
                 var password = _appConfig.GetConnectionString("Password");
-                connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true";
+                connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True";
             }
             
 
@@ -53,27 +53,30 @@ namespace JewelryRentalSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.SeedDefaultProduct();
+            modelBuilder.SeedDefaultProductCategory();
             modelBuilder.SeedAdminUser();
             modelBuilder.SeedDefaultTime();
+            modelBuilder.SeedDefaultCustomerClassification();
+            modelBuilder.SeedDefaultLocation();
+            modelBuilder.SeedDefaultAppointmentType();
 
-            modelBuilder.ProductCategoryRelation();
-            modelBuilder.AppointmentTimeRelation();
-            modelBuilder.LocationAppointmentrelation();
+            modelBuilder.AppointmentRelation();
             base.OnModelCreating(modelBuilder);
             
         }
 
-        public DbSet<User> Users { get; set; }
-/*        public DbSet<Role> Roles { get; set; }*/
         public DbSet<Product> Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentType> AppointmentTypes { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<ScheduleTime> ScheduleTimes { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ScheduleTime> ScheduleTimes { get; set; }
         public DbSet<JewelryRentalSystem.ViewModels.ProfileViewModel>? ProfileViewModel { get; set; }
+        public DbSet<JewelryRentalSystem.ViewModels.ActivateAccountViewModel>? ActivateAccountViewModel { get; set; }
+        public DbSet<JewelryRentalSystem.ViewModels.ModifyAccountViewModel>? ModifyAccountViewModel { get; set; }
+        public DbSet<CustomerClassification> CustomerClassifications { get; set; }
     }
 }

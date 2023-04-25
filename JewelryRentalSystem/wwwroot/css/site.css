@@ -24,11 +24,13 @@ body {
 
 /* PRODUCT DESIGN */
 
-/*#productMainDiv{
-    display:inline-flex;
-    padding:0;
-    margin:0;
-}*/
+#stock {
+    color: #E9DE82;
+}
+#priceStock {
+    display: inline-flex;
+    width: 100%;
+}
 #productListH3 {
     color: #6C757D;
 }
@@ -46,9 +48,14 @@ body {
 
 #productColumn {
     width: 220px;
-    height: 350px;
+    height: 380px;
 }
-
+#productCard {
+    height: 360px;
+}
+#prodFooter{
+    height:30px;
+}
 
 #containerProd {
     display: inline-flex;
@@ -60,7 +67,9 @@ body {
     flex-direction: column;
 
 }
-
+#cardBodyDiv{
+    height:310px;
+}
 
 .card {
     border-radius: 4px;
@@ -222,6 +231,7 @@ img.img-responsive {
 #prodDetailsContainer {
     display: flex;
     justify-content: space-between;
+    padding:50px;
 }
 
 #prodDetailLastChild {
@@ -231,19 +241,25 @@ img.img-responsive {
     display: flex;
     flex-direction: column;
 }
+    #prodDetailLastChild h6 {
+        color: #CDC781;
+    }
+    #prodDetailLastChild h5 {
+        color: #909090;
+    }
 
-#backToHomePage {
-    justify-content: flex-end;
-    display: flex;
-}
+    #backToHomePage {
+        justify-content: flex-end;
+        display: flex;
+    }
 
 
 /*Sign Up Design*/
+#signUpform {
+    width: 40%;
+    padding: 0;
+}
 #signUpContainer {
-    margin-right: auto;
-    margin-left: auto;
-    margin: auto;
-
 }
 #signUpTitle, #signUpParag {
     text-align: center;
@@ -251,15 +267,29 @@ img.img-responsive {
 #signUpBtnDiv{
 
 }
+#signUpImgDiv {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
 
-#signUpContainer2ndDiv {
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
-    border-style: ridge;
-    width: 600px;
-    padding: 10px
+    padding: 0;
 }
+#signUpImg {
+    height: 450px;
+    opacity: 50%;
+    margin:auto;
+}
+#signUpContainer2ndDiv {
+    display: flex;
+    justify-content: center;
+    padding:0;
+
+}
+#signUpfield {
+    padding-top: 12px;
+}
+
 /*FOOTER AND NAVBAR*/
 .navbar, footer {
     background-color: #00263D;
@@ -267,19 +297,16 @@ img.img-responsive {
 }
 
 /*Login Design*/
+#loginImg{
+    opacity:50%;
+    height:450px;
+}
 
 #loginContainer {
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
+    display: flex;
 }
 #login2ndDiv{
-    margin-left: auto;
-    margin-left: auto;
-    margin: auto;
-    width: 500px;
-    border-style: ridge;
-    padding: 10px;
+    margin:auto;
 }
 #loginH4, #loginParag {
     text-align: center;
@@ -288,7 +315,7 @@ img.img-responsive {
 .notification {
     color: white;
     text-decoration: none;
-    padding: 5px 10px;
+    padding: 7px 10px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
@@ -440,14 +467,19 @@ img.img-responsive {
     padding:0;
 }
 /* CHANGE PASSWORD */
-#changePass2ndDiv {
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
-    padding: 20px;
-    border-style: ridge;
+#changePasswordImgDiv{
+    text-align:right;
 }
+    #changePasswordImg{
+        opacity:50%;
+    }
+    #changePass2ndDiv {
+        display: flex;
+    }
+#changePassDiv{
+    padding:50px;
 
+}
 
 #changePassBackBtn {
     margin-right: 10px;
@@ -455,12 +487,38 @@ img.img-responsive {
 #changePassBtnDiv{
     justify-content:flex-start;
 }
-#changPassTitle{
-    text-align:center;
+#changPassTitle {
+    text-align: center;
+    color: #6C757D;
 }
 
 /*APPOINTMENT DESIGN*/
-#createAppointmentDiv{
+#appointmentDetailsDiv span{
+    font-weight:bold;
+}
+#appointmentDetailsDiv {
+    width: 40%;
+    padding: 20px;
+    background-color: #F3F3F3;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+#appointmentDetailsH4 {
+    color: #6C757D;
+    text-align:center;
+}
+#createTransactionH4 {
+    color: #6C757D;
+}
+#createAppointmentH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#createAppointmentContainer {
+    width: 40%;
+}
+#createAppointmentDiv {
     width: 40%;
     border-style: ridge;
     padding: 20px;
@@ -485,12 +543,70 @@ img.img-responsive {
     text-align: center;
 }
 /* CART DESIGN */
-#cartDiv {
-    width: 80%;
-    padding: 10px;
+#deleteCartH4 {
+    color: #6C757D;
+    text-align:center;
 }
-#totalH4 {
-    color: #BB2D3B;
+#deleteCartBtns {
+    display: flex;
+    justify-content: end;
+    padding: 0px;
+}
+#deleteCartDetails {
+    width: 60%;
+}
+#deleteCartImg {
+    height:200px;
+}
+#deleteCartImgDiv {
+    width: 40%;
+}
+#deleteCartContainer {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+#cartListContainer table {
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+#cartListTR {
+    background-color: #6C757D;
+    color: white;
+    text-align: center;
+}
+#cartListTRBody {
+
+    text-align:center;
+}
+#cartProductImg {
+    height: 90px;
+
+}
+#noItemsBtn {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+#noItemsImg {
+    width: 40%;
+}
+    #noItemsImg img{
+        opacity: 40%;
+        height:400px;
+    }
+    #cartDiv {
+        width: 80%;
+        padding: 10px;
+    }
+#totalH5 {
+    color: #6C757D;
+    text-align: end;
 }
 #cartTR {
     background-color: #373737;
@@ -504,6 +620,42 @@ img.img-responsive {
 }
 
 /* ADD TO CART DESIGN */
+#editCartH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#editCartContainer {
+    width: 40%;
+    border: ridge;
+    padding: 10px;
+}
+#addToCartBtns {
+    display: flex;
+    justify-content: end;
+    padding: 0;
+}
+#addToCartH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#addToCartContainer img {
+
+    padding: 20px;
+}
+#addToCartForm {
+    padding: 20px;
+    width: 50%;
+
+}
+#addToCartContainer {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+
 #addToCartDiv {
     width: 40%;
     padding: 20px;
@@ -518,19 +670,63 @@ img.img-responsive {
 #addToCartBtn{
     text-align: right;
 }
-#addToCartImg {
-    width: 40%;
-    padding: 20px;
-    border: ridge;
-}
 #addToCartMainDiv{
     display: flex;
     justify-items:center;
 }
 
 /* PROFILE DESIGN */
+#deactivate {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#profileMainDiv {
+    border: ridge;
+    width: 60%;
+    display: flex;
+    padding: 0px;
+}
+#userProfileImg {
+    height: 250px;
+    width: 250px;
+    opacity: 25%;
+    margin: auto;
+}
+#profile2ndDiv {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #FAFAFA;
+}
+#profileBtns {
+    display: flex;
+    justify-content: space-between;
+    padding-block-start:10px;
+    padding-block-end:20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#profileBtn{
+    width:49%;
+}
+#profileDetails {
+    padding: 30px;
 
-
+}
+#profileDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: #6C757D;
+    color:white;
+    /*    background-color: #FAFAFA;
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);*/
+}
+#profileH3 {
+    color: #6C757D;
+    text-align: center;
+}
 /* ROLES DESIGN */
 #roleListH3 {
     color: #6C757D;
@@ -560,7 +756,6 @@ img.img-responsive {
     background-color: #F3F3F3;
 }
 
-
 /* PRODUCT LIST DESIGN */
 #addProductContainer {
     width: 50%;
@@ -580,10 +775,10 @@ img.img-responsive {
 #productTitleTR {
     background-color: #6C757D;
     color: white;
-    text-align: center;
+
 }
 #productTRBody {
-    text-align: center;
+
     background-color: #F3F3F3;
 }
 
@@ -605,6 +800,11 @@ img.img-responsive {
     width: 50%;
     border: ridge;
     padding: 20px;
+
+}
+#modifyCategoryH3 {
+    color: #6C757D;
+    text-align: center;
 }
 #createCategoryContainer {
     width: 50%;
@@ -627,6 +827,24 @@ img.img-responsive {
 }
 
 /* LOCATION DESIGN */
+#modifyLocationH4 {
+    color: #6C757D;
+    text-align: center;
+}
+#modifyLocationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#addLocationH4 {
+    color: #6C757D;
+    text-align: center;
+}
+#createLocationContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
 #locationListH3 {
     color: #6C757D;
 }
@@ -643,4 +861,315 @@ img.img-responsive {
 #locationTRBody {
     text-align: center;
     background-color: #F3F3F3;
+}
+
+/* TRANSACTION DESIGN */
+#confirmOrderDiv{
+    width:30%;
+    text-align:center;
+    border:ridge;
+    padding:20px;
+}
+#noTransaction2ndDiv {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+#noTransactionH2 {
+    color: #6C757D;
+}
+#noTransactionImg{
+    opacity: 30%;
+    height:500px;
+}
+#noTransactionContainer {
+    display: flex;
+    justify-content: end;
+    width: 90%;
+}
+#cartItemsTable {
+    box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -webkit-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+    -moz-box-shadow: 5px 4px 23px -6px rgba(132,132,132,0.65);
+}
+#cartItemsTR {
+    background-color: #6C757D;
+    color:white;
+}
+#cartItemsTRBody {
+    
+}
+#cartItemsH4 {
+    color: #6C757D;
+}
+#containerTransaction {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+#transactionListH4 {
+    text-align: center;
+    color: #6C757D;
+    padding:10px;
+}
+#transactionCardBody {
+    background-color: #FAFAFA
+}
+#transactionBtns{
+    padding:0px;
+}
+#transactionBtns a{
+    padding: 10px;
+}
+
+/* APPOINTMENT TYPE DESIGN */
+#modifyAptTypeContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#modifyAptTypeH4 {
+    color: #6C757D;
+    text-align: center;
+}
+#APTTypeContainer {
+    width: 50%;
+    border: ridge;
+    padding: 20px;
+}
+#APTTypeH3 {
+    color: #6C757D;
+}
+#APTTR {
+    background-color: #6C757D;
+    color:white;
+    text-align:center;
+}
+#APTTRBody {
+    background-color: #F3F3F3;
+    text-align: center;
+}
+#APTTpeContainer{
+    width:40%;
+    border:ridge;
+    padding:20px;
+}
+#APTTypeH4 {
+    text-align: center;
+    color: #6C757D;
+}
+
+/* MODIFY ACCOUNT */
+#modifyAccH4 {
+    text-align: center;
+    color: #6C757D;
+}
+#modifyAccContainer {
+    width: 40%;
+    border: ridge;
+    padding: 20px;
+}
+
+/* Not Found Design */
+
+#notFoundContainer{
+    display:flex;
+    flex-direction:column;
+    justify-items:center;
+    width:50%;
+    padding:20px;
+}
+#notFoundH1 {
+    text-align: center;
+    color: #E97B79;
+    font-size: 60px;
+    font-weight: bold;
+}
+#notFoundH6 {
+    text-align: center;
+    color: #6C757D;
+}
+#notFoundImgContainer{
+    display:flex;
+    justify-content:center;
+}
+#notFoundImg{
+    opacity: 50%;
+    height:350px;
+}
+
+/* WELCOME PAGE DESIGN */
+#deactAccWelcomeImgDiv{
+    display:flex;
+    justify-content:end;
+    height:300px;
+}
+#deactAccWelcomeImg {
+    opacity: 40%;
+    height: 350px;
+    transform: scalex(-1)
+}
+#deactAccWelcomeContainer {
+    display: flex;
+    flex-direction: column;
+}
+#deactAccWelcomeH2 {
+    color: #FFD558;
+    font-weight: bold;
+
+}
+#deactAccWelcomeContainer p {
+    color: #6C757D;
+}
+#deactAccWelcomeBtn{
+    padding:0;
+
+}
+
+/* CONFIRM DEACTIVATION OF ACCOUNT DESIGN */
+#confirmDeactivationH2 {
+    color: #6C757D;
+}
+#confirmDeactivationContainer{
+    display:flex;
+    flex-direction:column;
+    width: 50%;
+    border:ridge;
+    padding:20px;
+}
+
+/* ABOUT US DESIGN */
+#aboutUsContainer1{
+
+    padding:0;
+    display:flex;
+    flex-direction:row-reverse;
+}
+#aboutUsContainer1P {
+    width: 50%;
+    padding: 0;
+    margin-right: 20%;
+    margin: auto;
+}
+#aboutUsContainer1ImgDiv {
+    width: 50%;
+    padding: 0;
+}
+#aboutUsContainer1P span {
+    font-size: 25px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
+#aboutUsContainer1P a {
+    color: #FFC107;
+    text-decoration:none;
+}
+    #aboutUsContainer1P a:hover {
+        color: #AA8003;
+        text-decoration: none;
+    }
+#aboutUsH1 {
+    color: #6C757D;
+    text-align:center;
+}
+#aboutUsContainer1Space{
+    width:10%;
+}
+
+
+#aboutUsContainer2 {
+    padding: 0;
+    display: flex;
+
+}
+
+#aboutUsContainer2P {
+    width: 50%;
+    padding: 0;
+    margin-right: 20%;
+    margin: auto;
+}
+
+#aboutUsContainer2ImgDiv {
+    width: 50%;
+    padding: 0;
+}
+#aboutUsContainer2 {
+    margin-left: 5%;
+}
+
+#aboutUsMainDiv span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
+#aboutUsContainer2P a {
+    color: #FFC107;
+    text-decoration: none;
+}
+
+    #aboutUsContainer2P a:hover {
+        color: #AA8003;
+        text-decoration: none;
+    }
+
+#aboutUsH2 {
+    color: #6C757D;
+}
+
+#aboutUsContainer2Space {
+    width: 15%;
+}
+
+#aboutUsOurTeamH4 {
+    color: #6C757D;
+    text-align:center;
+}
+#aboutUsOurTeamContainer{
+    display:flex;
+    justify-content:center;
+}
+#containerOurTeam {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+#ourTeamCardBody{
+    text-align:center;
+    padding:10%;
+}
+#teamName {
+    color: #6C757D;
+}
+#teamEmail{
+    color:blue;
+}
+
+/* USER LIST DESIGN */
+#userListDiv {
+    border: ridge;
+    padding: 20px;
+}
+#userListH3 {
+    color: #6C757D;
+
+}
+#userListTR {
+    background-color: #6C757D;
+    color: white;
+}
+#userListTRBody {
+    background-color: #F3F3F3;
+}
+/* UPDATE USER CLASS DESIGN */
+#updateUserClassDiv {
+    width: 40%;
+    border: ridge;
+    padding: 20px;
+}
+#updateUserClassH3 {
+    color: #6C757D;
+    text-align:center;
 }

@@ -1,18 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @model List<IdentityRole>
 
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 <div class="container " id="rolesContainer">
     <div class="container d-inline-flex justify-content-between" id="roleH3AddDiv">
         <h3 id="roleListH3">USER ROLES</h3>
-        <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Role">Add Role</a>
+        <a class="btn btn-outline-secondary" asp-action="Create" asp-controller="Role">ADD ROLE</a>
     </div><br />
     <table class="table">
         <br />
         <thead class="thead-dark">
             <tr id="roleTR">
                 <th scope="col">Name</th>
-                <th scope="col">Action</th>
+@*                <th scope="col">Action</th>*@
             </tr>
         </thead>
         <tbody>
@@ -20,10 +23,17 @@
             {
                 <tr id="roleTRBody">
                     <td>@role.Name</td>
-                    <td>
-                        <a class="btn btn-secondary btn-sm" asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id">Edit</a>
-                        <a class="btn btn-danger btn-sm" asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id">Delete</a>
-                    </td>
+@*                    <td>
+                        @if(role.Name == "Administrator" || role.Name == "Customer")
+                        {
+
+                        }
+                        else
+                        {
+                            <a class="btn btn-secondary btn-sm" asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id">Delete</a>
+                        }
+                    </td>*@
                 </tr>
             }
         </tbody>

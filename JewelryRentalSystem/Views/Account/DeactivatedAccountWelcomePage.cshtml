@@ -1,0 +1,20 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+<br /><div class="container" id="deactAccWelcomeContainer">
+    <h2 id="deactAccWelcomeH2">Welcome back, @(User.FindFirst("UserFirstName").Value)! We missed seeing you around!</h2>
+    <br /><div>
+        <p>You have successfully reactivated your account.</p>
+        <p>Find out what's new!</p>
+    </div>
+    <div class="container" id="deactAccWelcomeBtn">
+        <a class="btn btn-outline-warning" asp-action="GetAllProducts" asp-controller="Product">Continue Shopping</a>
+    </div>
+
+</div>
+<div id="deactAccWelcomeImgDiv" class="container">
+    <img src="~/img/welcome2.png" id="deactAccWelcomeImg" />
+</div>

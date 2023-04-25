@@ -30,6 +30,7 @@ namespace JewelryRentalSystem.Controllers
                 var result = await _roleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {
+                    TempData["Message"] = "Role has been added successfully!";
                     return RedirectToAction("GetAllRoles");
                 }
                 foreach (var error in result.Errors)
@@ -80,7 +81,7 @@ namespace JewelryRentalSystem.Controllers
         {
             var oldRole = await _roleManager.FindByIdAsync(roleId);
 
-            var todolist = _roleManager.DeleteAsync(oldRole);
+            var rolelist = _roleManager.DeleteAsync(oldRole);
             return RedirectToAction(controllerName: "Role", actionName: "GetAllRoles"); // reload the getall page it self
         }
 

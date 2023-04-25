@@ -1,61 +1,57 @@
-﻿@model JewelryRentalSystem.Models.Cart
-@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+﻿@model JewelryRentalSystem.ViewModels.CartViewModel
 
 @{
     ViewData["Title"] = "AddToCart";
-
 }
 
-
+<h4 id="addToCartH4">ADD ITEM</h4>
 <hr />
-
-<div id="addToCartMainDiv" class="container" >
-@*    <div id="addToCartImg">
-        <img src="" />
-    </div>*@
-    <div class="container" id="addToCartDiv">
-        <div class="container" id="addToCartH4andBack">
-            <h4>ADD TO CART</h4>
+<div class="row">
+    <div class="container" id="addToCartContainer">
+        <img height="350px" src="@Model.ProductImage" />
+        <div class="=container" id="addToCartForm">
+            <form asp-action="AddToCart">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input hidden asp-for="CustomerId" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Product Name</label>
+                    <input readonly asp-for="ProductName" class="form-control" />
+                </div>
+                @{
+                    var culture = new System.Globalization.CultureInfo("fil-PH");
+                }
+                <div class="form-group">
+                    <label class="control-label">Product Price</label>
+                    <input readonly asp-for="ProductPrice" value="@Model.ProductPrice.ToString("C", culture)" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Quantity</label>
+                    <input min="1" asp-for="ProductQty" class="form-control" />
+                    <span asp-validation-for="ProductQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Rent Duration</label>
+                    <input min="1" asp-for="RentDuration" class="form-control" />
+                    <span asp-validation-for="RentDuration" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input hidden asp-for="Total" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input hidden asp-for="ProductId" class="form-control" />
+                </div>
+                <br /><div class="container" id="addToCartBtns">
+                    <div class="form-group">
+                        <input asp-action="Create" asp-controller="Cart" type="submit" value="ADD TO BAG" class="btn btn-outline-warning" />&nbsp
+                    </div>
+                    <div>
+                        <a class="btn btn-outline-secondary" asp-action="GetAllProducts" asp-controller="Product">CANCEL</a>
+                    </div>
+                </div>
+            </form>
         </div>
-        <form asp-action="Create" asp-controller="Cart">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="CustomerName" hidden value="@(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductPrice" class="control-label"></label>
-                <input readonly asp-for="ProductPrice" class="form-control" />
-                <span asp-validation-for="ProductPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" readonly class="form-control" />
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Quantity</label>
-                <input asp-for="ProductQty" class="form-control" />
-                <span asp-validation-for="ProductQty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Rent Duration (Day/s)</label>
-                <input asp-for="RentDuration" class="form-control" />
-                <span asp-validation-for="RentDuration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input hidden asp-for="Total" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input hidden asp-for="ProductId" class="form-control" />
-            </div><br />
-            <div class="d-inline-flex">
-                <div>
-                    <a asp-action="GetAllProducts" asp-controller="Product" class="btn btn-secondary">Back to List</a>&nbsp
-                </div>
-                <div class="form-group" id="addToCartBtn">
-                    <input type="submit" value="Add To Cart" class="btn btn-warning" />
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 

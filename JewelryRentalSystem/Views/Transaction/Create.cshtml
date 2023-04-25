@@ -1,0 +1,28 @@
+﻿@model JewelryRentalSystem.Models.Transaction
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container" id="confirmOrderDiv">
+    <h5 id="createTransactionH4">Confirm Order?</h5><br />
+    <div class="">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select hidden asp-for="AppointmentId" class ="form-control" asp-items="ViewBag.AppointmentId"></select>
+            </div>
+            <div class="d-inline-flex justify-content-between">
+                <div class="form-group">
+                    <input type="submit" value="Confirm" class="btn btn-warning" />&nbsp
+                </div>
+                <div>
+                    <a class="btn btn-secondary" asp-action="CancelTransaction" asp-route-id="AppointmentId" asp-controller="Transaction">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

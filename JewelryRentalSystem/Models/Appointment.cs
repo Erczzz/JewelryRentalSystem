@@ -5,35 +5,52 @@ namespace JewelryRentalSystem.Models
 {
     public class Appointment
     {
+        private static readonly DateTime MinDate = DateTime.UtcNow.Date;
+
         [Key]
         public int AppointmentId { get; set; }
         [Required]
-        [DisplayName("Customer Name")]
-        public string CustomerName { get; set; }
+        public string? CustomerId { get; set; }
+        public ApplicationUser? Customer { get; set; }
+        [Required(ErrorMessage = "Date field is required.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DateGreaterThanOrEqualToToday(ErrorMessage = "Date must be equal or greater than today's date.")]
         [DisplayName("Date")]
-        public DateTime DateOfAppointment { get; set; }
+        public DateTime? DateOfAppointment { get; set; }
         [DisplayName("Time")]
-        public string TimeOfAppointment { get; set; }
-        //[DisplayName("Total Amount")]
-        //public double TotalAmountToBePaid { get; set; }
-        public int? TimeId { get; set; }      
-        public int? LocationId { get; set; }
-        public ScheduleTime? ScheduleTime { get; set; }
-        public Location? Location { get; set; }
+        public int ScheduleTimeId { get; set; }    
+        public ScheduleTime? ScheduleTime { get; set; } = null!;
+        public int LocationId { get; set; }
+        public Location? Location { get; set; } = null!;
+        public int AppointmentTypeId { get; set; }
+        public AppointmentType? AppointmentType { get; set; } = null!;
+        public bool ConfirmAppointment { get; set; } = false;
         public Appointment() { }
 
-        public Appointment(int appointmentId, string customerName, 
-            DateTime dateOfAppointment, string timeOfAppointment, int? timeId, int? locationId)
+    }
+    public class DateGreaterThanOrEqualToTodayAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            AppointmentId = appointmentId;
-            CustomerName = customerName;
-            DateOfAppointment = dateOfAppointment;
-            TimeOfAppointment = timeOfAppointment;
-            //TotalAmountToBePaid = totalAmountToBePaid;
-            TimeId = timeId;
-            LocationId = locationId;
+            if (value == null || string.IsNullOrEmpty(value.ToString()))
+            {
+                return new ValidationResult("Date is required.");
+            }
+
+            DateTime date;
+            bool parsed = DateTime.TryParse(value.ToString(), out date);
+            if (!parsed)
+            {
+                return new ValidationResult("Invalid date format.");
+            }
+
+            if (date.Date < DateTime.UtcNow.Date)
+            {
+                return new ValidationResult("Invalid input. Please enter correct appointment date.");
+            }
+
+            return ValidationResult.Success;
         }
     }
+
 }

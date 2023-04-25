@@ -1,0 +1,19 @@
+﻿@model ApplicationUser
+
+
+<h3 id="updateUserClassH3">UPDATE CUSTOMER CLASSIFICATION</h3>
+<div class="container" id="updateUserClassDiv">
+    <form asp-action="UpdateCustomerClassId" method="post">
+        <div>
+            <label class="control-label" asp-for="CustClassId">Customer Class:</label>
+            <select class="form-control" asp-for="CustClassId" asp-items="ViewBag.CustomerClassId"></select>
+        </div>
+        <br />
+        <div class="d-inline-flex justify-content-between">
+            <div>
+                <button class="btn btn-warning" type="submit">Update</button>&nbsp
+            </div>
+            <a asp-controller="Account" asp-action="ListUsers" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

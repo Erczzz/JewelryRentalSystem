@@ -14,22 +14,25 @@
 </head>
 <body>
 
-<h3 id="loginH4">Sign In to your Account</h3>
+    <h3 style="color:#6C757D" id="loginH4">SIGN IN TO YOUR ACCOUNT</h3>
 <hr />
-
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
 
     <div id="loginContainer" class="container rounded w-20">
-        <div id="login2ndDiv" class="row">
+        <div id="login2ndDiv" class="container">
                 <form asp-action="Login">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group"><br />
                         <label asp-for="Email" class="control-label" ></label>
-                        <input asp-for="Email" class="form-control" id="loginTextbox" />
+                        <input asp-for="Email" class="form-control" id="loginTextbox" placeholder="Enter your email..." />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" id="loginTextbox" />
+                        <input asp-for="Password" class="form-control" id="loginTextbox" placeholder="Enter your password..." />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
@@ -38,17 +41,20 @@
                         </label>
                     </div>
                     <div class="d-flex" id="signUpBtnDiv">
-                    <div>
-                        <a id="changePassBackBtn" class="btn btn-secondary" asp-action="GetAllProducts" asp-controller="Product">Cancel</a>
+                    <div class="form-group">
+                        <input id="loginButton" type="submit" value="Login" class="btn btn-warning" />&nbsp
                     </div>
-                        <div class="form-group">
-                            <input id="loginButton" type="submit" value="Login" class="btn btn-warning" />
+                        <div>
+                            <a id="changePassBackBtn" class="btn btn-secondary" asp-action="GetAllProducts" asp-controller="Product">Cancel</a>
                         </div>
                     </div>
                 </form>
             <div>
                 <p id="loginParag">No Account yet? Click <a asp-action="SignUp" asp-controller="Account">here</a> to Signup.</p>
             </div>
+        </div>
+        <div class="container" id="loginImgDiv">
+            <img id="loginImg" src="~/img/login3.png" />
         </div>
 </div>
 

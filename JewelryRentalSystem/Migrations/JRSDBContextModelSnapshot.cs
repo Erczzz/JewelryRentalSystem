@@ -45,6 +45,9 @@ namespace JewelryRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CustClassId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -93,7 +96,12 @@ namespace JewelryRentalSystem.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CustClassId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -111,19 +119,45 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "54f6b7ab-dba5-45cf-afc5-db32ce587a38",
+                            ConcurrencyStamp = "cf498b1b-02a5-456d-ae91-4f13386a5b5d",
                             ContactNo = "09876543211",
+                            CustClassId = 5,
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "admin",
                             LastName = "admin",
                             LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC9uPgpjF6VSKWdP4fY1KP4L2G9yxiGzuZm7rCENGCWsog4//T11D10yV28Hr44NGw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOrIT4C1AvpXu820u43yeJhb6gsTZPCqnCG27t+sAJ0FU0fEWXgUPI/sNW5oBC7Rdw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c35d60e9-787f-4373-9fdc-91b85d7e1fd2",
+                            SecurityStamp = "322f6487-d51b-4054-acb8-12d8e2768c6b",
                             TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
+                            UserName = "admin@gmail.com",
+                            isActive = true
+                        },
+                        new
+                        {
+                            Id = "45e23747-27a5-48e9-b7a6-755bfbb86004",
+                            AccessFailedCount = 0,
+                            Address = "Sample Address",
+                            Birthdate = new DateTime(2003, 4, 25, 2, 27, 9, 826, DateTimeKind.Local).AddTicks(4114),
+                            ConcurrencyStamp = "1d3e74b2-b560-40ea-ba43-f4d23093451e",
+                            ContactNo = "09876543211",
+                            CustClassId = 5,
+                            Email = "admin2@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "admin",
+                            LastName = "admin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN2@GMAIL.COM",
+                            NormalizedUserName = "ADMIN2@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHzN5gakMp/lVR5yLs5rPL/+uQMNo/g2P9SJmFfn5McOMTWV5NpqqkGIswliKW+XAA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "668978ac-82b5-426f-a63e-156bb448e9d2",
+                            TwoFactorEnabled = false,
+                            UserName = "admin2@gmail.com",
+                            isActive = true
                         });
                 });
 
@@ -135,28 +169,34 @@ namespace JewelryRentalSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"), 1L, 1);
 
-                    b.Property<string>("CustomerName")
+                    b.Property<int>("AppointmentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ConfirmAppointment")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateOfAppointment")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("LocationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TimeId")
+                    b.Property<int>("ScheduleTimeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("TimeOfAppointment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AppointmentId");
 
+                    b.HasIndex("AppointmentTypeId");
+
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("TimeId");
+                    b.HasIndex("ScheduleTimeId");
 
                     b.ToTable("Appointments");
                 });
@@ -169,10 +209,6 @@ namespace JewelryRentalSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentTypeId"), 1L, 1);
 
-                    b.Property<string>("APTDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("APTName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -180,6 +216,13 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("AppointmentTypeId");
 
                     b.ToTable("AppointmentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            AppointmentTypeId = 1,
+                            APTName = "Pick-Up"
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Cart", b =>
@@ -190,22 +233,18 @@ namespace JewelryRentalSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"), 1L, 1);
 
-                    b.Property<string>("CustomerName")
+                    b.Property<bool>("ConfirmRent")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("ProductPrice")
-                        .HasColumnType("float");
-
-                    b.Property<double>("ProductQty")
-                        .HasColumnType("float");
+                    b.Property<int>("ProductQty")
+                        .HasColumnType("int");
 
                     b.Property<int>("RentDuration")
                         .HasColumnType("int");
@@ -213,7 +252,16 @@ namespace JewelryRentalSystem.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
+                    b.Property<int?>("TransactionId")
+                        .HasColumnType("int");
+
                     b.HasKey("CartId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("TransactionId");
 
                     b.ToTable("Carts");
                 });
@@ -233,6 +281,88 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Ring"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Necklace"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Bracelet"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Earrings"
+                        });
+                });
+
+            modelBuilder.Entity("JewelryRentalSystem.Models.CustomerClassification", b =>
+                {
+                    b.Property<int>("CustomerClassId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerClassId"), 1L, 1);
+
+                    b.Property<string>("CustomerClassName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ItemLimit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentLimit")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerClassId");
+
+                    b.ToTable("CustomerClassifications");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerClassId = 1,
+                            CustomerClassName = "Classic",
+                            ItemLimit = 5,
+                            RentLimit = 1
+                        },
+                        new
+                        {
+                            CustomerClassId = 2,
+                            CustomerClassName = "Silver",
+                            ItemLimit = 10,
+                            RentLimit = 5
+                        },
+                        new
+                        {
+                            CustomerClassId = 3,
+                            CustomerClassName = "Gold",
+                            ItemLimit = 20,
+                            RentLimit = 10
+                        },
+                        new
+                        {
+                            CustomerClassId = 4,
+                            CustomerClassName = "Platinum",
+                            ItemLimit = 0,
+                            RentLimit = 0
+                        },
+                        new
+                        {
+                            CustomerClassId = 5,
+                            CustomerClassName = "Admin",
+                            ItemLimit = 0,
+                            RentLimit = 0
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
@@ -250,50 +380,33 @@ namespace JewelryRentalSystem.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Locations");
-                });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
-
-                    b.Property<DateTime>("RentDueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("RentStartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.Payment", b =>
-                {
-                    b.Property<int>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ReturnAsPerDueDate")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TotalNoOfDays")
-                        .HasColumnType("int");
-
-                    b.HasKey("PaymentId");
-
-                    b.ToTable("Payments");
+                    b.HasData(
+                        new
+                        {
+                            LocationId = 1,
+                            LocationName = "Makati City"
+                        },
+                        new
+                        {
+                            LocationId = 2,
+                            LocationName = "Quezon City"
+                        },
+                        new
+                        {
+                            LocationId = 3,
+                            LocationName = "Valenzuela City"
+                        },
+                        new
+                        {
+                            LocationId = 4,
+                            LocationName = "Antipolo City"
+                        },
+                        new
+                        {
+                            LocationId = 5,
+                            LocationName = "Taguig City"
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.Product", b =>
@@ -304,10 +417,10 @@ namespace JewelryRentalSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int?>("CustClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProductDescription")
@@ -330,28 +443,35 @@ namespace JewelryRentalSystem.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("CustClassId");
+
                     b.ToTable("Products");
-                });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Role", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("Role");
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 4,
+                            CustClassId = 2,
+                            ProductDescription = "Add a pop of color and a touch of magical charm to your looks with this pair of Enchanted Disney Fine Jewelry Dangle Earrings. Featuring a 14k rose gold finish, these sterling silver earrings glitter with class and beauty. Glistening Rose De France complement the pure sparkle of 1/10 CTTW of diamonds. With these beautiful earrings, you won't need magic hair that glows when you sing in order to shine.",
+                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
+                            ProductName = "Enchanted Disney Fine Jewelry",
+                            ProductPrice = 1250.0,
+                            ProductStock = 4
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 1,
+                            CustClassId = 3,
+                            ProductDescription = "A mysterious bloom carrying many meanings. The black rose, in this Disney Villain ring, actually stands for rebirth and new beginnings. Get this as a token to honor a major change in your life. A creation from the Enchanted Disney Fine Jewelry Collection, this Maleficent Ring features a thorn-inspired sterling silver band plated in black rhodium.",
+                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
+                            ProductName = "Maleficent Rose Ring",
+                            ProductPrice = 4000.0,
+                            ProductStock = 5
+                        });
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.Models.ScheduleTime", b =>
@@ -413,23 +533,51 @@ namespace JewelryRentalSystem.Migrations
                         });
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.User", b =>
+            modelBuilder.Entity("JewelryRentalSystem.Models.Transaction", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"), 1L, 1);
+
+                    b.Property<int?>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TransactionId");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("JewelryRentalSystem.ViewModels.ActivateAccountViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivateAccountViewModel");
+                });
+
+            modelBuilder.Entity("JewelryRentalSystem.ViewModels.ModifyAccountViewModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("Birthdate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
@@ -447,20 +595,9 @@ namespace JewelryRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Users");
+                    b.ToTable("ModifyAccountViewModel");
                 });
 
             modelBuilder.Entity("JewelryRentalSystem.ViewModels.ProfileViewModel", b =>
@@ -480,6 +617,10 @@ namespace JewelryRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerClassName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -488,9 +629,15 @@ namespace JewelryRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ItemLimit")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RentLimit")
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId");
 
@@ -631,6 +778,11 @@ namespace JewelryRentalSystem.Migrations
                         {
                             UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             RoleId = "9ea94376-bae3-4592-b2ef-16e2222ec6f4"
+                        },
+                        new
+                        {
+                            UserId = "45e23747-27a5-48e9-b7a6-755bfbb86004",
+                            RoleId = "9ea94376-bae3-4592-b2ef-16e2222ec6f4"
                         });
                 });
 
@@ -653,50 +805,101 @@ namespace JewelryRentalSystem.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("JewelryRentalSystem.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("JewelryRentalSystem.Models.CustomerClassification", "CustomerClassification")
+                        .WithMany("Users")
+                        .HasForeignKey("CustClassId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("CustomerClassification");
+                });
+
             modelBuilder.Entity("JewelryRentalSystem.Models.Appointment", b =>
                 {
-                    b.HasOne("JewelryRentalSystem.Models.Location", "Location")
+                    b.HasOne("JewelryRentalSystem.Models.AppointmentType", "AppointmentType")
+                        .WithMany()
+                        .HasForeignKey("AppointmentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JewelryRentalSystem.Models.ApplicationUser", "Customer")
                         .WithMany("Appointments")
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("JewelryRentalSystem.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("JewelryRentalSystem.Models.ScheduleTime", "ScheduleTime")
-                        .WithMany("Appointments")
-                        .HasForeignKey("TimeId");
+                        .WithMany()
+                        .HasForeignKey("ScheduleTimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppointmentType");
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Location");
 
                     b.Navigation("ScheduleTime");
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Product", b =>
+            modelBuilder.Entity("JewelryRentalSystem.Models.Cart", b =>
                 {
-                    b.HasOne("JewelryRentalSystem.Models.Cart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("JewelryRentalSystem.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.User", b =>
-                {
-                    b.HasOne("JewelryRentalSystem.Models.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("JewelryRentalSystem.Models.Role", "Roles")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
+                    b.HasOne("JewelryRentalSystem.Models.ApplicationUser", "Customer")
+                        .WithMany("Carts")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cart");
+                    b.HasOne("JewelryRentalSystem.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Roles");
+                    b.HasOne("JewelryRentalSystem.Models.Transaction", "Transaction")
+                        .WithMany("Carts")
+                        .HasForeignKey("TransactionId");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Transaction");
+                });
+
+            modelBuilder.Entity("JewelryRentalSystem.Models.Product", b =>
+                {
+                    b.HasOne("JewelryRentalSystem.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JewelryRentalSystem.Models.CustomerClassification", "CustomerClassification")
+                        .WithMany("Products")
+                        .HasForeignKey("CustClassId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Category");
+
+                    b.Navigation("CustomerClassification");
+                });
+
+            modelBuilder.Entity("JewelryRentalSystem.Models.Transaction", b =>
+                {
+                    b.HasOne("JewelryRentalSystem.Models.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId");
+
+                    b.Navigation("Appointment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -750,29 +953,23 @@ namespace JewelryRentalSystem.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Cart", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.Category", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("JewelryRentalSystem.Models.Location", b =>
+            modelBuilder.Entity("JewelryRentalSystem.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Carts");
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.Role", b =>
+            modelBuilder.Entity("JewelryRentalSystem.Models.CustomerClassification", b =>
                 {
+                    b.Navigation("Products");
+
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("JewelryRentalSystem.Models.ScheduleTime", b =>
+            modelBuilder.Entity("JewelryRentalSystem.Models.Transaction", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Carts");
                 });
 #pragma warning restore 612, 618
         }

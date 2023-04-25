@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Acount";
+}
+
+<div class="container" id="confirmDeactivationContainer">
+    <h2 id="confirmDeactivationH2">Confirm Account Deactivation</h2>
+    <p>Are you sure you want to deactivate your account?</p>
+    <div class="d-inline-flex justify-content-start">
+        <form method="post" asp-action="Deactivate">
+            <button type="submit" class="btn btn-danger">Deactivate Account</button> &nbsp
+        </form>
+        <div>
+            <a class="btn btn-secondary" asp-action="Profile" asp-controller="Account">Cancel</a>
+        </div>
+    </div>
+</div>

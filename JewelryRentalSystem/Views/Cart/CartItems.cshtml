@@ -1,0 +1,64 @@
+﻿@model IEnumerable<JewelryRentalSystem.Models.Cart>
+
+@{
+    ViewData["Title"] = "CartItems";
+    var culture = new System.Globalization.CultureInfo("fil-PH");
+}
+<div class="container d-inline-flex justify-content-between p-0">
+    <h4 id="cartItemsH4">TRANSACTION ITEMS</h4>
+    <div>
+        <a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Transaction">Back To List</a>
+    </div>
+</div>
+<br />
+<br />
+
+<table id="cartItemsTable" class="table">
+    <thead>
+        <tr id="cartItemsTR">
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr id="cartItemsTRBody">
+            <td>
+                <img id="cartProductImg" src="@Html.DisplayFor(modelItem => item.Product.ProductImage)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<h5 id="totalH5">Total Amount: @Model.Sum(p => p.Total).ToString("C", culture)</h5>

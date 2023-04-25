@@ -13,7 +13,6 @@ namespace JewelryRentalSystem.Models
         [DisplayName("Time")]
         public string SchedTime { get; set; }
 
-        public List<Appointment> Appointments { get; set; }
         public ScheduleTime()
         {
             

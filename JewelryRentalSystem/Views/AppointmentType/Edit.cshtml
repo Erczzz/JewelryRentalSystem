@@ -1,0 +1,32 @@
+﻿@model JewelryRentalSystem.Models.AppointmentType
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4 id="modifyAptTypeH4">MODIFY APPOINTMENT TYPE</h4>
+<hr />
+<div class="row">
+    <div class="container" id="modifyAptTypeContainer">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AppointmentTypeId" />
+            <div class="form-group">
+                <label class="control-label">Appointment Type Name</label>
+                <input asp-for="APTName" class="form-control" />
+                <span asp-validation-for="APTName" class="text-danger"></span>
+            </div><br />
+            <div class="d-inline-flex justify-content-between">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-warning" />&nbsp
+                </div>
+                <div>
+                    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

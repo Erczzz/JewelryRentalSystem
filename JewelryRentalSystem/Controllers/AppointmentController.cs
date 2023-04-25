@@ -7,100 +7,119 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JewelryRentalSystem.Data;
 using JewelryRentalSystem.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace JewelryRentalSystem.Controllers
 {
     public class AppointmentController : Controller
     {
         private readonly JRSDBContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AppointmentController(JRSDBContext context)
+        public AppointmentController(JRSDBContext context, 
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Appointment
         public async Task<IActionResult> Index()
         {
-            var jRSDBContext = _context.Appointments.Include(a => a.Location).Include(a => a.ScheduleTime);
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
+            var jRSDBContext = _context.Appointments.Include(a => a.AppointmentType).Include(a => a.Customer).Include(a => a.Location).Include(a => a.ScheduleTime);
             return View(await jRSDBContext.ToListAsync());
         }
 
-        // GET: Appointment/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
+
             if (id == null || _context.Appointments == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointment = await _context.Appointments
+                .Include(a => a.AppointmentType)
+                .Include(a => a.Customer)
                 .Include(a => a.Location)
                 .Include(a => a.ScheduleTime)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(appointment);
         }
 
-        // GET: Appointment/Create
+
         public IActionResult Create()
         {
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "APTName");
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "UserName");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime");
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
             return View();
         }
 
-        // POST: Appointment/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TimeId,LocationId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment, int id)
         {
+
+            // Get the current user ID
+            string currentUserId = _userManager.GetUserId(HttpContext.User);
+
+            // Set the appointment customer ID to the current user ID
+            appointment.CustomerId = currentUserId;
+
             if (ModelState.IsValid)
             {
-                
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Transaction");
             }
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "UserName", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.TimeId);
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
             return View(appointment);
         }
 
-        // GET: Appointment/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
             if (id == null || _context.Appointments == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointment = await _context.Appointments.FindAsync(id);
             if (appointment == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.TimeId);
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
             return View(appointment);
         }
 
-        // POST: Appointment/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerName,DateOfAppointment,TimeOfAppointment,TimeId,LocationId")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,CustomerId,DateOfAppointment,ScheduleTimeId,LocationId,AppointmentTypeId")] Appointment appointment)
         {
             if (id != appointment.AppointmentId)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             if (ModelState.IsValid)
@@ -114,7 +133,7 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (!AppointmentExists(appointment.AppointmentId))
                     {
-                        return NotFound();
+                        return View("NotFound", "Home");
                     }
                     else
                     {
@@ -123,32 +142,36 @@ namespace JewelryRentalSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "AppointmentTypeId", appointment.AppointmentTypeId);
+            ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id", appointment.CustomerId);
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName", appointment.LocationId);
-            ViewData["TimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.TimeId);
+            ViewData["ScheduleTimeId"] = new SelectList(_context.ScheduleTimes, "TimeId", "SchedTime", appointment.ScheduleTimeId);
             return View(appointment);
         }
 
-        // GET: Appointment/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var count = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Count();
+            ViewBag.Count = count;
             if (id == null || _context.Appointments == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             var appointment = await _context.Appointments
+                .Include(a => a.AppointmentType)
+                .Include(a => a.Customer)
                 .Include(a => a.Location)
                 .Include(a => a.ScheduleTime)
                 .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
-                return NotFound();
+                return View("NotFound", "Home");
             }
 
             return View(appointment);
         }
 
-        // POST: Appointment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

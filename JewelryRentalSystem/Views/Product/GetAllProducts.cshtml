@@ -1,6 +1,18 @@
 ﻿@model IEnumerable<JewelryRentalSystem.Models.Product>
 @inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
 
+@{
+    Layout = "_Layout";
+    
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["AddToCartError"] != null)
+{
+    <div class="alert alert-danger">@TempData["AddToCartError"]</div>
+}
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -29,13 +41,6 @@
 </div>
 
 <div class="container" id="productMainDiv">
-@*    <div class="container" id="productLeftContainer">
-        <h6>Categories</h6>
-        @foreach(var item in Model)
-        {
-            <a>@item.CategoryId</a>
-        }
-    </div>*@
     <div id="productContainer">
 
         <br />
@@ -51,61 +56,80 @@
             <div id="prod2ndDiv">
                 @foreach (var item in Model)
                 {
+                    var price = item.ProductPrice;
+                    var culture = new System.Globalization.CultureInfo("fil-PH");
                     @*            <div class="container" id="cardContainer">*@
                     <div id="containerProd" class="row">
                         <div class="col" id="productColumn">
                             <a id="productView" asp-action="Details" asp-controller="Product" asp-route-productId="@item.ProductId">
                                 <div class="card" id="productCard">
-                                    <img src="@item.ProductImage" class="card-img-top" height="200">
-                                    <div class="card-body">
-                                        <p class="card-title">@item.ProductName</p>
-                                        <h5>Php @item.ProductPrice</h5>
-                                    </div>
-                                    <div class="card-footer d-flex flex-row justify-content-between">
-                                        <div>
-                                            @if (item.ProductStock == 0)
-                                            {
-                                                <small class="text-muted">Out of stock</small>
-                                            }
-                                            else if (item.ProductStock == 1)
-                                            {
-                                                <small class="text-muted">@item.ProductStock item left</small>
-                                            }
-                                            else
-                                            {
-                                                <small class="text-muted">@item.ProductStock items left</small>
-                                            }
-                                        </div>
-                                        <div>
-                                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
-                                            {
+                                    <div id="cardBodyDiv">
+                                        <img src="@item.ProductImage" class="card-img-top" height="200">
+                                        <div class="card-body">
+                                            <p style="text-align:center; color:#6C757D; font-size:13px" class="card-title">@item.ProductName</p>
+                                            
+                                            <div class="container" id="priceStock">
+                                                <p value="@item.ProductPrice" id="price" style="text-align:center; color:#6C757D; font-size:13px">@item.ProductPrice.ToString("C", culture) | </p>&nbsp
+                                                <div>
+                                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                                    {
+                                                        <small style="font-size:12px" id="stock">@item.ProductStock Item(s)</small>
 
-                                            }
-                                            else
-                                            {
+                                                    }
+                                                    else
+                                                    {
+                                                        @if (item.ProductStock == 0)
+                                                        {
+                                                            <p id="stock" style="font-size:10px">Out of stock</p>
+                                                        }
+                                                        else if (item.ProductStock == 1)
+                                                        {
+                                                            <p id="stock" style="font-size:12px">@item.ProductStock item left</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p style="font-size:10px" id="stock">IN STOCK!</p>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <div class="card-footer" >
+                                            <div class="d-flex flex-column">
                                                 @if (_signInManager.IsSignedIn(User))
                                                 {
-                                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-secondary btn-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                                        </svg>
-                                                    </a>
+                                                    if(item.ProductStock == 0)
+                                                    {
+                                                        <a asp-controller="" asp-action="" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
+                                                            ADD TO BAG
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
+                                                            ADD TO BAG
+                                                        </a>
+                                                    }
+                                                    
                                                 }
                                                 else
                                                 {
-                                                    <a asp-controller="Account" asp-action="Login" class="btn btn-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                                                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                                        </svg>
+                                                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                        ADD TO BAG
                                                     </a>
                                                 }
 
-                                            }
-
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
+
                                 </div>
                             </a>
                         </div>
