@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: jrs
 
-# SQL
+# SQL Server
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -14,14 +14,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: jrsb
+      app: jrsdb
   template:
     metadata:
       labels:
-        app: jrsb
+        app: jrsdb
     spec:
       containers:
-      - name: jrsb
+      - name: jrsdb
         image: mcr.microsoft.com/mssql/server:2022-latest
         ports:
         - containerPort: 1433
@@ -46,7 +46,6 @@ spec:
     port: 1433
     targetPort: 1433
   type: NodePort
-      
 # Web App
 ---
 apiVersion: apps/v1
@@ -65,18 +64,18 @@ spec:
     spec:
       containers:
       - name: jrsweb
-        image: ercz/jrs_web:1.0
+        image: ercz/jrsweb:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
-        - name: ConnectionStrings_Server
+        - name: ConnectionStrings__Server
           value: jrsdb
-        - name: ConnectionStrings_DB
+        - name: ConnectionStrings__DB
           value: JRSDB
-        - name: ConnectionStrings_Username
+        - name: ConnectionStrings__Username
           value: sa
-        - name: ConnectionStrings_Password
+        - name: ConnectionStrings__Password
           value: Pa$$w0rd!
 ---
 apiVersion: v1
@@ -94,5 +93,50 @@ spec:
     port: 5001
     targetPort: 80
   type: NodePort
-
-# Web aPI
+# Web API
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jrsapi
+  namespace: jrs
+spec:
+  selector:
+    matchLabels:
+      app: jrsapi
+  template:
+    metadata:
+      labels:
+        app: jrsapi
+    spec:
+      containers:
+      - name: jrsapi
+        image: ercz/jrsapi:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: ConnectionStrings__Server
+          value: jrsdb
+        - name: ConnectionStrings__DB
+          value: JRSDB
+        - name: ConnectionStrings__Username
+          value: sa
+        - name: ConnectionStrings__Password
+          value: Pa$$w0rd!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jrsapi
+  namespace: jrs
+  labels:
+    app: jrsapi
+spec:
+  selector:
+    app: jrsapi
+  ports:
+  - name: tcp
+    port: 6001
+    targetPort: 80
+  type: NodePort
