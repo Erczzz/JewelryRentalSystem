@@ -6,10 +6,12 @@ namespace JewelryRentalSystem.ViewModels
 {
     public class SignUpUserModel
     {
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
         [Required(ErrorMessage ="Please enter your First Name")]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
         [Required(ErrorMessage = "Please enter your Last Name")]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
@@ -48,30 +50,4 @@ namespace JewelryRentalSystem.ViewModels
         public int CustomerClassId { get; set; } = 1;
         public CustomerClassification? CustomerClassification { get; set; }
     }
-
-    public class DateGreaterThanOrEqualToTodayAttribute : ValidationAttribute
-    {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            if (value == null)
-            {
-                return new ValidationResult("Date is required.");
-            }
-
-            DateTime date;
-            bool parsed = DateTime.TryParse(value.ToString(), out date);
-            if (!parsed)
-            {
-                return new ValidationResult("Invalid date format.");
-            }
-
-            if (date.Date > DateTime.UtcNow.Date)
-            {
-                return new ValidationResult("Invalid input. Please enter correct birthdate.");
-            }
-
-            return ValidationResult.Success;
-        }
-    }
-
 }

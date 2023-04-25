@@ -7,13 +7,17 @@ namespace JewelryRentalSystem.ViewModels
     {
         public string Id { get; set; }
         [Required(ErrorMessage ="Please enter your First Name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
         public string FirstName { get; set; }
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "This field allows letters only.")]
 
         [Required(ErrorMessage = "Please enter your Last Name")]
         public string LastName { get; set; }
 
+        [DisplayName("Birth of Date")]
+        [Required(ErrorMessage = "Date field is required.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DateGreaterThanOrEqualToToday(ErrorMessage = "Date must be equal or greater than today's date.")]
         public DateTime? Birthdate { get; set; }
 
         [Required]
@@ -29,5 +33,54 @@ namespace JewelryRentalSystem.ViewModels
         [Display(Name = "Email Address")]
         [EmailAddress(ErrorMessage ="Please enter a valid Email Address")]
         public string Email { get; set; }
+    }
+    public class DateGreaterThanOrEqualToTodayAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value == null)
+            {
+                return new ValidationResult("Date is required.");
+            }
+
+            DateTime date;
+            bool parsed = DateTime.TryParse(value.ToString(), out date);
+            if (!parsed)
+            {
+                return new ValidationResult("Invalid date format.");
+            }
+
+            if (date.Date > DateTime.UtcNow.Date)
+            {
+                return new ValidationResult("Invalid input. Please enter correct birthdate.");
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+
+    public class DateEssThanOrEqualToTodayAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value == null)
+            {
+                return new ValidationResult("Date is required.");
+            }
+
+            DateTime date;
+            bool parsed = DateTime.TryParse(value.ToString(), out date);
+            if (!parsed)
+            {
+                return new ValidationResult("Invalid date format.");
+            }
+
+            if (date.Date < DateTime.UtcNow.Date)
+            {
+                return new ValidationResult("Invalid input. Please enter correct birthdate.");
+            }
+
+            return ValidationResult.Success;
+        }
     }
 }
