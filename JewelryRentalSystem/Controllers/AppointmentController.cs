@@ -69,13 +69,30 @@ namespace JewelryRentalSystem.Controllers
 
             if (invalidCartItems.Any())
             {
+                var errorMessages = "The following cart items have invalid quantities:" + Environment.NewLine;
+
                 foreach (var item in invalidCartItems)
                 {
-                    /*Console.WriteLine($"Invalid cart item: ProductId = {item.Cart.ProductId}, ProductQty = {item.Cart.ProductQty}, ProductStock = {item.ProductStock}");*/
-                    TempData["InvalidCartItem"] = $"Invalid cart item: {item.Product.ProductName} has {item.ProductStock} stocks left. Please decrease your cart item of {item.Cart.ProductQty} to available stocks.";
+                    errorMessages += $"- {item.Product.ProductName} has {item.ProductStock} stocks left, but your cart has {item.Cart.ProductQty} items." + Environment.NewLine;
+                }
+
+                if (invalidCartItems.Count() == 1)
+                {
+                    foreach (var item in invalidCartItems)
+                    {
+                        TempData["InvalidCartItem"] = $"Invalid cart item: {item.Product.ProductName} has {item.ProductStock} stocks left. Please decrease your cart item of {item.Cart.ProductQty} to available stocks to continue.";
+                        return RedirectToAction("Index", "Cart");
+                    }
+                        
+                }
+                else
+                {
+                    TempData["InvalidCartItems"] = errorMessages;
                     return RedirectToAction("Index", "Cart");
                 }
             }
+
+
 
             ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "APTName");
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "UserName");
