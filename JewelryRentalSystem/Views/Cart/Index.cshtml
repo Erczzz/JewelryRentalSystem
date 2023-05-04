@@ -11,6 +11,10 @@
 {
     <div class="alert alert-success">@TempData["Message"]</div>
 }
+@if (TempData["InvalidCartItem"] != null)
+{
+    <div class="alert alert-danger">@TempData["InvalidCartItem"]</div>
+}
 <div class="container" id="cartListContainer">
     
     @if (ViewBag.Count == 0)

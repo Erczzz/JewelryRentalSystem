@@ -119,7 +119,7 @@ namespace JewelryRentalSystem.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            ConcurrencyStamp = "d2811590-b67a-4936-9251-271fe1b8ab84",
+                            ConcurrencyStamp = "145ef3d7-adcc-46df-884c-4ee78fb264c9",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin@gmail.com",
@@ -129,9 +129,9 @@ namespace JewelryRentalSystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECldNdohqcFLWw5vPkE8pQmImaV60RUOw6gWtvyhDXsMoY08VdLP2m5Gg1VOHZId5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH3VU/zbVFISJVBXVKF1oVKNpouWvoCpwgIq/lurvJmJRVYaT4oU0cDeguauNjWKGQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0e5217cd-68d8-4964-9b3d-519ced9ee70d",
+                            SecurityStamp = "7e815b25-e9c8-46c8-9fa0-031aeb176ccc",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             isActive = true
@@ -141,8 +141,8 @@ namespace JewelryRentalSystem.Migrations
                             Id = "45e23747-27a5-48e9-b7a6-755bfbb86004",
                             AccessFailedCount = 0,
                             Address = "Sample Address",
-                            Birthdate = new DateTime(2003, 4, 26, 2, 21, 18, 861, DateTimeKind.Local).AddTicks(252),
-                            ConcurrencyStamp = "c4bc6ba6-7699-4bc6-8bf8-d76d1acc2abb",
+                            Birthdate = new DateTime(2003, 4, 26, 2, 52, 31, 991, DateTimeKind.Local).AddTicks(2810),
+                            ConcurrencyStamp = "0112c54c-843d-4628-9c7b-49393ee6f016",
                             ContactNo = "09876543211",
                             CustClassId = 5,
                             Email = "admin2@gmail.com",
@@ -152,9 +152,9 @@ namespace JewelryRentalSystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN2@GMAIL.COM",
                             NormalizedUserName = "ADMIN2@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENyyW5de3BT6tpiKszCEug6XqHLt/wJ4Qxe9UMI7serbpQkyPrwwsWVbxs9AJ4vpuQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF034IpwTHLTkw5LjYLMdp0etVdlwv8mlGlQ/XnPPt4TyPbDpWewR8AQefEk8tEuaA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "abc6c47b-8e67-4b64-9f17-907833fdb671",
+                            SecurityStamp = "24714400-fd4f-40fc-ac1e-507fb03a07f5",
                             TwoFactorEnabled = false,
                             UserName = "admin2@gmail.com",
                             isActive = true
@@ -471,182 +471,6 @@ namespace JewelryRentalSystem.Migrations
                             ProductImage = "/products/productImgs/6a33a5ce-c010-419a-99f7-1d6e5ef8d343_06-28-2020_SD_RGO8042_0308_72dpi_600x@2x.webp",
                             ProductName = "Diamond and Red Garnet Snow White Ring",
                             ProductPrice = 2450.0,
-                            ProductStock = 5
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 4,
-                            CustClassId = 2,
-                            ProductDescription = "Such a classic pair of earrings but now given a magical twist. These rose-shaped studs with diamond center are crafted from 14k rose gold over sterling silver. They are part of the Enchanted Disney Fine Jewelry Collection and are inspired by Belle. With a design influenced by Belle's character, you'll see these rose earrings to be gentle and delicate yet very much capable of standing and shining on their own.",
-                            ProductImage = "/products/productImgs/0332f9d5-a488-4011-a5e3-407a7ab96a86_06-11-2020_SD_ERO4580_0265_72dpi_800x.webp",
-                            ProductName = "Maleficent Rose Ring",
-                            ProductPrice = 1290.0,
-                            ProductStock = 6
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            CategoryId = 1,
-                            CustClassId = 1,
-                            ProductDescription = "The ring that gets a lot of compliments. Why would anyone not notice this beauty? Crafted from 14k rose gold over sterling silver, here is a ring inspired by Belle and exudes her fierce but kind and gentle but strong character. Featuring a bypass shank with sides lined in diamonds and a centerpiece of meeting roses, the interesting design of this ring is meant to start conversations and leave impressions.",
-                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
-                            ProductName = "Belle Rose Fashion Ring",
-                            ProductPrice = 610.0,
-                            ProductStock = 7
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            CategoryId = 2,
-                            CustClassId = 1,
-                            ProductDescription = "Celebrate your life that's full of contrast with this heart-shaped pendant inspired by Belle. Part of the Enchanted Disney Fine Jewelry Collection, this sterling silver pendant has its one side simple and the other embellished with diamonds and a 14k rose gold flower accent. Consider this necklace a symbolic accessory that will remind you of the importance of contrasts in order to find balance.",
-                            ProductImage = "/products/productImgs/9a7cf85c-5c57-4571-b1b3-b5a0b9a50ecc_08-16-2018_SD_PDO3592_0003_300dpiNoBezel_600x@2x.webp",
-                            ProductName = "Rose Fashion Pendant Necklace",
-                            ProductPrice = 735.0,
-                            ProductStock = 3
-                        },
-                        new
-                        {
-                            ProductId = 6,
-                            CategoryId = 2,
-                            CustClassId = 1,
-                            ProductDescription = "Rapunzel Collection Style #PDO5187-SP-DS Enchanted Disney Fine Jewelry Sterling Silver with 1/20 CTTW Dancing Diamond Rapunzel Pendant Necklace\r\nA twinkling sun pendant artistically rendered in sterling silver. This piece of fine jewelry is inspired by Rapunzel and is a must-have piece for any Disney fashionista. With this pendant, you not only get to level up your accessorizing but also get to wear a jewelry that's pretty and symbolic. Let this enchanting necklace shaped like the Kingdom of Corona's crest be a beautiful reminder of facing your fears and shining your light.",
-                            ProductImage = "/products/productImgs/ed1119de-f9af-4fd3-b97f-f75e8af8b9ea_earrings3.webp",
-                            ProductName = "Dancing Diamond Rapunzel Pendant Necklace",
-                            ProductPrice = 528.0,
-                            ProductStock = 9
-                        },
-                        new
-                        {
-                            ProductId = 7,
-                            CategoryId = 1,
-                            CustClassId = 3,
-                            ProductDescription = "What a lovely ring this is! The blend of color and sparkle works seamlessly and beautifully without pretension and flaunting. This Enchanted Disney Fine Jewelry Elsa Snowflake Ring is fashioned in 14K Rose Gold over Sterling Silver and displays the radiance of 1/6 carat total weight of diamonds. A Swiss Blue Topaz and a Rose-de-France bring even more grace and sophistication to this sculpted piece of jewelry.",
-                            ProductImage = "/products/productImgs/e0e7d2b0-dbc8-4744-9dd2-09b53c36c81f_ring2.webp",
-                            ProductName = "Rose-De-France Elsa Snowflake Ring",
-                            ProductPrice = 2999.0,
-                            ProductStock = 7
-                        },
-                        new
-                        {
-                            ProductId = 8,
-                            CategoryId = 1,
-                            CustClassId = 3,
-                            ProductDescription = "Be the voyager princess that you truly are and show great pride for who you are by wearing this Enchanted Disney Fine Jewelry Moana Wave Ring. Fashioned in sterling silver with 1/4 CTTW blue and white diamond, this glittering wave ring will fit your sea-loving, headstrong, and fearless personality. Let it make you stand out from the crowd while keeping you empowered to believe in yourself and stand your ground to fight for what you value.",
-                            ProductImage = "/products/productImgs/d40ac081-7252-4d38-ae13-43d460359eff_090176_RG11593_0650_client_03_600x@2x.webp",
-                            ProductName = "Wave Ring",
-                            ProductPrice = 3460.0,
-                            ProductStock = 6
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            CategoryId = 4,
-                            CustClassId = 3,
-                            ProductDescription = "Want a jewelry that tells a story? Get yourself this pair of blazing sun earrings inspired by Rapunzel's tale. These Enchanted Disney Fine Jewelry earrings features a 10 karat yellow gold sunburst stud with a round solitaire diamond at its center. This fashion accessory will not only enhance your sense of style, it can also be a symbolic reminder for you to take a step out of your comfort zone, chase your dreams, and never give up.",
-                            ProductImage = "/products/productImgs/8ba7413d-c5bb-4d86-b85d-3a8da19d587e_ERO2761Y1WDSZA_600x@2x.webp",
-                            ProductName = "Sun Blaze Earrings",
-                            ProductPrice = 2910.0,
-                            ProductStock = 3
-                        },
-                        new
-                        {
-                            ProductId = 10,
-                            CategoryId = 1,
-                            CustClassId = 2,
-                            ProductDescription = "Acknowledge a loved one's fearless and determined spirit with a Diamond Star Ring present inspired by the feisty fairy, Tinker Bell. This piece of jewelry is crafted from sterling silver and features four sparkling stars. Two twinkles with white diamond beauty and the other two glistens in vivid green tourmaline charm. The whimsical crossover style mirrors the vivacious personality of Tinkerbell and completes the fab fairy charm of this fashion jewelry.",
-                            ProductImage = "/products/productImgs/6a33a5ce-c010-419a-99f7-1d6e5ef8d343_06-28-2020_SD_RGO8042_0308_72dpi_600x@2x.webp",
-                            ProductName = "Diamond and Green Tourmaline Tinker Bell Star Ring",
-                            ProductPrice = 1535.0,
-                            ProductStock = 8
-                        },
-                        new
-                        {
-                            ProductId = 11,
-                            CategoryId = 4,
-                            CustClassId = 2,
-                            ProductDescription = "Do you see yourself as somebody who has Tinker Bell's feisty spirit? This pair of whimsical earrings from Enchanted Disney Fine Jewelry is for you. Crafted in sterling silver, shaped into Tinker Bell's iconic pose, and dotted with 1/10 CTTW of diamonds, this pair of earrings will be a lovely addition to your jewelry collection. Wear this whenever you feel like you need a little inspiration to be brave, adventurous, determined, and creative like Tinker Bell.",
-                            ProductImage = "/products/productImgs/b15d56ed-3e68-4e6f-b0ae-da9e97953104_ERO2574_angle_03_300dpi_600x@2x.webp",
-                            ProductName = "Fine Jewelry Sterling Silver Earrings",
-                            ProductPrice = 1419.0,
-                            ProductStock = 5
-                        },
-                        new
-                        {
-                            ProductId = 12,
-                            CategoryId = 1,
-                            CustClassId = 1,
-                            ProductDescription = "You don't have to grow up under the sea to love this sparkling ring. Inspired by the Little Mermaid, this Enchanted Disney Fine Jewelry Sterling Silver and Rose Gold Plating 1/10CTTW Ariel Shell Tiara Ring fits grown-ups who have never lost their childlike wonder. Among your thingamabobs, this one is sure to stand out with its good looks, whimsical charm, and seashell splendor.",
-                            ProductImage = "/products/productImgs/341b9a28-10b7-41af-b959-25a67d2b321b_06-19-2018_SD_RGO7701_0031_72dpi_600x@2x.webp",
-                            ProductName = "Ariel Shell Tiara Ring",
-                            ProductPrice = 350.0,
-                            ProductStock = 4
-                        },
-                        new
-                        {
-                            ProductId = 13,
-                            CategoryId = 2,
-                            CustClassId = 1,
-                            ProductDescription = "A necklace you'll wear year-round. This Enchanted Disney Fine Jewelry 14K Yellow Gold over Sterling Silver with 1/10CTTW Diamonds and Smokey Quartz Pocahontas Medallion Pendant has a versatile aesthetic that will match any look. Aside from adding sparkle to what you wear, this necklace is also ready to bring personality to your style. Channel Pocahontas' free-spirited nature and look and feel confident while marching to the beat of your own drum.",
-                            ProductImage = "/products/productImgs/96b1ec1c-752e-4755-b77f-5146b4d786f0_PDO9307SWYC4SQDJ_600x@2x.webp",
-                            ProductName = "Medallion Pendant Necklace",
-                            ProductPrice = 290.0,
-                            ProductStock = 7
-                        },
-                        new
-                        {
-                            ProductId = 14,
-                            CategoryId = 1,
-                            CustClassId = 4,
-                            ProductDescription = "This Enchanted Disney Fine Jewelry Belle Wedding Band is just like how the tale of Beauty and the Beast is both magical and beautiful. Featuring a 14k white gold and rose gold band with a row of brilliant diamonds, this is the ring that will sparkle divinely on your finger. Seal your love with some fairytale charm and let this ring be the dazzling reminder of the promise of a happy ever after.",
-                            ProductImage = "/products/productImgs/acf14f77-f157-4129-bb94-72c8d1c8263c_31IfSg2Kx1L_600x@2x.webp",
-                            ProductName = "Belle Wedding Band",
-                            ProductPrice = 3690.0,
-                            ProductStock = 3
-                        },
-                        new
-                        {
-                            ProductId = 15,
-                            CategoryId = 1,
-                            CustClassId = 1,
-                            ProductDescription = "A floral jewelry to treasure, this Enchanted Disney Fine Jewelry Belle Rose Stud Earrings has a timeless appeal that your beloved will surely appreciate. Crafted in 14k rose gold over sterling, each rose-shaped stud comes with a diamond center. These studs blooming with elegance make for a refreshing statement piece. The size is perfect for daily wear, for day or night outfits. You'd be impressed by how these romantic rose earrings give a chic touch to your looks.",
-                            ProductImage = "/products/productImgs/5ca8ef63-53b6-416c-9d13-75f22dd2592c_earrings2.webp",
-                            ProductName = "Maleficent Rose Pendant Necklace",
-                            ProductPrice = 400.0,
-                            ProductStock = 5
-                        },
-                        new
-                        {
-                            ProductId = 16,
-                            CategoryId = 4,
-                            CustClassId = 1,
-                            ProductDescription = "Pretty with a touch of whimsy. If you're looking for a gift for a lady who has it all, this pair of Majestic Princess Crown Earrings would be a wonderful choice. It is from the Enchanted Disney Fine Jewelry and is crafted in Sterling Silver decorated with 1/10 carat total weight of diamonds. These earrings can instantly upstyle any outfit and give it a playful yet still sophisticated vibe.",
-                            ProductImage = "/products/productImgs/f97e401a-d915-47e3-90e2-84086332d972_ERO2557-SI3-DSJC_800x.webp",
-                            ProductName = "Diamond Majestic Princess Crown Earrings",
-                            ProductPrice = 411.0,
-                            ProductStock = 5
-                        },
-                        new
-                        {
-                            ProductId = 17,
-                            CategoryId = 1,
-                            CustClassId = 2,
-                            ProductDescription = "Bringing color and sparkle to your fairytale is this Enchanted Disney Fine Jewelry Cinderella Ring. Intricately crafted from sterling silver, its polished shank is dotted with 1/5 CTTW diamonds and neatly topped with a chic London Blue Topaz center stone. This sophisticated band effortlessly exudes beauty, romance and elegance making it the perfect ring for the love of your life who personifies grace and poise.",
-                            ProductImage = "/products/productImgs/8b35a5bd-9edb-46c5-8dbc-3ff0c4e4bffa_07-18-2018_SD_RGO8220_0046_300dpi_800x.webp",
-                            ProductName = "Diamond and London Blue Topaz Ring",
-                            ProductPrice = 1800.0,
-                            ProductStock = 8
-                        },
-                        new
-                        {
-                            ProductId = 18,
-                            CategoryId = 1,
-                            CustClassId = 2,
-                            ProductDescription = "Like Elsa, this pair of Enchanted Disney Fine Jewelry Diamonds and Swiss Blue Topaz Dangling Earrings make a statement. They accurately display the character of the Queen of Arendelle - elegant, dramatic, and confident. Exude the same personality by adding these earrings to your wardrobe. Expect this fine piece of jewelry bring an effortless shine and shimmer to whatever you wear.",
-                            ProductImage = "/products/productImgs/b0066390-209e-4729-8c88-5bf409c7bf5a_06-11-2020_SD_ERO4580_0265_72dpi_800x.webp",
-                            ProductName = "Swiss Blue Topaz Dangling Earrings",
-                            ProductPrice = 2290.0,
                             ProductStock = 5
                         });
                 });

@@ -105,7 +105,10 @@
                                             <div class="d-flex flex-column">
                                                 @if (_signInManager.IsSignedIn(User))
                                                 {
-                                                    if(item.ProductStock == 0)
+                                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
+                                                        ADD TO BAG
+                                                    </a>
+                                                    @*if(item.ProductStock == 0)
                                                     {
                                                         <a asp-controller="" asp-action="" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
                                                             ADD TO BAG
@@ -116,7 +119,7 @@
                                                         <a asp-controller="Product" asp-action="AddToCart" asp-route-Id="@item.ProductId" class="btn btn-outline-secondary btn-sm">
                                                             ADD TO BAG
                                                         </a>
-                                                    }
+                                                    }*@
                                                     
                                                 }
                                                 else

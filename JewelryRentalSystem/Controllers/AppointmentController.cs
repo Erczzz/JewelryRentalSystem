@@ -59,6 +59,24 @@ namespace JewelryRentalSystem.Controllers
 
         public IActionResult Create()
         {
+            var productStocks = _context.Products.Select(p => p.ProductStock).ToList();
+            var cartQty = _context.Carts.Where(p => p.ConfirmRent == false).Select(q => q.ProductQty).ToList();
+
+            var invalidCartItems = from c in _context.Carts
+                                   join p in _context.Products on c.ProductId equals p.ProductId
+                                   where c.ProductQty > p.ProductStock && c.ConfirmRent == false
+                                   select new { Cart = c, Product = p, ProductStock = p.ProductStock };
+
+            if (invalidCartItems.Any())
+            {
+                foreach (var item in invalidCartItems)
+                {
+                    /*Console.WriteLine($"Invalid cart item: ProductId = {item.Cart.ProductId}, ProductQty = {item.Cart.ProductQty}, ProductStock = {item.ProductStock}");*/
+                    TempData["InvalidCartItem"] = $"Invalid cart item: {item.Product.ProductName} has {item.ProductStock} stocks left. Please decrease your cart item of {item.Cart.ProductQty} to available stocks.";
+                    return RedirectToAction("Index", "Cart");
+                }
+            }
+
             ViewData["AppointmentTypeId"] = new SelectList(_context.AppointmentTypes, "AppointmentTypeId", "APTName");
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "UserName");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationName");

@@ -70,7 +70,7 @@ namespace JewelryRentalSystem.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             ViewData["TransactionId"] = new SelectList(_context.Transactions, "TransactionId", "TransactionId");
-            
+
             return View();
         }
 
@@ -91,7 +91,19 @@ namespace JewelryRentalSystem.Controllers
             var userItemLimit = user.CustomerClassification.ItemLimit;
             var userRentLimit = user.CustomerClassification.RentLimit;
             var userCart = _context.Carts.Where(c => c.ConfirmRent == false && c.CustomerId == _userManager.GetUserId(HttpContext.User)).Sum(q => q.ProductQty);
+            var productStock = _context.Products.Where(s => s.ProductId == cart.ProductId).Select(s => s.ProductStock).FirstOrDefault();
+            var products = _context.Products.FirstOrDefault(p => p.ProductId == cart.ProductId);
 
+            if (productStock == 0)
+            {
+                TempData["AddToCartError"] = "This item is not avaiable yet. We apologize for inconvenience.";
+                return RedirectToAction("GetAllProducts", "Product");
+            }
+            if (cart.ProductQty > productStock)
+            {
+                TempData["AddToCartError"] = "Not enough stock. This item has only " + productStock + " stock/s left.";
+                return RedirectToAction("GetAllProducts", "Product");
+            }
 
             if (existingCartItem != null)
             {
@@ -99,11 +111,15 @@ namespace JewelryRentalSystem.Controllers
                 {
                     if (userItemLimit == user.CustomerClassification.ItemLimit)
                     {
-                        if (cart.ProductQty > userItemLimit || cart.ProductQty > (userItemLimit - userCart) || (userCart + cart.ProductQty) > userRentLimit)
+                        if(userItemLimit != 0)
                         {
-                            TempData["AddToCartError"] = "You have exceeded your item limit of " + userItemLimit + ". Currently, you have " + userCart + " item/s in your cart.";
-                            return RedirectToAction("GetAllProducts", "Product");
+                            if (cart.ProductQty > userItemLimit || cart.ProductQty > (userItemLimit - userCart) || (userCart + cart.ProductQty) > userItemLimit)
+                            {
+                                TempData["AddToCartError"] = "You have exceeded your item limit of " + userItemLimit + ". Currently, you have " + userCart + " item/s in your cart.";
+                                return RedirectToAction("GetAllProducts", "Product");
+                            }
                         }
+                        
 
                         // Update the quantity of the existing item
                         existingCartItem.ProductQty += cart.ProductQty;
@@ -141,7 +157,7 @@ namespace JewelryRentalSystem.Controllers
                                 Total = cart.Total * cart.ProductQty * cart.RentDuration,
                                 ProductId = cart.ProductId
                             };
-                            _context.Add(newCart);
+                            _context.Add(newCart);                           
                             await _context.SaveChangesAsync();
                             TempData["Message"] = "Item added to your bag successfully!";
                             return RedirectToAction("GetAllProducts", "Product");
