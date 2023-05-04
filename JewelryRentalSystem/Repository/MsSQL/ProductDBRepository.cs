@@ -78,6 +78,12 @@ namespace JewelryRentalSystem.Repository.MsSQL
 
                     product.ProductImage = "/" + folder;
                 }
+                else
+                {
+                    // If model.ProductImage is null, keep the existing product image
+                    product.ProductImage = product.ProductImage;
+                }
+
 
                 // Save changes to the database
                 _JRSDBContext.Entry(product).State = EntityState.Modified;

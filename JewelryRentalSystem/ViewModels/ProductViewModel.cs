@@ -21,8 +21,7 @@ namespace JewelryRentalSystem.ViewModels
         [DisplayName("Product Stock")]
         [Range(0, double.MaxValue, ErrorMessage = "Value must be greater than or equal to 0")]
         public int ProductStock { get; set; }
-        [Required(ErrorMessage = "This field is required.")]
-        public IFormFile ProductImage { get; set; }
+        public IFormFile? ProductImage { get; set; }
         public Product? Product { get; set; }
         [Required(ErrorMessage = "This field is required.")]
         public int CategoryId { get; set; }

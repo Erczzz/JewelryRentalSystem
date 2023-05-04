@@ -79,14 +79,32 @@ namespace JewelryRentalSystem.Controllers
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
                 var cart = _context.Carts.Where(x => x.ConfirmRent == false && x.CustomerId == userId).ToList();
-
-                foreach (var item in cart)
+                var cartItems = await _context.Carts
+                .Where(c => c.ConfirmRent == false)
+                .Join(_context.Products, c => c.ProductId, p => p.ProductId, (cart, product) => new
                 {
-                    item.ConfirmRent = true;
-                    item.TransactionId = transaction.TransactionId;
-                    _context.Update(item);
+                    Cart = cart,
+                    Product = product
+                })
+                .Where(cp => cp.Product.ProductId == cp.Cart.ProductId && cp.Cart.ProductQty <= cp.Product.ProductStock)
+                .ToListAsync();
+
+
+                foreach (var item in cartItems)
+                {
+                    // Update the product stock by subtracting the cart quantity
+                    item.Product.ProductStock -= item.Cart.ProductQty;
+
+                    // Mark the cart item as confirmed
+                    item.Cart.ConfirmRent = true;
+                    item.Cart.TransactionId = transaction.TransactionId;
+
+                    // Save the changes to the database
+                    _context.Update(item.Product);
+                    _context.Update(item.Cart);
                     await _context.SaveChangesAsync();
                 }
+
 
                 var appointment = _context.Appointments.Where(x => x.ConfirmAppointment == false).ToList();
                 foreach (var item in appointment)
